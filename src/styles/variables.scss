@@ -1,0 +1,40 @@
+:root {
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-black-rgb: 0, 0, 0;
+  --color-gray-1: #111111;
+  --color-gray-2: #232323;
+  --color-gray-4: #4c4c4c;
+  --color-gray-4-rgb: 76, 76, 76;
+  --color-gray-7: #767676; /* Minimum WCAG AA Pass */
+  --color-gray-8: #8c8c8c; /* Fail to WCAG AA */
+  --color-gray-9: #999999;
+  --color-gray-a: #aaaaaa;
+  --color-gray-c: #cccccc;
+  --color-gray-d: #dddddd;
+  --color-gray-e: #eeeeee;
+  --color-gray-f: #f6f6f6;
+
+  --color-bg: #f6f6f6;
+  --color-blue: #0071f0; /* Minimum WCAG AA Pass */
+  --color-blue-dark: #0053b3;
+  --color-red: #eb0d00; /* Minimum WCAG AA Pass */
+  --color-red-rgb: 235, 13, 0;
+  --color-orange: #ff9500;
+  --color-yellow: #ffcc00;
+  --color-green: #26873e; /* Minimum WCAG AA Pass */
+  --color-teal: #5ac8fa;
+  --color-indigo: #5856d6;
+  --color-purple: #af52de;
+  --color-pink: #ff2d55;
+
+  --color-em: #ff59e3;
+
+  /* Sizes */
+  --w-nav-side: 200px;
+  --h-nav-head: 44px;
+  --w-idol: 140px;
+  --h-idol: 220px;
+  --h-footer: 32px;
+  --x-scroll-aid: 52px;
+}

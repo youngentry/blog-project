@@ -1,0 +1,11 @@
+@import "@/styles/zindex.scss";
+
+.container {
+  position: fixed;
+  top: 0;
+  left: var(--w-nav-side);
+  width: 100%;
+  height: var(--h-nav-head);
+  background: rgba(255, 0, 0, 0.423);
+  z-index: $zindex-fixed;
+}
