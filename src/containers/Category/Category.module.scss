@@ -1,0 +1,24 @@
+@import "@/styles/mixins/flex.scss";
+
+.category {
+  @include flex(column, center, center, start);
+  margin: 0 auto;
+  padding: 7rem;
+  max-width: var(--w-max-page);
+  background: #369;
+  columns: 3;
+
+  h2 {
+    margin-bottom: 4rem;
+    display: inline-block;
+    font-size: var(--ft-36);
+  }
+
+  .cardContainer {
+    margin-bottom: 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    width: 100%;
+  }
+}

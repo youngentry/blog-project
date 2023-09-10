@@ -10,7 +10,7 @@ const NavSide = () => {
 
   return (
     <aside>
-      <nav className={styles.container}>
+      <nav className={styles.sideNav}>
         <div className={styles.profile}>블로그 프로필</div>
         {menus.map((menu) => {
           return (

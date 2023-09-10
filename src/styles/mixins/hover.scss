@@ -1,7 +1,15 @@
-@mixin hover($bg: #369) {
-  transition: 0.3s;
+@mixin hoverBG($bg: #369) {
+  transition: background 0.3s;
   cursor: pointer;
   &:hover {
     background: $bg;
+  }
+}
+
+@mixin hoverText() {
+  transition: text-decoration 0.3s;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
   }
 }

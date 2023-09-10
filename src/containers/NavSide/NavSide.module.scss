@@ -1,11 +1,11 @@
 @import "@/styles/mixins/flex.scss";
 @import "@/styles/mixins/hover.scss";
 
-$p-side: 0 10px;
+$p-side: 0 0.5rem;
 $w-side: 100%;
 $mb-item: 5px;
 
-.container {
+.sideNav {
   position: fixed;
   top: 0;
   left: 0;
@@ -15,7 +15,7 @@ $mb-item: 5px;
   @include flex(column, center, center, start);
 
   .profile {
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
     text-align: center;
     padding: $p-side;
     width: $w-side;
@@ -40,6 +40,6 @@ $mb-item: 5px;
     padding: 5px 0;
     border: 1px solid #369;
     font-size: var(--ft-13);
-    @include hover;
+    @include hoverBG;
   }
 }
