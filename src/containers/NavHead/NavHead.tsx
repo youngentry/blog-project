@@ -4,7 +4,7 @@ import styles from "./NavHead.module.scss";
 const NavHead = () => {
   return (
     <header className={styles.container}>
-      <nav>네비게이션</nav>
+      <nav>네브 헤드</nav>
     </header>
   );
 };

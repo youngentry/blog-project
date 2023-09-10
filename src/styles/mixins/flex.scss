@@ -1,0 +1,7 @@
+@mixin flex($f-d: row, $j-c: center, $a-i: center, $t-a: center) {
+  display: flex;
+  flex-direction: $f-d;
+  justify-content: $j-c;
+  align-items: $a-i;
+  text-align: $t-a;
+}

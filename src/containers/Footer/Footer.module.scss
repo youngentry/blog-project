@@ -1,5 +1,8 @@
+@import "@/styles/mixins/flex.scss";
+
 .container {
   height: 200px;
   width: calc(100% - var(--w-nav-side));
   background: rgba(0, 255, 0, 0.147);
+  @include flex(row, center, center, center);
 }

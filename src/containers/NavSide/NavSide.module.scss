@@ -1,3 +1,10 @@
+@import "@/styles/mixins/flex.scss";
+@import "@/styles/mixins/hover.scss";
+
+$p-side: 0 10px;
+$w-side: 100%;
+$mb-item: 5px;
+
 .container {
   position: fixed;
   top: 0;
@@ -5,4 +12,34 @@
   height: 100%;
   width: var(--w-nav-side);
   background: rgba(0, 0, 255, 0.143);
+  @include flex(column, center, center, start);
+
+  .profile {
+    margin-bottom: 10px;
+    text-align: center;
+    padding: $p-side;
+    width: $w-side;
+  }
+
+  .category {
+    margin-bottom: $mb-item;
+    padding: $p-side;
+    width: $w-side;
+
+    strong {
+      margin-bottom: $mb-item;
+      display: flex;
+      justify-content: center;
+      font-weight: 500;
+      font-size: var(--ft-13);
+    }
+  }
+
+  .subject {
+    margin-bottom: $mb-item;
+    padding: 5px 0;
+    border: 1px solid #369;
+    font-size: var(--ft-13);
+    @include hover;
+  }
 }

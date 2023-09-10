@@ -1,0 +1,7 @@
+@mixin hover($bg: #369) {
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover {
+    background: $bg;
+  }
+}
