@@ -30,12 +30,19 @@
 
   --color-em: #ff59e3;
 
+  --color-border: #dddddd;
+
   /* Sizes */
   --h-section-gap: 4rem; // section gap
   --w-max-page: 1366px; // page max width
 
   --w-nav-side: 10rem;
   --h-nav-head: 2.2rem;
+
+  //post
+  --w-post: 45rem;
+  --p-post: 0 2.5rem;
+  --m-post: 5rem auto;
 
   // font
   --ft-13: 0.65rem;
