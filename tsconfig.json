@@ -22,6 +22,9 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  // TypeScript가 타입 정의 파일을 검색할 위치
+  "typeRoots": ["./src/types", "./node_modules/@types"],
+  //  TypeScript 컴파일 대상 설정
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/**/*", "global.d.ts"],
   "exclude": ["node_modules"]
 }
