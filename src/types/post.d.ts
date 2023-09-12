@@ -1,26 +1,19 @@
 import exp from "constants";
+import { ObjectId } from "mongodb";
 
-export interface card {
+export interface Card {
+  _id: ObjectId;
   id: number;
-  link: string;
   src: string;
   title: string;
   subtitles: string[];
   languages: string[];
+  author: string;
+  date: Date;
   commentCount: number;
   likes: number;
 }
 
-export interface post {
-  id: number;
-  link: string;
-  src: string;
-  title: string;
-  subtitles: string[];
-  languages: string[];
+export interface Post extends Card {
   content: string;
-  commentCount: number;
-  author: string;
-  date: Date;
-  likes: number;
 }

@@ -2,10 +2,12 @@ import React from "react";
 import styles from "./Card.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-import { card } from "@/types/post";
+import { Post } from "@/types/post";
 
-const Card = ({ data }: { data: card }) => {
-  const { id, link, src, title, subtitles, languages, commentCount, likes } = data;
+const Card = ({ data }: { data: Post }) => {
+  const { id, src, title, subtitles, languages, commentCount, likes } = data;
+  const link = `/post/${id}`;
+
   return (
     <div className={styles.card}>
       <Link prefetch={false} href={link}>

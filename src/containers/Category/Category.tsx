@@ -1,67 +1,22 @@
-import React from "react";
+import { connectDB } from "@/utils/db/db";
 import Card from "./Card/Card";
 import styles from "./Category.module.scss";
 import Pagination from "@/components/Pagination/Pagination";
+import { Post } from "@/types/post";
 
-const Category = () => {
-  const cardData = [
-    {
-      id: 1,
-      link: "/post/1",
-      src: "https://cdn.pixabay.com/photo/2023/08/29/19/09/starling-8221990_640.jpg",
-      title: "제목제목제목제목제목제목제목제목제목제목제목제목",
-      subtitles: ["#페이지네이션", "#레이지로딩", "#예약", "#페이지네이션", "#레이지로딩", "#예약"],
-      languages: ["#JavaScript", "#Rust", "#Go", "#JavaScript", "#Rust", "#Go"],
-      commentCount: 10,
-      likes: 7,
-    },
-    {
-      id: 2,
-      link: "/post/2",
-      src: "https://cdn.pixabay.com/photo/2023/08/26/18/01/planet-8215532_640.png",
-      title: "제목",
-      subtitles: ["#페이지네이션", "#예약"],
-      languages: ["#JavaScript", "#Rust", "#Go"],
-      commentCount: 10,
-      likes: 7,
-    },
-    {
-      id: 3,
-      link: "/post/3",
-      src: "https://cdn.pixabay.com/photo/2023/09/04/13/17/mushrooms-8232731_1280.jpg",
-      title: "제목",
-      subtitles: ["#레이지로딩", "#예약"],
-      languages: ["#JavaScript", "#Rust", "#Go"],
-      commentCount: 10,
-      likes: 7,
-    },
-    {
-      id: 4,
-      link: "/post/4",
-      src: "https://cdn.pixabay.com/photo/2023/05/14/17/46/ducklings-7993465_1280.jpg",
-      title: "제목",
-      subtitles: ["#예약"],
-      languages: ["#JavaScript", "#Rust", "#Go"],
-      commentCount: 10,
-      likes: 7,
-    },
-    {
-      id: 5,
-      link: "/post/5",
-      src: "https://cdn.pixabay.com/photo/2023/08/28/23/17/superb-fairywren-8220199_640.jpg",
-      title: "제목",
-      subtitles: ["#드래그앤드롭"],
-      languages: ["#JavaScript", "#Rust", "#Go"],
-      commentCount: 10,
-      likes: 7,
-    },
-  ];
+const Category = async () => {
+  const db = (await connectDB).db("blog");
+  const postCollection = db.collection<Post>("post");
+  // _id 필드는 노출되지 않는 것이 좋습니다. content 필드는 제외하고 도큐먼트를 불러옴으로써 card에 불필요한 데이터는 제외합니다.
+  const postData: Post[] = await postCollection
+    .find({}, { projection: { content: 0, _id: 0 } })
+    .toArray();
 
   return (
     <div className={styles.category}>
       <h2>전체 게시물</h2>
       <div className={styles.cardContainer}>
-        {cardData.map((data) => {
+        {postData.map((data: Post) => {
           return <Card key={data.id} data={data} />;
         })}
       </div>
