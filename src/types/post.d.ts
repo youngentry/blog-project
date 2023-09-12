@@ -2,7 +2,6 @@ import exp from "constants";
 import { ObjectId } from "mongodb";
 
 export interface Card {
-  _id: ObjectId;
   id: number;
   src: string;
   title: string;

@@ -3,9 +3,10 @@ import Image from "next/image";
 import styles from "./Post.module.scss";
 import { Post } from "@/types/post";
 
-const Post = async ({ postId }: any) => {
+const Post = async ({ postId }: { postId: string }) => {
   const db = (await connectDB).db("blog");
   const postCollection = db.collection<Post>("post");
+
   const postData: Post | null = await postCollection.findOne(
     { id: Number(postId) },
     { projection: { _id: 0 } }
