@@ -10,4 +10,8 @@
   background: rgba(255, 0, 0, 0.423);
   z-index: $zindex-fixed;
   @include flex(row, center, center, center);
+
+  nav {
+    @include flex(row, center, center, center);
+  }
 }
