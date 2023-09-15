@@ -1,9 +1,32 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import styles from "./Register.module.scss";
+import { useEffect, useState } from "react";
 
 const Register = () => {
+  const [second, setSecond] = useState(5);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setSecond((prevSecond) => {
+        if (prevSecond >= 1) {
+          return prevSecond - 1;
+        } else {
+          clearInterval(intervalId); // second가 0이 되면 interval을 멈춥니다.
+          router.push("/"); // 홈 페이지로 리다이렉션합니다.
+          return 0;
+        }
+      });
+    }, 1000);
+  }, []);
+
   return (
     <div className={styles.container}>
-      <h2>닉네임/비밀번호로 로그인하기</h2>
+      <h2>현재 가입 기능은 비활성화 하였습니다. {second}초 뒤 home으로 돌려보냅니다.</h2>
+      {/* <h2>닉네임/비밀번호로 로그인하기</h2>
       <form method="POST" action="/api/auth/signup">
         <label>
           <input name="name" type="text" placeholder="닉네임" />
@@ -16,7 +39,7 @@ const Register = () => {
         </label>
         <button type="submit">로그인</button>
         <p>* 방문자는 방명록, 댓글 작성만 가능합니다.</p>
-      </form>
+      </form> */}
     </div>
   );
 };
