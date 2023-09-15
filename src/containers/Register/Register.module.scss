@@ -1,0 +1,45 @@
+@import "@/styles/mixins/flex.scss";
+@import "@/styles/mixins/hover.scss";
+
+.container {
+  @include flex(column, center, center, flex-start);
+  height: calc(100vh - var(--h-footer) - var(--h-nav-head));
+
+  h2 {
+    font-size: var(--ft-24);
+    padding: 1rem 0;
+  }
+
+  form {
+    border: var(--1-solid);
+    padding: 2.5rem;
+    @include flex(column, center, flex-start, flex-start);
+    gap: var(--gap-20);
+    width: 25rem;
+
+    .email {
+      display: none;
+    }
+
+    label {
+      @include flex(row, space-between, flex-start, flex-start);
+      width: 100%;
+      font-size: var(--ft-19);
+      input {
+        padding: 0.25rem;
+        width: 100%;
+        background: none;
+        border: none;
+        border-bottom: var(--2-solid);
+      }
+    }
+    button {
+      height: 2rem;
+      border: none;
+      background: var(--color-gray-e);
+      border-radius: var(--br-5);
+      width: 100%;
+      @include hoverBG(var(--color-gray-d));
+    }
+  }
+}
