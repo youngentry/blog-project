@@ -1,4 +1,4 @@
-import WritePostButton from "@/components/postControls/WritePostButton";
+import NewPostButton from "@/components/buttons/NewPostButton";
 import styles from "./NavSideHeader.module.scss";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
@@ -10,7 +10,7 @@ const NavSideHeader = async () => {
   return (
     <header className={styles.container}>
       <h2>블로그 프로필</h2>
-      <div>{session && isBlogMaster(session) && <WritePostButton />}</div>
+      <div>{session && isBlogMaster(session) && <NewPostButton />}</div>
     </header>
   );
 };

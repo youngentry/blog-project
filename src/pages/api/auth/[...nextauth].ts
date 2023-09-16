@@ -5,6 +5,7 @@ import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { JWT } from "next-auth/jwt";
+import { use } from "react";
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -15,18 +16,18 @@ export const authOptions: NextAuthOptions = {
     GithubProvider({
       clientId: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_ID as string,
       clientSecret: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_SECRET as string,
-      profile(profile: any) {
-        // console.log(profile, "???");
-        return {
-          // Return the default fields
-          id: profile.id,
-          name: profile.name,
-          email: profile.email,
-          image: profile.picture,
-          // Add a new one
-          role: "visitor",
-        };
-      },
+      // profile(profile: any) {
+      //   // console.log(profile, "???");
+      //   return {
+      //     // Return the default fields
+      //     id: profile.id,
+      //     name: profile.name,
+      //     email: profile.email,
+      //     image: profile.picture,
+      //     // Add a new one
+      //     // role: "visitor",
+      //   };
+      // },
     }),
 
     CredentialsProvider({
@@ -71,19 +72,11 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     //4. jwt 생성 시 실행되는 코드
-    jwt: async ({ token }: { token: any }) => {
-      // console.log(token, "auth token");
-
-      // let db = (await connectDB).db("blog");
-      // let user = await db.collection("user_credentials").findOne({ name: credentials.name });
-
-      // token.role = "dd";
-      // console.log(token, "auth token after");
-
+    jwt: async ({ token }: { token: JWT }) => {
       return token;
     },
     //5. 유저 세션이 조회될 때 session에 user 정보를 저장하여 이용할 수 있도록 함
-    session: async ({ session }: { session: any }) => {
+    session: async ({ session }: { session: Session }) => {
       return session;
     },
   },
