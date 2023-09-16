@@ -1,20 +1,32 @@
 import { connectDB } from "@/utils/db/db";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import NextAuth, { Session } from "next-auth";
+import NextAuth, { NextAuthOptions, Session } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { JWT } from "next-auth/jwt";
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   pages: {
     newUser: "/auth/new-user",
   },
 
   providers: [
     GithubProvider({
-      clientId: `${process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_ID}`,
-      clientSecret: `${process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_SECRET}`,
+      clientId: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_ID as string,
+      clientSecret: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_SECRET as string,
+      profile(profile: any) {
+        // console.log(profile, "???");
+        return {
+          // Return the default fields
+          id: profile.id,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
+          // Add a new one
+          role: "visitor",
+        };
+      },
     }),
 
     CredentialsProvider({
@@ -32,7 +44,7 @@ export const authOptions = {
       //2. form을 통해 로그인 요청시 db와 회원정보 대조
       async authorize(credentials) {
         let db = (await connectDB).db("blog");
-        let user = await db.collection("user_credentials").findOne({ name: credentials.name });
+        let user = await db.collection("user_credentials").findOne({ name: credentials?.name });
 
         // db에 존재하는 email이 아니면 로그인 실패
         if (!user || user.email === "visitor") {
@@ -40,7 +52,7 @@ export const authOptions = {
           return null;
         }
 
-        const isValidPassword = await bcrypt.compare(credentials.password, user.password);
+        const isValidPassword = await bcrypt.compare(credentials?.password as string, user.password);
         // 비밀번호가 일치하지 않으면 로그인 실패
         if (!isValidPassword) {
           console.log("일치하지 않는 비밀번호");
@@ -59,17 +71,24 @@ export const authOptions = {
 
   callbacks: {
     //4. jwt 생성 시 실행되는 코드
-    //user변수는 DB의 유저정보담겨있고 token.user에 뭐 저장하면 jwt에 들어갑니다.
-    jwt: async ({ token }: { token: Promise<JWT> }) => {
+    jwt: async ({ token }: { token: any }) => {
+      // console.log(token, "auth token");
+
+      // let db = (await connectDB).db("blog");
+      // let user = await db.collection("user_credentials").findOne({ name: credentials.name });
+
+      // token.role = "dd";
+      // console.log(token, "auth token after");
+
       return token;
     },
     //5. 유저 세션이 조회될 때 session에 user 정보를 저장하여 이용할 수 있도록 함
-    session: async ({ session }: { session: Promise<Session> }) => {
+    session: async ({ session }: { session: any }) => {
       return session;
     },
   },
 
-  secret: `${process.env.NEXTAUTH_SECRET}`,
+  secret: process.env.NEXTAUTH_SECRET,
   adapter: MongoDBAdapter(connectDB),
 };
 export default NextAuth(authOptions);
