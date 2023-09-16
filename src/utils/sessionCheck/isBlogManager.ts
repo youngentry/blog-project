@@ -3,13 +3,12 @@
  * @param session
  * @returns boolean
  */
-export const isBlogMaster = (session: UserSessionData) => {
-  const sessionEmail: string | undefined = session?.user?.email; // 로그인된 유저의 email
+export const isBlogManager = (email: string) => {
   const managers: string[] | undefined = process.env.NEXT_PUBLIC_BLOG_MASTER?.split(","); // blog manager emails: string[]
 
   // 로그인된 유저의 email이 managers에 포함될 경우 true를 반환합니다.
-  if (sessionEmail && managers) {
-    return managers.includes(sessionEmail);
+  if (email && managers) {
+    return managers.includes(email);
   }
 
   return false;

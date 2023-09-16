@@ -5,7 +5,6 @@ import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { JWT } from "next-auth/jwt";
-import { use } from "react";
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -16,18 +15,7 @@ export const authOptions: NextAuthOptions = {
     GithubProvider({
       clientId: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_ID as string,
       clientSecret: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_SECRET as string,
-      // profile(profile: any) {
-      //   // console.log(profile, "???");
-      //   return {
-      //     // Return the default fields
-      //     id: profile.id,
-      //     name: profile.name,
-      //     email: profile.email,
-      //     image: profile.picture,
-      //     // Add a new one
-      //     // role: "visitor",
-      //   };
-      // },
+      // profile(profile: any) { }, // 프로필 설정 기능 검색
     }),
 
     CredentialsProvider({
