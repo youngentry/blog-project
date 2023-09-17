@@ -1,0 +1,18 @@
+.container {
+  .head {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      font-size: 1.5rem;
+    }
+    .subtitle {
+    }
+    .langunages {
+    }
+  }
+
+  .quillContainer {
+    height: calc(100vh - var(--h-nav-head) - var(--h-footer));
+  }
+}

@@ -1,0 +1,5 @@
+$toolbar-height: 40px;
+
+.quill {
+  height: calc(100% - $toolbar-height);
+}
