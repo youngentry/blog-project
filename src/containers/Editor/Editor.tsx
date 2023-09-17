@@ -7,29 +7,31 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const Editor = () => {
-  const router = useRouter();
+  const router = useRouter(); // 작성 완료되면 게시물로 redirect 할겁니다.
 
   const [title, setTitle] = useState("");
   const [subtitles, setSubtitles] = useState("");
   const [languages, setLanguages] = useState("");
   const [contents, setContents] = useState("");
 
+  // quill에 전달할 state props
   const quillProps = {
     contents,
     setContents,
   };
 
+  // 작성하기 버튼 클릭하면,
   const handleClickWriteButton = async (e: any) => {
     e.preventDefault();
-    console.log("?");
-    console.log(contents);
+    // api 요청을 보내고
     const result = await axios.post("/api/manage/newpost", {
       title,
       subtitles,
       languages,
       contents,
     });
-    console.log(result);
+
+    // 게시물 작성이 완료되면 해당 게시물 주소로 redirect 합니다.
     router.push(`/post/${result.data.id}`);
   };
 

@@ -3,11 +3,15 @@ import { getToken } from "next-auth/jwt";
 
 const handler = async (req: any, res: any) => {
   if (req.method == "POST") {
-    const db = (await connectDB).db("blog"); // DB에 비동기로 연결한 뒤 blog DB에 연결
-    const postCollection = await db.collection("posts"); // post 콜렉션에 연결
-    const countersCollection = await db.collection("counters"); // counters 콜렉션에 연결
+    // DB와 Collection 연결
+    const db = (await connectDB).db("blog");
+    const postCollection = await db.collection("posts");
+    const countersCollection = await db.collection("counters");
+
+    // 게시물 작성자 정보
     const token = await getToken({ req });
 
+    // 게시물 번호 정보 업데이트하기
     const currentCounter = await countersCollection.findOne({ model: "posts" });
     await countersCollection.findOneAndUpdate(
       { model: "posts" },
@@ -15,13 +19,13 @@ const handler = async (req: any, res: any) => {
       { upsert: true }
     );
 
-    const { title, subtitles, languages, contents, src } = req.body;
-    const email = token?.email;
-    const author = token?.name;
-    const date = new Date();
-    const commentCount = 0;
-    const likes = 0;
-    const id = currentCounter ? currentCounter.count + 1 : 1;
+    const { title, subtitles, languages, contents, src } = req.body; // 게시물 내용
+    const id = currentCounter ? currentCounter.count + 1 : 1; // 게시물 번호
+    const email = token?.email; // 작성자 email
+    const author = token?.name; // 작성자 닉네임
+    const date = new Date(); // 게시물 작성 시점
+    const commentCount = 0; // 댓글
+    const likes = 0; // 좋아요
 
     const saveData = {
       id,
@@ -37,9 +41,9 @@ const handler = async (req: any, res: any) => {
       likes,
     };
 
-    const result = await postCollection.insertOne({ ...saveData });
+    const result = await postCollection.insertOne({ ...saveData }); // DB에 저장한 결과
 
-    return res.status(200).json({ id });
+    return res.status(200).json({ id }); // 응답하기
   }
 };
 
