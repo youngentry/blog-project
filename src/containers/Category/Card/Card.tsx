@@ -21,6 +21,13 @@ const Card = ({ data }: { data: Post }) => {
         </h3>
         <ul className={styles.subtitles}>
           {subtitles.map((subtitle, index) => {
+            if (subtitles.length === 1 && subtitle) {
+              return (
+                <li className={styles.subtitle} key={index}>
+                  #부제목없음
+                </li>
+              );
+            }
             return (
               <li className={styles.subtitle} key={index}>
                 {subtitle}
@@ -30,6 +37,13 @@ const Card = ({ data }: { data: Post }) => {
         </ul>
         <ul className={styles.languages}>
           {languages.map((language, index) => {
+            if (languages.length === 1 && languages) {
+              return (
+                <li className={styles.subtitle} key={index}>
+                  #언어선택없음
+                </li>
+              );
+            }
             return (
               <li className={styles.subtitle} key={index}>
                 {language}
