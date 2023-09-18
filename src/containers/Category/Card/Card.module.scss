@@ -31,7 +31,6 @@
     .subtitles,
     .languages {
       //   height: 2rem;
-      margin-bottom: var(--gap-10);
       display: flex;
       flex-wrap: wrap;
       gap: var(--gap-5);
@@ -39,6 +38,7 @@
       .subtitle,
       .language {
         @include hoverText;
+        margin-bottom: var(--gap-10);
       }
     }
 

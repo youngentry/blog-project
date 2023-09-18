@@ -36,7 +36,7 @@ const handler = async (req: any, res: any) => {
       id,
       title,
       subtitles: subtitles.split(" "),
-      languages: languages.split(" "),
+      // languages: languages.split(" "),
       contents,
       email,
       src: src || "https://cdn.pixabay.com/photo/2023/09/03/11/13/mountains-8230502_1280.jpg",

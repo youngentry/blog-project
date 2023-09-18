@@ -21,9 +21,9 @@ const Post = async ({ postId }: { postId: string }) => {
             <div className={styles.subtitles}>
               <span>{postData.subtitles.join(" ")}</span>
             </div>
-            <div className={styles.languages}>
+            {/* <div className={styles.languages}>
               <span>{postData.languages.join(" ")}</span>
-            </div>
+            </div> */}
             <div className={styles.info}>
               <span>{postData.author}</span>
               <span>{postData.date.toString()}</span>

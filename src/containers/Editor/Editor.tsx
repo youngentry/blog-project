@@ -11,7 +11,7 @@ const Editor = () => {
 
   const [title, setTitle] = useState("");
   const [subtitles, setSubtitles] = useState("");
-  const [languages, setLanguages] = useState("");
+  // const [languages, setLanguages] = useState("");
   const [contents, setContents] = useState("");
 
   // quill에 전달할 state props
@@ -27,7 +27,7 @@ const Editor = () => {
     const result = await axios.post("/api/manage/newpost", {
       title,
       subtitles,
-      languages,
+      // languages,
       contents,
     });
 
@@ -43,7 +43,6 @@ const Editor = () => {
           type="text"
           placeholder="제목"
           value={title}
-          minLength={1}
           onChange={(e) => setTitle(e.target.value)}
         />
         <input
@@ -53,13 +52,13 @@ const Editor = () => {
           value={subtitles}
           onChange={(e) => setSubtitles(e.target.value)}
         />
-        <input
+        {/* <input
           className={styles.languages}
           type="text"
           placeholder="languages"
           value={languages}
           onChange={(e) => setLanguages(e.target.value)}
-        />
+        /> */}
       </div>
       <div className={styles.quillContainer}>
         <Quill {...quillProps} />

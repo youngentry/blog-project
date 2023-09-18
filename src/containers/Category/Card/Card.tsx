@@ -18,28 +18,30 @@ const Card = ({ data }: { data: Post }) => {
       <div className={styles.content}>
         <h3 className={styles.title}>
           <Link prefetch={false} href={link}>
-            {title}
+            {title ? title : "제목 없음"}
           </Link>
         </h3>
         <ul className={styles.subtitles}>
           {subtitles.map((subtitle, index) => {
-            if (subtitles.length === 1 && subtitle) {
+            if (subtitles.length === 1 && !subtitle) {
               return (
                 <li className={styles.subtitle} key={index}>
                   #부제목없음
                 </li>
               );
             }
-            return (
-              <li className={styles.subtitle} key={index}>
-                {subtitle}
-              </li>
-            );
+            if (subtitle) {
+              return (
+                <li className={styles.subtitle} key={index}>
+                  #{subtitle}
+                </li>
+              );
+            }
           })}
         </ul>
-        <ul className={styles.languages}>
+        {/* <ul className={styles.languages}>
           {languages.map((language, index) => {
-            if (languages.length === 1 && languages) {
+            if (languages.length === 1 && !languages) {
               return (
                 <li className={styles.subtitle} key={index}>
                   #언어선택없음
@@ -48,11 +50,11 @@ const Card = ({ data }: { data: Post }) => {
             }
             return (
               <li className={styles.subtitle} key={index}>
-                {language}
+                #{language}
               </li>
             );
           })}
-        </ul>
+        </ul> */}
         <div className={styles.more}>
           <div className={styles.write}>
             <div className={styles.author}>{author}</div>
