@@ -5,13 +5,22 @@ import Quill from "./Quill/Quill";
 import styles from "./Editor.module.scss";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { Cabin_Sketch } from "next/font/google";
 
-const Editor = ({ postId }: { postId?: number }) => {
+const Editor = ({ postId, canEdit }: { postId?: number; canEdit?: boolean }) => {
   const router = useRouter(); // 작성 완료되면 게시물로 redirect 할겁니다.
 
   const [title, setTitle] = useState("");
   const [subtitles, setSubtitles] = useState("");
   const [contents, setContents] = useState("");
+
+  // 수정 권한이 없는 경우엔 수정을 시도하려던 게시글로 이동합니다.
+  useEffect(() => {
+    if (!canEdit) {
+      window.alert("수정 권한 없음");
+      router.push(`/post/${postId}`);
+    }
+  }, []);
 
   useEffect(() => {
     if (postId) {

@@ -1,6 +1,4 @@
-import { Post } from "@/types/post";
 import { connectDB } from "@/utils/db/db";
-import { getToken } from "next-auth/jwt";
 
 const handler = async (req: any, res: any) => {
   const { postId } = req.query;
@@ -11,8 +9,8 @@ const handler = async (req: any, res: any) => {
     const post = await postCollection.findOne({ id: Number(postId) });
 
     if (post) {
-      const { title, subtitles, contents } = post;
-      return res.status(200).json({ title, subtitles, contents });
+      const { title, subtitles, contents, email } = post;
+      return res.status(200).json({ title, subtitles, contents, email });
     }
 
     return res.status(404).json({ message: "Not found any post" });
@@ -26,7 +24,6 @@ const handler = async (req: any, res: any) => {
     // 게시물 작성자 정보
     const { title, subtitles, contents, id } = req.body; // 게시물 내용
 
-    console.log(req.body);
     const saveData = {
       title,
       subtitles: subtitles.split(" "),

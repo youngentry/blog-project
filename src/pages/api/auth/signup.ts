@@ -61,7 +61,6 @@ const signUpHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     const role = "visitor";
     const created_at = new Date();
 
-    console.log(req.body);
     const userData = {
       name,
       email,

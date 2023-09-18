@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { isBlogAdmin } from "./isBlogAdmin";
+import { checkBlogAdmin } from "./checkBlogAdmin";
 
 /**
  * 동일한 게시물을 작성한 계정인지 확인합니다.
@@ -17,8 +17,8 @@ export const isSameAuthor = async (email: string) => {
   // 로그인된 유저의 email과 게시물의 email이 동일한 경우 또는 admin일 경우 true를 반환합니다.
   const user = token.user?.email;
   if (user) {
-    const blogAdmin: boolean = isBlogAdmin(user);
-    if (user === email || blogAdmin) {
+    const isBlogAdmin: boolean = checkBlogAdmin(user);
+    if (user === email || isBlogAdmin) {
       return true;
     }
   }

@@ -37,14 +37,12 @@ export const authOptions: NextAuthOptions = {
 
         // db에 존재하는 email이 아니면 로그인 실패
         if (!user || user.email === "visitor") {
-          console.log("존재하지 않는 유저 email");
           return null;
         }
 
         const isValidPassword = await bcrypt.compare(credentials?.password as string, user.password);
         // 비밀번호가 일치하지 않으면 로그인 실패
         if (!isValidPassword) {
-          console.log("일치하지 않는 비밀번호");
           return null;
         }
         return user;
