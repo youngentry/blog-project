@@ -5,9 +5,23 @@ import axios from "axios";
 import { getServerSession } from "next-auth";
 
 const EditPostRouter = async ({ params }: any) => {
+  const canEdit: boolean = await checkEditAuthor(params.postId); // 수정 권한 확인
+
+  return (
+    <div>
+      <Editor postId={params.postId} canEdit={canEdit} />
+    </div>
+  );
+};
+
+const checkEditAuthor = async (postId: string) => {
   // 게시글을 작성한 유저를 확인합니다.
-  const result = await axios.get(`http://localhost:3000/api/manage/newpost/${params.postId}`);
-  const postEmail = result.data.email;
+  const result = await fetch(`http://localhost:3000/api/manage/newpost/${postId}`, {
+    method: "GET",
+    cache: "force-cache",
+  });
+  const jsonData = await result.json();
+  const postEmail = jsonData.email;
 
   // 로그인한 유저를 확인합니다.
   const token = await getServerSession(authOptions);
@@ -17,11 +31,7 @@ const EditPostRouter = async ({ params }: any) => {
   const isBlogAdmin = checkBlogAdmin(userEmail as string);
   const canEdit: boolean = postEmail === userEmail || isBlogAdmin;
 
-  return (
-    <div>
-      <Editor postId={params.postId} canEdit={canEdit} />
-    </div>
-  );
+  return canEdit;
 };
 
 export default EditPostRouter;

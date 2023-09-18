@@ -5,7 +5,6 @@ import Quill from "./Quill/Quill";
 import styles from "./Editor.module.scss";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { Cabin_Sketch } from "next/font/google";
 
 const Editor = ({ postId, canEdit }: { postId?: number; canEdit?: boolean }) => {
   const router = useRouter(); // 작성 완료되면 게시물로 redirect 할겁니다.
@@ -16,7 +15,7 @@ const Editor = ({ postId, canEdit }: { postId?: number; canEdit?: boolean }) => 
 
   // 수정 권한이 없는 경우엔 수정을 시도하려던 게시글로 이동합니다.
   useEffect(() => {
-    if (!canEdit) {
+    if (postId && !canEdit) {
       window.alert("수정 권한 없음");
       router.push(`/post/${postId}`);
     }
@@ -56,31 +55,37 @@ const Editor = ({ postId, canEdit }: { postId?: number; canEdit?: boolean }) => 
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.head}>
-        <input
-          className={styles.title}
-          type="text"
-          placeholder="제목"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          className={styles.subtitles}
-          type="text"
-          placeholder="부제목"
-          value={subtitles}
-          onChange={(e) => setSubtitles(e.target.value)}
-        />
-      </div>
-      <div className={styles.quillContainer}>
-        <Quill {...quillProps} />
-      </div>
-      <div>
-        <button onClick={(e) => handleClickEditButton(e)}>작성하기</button>
-        <button>취소하기</button>
-      </div>
-    </div>
+    <>
+      {postId && !canEdit ? (
+        <div>{null}</div>
+      ) : (
+        <div className={styles.container}>
+          <div className={styles.head}>
+            <input
+              className={styles.title}
+              type="text"
+              placeholder="제목"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <input
+              className={styles.subtitles}
+              type="text"
+              placeholder="부제목"
+              value={subtitles}
+              onChange={(e) => setSubtitles(e.target.value)}
+            />
+          </div>
+          <div className={styles.quillContainer}>
+            <Quill {...quillProps} />
+          </div>
+          <div>
+            <button onClick={(e) => handleClickEditButton(e)}>작성하기</button>
+            <button>취소하기</button>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
