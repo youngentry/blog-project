@@ -13,6 +13,8 @@ const Post = async ({ postId }: { postId: string }) => {
     { id: Number(postId) },
     { projection: { _id: 0 } }
   );
+
+  // 게시물 작성자와 현재 로그인한 user가 같은지 확인하여 "수정", "삭제" 버튼 나타나도록 함
   const sameAuthor: boolean = await isSameAuthor(postData?.email as string);
 
   return (

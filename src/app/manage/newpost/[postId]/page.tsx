@@ -1,7 +1,6 @@
 import Editor from "@/containers/Editor/Editor";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { checkBlogAdmin } from "@/utils/sessionCheck/checkBlogAdmin";
-import axios from "axios";
 import { getServerSession } from "next-auth";
 
 const EditPostRouter = async ({ params }: any) => {

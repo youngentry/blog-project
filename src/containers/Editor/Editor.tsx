@@ -22,6 +22,7 @@ const Editor = ({ postId, canEdit }: { postId?: number; canEdit?: boolean }) => 
   }, []);
 
   useEffect(() => {
+    // postId가 있다면 게시물 데이터를 요청하고, state에 데이터를 저장합니다.
     if (postId) {
       (async () => {
         const result = await axios.get(`/api/manage/newpost/${postId}`);
@@ -42,16 +43,22 @@ const Editor = ({ postId, canEdit }: { postId?: number; canEdit?: boolean }) => 
   // 수정하기 버튼 클릭하면,
   const handleClickEditButton = async (e: any) => {
     e.preventDefault();
-    // api 요청을 보내고
-    const result = await axios.post(`/api/manage/newpost/${postId}`, {
-      title,
-      subtitles,
-      contents,
-      id: postId,
-    });
+    try {
+      // api 요청을 보내고
+      const result = await axios.post(`/api/manage/newpost/${postId}`, {
+        title,
+        subtitles,
+        contents,
+        id: postId,
+      });
 
-    // 게시물 작성이 완료되면 해당 게시물 주소로 redirect 합니다.
-    router.push(`/post/${result.data.id}`);
+      // 게시물로 redirect하기 전 refresh를 하여 캐시된 페이지를 불러오지 않고 서버의 데이터를 새로 가져오도록 합니다.
+      router.refresh();
+      // 해당 게시물로 redirect 합니다.
+      router.push(`/post/${result.data.id}`);
+    } catch (error) {
+      console.error("게시물 수정 오류:", error);
+    }
   };
 
   return (
