@@ -1,13 +1,15 @@
 "use client";
 
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styles from "./Quill.module.scss";
+import dynamic from "next/dynamic";
 
 interface quillProps {
   contents: string;
   setContents: React.Dispatch<React.SetStateAction<string>>;
 }
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const Quill = ({ contents, setContents }: quillProps) => {
   const modules = {
