@@ -2,6 +2,8 @@ import { connectDB } from "@/utils/db/db";
 import Image from "next/image";
 import styles from "./Post.module.scss";
 import { Post } from "@/types/post";
+import { isSameAuthor } from "@/utils/sessionCheck/isSameAuthor";
+import EditPostButton from "@/components/buttons/EditPostButton";
 
 const Post = async ({ postId }: { postId: string }) => {
   const db = (await connectDB).db("blog");
@@ -11,6 +13,7 @@ const Post = async ({ postId }: { postId: string }) => {
     { id: Number(postId) },
     { projection: { _id: 0 } }
   );
+  const sameAuthor: boolean = await isSameAuthor(postData?.email as string);
 
   return (
     <article className={styles.container}>
@@ -27,13 +30,15 @@ const Post = async ({ postId }: { postId: string }) => {
             <div className={styles.info}>
               <span>{postData.author}</span>
               <span>{postData.date.toString()}</span>
+              {sameAuthor && <EditPostButton postId={postId} />}
+              {sameAuthor && <button>삭제</button>}
             </div>
           </header>
           {/* {postData.id} */}
           {/* {postData.link} */}
           <div className={styles.content}>
             <Image src={postData.src} alt="post content image" width={300} height={300} />
-            {postData.content}
+            {postData.contents}
           </div>
           <div className={styles.comment}>
             <div className={styles.counts}>

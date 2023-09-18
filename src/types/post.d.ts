@@ -14,5 +14,6 @@ export interface Card {
 }
 
 export interface Post extends Card {
-  content: string;
+  contents: string;
+  email: string;
 }

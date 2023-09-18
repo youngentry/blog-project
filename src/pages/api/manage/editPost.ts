@@ -2,6 +2,11 @@ import { connectDB } from "@/utils/db/db";
 import { getToken } from "next-auth/jwt";
 
 const handler = async (req: any, res: any) => {
+  if (req.method === "GET") {
+    const db = (await connectDB).db("blog");
+    const postCollection = await db.collection("posts");
+  }
+
   if (req.method === "POST") {
     // DB와 Collection 연결
     const db = (await connectDB).db("blog");
