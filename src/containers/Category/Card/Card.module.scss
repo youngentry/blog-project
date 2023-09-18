@@ -2,12 +2,14 @@
 @import "@/styles/mixins/hover.scss";
 
 .card {
-  height: 100%;
-  width: calc(100% / 3 - (1.5rem * 2 / 3));
-  background: #fff;
+  display: inline-block;
+  font-size: 0.75rem;
+  width: 100%;
+  break-inside: avoid;
+  background: var(--color-white);
   border-radius: var(--br-20);
   overflow: hidden;
-  position: relative;
+  margin-bottom: var(--gap-20);
 
   .image {
     width: 100%;
@@ -21,7 +23,7 @@
     justify-content: space-between;
 
     .title {
-      margin-bottom: 0.5rem;
+      margin-bottom: var(--gap-10);
       font-size: var(--ft-17);
       @include hoverText;
     }
@@ -29,7 +31,7 @@
     .subtitles,
     .languages {
       //   height: 2rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: var(--gap-10);
       display: flex;
       flex-wrap: wrap;
       gap: var(--gap-5);
@@ -41,13 +43,37 @@
     }
 
     .more {
-      -top: auto;
+      top: auto;
       display: flex;
+      justify-content: space-between;
       gap: var(--gap-10);
 
-      > * {
+      .write {
         display: flex;
+        flex-direction: column;
         gap: var(--gap-5);
+
+        .author {
+          font-weight: 500;
+        }
+        .date {
+          font-size: var(--ft-13);
+        }
+      }
+
+      .counts {
+        display: flex;
+        align-items: flex-end;
+        gap: var(--gap-5);
+        .comments {
+          display: flex;
+          gap: var(--gap-5);
+        }
+
+        .likes {
+          display: flex;
+          gap: var(--gap-5);
+        }
       }
     }
   }

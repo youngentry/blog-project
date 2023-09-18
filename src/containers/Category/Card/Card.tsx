@@ -3,9 +3,11 @@ import styles from "./Card.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import { Post } from "@/types/post";
+import { getDateForm } from "@/utils/getDateForm";
 
 const Card = ({ data }: { data: Post }) => {
-  const { id, src, title, subtitles, languages, commentCount, likes } = data;
+  const { id, src, title, subtitles, languages, commentCount, likes, author, date } = data;
+
   const link = `/post/${id}`;
 
   return (
@@ -52,13 +54,19 @@ const Card = ({ data }: { data: Post }) => {
           })}
         </ul>
         <div className={styles.more}>
-          <div>
-            <i>💬</i>
-            <p>{commentCount}</p>
+          <div className={styles.write}>
+            <div className={styles.author}>{author}</div>
+            <div className={styles.date}>{getDateForm(date)}</div>
           </div>
-          <div>
-            <i>❤</i>
-            <p>{likes}</p>
+          <div className={styles.counts}>
+            <div className={styles.comments}>
+              <i>💬</i>
+              <p>{commentCount}</p>
+            </div>
+            <div className={styles.likes}>
+              <i>❤</i>
+              <p>{likes}</p>
+            </div>
           </div>
         </div>
       </div>

@@ -6,7 +6,6 @@
   padding: 7rem;
   max-width: var(--w-max-page);
   background: #369;
-  columns: 3;
 
   h2 {
     margin-bottom: 4rem;
@@ -16,9 +15,11 @@
 
   .cardContainer {
     margin-bottom: 4rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
+    display: inline-block;
+    column-count: 3;
+    gap: var(--gap-20);
+    // flex-wrap: wrap;
+    // gap: 1.5rem;
     width: 100%;
   }
 }

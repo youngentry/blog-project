@@ -2,7 +2,12 @@ import { connectDB } from "@/utils/db/db";
 import { getToken } from "next-auth/jwt";
 
 const handler = async (req: any, res: any) => {
-  if (req.method == "POST") {
+  if (req.method === "GET") {
+    const db = (await connectDB).db("blog");
+    const postCollection = await db.collection("posts");
+  }
+
+  if (req.method === "POST") {
     // DB와 Collection 연결
     const db = (await connectDB).db("blog");
     const postCollection = await db.collection("posts");
@@ -43,7 +48,7 @@ const handler = async (req: any, res: any) => {
 
     const result = await postCollection.insertOne({ ...saveData }); // DB에 저장한 결과
 
-    return res.status(200).json({ id }); // 응답하기
+    return res.status(200).json({ id }); // 응답에 게시물 id를 포함하여 redirect할 수 있도록 합니다.
   }
 };
 
