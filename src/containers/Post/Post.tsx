@@ -4,6 +4,7 @@ import styles from "./Post.module.scss";
 import { Post } from "@/types/post";
 import { isSameAuthor } from "@/utils/sessionCheck/isSameAuthor";
 import EditPostButton from "@/components/buttons/EditPostButton";
+import { sanitize } from "isomorphic-dompurify";
 
 const Post = async ({ postId }: { postId: string }) => {
   const db = (await connectDB).db("blog");
@@ -40,7 +41,7 @@ const Post = async ({ postId }: { postId: string }) => {
           {/* {postData.link} */}
           <div className={styles.content}>
             <Image src={postData.src} alt="post content image" width={300} height={300} />
-            {postData.contents}
+            {<div dangerouslySetInnerHTML={{ __html: sanitize(postData.contents) }} />}
           </div>
           <div className={styles.comment}>
             <div className={styles.counts}>
