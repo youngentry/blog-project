@@ -6,6 +6,7 @@ import styles from "./Editor.module.scss";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
+// react-quill에 게시물 데이터를 불러오거나, 새롭게 작성하거나 수정한 게시물을 DB에 업데이트합니다.
 const Editor = ({ postId, canEdit }: { postId?: number; canEdit?: boolean }) => {
   const router = useRouter(); // 작성 완료되면 게시물로 redirect 할겁니다.
 

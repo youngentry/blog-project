@@ -1,6 +1,7 @@
 import { connectDB } from "@/utils/db/db";
 import { getToken } from "next-auth/jwt";
 
+// 새로운 게시물 작성 API 입니다.
 const handler = async (req: any, res: any) => {
   if (req.method === "POST") {
     // DB와 Collection 연결

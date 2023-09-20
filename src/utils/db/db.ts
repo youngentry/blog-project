@@ -1,3 +1,5 @@
+// 애플리케이션 실행 시 db에 1회 연결합니다.
+
 import { MongoClient } from "mongodb";
 
 const url: string | undefined = process.env.DB_CONNECT;

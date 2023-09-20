@@ -1,3 +1,4 @@
+// flex mixin입니다. 좋은 아이디어가 필요합니다. 지금은 별로 효용성이 없습니다.
 @mixin flex($f-d: row, $j-c: center, $a-i: center, $t-a: center) {
   display: flex;
   flex-direction: $f-d;

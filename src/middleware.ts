@@ -4,7 +4,8 @@ import { NextRequest } from "next/server";
 import { isBlogManager } from "./utils/sessionCheck/isBlogManager";
 export { withAuth } from "next-auth/middleware";
 
-// This function can be marked `async` if using `await` inside
+// '/manage' 경로에 접근하는 클라이언트의 권한을 확인합니다.
+// 권한이 없다면 '/'로 되돌려 보냅니다.
 export const middleware = async (request: NextRequest) => {
   // 1. '/manage'로 시작하는 경로에 접근 시
   if (request.nextUrl.pathname.startsWith("/manage")) {

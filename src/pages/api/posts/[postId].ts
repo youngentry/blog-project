@@ -1,5 +1,6 @@
 import { connectDB } from "@/utils/db/db";
 
+// 게시물 정보를 불러오는 API입니다.
 const handler = async (req: any, res: any) => {
   const { postId } = req.query;
   if (req.method === "GET") {

@@ -7,6 +7,7 @@ import EditPostButton from "@/components/buttons/EditPostButton";
 import { sanitize } from "isomorphic-dompurify";
 import axios from "axios";
 
+// 게시물 하나의 컴포넌트입니다.
 const Post = async ({ postId }: { postId: string }) => {
   const response = await axios.get(`http://localhost:3000/api/posts/${postId}`);
   const postData: Post = response.data;

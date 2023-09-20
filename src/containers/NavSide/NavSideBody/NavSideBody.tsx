@@ -1,5 +1,6 @@
 import styles from "./NavSideBody.module.scss";
 
+// 사이드 메뉴의 바디 컴포넌트입니다.
 const NavSideBody = () => {
   const menus = [
     { category: "기능 구현", subjects: ["페이지네이션", "레이지 로딩", "예약 기능"] },

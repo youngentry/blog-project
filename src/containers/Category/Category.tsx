@@ -4,6 +4,8 @@ import styles from "./Category.module.scss";
 import Pagination from "@/components/Pagination/Pagination";
 import { Post } from "@/types/post";
 
+// category (게시물 목록)페이지입니다.
+// 게시물 카드를 map으로 렌더링 하고, 각각의 게시물 카드에는 게시물 데이터를 props 전달합니다.
 const Category = async () => {
   const db = (await connectDB).db("blog");
   const postCollection = db.collection<Post>("posts");

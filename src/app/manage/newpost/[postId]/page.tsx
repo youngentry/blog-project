@@ -3,7 +3,8 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { checkBlogAdmin } from "@/utils/sessionCheck/checkBlogAdmin";
 import { getServerSession } from "next-auth";
 
-// 게시물 수정 페이지로 라우트하기 전 수정 권한 검사를 거칩니다.
+// 게시물 수정 페이지로 라우트합니다.
+// 라우트 전 수정 권한 검사를 server에서 합니다.
 const EditPostRouter = async ({ params }: any) => {
   // 수정 권한 확인
   const canEdit: boolean = await checkEditAuthor(params.postId);

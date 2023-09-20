@@ -2,6 +2,7 @@ import { connectDB } from "@/utils/db/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcrypt";
 
+// 회원 가입에 필요한 각 문자열의 최소, 최대 길이입니다.
 const LENGTH = {
   MIN_NAME: 2,
   MAX_NAME: 10,
@@ -11,6 +12,7 @@ const LENGTH = {
   MAX_PASSWORD: 20,
 };
 
+// 회원 가입에 필요한 형태를 갖추었는지 조건을 검사하고 문제가 없다면 회원 정보를 DB에 저장합니다.
 const signUpHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     let { name, email, password } = req.body;

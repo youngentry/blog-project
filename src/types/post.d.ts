@@ -1,6 +1,7 @@
 import exp from "constants";
 import { ObjectId } from "mongodb";
 
+// 게시물 카드
 export interface Card {
   id: number;
   src: string;
@@ -13,6 +14,7 @@ export interface Card {
   likes: number;
 }
 
+// 게시물
 export interface Post extends Card {
   contents: string;
   email: string;

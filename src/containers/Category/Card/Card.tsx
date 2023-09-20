@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Post } from "@/types/post";
 import { getDateForm } from "@/utils/getDateForm";
 
+// category (게시물 목록)페이지에서 하나의 게시물 카드입니다.
 const Card = ({ data }: { data: Post }) => {
   const { id, src, title, subtitles, languages, commentCount, likes, author, date } = data;
 
@@ -39,22 +40,6 @@ const Card = ({ data }: { data: Post }) => {
             }
           })}
         </ul>
-        {/* <ul className={styles.languages}>
-          {languages.map((language, index) => {
-            if (languages.length === 1 && !languages) {
-              return (
-                <li className={styles.subtitle} key={index}>
-                  #언어선택없음
-                </li>
-              );
-            }
-            return (
-              <li className={styles.subtitle} key={index}>
-                #{language}
-              </li>
-            );
-          })}
-        </ul> */}
         <div className={styles.more}>
           <div className={styles.write}>
             <div className={styles.author}>{author}</div>

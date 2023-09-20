@@ -9,6 +9,8 @@ interface quillProps {
   setContents: React.Dispatch<React.SetStateAction<string>>;
 }
 
+// dynamic import. srr: false 옵션으로 클라이언트에서 동적으로 로드하도록 합니다.
+// window와 같은 브라우저 API에 의존할 경우 필요합니다.
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const Quill = ({ contents, setContents }: quillProps) => {

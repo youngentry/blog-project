@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import styles from "./Register.module.scss";
 import { useEffect, useState } from "react";
 
+// 가입 페이지 컴포넌트입니다.
+// 현재는 비활성화하여 5초 뒤에 '/'로 되돌려 보냅니다.
 const Register = () => {
   const [second, setSecond] = useState(5);
 

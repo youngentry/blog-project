@@ -1,3 +1,4 @@
+// pointer 효과와 hover 시 background 효과를 줍니다.
 @mixin hoverBG($bg: #369) {
   transition: background 0.3s;
   cursor: pointer;
@@ -6,6 +7,7 @@
   }
 }
 
+// pointer 효과와 hover 시 text underline 효과를 줍니다.
 @mixin hoverText() {
   transition: text-decoration 0.3s;
   cursor: pointer;

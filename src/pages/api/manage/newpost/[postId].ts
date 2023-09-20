@@ -1,5 +1,6 @@
 import { connectDB } from "@/utils/db/db";
 
+// 게시물 수정 API 입니다.
 const handler = async (req: any, res: any) => {
   const { postId } = req.query;
 
