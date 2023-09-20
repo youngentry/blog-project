@@ -3,8 +3,10 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { checkBlogAdmin } from "@/utils/sessionCheck/checkBlogAdmin";
 import { getServerSession } from "next-auth";
 
+// 게시물 수정 페이지로 라우트하기 전 수정 권한 검사를 거칩니다.
 const EditPostRouter = async ({ params }: any) => {
-  const canEdit: boolean = await checkEditAuthor(params.postId); // 수정 권한 확인
+  // 수정 권한 확인
+  const canEdit: boolean = await checkEditAuthor(params.postId);
 
   return (
     <div>
@@ -15,9 +17,8 @@ const EditPostRouter = async ({ params }: any) => {
 
 const checkEditAuthor = async (postId: string) => {
   // 게시글을 작성한 유저를 확인합니다.
-  const result = await fetch(`http://localhost:3000/api/manage/newpost/${postId}`, {
+  const result = await fetch(`http://localhost:3000/api/posts/${postId}`, {
     method: "GET",
-    cache: "force-cache",
   });
   const jsonData = await result.json();
   const postEmail = jsonData.email;

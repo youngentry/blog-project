@@ -19,7 +19,7 @@ const handler = async (req: any, res: any) => {
       { upsert: true }
     );
 
-    const { title, subtitles, languages, contents, src } = req.body; // 게시물 내용
+    const { title, subtitles, contents, src } = req.body; // 게시물 내용
     const id = currentCounter ? currentCounter.count + 1 : 1; // 게시물 번호
     const email = token?.email; // 작성자 email
     const author = token?.name; // 작성자 닉네임
@@ -31,7 +31,6 @@ const handler = async (req: any, res: any) => {
       id,
       title,
       subtitles: subtitles.split(" "),
-      // languages: languages.split(" "),
       contents,
       email,
       src: src || "https://cdn.pixabay.com/photo/2023/09/03/11/13/mountains-8230502_1280.jpg",

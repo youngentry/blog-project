@@ -5,15 +5,11 @@ import { Post } from "@/types/post";
 import { isSameAuthor } from "@/utils/sessionCheck/isSameAuthor";
 import EditPostButton from "@/components/buttons/EditPostButton";
 import { sanitize } from "isomorphic-dompurify";
+import axios from "axios";
 
 const Post = async ({ postId }: { postId: string }) => {
-  const db = (await connectDB).db("blog");
-  const postCollection = db.collection<Post>("posts");
-
-  const postData: Post | null = await postCollection.findOne(
-    { id: Number(postId) },
-    { projection: { _id: 0 } }
-  );
+  const response = await axios.get(`http://localhost:3000/api/posts/${postId}`);
+  const postData: Post = response.data;
 
   // 게시물 작성자와 현재 로그인한 user가 같은지 확인하여 "수정", "삭제" 버튼 나타나도록 함
   const sameAuthor: boolean = await isSameAuthor(postData?.email as string);
@@ -27,9 +23,6 @@ const Post = async ({ postId }: { postId: string }) => {
             <div className={styles.subtitles}>
               <span>{postData.subtitles.join(" ")}</span>
             </div>
-            {/* <div className={styles.languages}>
-              <span>{postData.languages.join(" ")}</span>
-            </div> */}
             <div className={styles.info}>
               <span>{postData.author}</span>
               <span>{postData.date.toString()}</span>
@@ -37,8 +30,6 @@ const Post = async ({ postId }: { postId: string }) => {
               {sameAuthor && <button>삭제</button>}
             </div>
           </header>
-          {/* {postData.id} */}
-          {/* {postData.link} */}
           <div className={styles.content}>
             <Image src={postData.src} alt="post content image" width={300} height={300} />
             {<div dangerouslySetInnerHTML={{ __html: sanitize(postData.contents) }} />}
