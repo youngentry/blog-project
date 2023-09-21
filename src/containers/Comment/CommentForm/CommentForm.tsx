@@ -1,15 +1,9 @@
 import React from "react";
 import styles from "./CommentForm.module.scss";
-import { CommentProps } from "@/types/post";
 
-const CommentForm = (commentProps: CommentProps) => {
-  const { commentCount, likes } = commentProps;
+const CommentForm = () => {
   return (
     <div className={styles.comment}>
-      <div className={styles.counts}>
-        <div>댓글 {commentCount}</div>
-        <div>❤ {likes}</div>
-      </div>
       <form className={styles.form}>
         <div className={styles.thumbnail}>😀</div>
         <div className={styles.write}>

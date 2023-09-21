@@ -48,7 +48,11 @@ const Post = async ({ postId }: { postId: string }) => {
             <Image src={src} alt="post content image" width={300} height={300} />
             {<div dangerouslySetInnerHTML={{ __html: sanitize(contents) }} />}
           </div>
-          <Comment {...commentProps} />
+          <div className={styles.counts}>
+            <div>댓글 {commentCount}</div>
+            <div>❤ {likes}</div>
+          </div>
+          <Comment />
         </div>
       ) : (
         <div>게시물이 존재하지 않습니다.</div>
