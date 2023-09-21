@@ -1,4 +1,3 @@
-import { connectDB } from "@/utils/db/db";
 import Image from "next/image";
 import styles from "./Post.module.scss";
 import { Post } from "@/types/post";
