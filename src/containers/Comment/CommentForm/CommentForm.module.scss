@@ -19,6 +19,10 @@
         > * {
           flex: 1;
         }
+
+        &.sameAuthor {
+          display: none;
+        }
       }
 
       .textarea {

@@ -3,7 +3,7 @@
  * @param session
  * @returns boolean
  */
-export const checkBlogAdmin = (email: string) => {
+export const checkBlogAdmin = (email: string): boolean => {
   const admins: string[] | undefined = process.env.NEXT_PUBLIC_BLOG_ADMIN?.split(","); // blog manager emails: string[]
 
   // 로그인된 유저의 email이 admin에 포함될 경우 true를 반환합니다.
