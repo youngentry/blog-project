@@ -19,3 +19,9 @@ export interface Post extends Card {
   contents: string;
   email: string;
 }
+
+// 댓글 form
+export interface CommentProps {
+  commentCount: number;
+  likes: number;
+}
