@@ -6,14 +6,16 @@ import { isSameAuthor } from "@/utils/sessionCheck/isSameAuthor";
 import EditPostButton from "@/components/buttons/EditPostButton";
 import { sanitize } from "isomorphic-dompurify";
 import axios from "axios";
+import DeletePostButton from "@/components/buttons/DeletePostButton";
 
 // 게시물 하나의 컴포넌트입니다.
 const Post = async ({ postId }: { postId: string }) => {
   const response = await axios.get(`http://localhost:3000/api/posts/${postId}`);
   const postData: Post = response.data;
+  const postAuthor = postData.email;
 
   // 게시물 작성자와 현재 로그인한 user가 같은지 확인하여 "수정", "삭제" 버튼 나타나도록 함
-  const sameAuthor: boolean = await isSameAuthor(postData?.email as string);
+  const sameAuthor: boolean = await isSameAuthor(postAuthor);
 
   return (
     <article className={styles.container}>
@@ -27,8 +29,12 @@ const Post = async ({ postId }: { postId: string }) => {
             <div className={styles.info}>
               <span>{postData.author}</span>
               <span>{postData.date.toString()}</span>
-              {sameAuthor && <EditPostButton postId={postId} />}
-              {sameAuthor && <button>삭제</button>}
+              {sameAuthor && (
+                <>
+                  <EditPostButton postId={postId} />
+                  <DeletePostButton postId={postId} />
+                </>
+              )}
             </div>
           </header>
           <div className={styles.content}>
