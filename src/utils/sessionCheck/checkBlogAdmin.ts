@@ -6,7 +6,7 @@
 export const checkBlogAdmin = (email: string) => {
   const admins: string[] | undefined = process.env.NEXT_PUBLIC_BLOG_ADMIN?.split(","); // blog manager emails: string[]
 
-  // 로그인된 유저의 email이 managers에 포함될 경우 true를 반환합니다.
+  // 로그인된 유저의 email이 admin에 포함될 경우 true를 반환합니다.
   if (email && admins) {
     return admins.includes(email);
   }

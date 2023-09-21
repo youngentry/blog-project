@@ -53,8 +53,8 @@ const Editor = ({ postId, canEdit }: { postId?: number; canEdit?: boolean }) => 
       });
 
       // 게시물로 redirect하기 전 서버를 refresh하여 업데이트 된 DB 데이터를 가져오도록 합니다.
-      router.refresh();
       router.push(`/post/${result.data.id}`); // 해당 게시물로 redirect 합니다.
+      router.refresh();
     } catch (error) {
       console.error("게시물 수정 오류:", error);
     }
