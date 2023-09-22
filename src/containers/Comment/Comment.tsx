@@ -14,7 +14,7 @@ const Comment = ({
   return (
     <div>
       <CommentForm postId={postId} userEmail={userEmail} />
-      <CommentList />
+      <CommentList postId={postId} />
     </div>
   );
 };

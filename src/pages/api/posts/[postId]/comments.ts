@@ -7,6 +7,18 @@ const handler = async (req: any, res: any) => {
   let { postId }: { postId: string } = req.query;
   const token: JWT | null = await getToken({ req }); // 유저 정보
 
+  // DB에 연결합니다.
+  const db = (await connectDB).db("blog");
+  const commentsCollection = db.collection("comments");
+
+  if (req.method === "GET") {
+    const foundCommentsResult = await commentsCollection
+      .find({ parentId: Number(postId) }, { projection: { password: 0, parentId: 0 } })
+      .toArray();
+
+    res.status(200).json({ comments: foundCommentsResult });
+  }
+
   if (req.method === "POST") {
     const { nickname, password, comment }: CommentsForm = req.body;
 
@@ -19,10 +31,6 @@ const handler = async (req: any, res: any) => {
     if (comment.length < 1) {
       return res.status(400).json({ message: "댓글을 입력해야합니다." });
     }
-
-    // DB에 연결합니다.
-    const db = (await connectDB).db("blog");
-    const commentsCollection = db.collection("comments");
 
     // DB에 저장할 데이터
     const saveData: Comments = {

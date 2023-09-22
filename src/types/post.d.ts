@@ -29,6 +29,7 @@ export interface CommentsForm {
 
 // 댓글
 export interface Comments extends CommentsForm {
+  _id?: ObjectId;
   parentId: number;
   author: string;
   date: Date;
