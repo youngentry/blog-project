@@ -1,6 +1,6 @@
 import { connectDB } from "@/utils/db/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import bcrypt from "bcrypt";
+import { hash } from "bcrypt";
 
 // 회원 가입에 필요한 각 문자열의 최소, 최대 길이입니다.
 const LENGTH = {
@@ -56,7 +56,7 @@ const signUpHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     // 비밀번호 해쉬화
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const hashedPassword = await hash(req.body.password, 10);
     password = hashedPassword;
 
     // 부가 정보

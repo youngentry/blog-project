@@ -51,11 +51,21 @@ const CommentForm = ({ postId, userEmail, newUpdate, setNewUpdate }: CommentForm
           ...commentForm,
         }),
       });
-      setNewUpdate(!newUpdate);
+
+      // 작성 성공 시
+      successSubmit();
     } catch (err) {
       console.error(err);
       window.alert("댓글 작성 중에 오류가 발생했습니다. 잠시 후에 다시 시도해주세요.");
     }
+  };
+
+  const successSubmit = () => {
+    //  comment 초기화
+    setComment("");
+
+    // client component 업데이트
+    setNewUpdate(!newUpdate);
   };
 
   return (
