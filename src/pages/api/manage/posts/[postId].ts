@@ -15,7 +15,6 @@ const handler = async (req: any, res: any) => {
     }
 
     const userEmail = token.email as string; // 로그인 유저 email
-    console.log(userEmail);
     // DB와 Collection 연결
     const db = (await connectDB).db("blog");
     const postCollection = await db.collection("posts");

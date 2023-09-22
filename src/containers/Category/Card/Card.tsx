@@ -9,7 +9,7 @@ import { getDateForm } from "@/utils/getDateForm";
 const Card = ({ data }: { data: Post }) => {
   const { id, src, title, subtitles, languages, commentCount, likes, author, date } = data;
 
-  const link = `/post/${id}`;
+  const link = `/posts/${id}`;
 
   return (
     <div className={styles.card}>

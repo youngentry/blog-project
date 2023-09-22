@@ -5,7 +5,6 @@ import React from "react";
 // 게시글의 id를 Post component에 전달합니다.
 const PostRouter = (props: any) => {
   const { postId }: { postId: string } = props.params;
-
   return <div>{postId && <Post postId={postId} />}</div>;
 };
 
