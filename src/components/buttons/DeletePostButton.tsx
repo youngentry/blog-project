@@ -1,8 +1,5 @@
 "use client";
 
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { checkEditAuthor } from "@/utils/sessionCheck/checkEditAuthor";
-import { getServerSession } from "next-auth";
 import { useRouter } from "next/navigation";
 import React from "react";
 

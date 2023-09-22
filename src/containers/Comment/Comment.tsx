@@ -2,10 +2,18 @@ import React from "react";
 import CommentForm from "./CommentForm/CommentForm";
 import CommentList from "./CommentList/CommentList";
 
-const Comment = ({ isSameAuthor, userEmail }: { isSameAuthor: boolean; userEmail: string }) => {
+const Comment = ({
+  postId,
+  isSameAuthor,
+  userEmail,
+}: {
+  postId: string;
+  isSameAuthor: boolean;
+  userEmail: string;
+}) => {
   return (
     <div>
-      <CommentForm userEmail={userEmail} />
+      <CommentForm postId={postId} userEmail={userEmail} />
       <CommentList />
     </div>
   );

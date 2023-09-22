@@ -6,7 +6,7 @@ import styles from "./CommentForm.module.scss";
 // 댓글 입력 폼입니다.
 // userEmail이 존재하면(로그인 상태) name, password input 값은 고정되어 있습니다.
 // 존재하지 않을 경우(비로그인 상태) name, password input이 나타납니다.
-const CommentForm = ({ userEmail }: { userEmail: string }) => {
+const CommentForm = ({ postId, userEmail }: { postId: string; userEmail: string }) => {
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [comment, setComment] = useState("");

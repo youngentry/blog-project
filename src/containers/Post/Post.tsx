@@ -50,7 +50,7 @@ const Post = async ({ postId }: { postId: string }) => {
             <div>댓글 {commentCount}</div>
             <div>❤ {likes}</div>
           </div>
-          <Comment isSameAuthor={isSameAuthor} userEmail={userEmail} />
+          <Comment postId={postId} isSameAuthor={isSameAuthor} userEmail={userEmail} />
         </div>
       ) : (
         <div>게시물이 존재하지 않습니다.</div>
