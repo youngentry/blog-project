@@ -41,10 +41,10 @@ export interface Comments extends CommentsForm {
 export interface CommentListProps {
   postId: string;
   newUpdate: boolean;
+  userEmail: string;
 }
 
 // 댓글 CommentFormProps 컴포넌트 프롭스 타입
 export interface CommentFormProps extends CommentListProps {
-  userEmail: string;
   setNewUpdate: Dispatch<SetStateAction<boolean>>;
 }

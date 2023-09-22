@@ -4,7 +4,12 @@ import React, { useState } from "react";
 import CommentForm from "./CommentForm/CommentForm";
 import CommentList from "./CommentList/CommentList";
 
-const Comment = ({ postId, userEmail }: { postId: string; userEmail: string }) => {
+interface CommentProps {
+  postId: string;
+  userEmail: string;
+}
+
+const Comment = ({ postId, userEmail }: CommentProps) => {
   const [newUpdate, setNewUpdate] = useState<boolean>(false);
   return (
     <div>
@@ -14,7 +19,7 @@ const Comment = ({ postId, userEmail }: { postId: string; userEmail: string }) =
         newUpdate={newUpdate}
         setNewUpdate={setNewUpdate}
       />
-      <CommentList postId={postId} newUpdate={newUpdate} />
+      <CommentList postId={postId} newUpdate={newUpdate} userEmail={userEmail} />
     </div>
   );
 };
