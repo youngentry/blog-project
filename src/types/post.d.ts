@@ -36,3 +36,15 @@ export interface Comments extends CommentsForm {
   thumbnail: string;
   isLoggedIn: boolean;
 }
+
+// 댓글 CommentListProps 컴포넌트 프롭스 타입
+export interface CommentListProps {
+  postId: string;
+  newUpdate: boolean;
+}
+
+// 댓글 CommentFormProps 컴포넌트 프롭스 타입
+export interface CommentFormProps extends CommentListProps {
+  userEmail: string;
+  setNewUpdate: Dispatch<SetStateAction<boolean>>;
+}

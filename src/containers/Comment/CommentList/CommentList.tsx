@@ -2,28 +2,28 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./CommentList.module.scss";
-import { Comments } from "@/types/post";
+import { CommentListProps, Comments } from "@/types/post";
 import { getDateForm } from "@/utils/getDateForm";
 
-const CommentList = ({ postId }: { postId: string }) => {
+const CommentList = ({ postId, newUpdate }: CommentListProps) => {
   const [comments, setComments] = useState<Comments[]>([]);
 
   // 댓글을 불러와 state에 저장합니다.
   useEffect(() => {
     (async () => {
       try {
+        // GET 요청을 보냅니다.
         const response = await fetch(`/api/posts/${postId}/comments`, { method: "GET" });
         const parsedData = await response.json();
         const foundComments: Comments[] = parsedData.comments;
 
+        // 불러온 댓글을 state에 저장합니다.
         setComments(foundComments);
       } catch (err) {
         console.error(err);
       }
     })();
-  }, []);
-
-  console.log(comments);
+  }, [postId, newUpdate]);
 
   return (
     <ul className={styles.commentList}>

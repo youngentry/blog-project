@@ -2,15 +2,15 @@
 
 import React, { useState } from "react";
 import styles from "./CommentForm.module.scss";
-import { CommentsForm } from "@/types/post";
+import { CommentFormProps, CommentsForm } from "@/types/post";
 
 // 댓글 입력 폼입니다.
 // userEmail이 존재하면(로그인 상태) nickname, password "고정"되어 있습니다.
 // 존재하지 않을 경우(비로그인 상태) nickname, password input이 나타납니다.
-const CommentForm = ({ postId, userEmail }: { postId: string; userEmail: string }) => {
-  const [nickname, setNickname] = useState(userEmail || "");
-  const [password, setPassword] = useState("");
-  const [comment, setComment] = useState("");
+const CommentForm = ({ postId, userEmail, newUpdate, setNewUpdate }: CommentFormProps) => {
+  const [nickname, setNickname] = useState<string>(userEmail || "");
+  const [password, setPassword] = useState<string>("");
+  const [comment, setComment] = useState<string>("");
 
   const checkValidInput = () => {
     // 비로그인 유저가 nickname또는 password입력을 했는지 검사합니다.
@@ -28,6 +28,7 @@ const CommentForm = ({ postId, userEmail }: { postId: string; userEmail: string 
     return true;
   };
 
+  // 댓글 작성
   const clickSubmitComment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -39,6 +40,7 @@ const CommentForm = ({ postId, userEmail }: { postId: string; userEmail: string 
 
     const commentForm: CommentsForm = { nickname, password, comment };
 
+    // POST 요청을 보냅니다.
     try {
       const response = await fetch(`/api/posts/${postId}/comments`, {
         method: "POST",
@@ -49,6 +51,7 @@ const CommentForm = ({ postId, userEmail }: { postId: string; userEmail: string 
           ...commentForm,
         }),
       });
+      setNewUpdate(!newUpdate);
     } catch (err) {
       console.error(err);
       window.alert("댓글 작성 중에 오류가 발생했습니다. 잠시 후에 다시 시도해주세요.");
