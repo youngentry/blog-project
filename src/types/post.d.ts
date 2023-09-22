@@ -19,3 +19,19 @@ export interface Post extends Card {
   contents: string;
   email: string;
 }
+
+// 댓글 입력 폼
+export interface CommentsForm {
+  nickname: string;
+  password: string;
+  comment: string;
+}
+
+// 댓글
+export interface Comments extends CommentsForm {
+  parentId: number;
+  author: string;
+  date: Date;
+  thumbnail: string;
+  isLoggedIn: boolean;
+}

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import styles from "./CommentForm.module.scss";
+import { CommentsForm } from "@/types/post";
 
 // 댓글 입력 폼입니다.
 // userEmail이 존재하면(로그인 상태) nickname, password "고정"되어 있습니다.
@@ -11,23 +12,47 @@ const CommentForm = ({ postId, userEmail }: { postId: string; userEmail: string 
   const [password, setPassword] = useState("");
   const [comment, setComment] = useState("");
 
+  const checkValidInput = () => {
+    // 비로그인 유저가 nickname또는 password입력을 했는지 검사합니다.
+    if (!userEmail && (nickname.length < 1 || password.length < 1)) {
+      window.alert("닉네임 또는 비밀번호를 입력해주세요.");
+      return false;
+    }
+
+    // 댓글을 입력했는지 검사합니다.
+    if (comment.length < 1) {
+      window.alert("댓글을 입력해주세요.");
+      return false;
+    }
+
+    return true;
+  };
+
   const clickSubmitComment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(postId);
+    // input이 유효한지 검사합니다.
+    const isValidInput = checkValidInput();
+    if (!isValidInput) {
+      return false;
+    }
 
-    const data = { nickname, password, comment, postId };
+    const commentForm: CommentsForm = { nickname, password, comment };
 
-    const response = await fetch(`/api/posts/${postId}/comments`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...data,
-      }),
-    });
-    console.log(response.json());
+    try {
+      const response = await fetch(`/api/posts/${postId}/comments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...commentForm,
+        }),
+      });
+    } catch (err) {
+      console.error(err);
+      window.alert("댓글 작성 중에 오류가 발생했습니다. 잠시 후에 다시 시도해주세요.");
+    }
   };
 
   return (
@@ -46,8 +71,6 @@ const CommentForm = ({ postId, userEmail }: { postId: string; userEmail: string 
                 type="text"
                 placeholder="이름"
                 value={nickname}
-                minLength={1}
-                maxLength={10}
                 onChange={(e) => {
                   setNickname(e.target.value);
                 }}
@@ -56,8 +79,6 @@ const CommentForm = ({ postId, userEmail }: { postId: string; userEmail: string 
                 type="text"
                 placeholder="비밀번호"
                 value={password}
-                minLength={1}
-                maxLength={20}
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
@@ -68,8 +89,6 @@ const CommentForm = ({ postId, userEmail }: { postId: string; userEmail: string 
             className={styles.textarea}
             placeholder="내용을 입력하세요"
             value={comment}
-            minLength={1}
-            maxLength={500}
             onChange={(e) => setComment(e.target.value)}
           />
           <button>댓글 작성</button>
