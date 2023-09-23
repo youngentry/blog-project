@@ -11,15 +11,25 @@ interface CommentProps {
 
 const Comment = ({ postId, userEmail }: CommentProps) => {
   const [newUpdate, setNewUpdate] = useState<boolean>(false);
+  const [editingCommentId, setEditingCommentId] = useState<string>("");
+
+  const commentFormProps = {
+    postId,
+    userEmail,
+    newUpdate,
+    setNewUpdate,
+  };
+
+  const commentListProps = {
+    postId,
+    newUpdate,
+    userEmail,
+  };
+
   return (
     <div>
-      <CommentForm
-        postId={postId}
-        userEmail={userEmail}
-        newUpdate={newUpdate}
-        setNewUpdate={setNewUpdate}
-      />
-      <CommentList postId={postId} newUpdate={newUpdate} userEmail={userEmail} />
+      <CommentForm {...commentFormProps} />
+      <CommentList {...commentListProps} />
     </div>
   );
 };

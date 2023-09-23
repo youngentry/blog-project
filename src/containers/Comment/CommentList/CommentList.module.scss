@@ -7,6 +7,17 @@
   flex-direction: column;
   gap: var(--gap-10);
 
+  .editForm {
+    display: none;
+    &.editing {
+      display: block;
+    }
+  }
+
+  .hide {
+    display: none;
+  }
+
   .commentItem {
     padding: 1rem;
     display: flex;
@@ -33,8 +44,8 @@
           background: #eee;
         }
 
-        .edit,
-        .delete {
+        .editButton,
+        .deleteButton {
           @include hoverText();
         }
       }

@@ -61,6 +61,38 @@ const handler = async (req: any, res: any) => {
     return res.status(404).json({ message: "Not found any post" });
   }
 
+  // 댓글 수정 요청
+  if (req.method === "PATCH") {
+    console.log(req.method);
+    const _id = new ObjectId(req.query._id);
+    const { comment }: { comment: string } = req.body;
+
+    // DB에서 댓글 작성자 정보 확인
+    const foundResult = await commentsCollection.findOne({ _id });
+
+    // 삭제할 댓글이 DB에 존재하지 않을 경우
+    if (!foundResult) {
+      return res.status(404).json({ message: "Not found any comment" });
+    }
+
+    // 로그인 유저일 경우 블로그 관리자가 아니거나, 동일한 작성자가 아닐 경우 400 응답
+    if (token) {
+      const isBlogAdmin = checkBlogAdmin(token.email as string);
+      const isSameAuthor = token.email === foundResult.author;
+      if (!isBlogAdmin && !isSameAuthor) {
+        return res.status(400).json({ message: "수정 권한이 없습니다." });
+      }
+    }
+
+    // 수정 요청 결과
+    const editResult = await commentsCollection.updateOne({ _id }, { $set: { comment } });
+
+    // 결과 응답
+    if (editResult) {
+      return res.status(200).json({ message: "댓글이 수정되었습니다." });
+    }
+  }
+
   // 댓글 삭제 요청
   if (req.method === "DELETE") {
     const _id = new ObjectId(req.query._id);
