@@ -30,21 +30,21 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
   }, [postId, newUpdate]);
 
   // 수정 버튼 클릭 이벤트
-  const handleClickEdit = async (_id: string, originComment: string) => {
+  const handleClickEditButton = async (_id: string, originComment: string) => {
     // 수정할 코멘트 정보
     setEditingCommentId(_id);
     setEditComment(originComment);
   };
 
   // 수정 취소 버튼 클릭 이벤트
-  const handleClickCancelEdit = () => {
+  const handleClickCancelEditButton = () => {
     // 수정할 코멘트 정보 초기화
     setEditingCommentId("");
     setEditComment("");
   };
 
   // 수정 확인 버튼 클릭 이벤트
-  const handleClickConfirmEdit = async (commentId: string) => {
+  const handleClickConfirmEditButton = async (commentId: string) => {
     try {
       // PATCH 요청을 보냅니다.
       const response = await fetch(`/api/posts/${postId}/comments?_id=${commentId}`, {
@@ -82,7 +82,7 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
   };
 
   // 삭제 버튼 클릭 이벤트
-  const handleClickDelete = async (commentId: string) => {
+  const handleClickDeleteButton = async (commentId: string) => {
     try {
       // GET 요청을 보냅니다.
       const response = await fetch(`/api/posts/${postId}/comments?_id=${commentId}`, {
@@ -103,6 +103,56 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const [checkingGuestPassword, setCheckingGuestPassword] = useState<boolean>(false);
+  const [deletePassword, setDeletePassword] = useState<string>("");
+
+  // 게스트 댓글 삭제 버튼 클릭
+  const handleClickGuestDeleteButton = () => {
+    setCheckingGuestPassword(true);
+    setEditingCommentId("");
+    setEditComment("");
+  };
+
+  // 게스트 비밀번호 입력 후 삭제확인 버튼 클릭
+  const handleClickGuestPasswordConfirm = async (_id: string) => {
+    try {
+      // POST 요청을 보냅니다.
+      const response = await fetch(`/api/posts/${postId}/comments/guest?_id=${_id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password: deletePassword,
+        }),
+      });
+
+      // 삭제 실패 시
+      if (response.status !== 200) {
+        window.alert("비밀번호가 다릅니다.");
+      } else {
+        //삭제 성공 시
+        // 초기화
+        setCheckingGuestPassword(false);
+        setDeletePassword("");
+
+        // 삭제된 댓글 리스트 렌더링
+        const deletedCommentList = [...commentList].filter(
+          (comment: Comments) => String(comment._id) != _id
+        );
+        setCommentList(deletedCommentList);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // 게스트 댓글 비밀번호 입력 취소
+  const handleClickCancelCheckingPassword = () => {
+    setCheckingGuestPassword(false);
+    setDeletePassword("");
   };
 
   return (
@@ -126,17 +176,35 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
                 {canEdit && (
                   <div>
                     <button
-                      className={styles.editButton}
-                      onClick={() => handleClickEdit(commentId, comment)}
+                      className={`${styles.editButton} ${!isLoggedIn && styles.hide}`}
+                      onClick={() => handleClickEditButton(commentId, comment)}
                     >
                       수정
                     </button>
                     <button
                       className={styles.deleteButton}
-                      onClick={(e) => handleClickDelete(commentId)}
+                      onClick={
+                        isLoggedIn || isBlogAdmin
+                          ? () => handleClickDeleteButton(commentId)
+                          : () => handleClickGuestDeleteButton()
+                      }
                     >
                       삭제
                     </button>
+                    <div
+                      className={`${styles.guestConfirm} ${
+                        checkingGuestPassword && !isLoggedIn && styles.visible
+                      }`}
+                    >
+                      <input
+                        type="text"
+                        placeholder="비밀번호"
+                        value={deletePassword}
+                        onChange={(e) => setDeletePassword(e.target.value)}
+                      />
+                      <button onClick={() => handleClickGuestPasswordConfirm(commentId)}>확인</button>
+                      <button onClick={() => handleClickCancelCheckingPassword()}>취소</button>
+                    </div>
                   </div>
                 )}
               </div>
@@ -151,8 +219,8 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
                   value={editComment}
                   onChange={(e) => setEditComment(e.target.value)}
                 />
-                <button onClick={() => handleClickCancelEdit()}>취소</button>
-                <button onClick={() => handleClickConfirmEdit(commentId)}>확인</button>
+                <button onClick={() => handleClickCancelEditButton()}>취소</button>
+                <button onClick={() => handleClickConfirmEditButton(commentId)}>확인</button>
               </div>
             </div>
           </li>

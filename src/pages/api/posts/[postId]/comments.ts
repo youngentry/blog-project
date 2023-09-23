@@ -63,7 +63,6 @@ const handler = async (req: any, res: any) => {
 
   // 댓글 수정 요청
   if (req.method === "PATCH") {
-    console.log(req.method);
     const _id = new ObjectId(req.query._id);
     const { comment }: { comment: string } = req.body;
 
