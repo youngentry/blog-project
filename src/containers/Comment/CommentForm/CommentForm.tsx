@@ -3,24 +3,39 @@
 import React, { useState } from "react";
 import styles from "./CommentForm.module.scss";
 import { CommentFormProps, CommentsForm } from "@/types/post";
+import { COMMENT_FORM_LENGTH } from "@/constants/commentConstants";
+import {
+  CustomInput,
+  CustomTextarea,
+  ReadOnlyInput,
+} from "@/components/inputs/CustomInputs/CustomInputs";
 
 // 댓글 입력 폼입니다.
-// userEmail이 존재하면(로그인 상태) nickname, password "고정"되어 있습니다.
-// 존재하지 않을 경우(비로그인 상태) nickname, password input이 나타납니다.
+// 비로그인 상태에서는(userEmail이 존재하지 않을 경우에) nickname, password input이 나타납니다.
 const CommentForm = ({ postId, userEmail, newUpdate, setNewUpdate }: CommentFormProps) => {
   const [nickname, setNickname] = useState<string>(userEmail || "");
   const [password, setPassword] = useState<string>("");
   const [comment, setComment] = useState<string>("");
 
+  const [inputs, setInputs] = useState({
+    nickname: "",
+    password: "",
+    comment: "",
+  });
+
+  const { MIN_NICKNAME, MIN_PASSWORD, MIN_COMMENT, MAX_NICKNAME, MAX_PASSWORD, MAX_COMMENT } =
+    COMMENT_FORM_LENGTH; // input length 조건
+
+  // input 유효성 검사
   const checkValidInput = () => {
     // 비로그인 유저가 nickname또는 password입력을 했는지 검사합니다.
-    if (!userEmail && (nickname.length < 1 || password.length < 1)) {
+    if (!userEmail && (nickname.length < MIN_NICKNAME || password.length < MIN_PASSWORD)) {
       window.alert("닉네임 또는 비밀번호를 입력해주세요.");
       return false;
     }
 
     // 댓글을 입력했는지 검사합니다.
-    if (comment.length < 1) {
+    if (comment.length < MIN_COMMENT) {
       window.alert("댓글을 입력해주세요.");
       return false;
     }
@@ -52,8 +67,7 @@ const CommentForm = ({ postId, userEmail, newUpdate, setNewUpdate }: CommentForm
         }),
       });
 
-      // 작성 성공 시
-      successSubmit();
+      successSubmit(); // 댓글 작성요청 성공 시 실행할 함수
     } catch (err) {
       console.error(err);
       window.alert("댓글 작성 중에 오류가 발생했습니다. 잠시 후에 다시 시도해주세요.");
@@ -61,11 +75,33 @@ const CommentForm = ({ postId, userEmail, newUpdate, setNewUpdate }: CommentForm
   };
 
   const successSubmit = () => {
-    //  comment 초기화
+    // form 초기화
     setComment("");
+    setNickname("");
+    setPassword("");
+
+    setInputs({ nickname: "", comment: "", password: "" });
 
     // client component 업데이트
     setNewUpdate(!newUpdate);
+  };
+
+  const nicknameInputProps = {
+    value: nickname,
+    maxLength: MAX_NICKNAME,
+    dispatch: setNickname,
+  };
+
+  const passwordInputProps = {
+    value: password,
+    maxLength: MAX_PASSWORD,
+    dispatch: setPassword,
+  };
+
+  const commentInputProps = {
+    value: comment,
+    maxLength: MAX_COMMENT,
+    dispatch: setComment,
   };
 
   return (
@@ -75,34 +111,19 @@ const CommentForm = ({ postId, userEmail, newUpdate, setNewUpdate }: CommentForm
         <div className={styles.write}>
           {userEmail ? (
             <div className={`${styles.account} ${styles.sameAuthor}`}>
-              <input type="text" placeholder="이름" value={userEmail} readOnly />
-              <input type="text" placeholder="비밀번호" value={""} readOnly />
+              <ReadOnlyInput placeholder={"닉네임"} value={userEmail} />
+              <ReadOnlyInput placeholder={"비밀번호"} value={""} />
             </div>
           ) : (
             <div className={styles.account}>
-              <input
-                type="text"
-                placeholder="이름"
-                value={nickname}
-                onChange={(e) => {
-                  setNickname(e.target.value);
-                }}
-              />
-              <input
-                type="text"
-                placeholder="비밀번호"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
+              <CustomInput placeholder={"닉네임"} {...nicknameInputProps} />
+              <CustomInput placeholder={"비밀번호"} {...passwordInputProps} />
             </div>
           )}
-          <textarea
+          <CustomTextarea
             className={styles.textarea}
-            placeholder="내용을 입력하세요"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            placeholder={"댓글을 입력하세요"}
+            {...commentInputProps}
           />
           <button>댓글 작성</button>
         </div>

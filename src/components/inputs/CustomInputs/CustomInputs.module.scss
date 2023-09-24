@@ -1,0 +1,18 @@
+.inputBox {
+  position: relative;
+  display: flex;
+  width: 100%;
+
+  .reset {
+    position: absolute;
+    top: 50%;
+    right: 0.25rem;
+    transform: translateY(-50%);
+    display: none;
+    cursor: pointer;
+
+    &.visible {
+      display: block;
+    }
+  }
+}

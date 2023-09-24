@@ -4,11 +4,15 @@ import { ObjectId } from "mongodb";
 import { JWT, getToken } from "next-auth/jwt";
 import { hash } from "bcrypt";
 import { checkBlogAdmin } from "@/utils/sessionCheck/checkBlogAdmin";
+import { COMMENT_FORM_LENGTH } from "@/constants/commentConstants";
 
 // 댓글 정보를 불러오는 API입니다.
 const handler = async (req: any, res: any) => {
   let { postId }: { postId: string } = req.query;
   const token: JWT | null = await getToken({ req }); // 유저 정보
+
+  const { MIN_NICKNAME, MIN_PASSWORD, MIN_COMMENT, MAX_NICKNAME, MAX_PASSWORD, MAX_COMMENT } =
+    COMMENT_FORM_LENGTH;
 
   // DB에 연결합니다.
   const db = (await connectDB).db("blog");
@@ -28,13 +32,23 @@ const handler = async (req: any, res: any) => {
     let { nickname, password, comment }: CommentsForm = req.body;
 
     // nickname또는 password를 입력했는지 검사합니다.
-    if (!token && (nickname.length < 1 || password.length < 1)) {
+    if (!token && (nickname.length < MIN_NICKNAME || password.length < MIN_PASSWORD)) {
       return res.status(400).json({ message: "닉네임 또는 비밀번호를 입력해야합니다." });
     }
 
+    // nickname또는 password가 길이를 초과했는지 검사합니다.
+    if (!token && (nickname.length > MAX_NICKNAME || password.length > MAX_PASSWORD)) {
+      return res.status(400).json({ message: "닉네임 또는 비밀번호의 길이가 너무 짧습니다." });
+    }
+
     // comment를 입력했는지 검사합니다.
-    if (comment.length < 1) {
+    if (comment.length < MIN_COMMENT) {
       return res.status(400).json({ message: "댓글을 입력해야합니다." });
+    }
+
+    // comment가 길이를 초과했는지 검사합니다.
+    if (comment.length > MAX_COMMENT) {
+      return res.status(400).json({ message: "댓글의 길이가 500자를 초과했습니다." });
     }
 
     const hashedPassword: string = await hash(password, 10);

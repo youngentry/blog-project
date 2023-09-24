@@ -16,8 +16,8 @@
         display: flex;
         gap: var(--gap-5);
 
-        > * {
-          flex: 1;
+        input {
+          width: 100%;
         }
 
         &.sameAuthor {
