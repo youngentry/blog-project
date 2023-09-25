@@ -9,6 +9,7 @@ import {
   CustomTextarea,
   ReadOnlyInput,
 } from "@/components/inputs/CustomInputs/CustomInputs";
+import { postCommentApi } from "@/services/commentsFetch";
 
 // 댓글 입력 폼입니다.
 // 비로그인 상태에서는(userEmail이 존재하지 않을 경우에) nickname, password input이 나타납니다.
@@ -16,12 +17,6 @@ const CommentForm = ({ postId, userEmail, newUpdate, setNewUpdate }: CommentForm
   const [nickname, setNickname] = useState<string>(userEmail || "");
   const [password, setPassword] = useState<string>("");
   const [comment, setComment] = useState<string>("");
-
-  const [inputs, setInputs] = useState({
-    nickname: "",
-    password: "",
-    comment: "",
-  });
 
   const { MIN_NICKNAME, MIN_PASSWORD, MIN_COMMENT, MAX_NICKNAME, MAX_PASSWORD, MAX_COMMENT } =
     COMMENT_FORM_LENGTH; // input length 조건
@@ -55,19 +50,14 @@ const CommentForm = ({ postId, userEmail, newUpdate, setNewUpdate }: CommentForm
 
     const commentForm: CommentsForm = { nickname, password, comment };
 
-    // POST 요청을 보냅니다.
     try {
-      const response = await fetch(`/api/posts/${postId}/comments`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...commentForm,
-        }),
-      });
+      // POST 요청을 보냅니다.
+      const res = await postCommentApi(postId, commentForm);
 
-      successSubmit(); // 댓글 작성요청 성공 시 실행할 함수
+      // 댓글 작성요청 성공 시 실행할 함수
+      if (res) {
+        successSubmit();
+      }
     } catch (err) {
       console.error(err);
       window.alert("댓글 작성 중에 오류가 발생했습니다. 잠시 후에 다시 시도해주세요.");
@@ -80,24 +70,25 @@ const CommentForm = ({ postId, userEmail, newUpdate, setNewUpdate }: CommentForm
     setNickname("");
     setPassword("");
 
-    setInputs({ nickname: "", comment: "", password: "" });
-
     // client component 업데이트
     setNewUpdate(!newUpdate);
   };
 
+  // nickname input 속성
   const nicknameInputProps = {
     value: nickname,
     maxLength: MAX_NICKNAME,
     dispatch: setNickname,
   };
 
+  // password input 속성
   const passwordInputProps = {
     value: password,
     maxLength: MAX_PASSWORD,
     dispatch: setPassword,
   };
 
+  // comment input 속성
   const commentInputProps = {
     value: comment,
     maxLength: MAX_COMMENT,

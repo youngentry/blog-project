@@ -24,7 +24,7 @@ const handler = async (req: any, res: any) => {
       .find({ parentId: Number(postId) }, { projection: { password: 0, parentId: 0 } })
       .toArray();
 
-    res.status(200).json({ comments: foundCommentsResult });
+    res.status(200).json(foundCommentsResult);
   }
 
   // 댓글 작성 요청

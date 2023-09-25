@@ -27,7 +27,7 @@ interface CustomInputProps {
 
 /**
  * 존재하지 않는 input 속성은 타입 추가 후에 작성하여야 합니다. 추가할 때 ex) require?: boolean
- * onChange에 할당할 setState를 전달하여야 합니다.
+ * onChange에 setState를 전달하여야 합니다.
  * @param dispatch setState
  * @returns
  */
@@ -44,22 +44,28 @@ export const CustomInput = ({
   };
 
   return (
-    <div className={styles.inputBox}>
+    <div className={`${styles.inputBox} ${className}`}>
       <div className={`${styles.reset} ${value.length && styles.visible}`} onClick={clickInitialize}>
         ❌
       </div>
       <input
-        className={className}
         type="text"
         placeholder={placeholder}
         value={value}
         maxLength={maxLength}
+        required
         onChange={(e) => dispatch(e.target.value)}
       />
     </div>
   );
 };
 
+/**
+ * 존재하지 않는 textarea 속성은 타입 추가 후에 작성하여야 합니다. 추가할 때 ex) require?: boolean
+ * onChange에 setState를 전달하여야 합니다.
+ * @param param0
+ * @returns
+ */
 export const CustomTextarea = ({
   className,
   placeholder,
@@ -69,10 +75,11 @@ export const CustomTextarea = ({
 }: CustomInputProps) => {
   return (
     <textarea
-      className={className}
+      className={`${className} ${styles.textarea}`}
       placeholder={placeholder}
       value={value}
       maxLength={maxLength}
+      required
       onChange={(e) => dispatch(e.target.value)}
     />
   );
