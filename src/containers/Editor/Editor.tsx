@@ -5,9 +5,11 @@ import Quill from "./Quill/Quill";
 import styles from "./Editor.module.scss";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { editPostData, getPostData } from "@/services/postsFetch";
+import { Post } from "@/types/post";
 
 // react-quill에 게시물 데이터를 불러오거나, 새롭게 작성하거나 수정한 게시물을 DB에 업데이트합니다.
-const Editor = ({ postId, canEdit }: { postId?: number; canEdit?: boolean }) => {
+const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => {
   const router = useRouter(); // 작성 완료되면 게시물로 redirect 할겁니다.
 
   const [title, setTitle] = useState("");
@@ -26,11 +28,20 @@ const Editor = ({ postId, canEdit }: { postId?: number; canEdit?: boolean }) => 
     // postId가 있다면 게시물 데이터를 요청하고, state에 데이터를 저장합니다.
     if (postId) {
       (async () => {
-        const result = await axios.get(`http://localhost:3000/api/posts/${postId}`);
+        const res: Post | false = await getPostData(postId);
 
-        setTitle(result.data.title);
-        setSubtitles(result.data.subtitles.join(" "));
-        setContents(result.data.contents);
+        // 수정할 게시물이 존재하지 않을 경우
+        if (!res) {
+          window.alert("수정할 게시물이 존재하지 않습니다.");
+          router.push(`/category`);
+        }
+
+        // editor 수정할 게시물 정보 저장
+        if (res) {
+          setTitle(res.title);
+          setSubtitles(res.subtitles.join(" "));
+          setContents(res.contents);
+        }
       })();
     }
   }, []);
@@ -45,15 +56,24 @@ const Editor = ({ postId, canEdit }: { postId?: number; canEdit?: boolean }) => 
   const handleClickEditButton = async (e: any) => {
     e.preventDefault();
     try {
-      // postId가 없다면 새로운 글 작성, postId가 있다면 수정 api 요청을 보냅니다.
-      const result = await axios.post(`/api/manage/newpost/${postId ? postId : ""}`, {
+      const editContents = {
         title,
         subtitles,
         contents,
-      });
+      };
+
+      // postId가 없다면 새로운 글 작성, postId가 있다면 수정 api 요청을 보냅니다.
+      const res = await editPostData(postId ? postId : "", editContents);
+
+      // 수정할 게시물이 존재하지 않을 경우
+      if (!res) {
+        window.alert("수정할 게시물이 존재하지 않습니다.");
+        router.push(`/category`);
+        return;
+      }
 
       // 게시물로 redirect하기 전 서버를 refresh하여 업데이트 된 DB 데이터를 가져오도록 합니다.
-      router.push(`/posts/${result.data.id}`); // 해당 게시물로 redirect 합니다.
+      router.push(`/posts/${res.id}`); // 해당 게시물로 redirect 합니다.
       router.refresh();
     } catch (error) {
       console.error("게시물 수정 오류:", error);

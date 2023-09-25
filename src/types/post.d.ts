@@ -9,7 +9,7 @@ export interface Card {
   subtitles: string[];
   languages: string[];
   author: string;
-  date: Date;
+  date: Date | string;
   commentCount: number;
   likes: number;
 }
@@ -20,15 +20,22 @@ export interface Post extends Card {
   email: string;
 }
 
+// 게시물 컨텐츠
+export interface PostContents {
+  title: string;
+  subtitles: string;
+  contents: string;
+}
+
 // 댓글 입력 폼
-export interface CommentsForm {
+export interface CommentForm {
   nickname: string;
   password: string;
   comment: string;
 }
 
 // 댓글
-export interface Comments extends CommentsForm {
+export interface Comment extends CommentForm {
   _id?: ObjectId;
   parentId: number;
   author: string;

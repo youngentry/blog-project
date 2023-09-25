@@ -1,4 +1,4 @@
-import { CommentsForm, Comments } from "@/types/post";
+import { CommentForm, Comment } from "@/types/post";
 import { connectDB } from "@/utils/db/db";
 import { ObjectId } from "mongodb";
 import { JWT, getToken } from "next-auth/jwt";
@@ -16,7 +16,7 @@ const handler = async (req: any, res: any) => {
 
   // DB에 연결합니다.
   const db = (await connectDB).db("blog");
-  const commentsCollection = db.collection<Comments>("comments");
+  const commentsCollection = db.collection<Comment>("comments");
 
   // 댓글 조회 요청
   if (req.method === "GET") {
@@ -29,7 +29,7 @@ const handler = async (req: any, res: any) => {
 
   // 댓글 작성 요청
   if (req.method === "POST") {
-    let { nickname, password, comment }: CommentsForm = req.body;
+    let { nickname, password, comment }: CommentForm = req.body;
 
     // nickname또는 password를 입력했는지 검사합니다.
     if (!token && (nickname.length < MIN_NICKNAME || password.length < MIN_PASSWORD)) {
@@ -54,7 +54,7 @@ const handler = async (req: any, res: any) => {
     const hashedPassword: string = await hash(password, 10);
 
     // DB에 저장할 데이터
-    const saveData: Comments = {
+    const saveData: Comment = {
       parentId: Number(postId),
       nickname: token ? (token.name as string) : nickname,
       author: token ? (token.email as string) : "",

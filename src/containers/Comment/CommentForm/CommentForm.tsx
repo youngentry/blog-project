@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import styles from "./CommentForm.module.scss";
-import { CommentFormProps, CommentsForm } from "@/types/post";
+import { CommentFormProps, CommentForm } from "@/types/post";
 import { COMMENT_FORM_LENGTH } from "@/constants/commentConstants";
 import {
   CustomInput,
@@ -48,7 +48,7 @@ const CommentForm = ({ postId, userEmail, newUpdate, setNewUpdate }: CommentForm
       return false;
     }
 
-    const commentForm: CommentsForm = { nickname, password, comment };
+    const commentForm: CommentForm = { nickname, password, comment };
 
     try {
       // POST 요청을 보냅니다.

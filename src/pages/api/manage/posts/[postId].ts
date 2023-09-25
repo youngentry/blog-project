@@ -2,7 +2,7 @@ import { connectDB } from "@/utils/db/db";
 import { checkBlogAdmin } from "@/utils/sessionCheck/checkBlogAdmin";
 import { JWT, getToken } from "next-auth/jwt";
 
-// 새로운 게시물 작성 API 입니다.
+// 게시물 삭제 API 입니다.
 const handler = async (req: any, res: any) => {
   if (req.method === "DELETE") {
     // 게시물 번호

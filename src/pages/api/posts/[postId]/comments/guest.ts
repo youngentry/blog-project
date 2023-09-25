@@ -1,4 +1,4 @@
-import { CommentsForm, Comments } from "@/types/post";
+import { CommentForm, Comment } from "@/types/post";
 import { connectDB } from "@/utils/db/db";
 import { ObjectId } from "mongodb";
 import { JWT, getToken } from "next-auth/jwt";
@@ -13,7 +13,7 @@ const handler = async (req: any, res: any) => {
   try {
     // DB에 연결합니다.
     const db = (await connectDB).db("blog");
-    const commentsCollection = db.collection<Comments>("comments");
+    const commentsCollection = db.collection<Comment>("comments");
 
     // 댓글 권한 조회
     if (req.method === "POST") {

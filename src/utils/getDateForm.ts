@@ -9,7 +9,8 @@ const transformPadUnit = (unit: number) => {
  * @param time
  * @returns
  */
-export const getDateForm = (date: Date, time: boolean = false) => {
+export const getDateForm = (date: Date | string, time: boolean = false) => {
+  date = new Date(date);
   const year = date.getFullYear();
   const month = transformPadUnit(date.getMonth() + 1);
   const day = transformPadUnit(date.getDate());

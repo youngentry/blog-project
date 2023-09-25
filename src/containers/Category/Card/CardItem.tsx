@@ -1,18 +1,18 @@
 import React from "react";
-import styles from "./Card.module.scss";
+import styles from "./CardItem.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-import { Post } from "@/types/post";
+import { Card } from "@/types/post";
 import { getDateForm } from "@/utils/getDateForm";
 
 // category (게시물 목록)페이지에서 하나의 게시물 카드입니다.
-const Card = ({ data }: { data: Post }) => {
-  const { id, src, title, subtitles, languages, commentCount, likes, author, date } = data;
-
+const CardItem = ({ data }: { data: Card }) => {
+  let { id, src, title, subtitles, commentCount, likes, author, date } = data;
+  date = getDateForm(date);
   const link = `/posts/${id}`;
 
   return (
-    <div className={styles.card}>
+    <li className={styles.card}>
       <Link prefetch={false} href={link}>
         <Image className={styles.image} src={src} alt={"post cover"} width={300} height={300 * 0.75} />
       </Link>
@@ -43,7 +43,7 @@ const Card = ({ data }: { data: Post }) => {
         <div className={styles.more}>
           <div className={styles.write}>
             <div className={styles.author}>{author}</div>
-            <div className={styles.date}>{getDateForm(date)}</div>
+            <div className={styles.date}>{date}</div>
           </div>
           <div className={styles.counts}>
             <div className={styles.comments}>
@@ -57,8 +57,8 @@ const Card = ({ data }: { data: Post }) => {
           </div>
         </div>
       </div>
-    </div>
+    </li>
   );
 };
 
-export default Card;
+export default CardItem;

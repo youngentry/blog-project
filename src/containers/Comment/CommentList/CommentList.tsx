@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./CommentList.module.scss";
-import { CommentListProps, Comments } from "@/types/post";
+import { CommentListProps, Comment } from "@/types/post";
 import { getDateForm } from "@/utils/getDateForm";
 import { checkBlogAdmin } from "@/utils/sessionCheck/checkBlogAdmin";
 import { COMMENT_FORM_LENGTH } from "@/constants/commentConstants";
@@ -18,7 +18,7 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
   const { MIN_NICKNAME, MIN_PASSWORD, MIN_COMMENT, MAX_NICKNAME, MAX_PASSWORD, MAX_COMMENT } =
     COMMENT_FORM_LENGTH;
 
-  const [commentList, setCommentList] = useState<Comments[]>([]); // API 요청하여 조회할 댓글 목록
+  const [commentList, setCommentList] = useState<Comment[]>([]); // API 요청하여 조회할 댓글 목록
 
   const [editComment, setEditComment] = useState<string>(""); // 수정 input
   const [editingCommentId, setEditingCommentId] = useState<string>(""); // 수정중인 댓글 ObjectId
@@ -32,7 +32,7 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
     (async () => {
       try {
         // GET 요청을 보냅니다.
-        const res: Comments[] | false = await getCommentsDataApi(postId);
+        const res: Comment[] | false = await getCommentsDataApi(postId);
 
         // 작성 요청 성공 시 불러온 댓글을 state에 저장합니다.
         if (res) {
@@ -57,8 +57,8 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
       }
 
       // 수정한 댓글을 반영한 결과를 state에 저장합니다.
-      const copiedComments: Comments[] = [...commentList];
-      const editedComment: Comments | undefined = copiedComments.find(
+      const copiedComments: Comment[] = [...commentList];
+      const editedComment: Comment | undefined = copiedComments.find(
         (comment) => String(comment._id) === _id
       );
       if (editedComment) {
@@ -90,8 +90,8 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
       }
 
       // 삭제한 댓글을 제외한 결과를 state에 저장합니다.
-      const afterDeleteComments: Comments[] = commentList.filter(
-        (comment: Comments) => String(comment._id) !== _id
+      const afterDeleteComments: Comment[] = commentList.filter(
+        (comment: Comment) => String(comment._id) !== _id
       );
       setCommentList(afterDeleteComments);
     } catch (err) {
@@ -116,7 +116,7 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
 
       // 삭제된 댓글 리스트 렌더링
       const deletedCommentList = [...commentList].filter(
-        (comment: Comments) => String(comment._id) != _id
+        (comment: Comment) => String(comment._id) != _id
       );
       setCommentList(deletedCommentList);
 
@@ -165,7 +165,7 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
 
   return (
     <ul className={styles.commentList}>
-      {commentList.map((commentItem: Comments) => {
+      {commentList.map((commentItem: Comment) => {
         let { comment, date, isLoggedIn, nickname, author, thumbnail, _id } = commentItem;
         date = new Date(date); // YYYY.MM.DD 형태로 변환하기 위해 Date 객체로 만듭니다.
         const commentId = String(_id); // key에 할당하기 위해 직렬화합니다.
