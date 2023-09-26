@@ -1,9 +1,9 @@
 import { Card, Post } from "@/types/post";
 import { connectDB } from "@/utils/db/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 // 게시물 정보를 불러오는 API입니다.
-export const GET = async (req: any, res: any) => {
+export const GET = async (req: NextRequest) => {
   const db = (await connectDB).db("blog");
   const postCollection = db.collection<Post>("posts");
 

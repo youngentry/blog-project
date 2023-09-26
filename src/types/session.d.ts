@@ -5,3 +5,9 @@ interface UserSessionData {
     image: string;
   };
 }
+
+interface Params {
+  params: {
+    [key: string]: string;
+  };
+}
