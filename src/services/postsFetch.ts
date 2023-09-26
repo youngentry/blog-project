@@ -2,18 +2,20 @@ const baseUrl = "http://localhost:3000/api";
 
 import { Card, Post, PostContents } from "@/types/post";
 import { setFetchOptions } from "./fetchOptions";
+import { statusCheck } from "@/utils/statusCheck";
 
 /**
  * 게시물 카드 리스트를 조회합니다.
  * @returns {Card[]} commentsData or false
  */
 export const getCardsData = async () => {
-  const url = `${baseUrl}/posts/`;
+  const url = `${baseUrl}/category/`;
   const options = setFetchOptions("GET");
 
   // 요청 결과 반환
   const res = await fetch(url, options);
   const data: Card[] = await res.json(); // 댓글 리스트
+
   return res.ok ? data : false;
 };
 
@@ -39,9 +41,8 @@ export const editPostData = async (postId: string, editContents: PostContents) =
   const url = `${baseUrl}/manage/newpost/${postId}`;
   const options = setFetchOptions("POST", editContents);
 
-  // 요청 결과 반환
+  // "redirect 경로"로 쓰일 "새로운 게시물 id" 또는 "수정한 게시물 id"를 반환합니다.
   const res = await fetch(url, options);
-
   if (postId) {
     return res.ok ? { id: postId } : false;
   }

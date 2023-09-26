@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Quill from "./Quill/Quill";
 import styles from "./Editor.module.scss";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { editPostData, getPostData } from "@/services/postsFetch";
 import { Post } from "@/types/post";
@@ -24,13 +23,13 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
     }
   }, []);
 
+  // postId가 있다면 게시물 데이터를 요청하고, state에 데이터를 저장합니다.
   useEffect(() => {
-    // postId가 있다면 게시물 데이터를 요청하고, state에 데이터를 저장합니다.
     if (postId) {
       (async () => {
         const res: Post | false = await getPostData(postId);
 
-        // 수정할 게시물이 존재하지 않을 경우
+        // 수정할 게시물이 존재하지 않을 경우 category로 redirect 합니다.
         if (!res) {
           window.alert("수정할 게시물이 존재하지 않습니다.");
           router.push(`/category`);
@@ -45,12 +44,6 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
       })();
     }
   }, []);
-
-  // quill에 전달할 state props
-  const quillProps = {
-    contents,
-    setContents,
-  };
 
   // 수정하기 버튼 클릭하면,
   const handleClickEditButton = async (e: any) => {
@@ -78,6 +71,12 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
     } catch (error) {
       console.error("게시물 수정 오류:", error);
     }
+  };
+
+  // quill에 전달할 state props
+  const quillProps = {
+    contents,
+    setContents,
   };
 
   return (

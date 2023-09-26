@@ -1,5 +1,5 @@
 /**
- *  fetch 요청을 보낼 때 options를 설정합니다.
+ *  fetch 요청을 보낼 때 method와 options를 설정합니다.
  * @param {string} "GET", "DELETE", "POST", "PATCH"
  * @param {object|null} body
  * @returns
