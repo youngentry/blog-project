@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Quill from "./Quill/Quill";
 import styles from "./Editor.module.scss";
 import { useRouter } from "next/navigation";
-import { editPostData, getPostData } from "@/services/postsFetch";
 import { Post } from "@/types/post";
+import { editPostData, getPostData } from "@/services/postsFetch";
 
 // react-quill에 게시물 데이터를 불러오거나, 새롭게 작성하거나 수정한 게시물을 DB에 업데이트합니다.
 const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => {

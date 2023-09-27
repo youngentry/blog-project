@@ -1,5 +1,4 @@
 import PostItem from "@/containers/Post/PostItem";
-import Post from "@/containers/Post/PostItem";
 import React from "react";
 
 // 게시글 페이지로 라우트합니다.

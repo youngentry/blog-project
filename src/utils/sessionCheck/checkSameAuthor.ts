@@ -1,4 +1,3 @@
-import { getServerSession } from "next-auth";
 import { checkBlogAdmin } from "./checkBlogAdmin";
 
 interface CheckSameAuthor {

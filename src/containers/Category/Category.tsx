@@ -1,8 +1,7 @@
-import { connectDB } from "@/utils/db/db";
 import CardItem from "./Card/CardItem";
 import styles from "./Category.module.scss";
 import Pagination from "@/components/Pagination/Pagination";
-import { Card, Post } from "@/types/post";
+import { Card } from "@/types/post";
 import { getCardsData } from "@/services/postsFetch";
 
 // category (게시물 목록)페이지입니다.
