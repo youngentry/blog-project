@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./NavHead.module.scss";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/temp...nextauth]";
 import LogOutButton from "@/components/account/LogOutButton/LogOutButton";
 import LogInButton from "@/components/account/LogInButton/LogInButton";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 // 상단 네비게이션 컴포넌트입니다.
 const NavHead = async () => {
