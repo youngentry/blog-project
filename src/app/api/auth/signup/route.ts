@@ -19,28 +19,34 @@ export const POST = async (req: NextRequest) => {
 
   // 길이가 짧은 문자열 경고
   if (name.length < MIN_NAME || password.length < MIN_PASSWORD) {
-    return NextResponse.json({ error: "회원가입: 짧은 문자열" }, { status: 400 });
+    return NextResponse.json({ message: "회원가입: 짧은 아이디 또는 패스워드" }, { status: 400 });
   }
 
   // 길이가 긴 문자열 경고
   if (name.length > MAX_NAME || email.length > MAX_EMAIL || password.length > MAX_PASSWORD) {
-    return NextResponse.json({ error: "회원가입: 긴 문자열" }, { status: 400 });
+    return NextResponse.json({ message: "회원가입: 긴 아이디 또는 패스워드" }, { status: 400 });
   }
 
   // 중복되는 name, email 비교
   const db = (await connectDB).db("blog");
-  const collection = db.collection("user_credentials");
-  const isDuplicateName = await collection.findOne({ name });
-  const isDuplicateEmail = await collection.findOne({ email });
+  // 크레덴션 로그인 유저
+  const credentialsCollection = db.collection("user_credentials");
+  const isDuplicateCredentialName = await credentialsCollection.findOne({ name });
+  const isDuplicateCredentialEmail = await credentialsCollection.findOne({ email });
+
+  // 소셜 로그인 유저
+  const usersCollection = db.collection("users");
+  const isDuplicateUserName = await usersCollection.findOne({ name });
+  const isDuplicateUserEmail = await usersCollection.findOne({ email });
 
   // 중복되는 name경고
-  if (isDuplicateName) {
-    return NextResponse.json({ error: "회원가입: 중복되는 닉네임" }, { status: 400 });
+  if (isDuplicateCredentialName || isDuplicateUserName) {
+    return NextResponse.json({ message: "회원가입: 중복되는 닉네임" }, { status: 409 });
   }
 
   // 중복되는 email 경고
-  if (email !== "visitor" && isDuplicateEmail) {
-    return NextResponse.json({ error: "회원가입: 중복되는 이메일" }, { status: 400 });
+  if (email !== "visitor" && (isDuplicateCredentialEmail || isDuplicateUserEmail)) {
+    return NextResponse.json({ message: "회원가입: 중복되는 이메일" }, { status: 409 });
   }
 
   // 비밀번호 해쉬화
@@ -59,6 +65,12 @@ export const POST = async (req: NextRequest) => {
     created_at,
   };
 
-  await db.collection("user_credentials").insertOne({ ...userData });
-  return NextResponse.json({ message: "회원가입 성공" }, { status: 200 });
+  // 회원가입 결과
+  const signUpResult = await credentialsCollection.insertOne({ ...userData });
+
+  if (signUpResult) {
+    return NextResponse.json({ message: "회원가입 성공" }, { status: 201 });
+  }
+
+  return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
 };

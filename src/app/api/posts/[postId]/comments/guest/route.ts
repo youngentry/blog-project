@@ -13,7 +13,10 @@ export const POST = async (req: NextRequest) => {
   const _id: string | null = searchParams.get("_id"); // 삭제할 댓글 id
 
   if (!_id) {
-    return NextResponse.json({ error: "댓글 _id 조회에 실패하였습니다." }, { status: 400 });
+    return NextResponse.json(
+      { message: "게스트 댓글 삭제: 댓글 조회에 실패하였습니다." },
+      { status: 400 }
+    );
   }
 
   // DB에 연결합니다.
@@ -23,14 +26,17 @@ export const POST = async (req: NextRequest) => {
 
   // 찾는 댓글이 DB에 존재하지 않을 경우
   if (!foundComment) {
-    return NextResponse.json({ error: "댓글을 조회할 수  없습니다." }, { status: 400 });
+    return NextResponse.json(
+      { message: "게스트 댓글 삭제: 댓글을 조회할 수  없습니다." },
+      { status: 400 }
+    );
   }
 
   const isValidPassword = await compare(password, foundComment.password); // 댓글 비밀번호 검사
 
   // 입력한 비밀번호가 다른 경우
   if (isValidPassword) {
-    return NextResponse.json({ error: "비밀번호가 다릅니다." }, { status: 400 });
+    return NextResponse.json({ message: "게스트 댓글 삭제: 비밀번호가 다릅니다." }, { status: 400 });
   }
 
   // 삭제 결과 응답
@@ -38,5 +44,5 @@ export const POST = async (req: NextRequest) => {
   if (deleteResult) {
     return NextResponse.json({ message: "댓글 삭제 완료." }, { status: 200 });
   }
-  return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
 };

@@ -12,5 +12,7 @@ export const postSignUpApi = async (body: SignUp) => {
 
   // 요청 결과 반환
   const res = await fetch(url, options);
-  return res.ok ? true : false;
+  const status = res.status;
+  const { message } = await res.json();
+  return { status, message };
 };

@@ -26,5 +26,5 @@ export const POST = async (req: NextRequest, { params }: Params) => {
   if (result) {
     return NextResponse.json({ id: postId }, { status: 200 }); // 응답에 게시물 id를 포함하여 redirect할 수 있도록 합니다.
   }
-  return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
 };

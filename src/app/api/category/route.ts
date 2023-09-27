@@ -16,5 +16,5 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.json(cardsData, { status: 200 });
   }
 
-  return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
 };

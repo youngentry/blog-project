@@ -23,7 +23,7 @@ export const GET = async (req: NextRequest, { params }: Params) => {
     return NextResponse.json(foundResult, { status: 200 });
   }
 
-  return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
 };
 
 // 새로운 댓글 작성 API 입니다.
@@ -39,22 +39,31 @@ export const POST = async (req: NextRequest, { params }: Params) => {
 
   // nickname또는 password를 입력했는지 검사합니다.
   if (!token && (nickname.length < MIN_NICKNAME || password.length < MIN_PASSWORD)) {
-    return NextResponse.json({ error: "닉네임 또는 비밀번호를 입력해야합니다." }, { status: 400 });
+    return NextResponse.json(
+      { message: "게스트 댓글: 닉네임 또는 비밀번호를 입력해야합니다." },
+      { status: 400 }
+    );
   }
 
   // nickname또는 password가 길이를 초과했는지 검사합니다.
   if (!token && (nickname.length > MAX_NICKNAME || password.length > MAX_PASSWORD)) {
-    return NextResponse.json({ error: "닉네임 또는 비밀번호의 길이가 너무 짧습니다." }, { status: 400 });
+    return NextResponse.json(
+      { message: "닉네임 또는 비밀번호의 길이가 너무 짧습니다." },
+      { status: 400 }
+    );
   }
 
   // comment를 입력했는지 검사합니다.
   if (comment.length < MIN_COMMENT) {
-    return NextResponse.json({ error: "댓글을 입력해야합니다." }, { status: 400 });
+    return NextResponse.json({ message: "댓글 작성: 댓글을 입력해야합니다." }, { status: 400 });
   }
 
   // comment가 길이를 초과했는지 검사합니다.
   if (comment.length > MAX_COMMENT) {
-    return NextResponse.json({ message: "댓글의 길이가 500자를 초과했습니다." }, { status: 400 });
+    return NextResponse.json(
+      { message: "댓글 작성: 댓글의 길이가 500자를 초과했습니다." },
+      { status: 400 }
+    );
   }
 
   const hashedPassword: string = await hash(password, 10);
@@ -81,7 +90,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
     return NextResponse.json({ id: postId }, { status: 200 }); // 응답에 게시물 id를 포함하여 redirect할 수 있도록 합니다.
   }
 
-  return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
 };
 
 // 댓글 수정 API 입니다.
@@ -96,7 +105,7 @@ export const PATCH = async (req: NextRequest, { params }: Params) => {
   const _id: string | null = searchParams.get("_id"); // DB에서 댓글 찾고 수정하기 위한 _id
 
   if (!_id) {
-    return NextResponse.json({ error: "댓글 _id 조회에 실패하였습니다." }, { status: 400 });
+    return NextResponse.json({ message: "댓글 수정: 댓글 _id 조회에 실패하였습니다." }, { status: 400 });
   }
 
   // DB에서 댓글 작성자 정보 확인
@@ -106,7 +115,7 @@ export const PATCH = async (req: NextRequest, { params }: Params) => {
 
   // 삭제할 댓글이 DB에 존재하지 않을 경우
   if (!foundResult) {
-    return NextResponse.json({ error: "수정할 댓글을 찾을 수 없습니다." }, { status: 400 });
+    return NextResponse.json({ message: "댓글 수정: 수정할 댓글을 찾을 수 없습니다." }, { status: 400 });
   }
 
   // 로그인 유저일 경우 블로그 관리자가 아니거나, 동일한 작성자가 아닐 경우 400 응답
@@ -114,7 +123,7 @@ export const PATCH = async (req: NextRequest, { params }: Params) => {
     const isBlogAdmin = checkBlogAdmin(token.email as string);
     const isSameAuthor = token.email === foundResult.author;
     if (!isBlogAdmin && !isSameAuthor) {
-      return NextResponse.json({ error: "수정 권한이 없습니다." }, { status: 400 });
+      return NextResponse.json({ message: "댓글 수정: 수정 권한이 없습니다." }, { status: 400 });
     }
   }
 
@@ -126,7 +135,7 @@ export const PATCH = async (req: NextRequest, { params }: Params) => {
   if (editResult) {
     return NextResponse.json({ id: postId }, { status: 200 }); // 응답에 게시물 id를 포함하여 redirect할 수 있도록 합니다.
   }
-  return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
 };
 
 // 댓글 삭제 API 입니다.
@@ -136,7 +145,7 @@ export const DELETE = async (req: NextRequest) => {
   const _id: string | null = searchParams.get("_id"); // DB에서 댓글 찾고 수정하기 위한 _id
 
   if (!_id) {
-    return NextResponse.json({ error: "댓글 _id 조회에 실패하였습니다." }, { status: 400 });
+    return NextResponse.json({ message: "댓글 삭제: 댓글 조회에 실패하였습니다." }, { status: 400 });
   }
 
   // DB에서 댓글 작성자 정보 확인
@@ -146,7 +155,7 @@ export const DELETE = async (req: NextRequest) => {
 
   // 삭제할 댓글이 DB에 존재하지 않을 경우
   if (!foundResult) {
-    return NextResponse.json({ error: "댓글 _id 조회에 실패하였습니다." }, { status: 400 });
+    return NextResponse.json({ message: "댓글 삭제: 댓글 조회에 실패하였습니다." }, { status: 400 });
   }
 
   // 로그인 유저일 경우 블로그 관리자가 아니거나, 동일한 작성자가 아닐 경우 400 응답
@@ -154,7 +163,7 @@ export const DELETE = async (req: NextRequest) => {
     const isBlogAdmin = checkBlogAdmin(token.email as string);
     const isSameAuthor = token.email === foundResult.author;
     if (!isBlogAdmin && !isSameAuthor) {
-      return NextResponse.json({ error: "수정 권한이 없습니다." }, { status: 400 });
+      return NextResponse.json({ message: "댓글 삭제: 수정 권한이 없습니다." }, { status: 400 });
     }
   }
 
@@ -163,5 +172,5 @@ export const DELETE = async (req: NextRequest) => {
   if (deleteResult) {
     return NextResponse.json({}, { status: 200 });
   }
-  return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
 };

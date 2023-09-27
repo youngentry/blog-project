@@ -2,7 +2,6 @@ const baseUrl = "http://localhost:3000/api";
 
 import { Card, Post, PostContents } from "@/types/post";
 import { setFetchOptions } from "./fetchOptions";
-import { statusCheck } from "@/utils/statusCheck";
 
 /**
  * 게시물 카드 리스트를 조회합니다.
