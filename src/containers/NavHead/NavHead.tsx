@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./NavHead.module.scss";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { authOptions } from "@/pages/api/auth/temp...nextauth]";
 import LogOutButton from "@/components/account/LogOutButton/LogOutButton";
 import LogInButton from "@/components/account/LogInButton/LogInButton";
 

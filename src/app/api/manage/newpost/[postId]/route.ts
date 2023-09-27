@@ -8,10 +8,10 @@ export const POST = async (req: NextRequest, { params }: Params) => {
   // DB와 Collection 연결
   const db = (await connectDB).db("blog");
   const postCollection = db.collection("posts");
-  const editData = await req.json();
+  const editForm = await req.json();
 
   // 게시물 작성자 정보
-  const { title, subtitles, contents } = editData; // 게시물 내용
+  const { title, subtitles, contents } = editForm; // 게시물 내용
 
   const saveData = {
     title,

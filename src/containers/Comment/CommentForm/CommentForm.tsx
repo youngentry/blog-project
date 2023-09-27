@@ -39,7 +39,7 @@ const CommentForm = ({ postId, userEmail, newUpdate, setNewUpdate }: CommentForm
   };
 
   // 댓글 작성
-  const clickSubmitComment = async (e: React.FormEvent<HTMLFormElement>) => {
+  const submitComment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // input이 유효한지 검사합니다.
@@ -97,7 +97,7 @@ const CommentForm = ({ postId, userEmail, newUpdate, setNewUpdate }: CommentForm
 
   return (
     <div className={styles.comment}>
-      <form className={styles.form} onSubmit={(e) => clickSubmitComment(e)}>
+      <form className={styles.form} onSubmit={(e) => submitComment(e)}>
         <div className={styles.thumbnail}>{userEmail ? <div>✅</div> : <div>😀</div>}</div>
         <div className={styles.write}>
           {userEmail ? (
