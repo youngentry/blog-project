@@ -175,7 +175,7 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
         const isBlogAdmin: boolean = checkBlogAdmin(userEmail); // 블로그 관리자
         const canEdit: boolean = isSameCommenter || !isLoggedIn || isBlogAdmin; // 수정 권한
         const isVisibleConfirmDeletePassword =
-          deletingCommentId === commentId && checkingGuestPassword && !isLoggedIn; // 게스트 댓글 삭제
+          deletingCommentId === commentId && checkingGuestPassword && !isLoggedIn; // 게스트 댓글 삭제버튼 visible 여부
         return (
           <li key={commentId} className={`${styles.commentItem}`}>
             <div className={styles.thumbnail}>{isLoggedIn ? "✅" : "😀"}</div>
@@ -185,7 +185,7 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
                 {canEdit && (
                   <div>
                     <button
-                      className={`${styles.editButton} ${!isLoggedIn && styles.hide}`}
+                      className={`${styles.editButton} ${!isLoggedIn && "hide"}`}
                       onClick={() => handleClickEditButton(commentId, comment)}
                     >
                       수정
@@ -193,7 +193,7 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
                     <button
                       className={styles.deleteButton}
                       onClick={
-                        isLoggedIn || isBlogAdmin
+                        isSameCommenter || isBlogAdmin
                           ? () => handleClickDeleteButton(commentId)
                           : () => handleClickGuestDeleteButton(commentId)
                       }
@@ -201,9 +201,7 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
                       삭제
                     </button>
                     <div
-                      className={`${styles.guestConfirm} ${
-                        isVisibleConfirmDeletePassword && styles.visible
-                      }`}
+                      className={`${styles.guestConfirm} ${isVisibleConfirmDeletePassword && "visible"}`}
                     >
                       <CustomInput placeholder="비밀번호" {...deletePasswordInputProps} />
                       <button onClick={() => handleClickConfirmGuestPassword(commentId)}>확인</button>
@@ -212,11 +210,11 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
                   </div>
                 )}
               </div>
-              <div className={`${styles.body} ${editingCommentId === commentId && styles.hide}`}>
+              <div className={`${styles.body} ${editingCommentId === commentId && "hide"}`}>
                 <p className={`${styles.comment} `}>{comment}</p>
                 <p className={styles.date}>{getDateForm(date, true)}</p>
               </div>
-              <div className={`${styles.editForm} ${editingCommentId === commentId && styles.editing}`}>
+              <div className={`${styles.editForm} ${editingCommentId === commentId && "visible"}`}>
                 <CustomTextarea
                   className={`${styles.textarea}`}
                   placeholder="댓글을 입력하세요."

@@ -10,6 +10,18 @@
 // reset
 // --------------------------------------
 
+.hide {
+  display: none !important;
+}
+
+.visible {
+  display: block !important;
+}
+
+// -------------------------------------
+// reset
+// --------------------------------------
+
 html {
   font-size: 20px;
   box-sizing: border-box;
