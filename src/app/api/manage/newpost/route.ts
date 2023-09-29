@@ -6,8 +6,9 @@ import { NextRequest, NextResponse } from "next/server";
 export const POST = async (req: NextRequest) => {
   // DB와 Collection 연결
   const db = (await connectDB).db("blog");
-  const postCollection = await db.collection("posts");
-  const countersCollection = await db.collection("counters");
+  const postCollection = db.collection("posts");
+  const countersCollection = db.collection("counters");
+  const categoriesCollection = db.collection("categories");
 
   // 게시물 작성자 정보
   const token = await getToken({ req });
@@ -21,7 +22,7 @@ export const POST = async (req: NextRequest) => {
     { upsert: true }
   );
 
-  const { title, subtitle, contents, src } = data; // 게시물 내용
+  const { title, subtitle, contents, categoryId, src } = data; // 게시물 내용
   const id = currentCounter ? currentCounter.count + 1 : 1; // 게시물 번호
   const email = token?.email; // 작성자 email
   const author = token?.name; // 작성자 닉네임
@@ -35,6 +36,7 @@ export const POST = async (req: NextRequest) => {
     subtitle,
     contents,
     email,
+    categoryId,
     src: src || "https://cdn.pixabay.com/photo/2023/09/03/11/13/mountains-8230502_1280.jpg",
     author,
     date,
@@ -43,6 +45,8 @@ export const POST = async (req: NextRequest) => {
   };
 
   const result = await postCollection.insertOne({ ...saveData }); // DB에 저장한 결과
+  // const result2 = await categoriesCollection.findOne({ _id: categoryId });
+
   if (result) {
     return NextResponse.json({ id }, { status: 200 });
   }

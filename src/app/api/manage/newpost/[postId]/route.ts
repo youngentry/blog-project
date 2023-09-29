@@ -1,4 +1,5 @@
 import { connectDB } from "@/utils/db/db";
+import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
 // 게시물 수정 API 입니다.
@@ -11,12 +12,13 @@ export const POST = async (req: NextRequest, { params }: Params) => {
   const editForm = await req.json();
 
   // 게시물 작성자 정보
-  const { title, subtitle, contents } = editForm; // 게시물 내용
+  const { title, subtitle, contents, categoryId } = editForm; // 게시물 내용
 
   const saveData = {
     title,
     subtitle,
     contents,
+    categoryId,
   };
 
   // DB에서 게시물 업데이트 시도

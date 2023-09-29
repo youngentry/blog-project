@@ -24,7 +24,7 @@ export const GET = async (req: NextRequest) => {
   }
 
   if (role === "sub") {
-    const foundCategory = await categoryCollection.find({ parent: parentId }).toArray();
+    const foundCategory = await categoryCollection.findOne({ _id: new ObjectId(parentId as string) });
 
     //   해당 카테고리 데이터와 status를 응답합니다.
     if (foundCategory) {
@@ -32,14 +32,14 @@ export const GET = async (req: NextRequest) => {
     }
   }
 
-  // if (!role) {
-  //   const foundCategory = await categoryCollection.find({}).toArray();
+  if (!role) {
+    const foundCategory = await categoryCollection.find({}).toArray();
 
-  //   //   모든 카테고리 데이터와 status를 응답합니다.
-  //   if (foundCategory) {
-  //     return NextResponse.json(foundCategory, { status: 200 });
-  //   }
-  // }
+    //   모든 카테고리 데이터와 status를 응답합니다.
+    if (foundCategory) {
+      return NextResponse.json(foundCategory, { status: 200 });
+    }
+  }
 
   return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
 };
@@ -80,15 +80,17 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({ message: "카테고리 편집: 유효하지 않은 접근입니다." }, { status: 400 });
   }
 
-  const formData = await req.json();
-  let { _id, role, parent, title }: CategoryType = formData; // 게시물 내용
+  const body = await req.json();
+  let { _id, role, parent, title }: CategoryType = body; // 게시물 내용
 
   // 메인 추가/수정
   if (role === "main") {
     _id = _id ? new ObjectId(_id) : "";
 
-    const saveData: CategoryType = {
-      ...formData,
+    const saveData = {
+      _id: new ObjectId(),
+      title,
+      role,
       children: [],
     };
 
@@ -115,10 +117,14 @@ export const POST = async (req: NextRequest) => {
   // 서브 추가
   if (role === "sub") {
     const saveData: CategoryType = {
-      ...formData,
-      children: [],
+      _id: new ObjectId(),
+      ...body,
     };
-    const result = await categoryCollection.insertOne({ ...saveData }); // DB에 저장한 결과
+
+    const result = await categoryCollection.findOneAndUpdate(
+      { _id: new ObjectId(parent) },
+      { $addToSet: { children: { ...saveData } } }
+    ); // DB에 저장한 결과
 
     if (result) {
       return NextResponse.json({ message: "카테고리 편집: 서브 카테고리 추가 성공." }, { status: 200 });

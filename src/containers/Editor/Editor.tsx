@@ -13,10 +13,13 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
   const router = useRouter(); // 작성 완료되면 게시물로 redirect 합니다.
 
   const [title, setTitle] = useState("");
-  const [subtitle, setSubtitles] = useState("카테고리 없음");
+  const [subtitle, setSubtitles] = useState<string>("카테고리 없음");
+  const [categoryId, setCategoryId] = useState<string>("6516f855d44958b59ed7b8d5");
   const [contents, setContents] = useState("");
 
-  // const [categoryList, setCategoryList] = useState<CategoryType[]>([]);
+  const [categoryList, setCategoryList] = useState<any[]>([]);
+  const [selectedSubtitle, setSelectedSubtitle] = useState("부제목 없음");
+  const [isSelectCategoryVisible, setIsSelectCategoryVisible] = useState<boolean>(false);
 
   // 수정 권한이 없는 경우엔 수정을 시도하려던 게시글로 이동합니다.
   useEffect(() => {
@@ -26,18 +29,18 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
     }
   }, []);
 
-  // // 카테고리 리스트를 불러옵니다.
-  // useEffect(() => {
-  //   (async () => {
-  //     const res: CategoryType[] | false = await getCategoriesApi();
-  //     console.log(res);
+  // 카테고리 리스트를 불러옵니다.
+  useEffect(() => {
+    (async () => {
+      const res = await getCategoriesApi();
 
-  //     // editor 수정할 게시물 정보 저장
-  //     if (res) {
-  //       setCategoryList(res);
-  //     }
-  //   })();
-  // }, []);
+      // editor 수정할 게시물 정보 저장
+      if (res) {
+        setCategoryList(res);
+        setSelectedSubtitle(res[0].children[0].title); // 카테고리 선택 초기값 설정
+      }
+    })();
+  }, []);
 
   // postId가 있다면 게시물 데이터를 요청하고, state에 데이터를 저장합니다.
   useEffect(() => {
@@ -69,6 +72,7 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
         title,
         subtitle,
         contents,
+        categoryId,
       };
 
       // postId가 없다면 새로운 글 작성, postId가 있다면 수정 api 요청을 보냅니다.
@@ -95,6 +99,13 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
     setContents,
   };
 
+  const handleSelectSubtitle = (subTitle: string, categoryId: string) => {
+    setSubtitles(subTitle);
+    setCategoryId(categoryId);
+    setSelectedSubtitle(subTitle);
+    setIsSelectCategoryVisible(false);
+  };
+
   return (
     <>
       {postId && !canEdit ? (
@@ -109,13 +120,36 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
-            <input
-              className={styles.subtitle}
-              type="text"
-              placeholder="부제목"
-              value={subtitle}
-              onChange={(e) => setSubtitles(e.target.value)}
-            />
+            <div className={styles.categoryBox}>
+              <div
+                className={styles.selectedSubtitle}
+                onClick={() => setIsSelectCategoryVisible(!isSelectCategoryVisible)}
+              >
+                {selectedSubtitle}
+              </div>
+              <div className={`${styles.categoryList} ${!isSelectCategoryVisible && "hide"}`}>
+                {categoryList.map((mainCategory) => {
+                  return (
+                    <div key={mainCategory._id}>
+                      <p className={`${styles.mainCategory}`}>{mainCategory.title}</p>
+                      <ul>
+                        {mainCategory.children?.map((subCategory: CategoryType) => {
+                          return (
+                            <p
+                              key={subCategory._id}
+                              className={styles.subCategory}
+                              onClick={() => handleSelectSubtitle(subCategory.title, mainCategory._id)}
+                            >
+                              - {subCategory.title}
+                            </p>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
           <div className={styles.quillContainer}>
             <Quill {...quillProps} />
