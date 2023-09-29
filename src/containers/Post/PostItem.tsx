@@ -22,7 +22,7 @@ const PostItem = async ({ postId }: { postId: string }) => {
     );
   }
 
-  const { title, subtitles, contents, src, email, author, date, commentCount, likes } = postData;
+  const { title, subtitle, contents, src, email, author, date, commentCount, likes } = postData;
 
   // 같은 작성자인 경우에는 '수정', '삭제' 버튼이 나타나도록 합니다.
   const token = await getServerSession(); // 로그인 유저
@@ -33,9 +33,9 @@ const PostItem = async ({ postId }: { postId: string }) => {
     <article className={styles.container}>
       <div className={styles.post}>
         <header>
-          <h2>{title}</h2>
-          <div className={styles.subtitles}>
-            <span>{subtitles.join(" ")}</span>
+          <h2>{title || "제목없음"}</h2>
+          <div className={styles.subtitle}>
+            <span>{subtitle || "부제목없음"}</span>
           </div>
           <div className={styles.info}>
             <span>{author}</span>

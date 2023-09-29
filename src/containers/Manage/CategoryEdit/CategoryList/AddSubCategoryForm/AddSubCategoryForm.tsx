@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./AddSubCategoryForm.module.scss";
 import { CustomInput } from "@/components/inputs/CustomInputs/CustomInputs";
-import { AddCategoryType, addCategoryApi } from "@/services/editCategoryFetch";
+import { CategoryType, addCategoryApi } from "@/services/editCategoryFetch";
 
 const AddSubCategoryForm = ({ _id }: { _id: string }) => {
   const [addSubCategoryInput, setAddSubCategoryInput] = useState<string>("");
@@ -11,7 +11,7 @@ const AddSubCategoryForm = ({ _id }: { _id: string }) => {
 
     try {
       // POST 요청을 보냅니다.
-      const body: AddCategoryType = {
+      const body: CategoryType = {
         role: "sub",
         parent: parentId,
         title: addSubCategoryInput,

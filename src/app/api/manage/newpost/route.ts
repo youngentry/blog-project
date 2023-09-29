@@ -21,7 +21,7 @@ export const POST = async (req: NextRequest) => {
     { upsert: true }
   );
 
-  const { title, subtitles, contents, src } = data; // 게시물 내용
+  const { title, subtitle, contents, src } = data; // 게시물 내용
   const id = currentCounter ? currentCounter.count + 1 : 1; // 게시물 번호
   const email = token?.email; // 작성자 email
   const author = token?.name; // 작성자 닉네임
@@ -32,7 +32,7 @@ export const POST = async (req: NextRequest) => {
   const saveData = {
     id,
     title,
-    subtitles: subtitles.split(" "),
+    subtitle,
     contents,
     email,
     src: src || "https://cdn.pixabay.com/photo/2023/09/03/11/13/mountains-8230502_1280.jpg",

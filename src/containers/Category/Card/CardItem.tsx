@@ -7,7 +7,7 @@ import { getDateForm } from "@/utils/getDateForm";
 
 // category (게시물 목록)페이지에서 하나의 게시물 카드입니다.
 const CardItem = ({ data }: { data: Card }) => {
-  let { id, src, title, subtitles, commentCount, likes, author, date } = data;
+  let { id, src, title, subtitle, commentCount, likes, author, date } = data;
   date = getDateForm(date);
   const link = `/posts/${id}`;
 
@@ -19,26 +19,11 @@ const CardItem = ({ data }: { data: Card }) => {
       <div className={styles.content}>
         <h3 className={styles.title}>
           <Link prefetch={false} href={link}>
-            {title ? title : "제목 없음"}
+            {title || "제목 없음"}
           </Link>
         </h3>
-        <ul className={styles.subtitles}>
-          {subtitles.map((subtitle, index) => {
-            if (subtitles.length === 1 && !subtitle) {
-              return (
-                <li className={styles.subtitle} key={index}>
-                  #부제목없음
-                </li>
-              );
-            }
-            if (subtitle) {
-              return (
-                <li className={styles.subtitle} key={index}>
-                  #{subtitle}
-                </li>
-              );
-            }
-          })}
+        <ul className={styles.subtitle}>
+          <li className={styles.subtitle}>#{subtitle || "부제목없음"}</li>
         </ul>
         <div className={styles.more}>
           <div className={styles.write}>

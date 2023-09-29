@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import styles from "./CategoryEdit.module.scss";
 import { CustomInput } from "@/components/inputs/CustomInputs/CustomInputs";
-import { AddCategoryType, addCategoryApi } from "@/services/editCategoryFetch";
+import { CategoryType, addCategoryApi } from "@/services/editCategoryFetch";
 import AddMainCategoryForm from "./AddMainCategoryForm/AddMainCategoryForm";
 import CategoryList from "./CategoryList/CategoryList";
 

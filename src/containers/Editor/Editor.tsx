@@ -6,14 +6,17 @@ import styles from "./Editor.module.scss";
 import { useRouter } from "next/navigation";
 import { Post } from "@/types/post";
 import { editPostData, getPostData } from "@/services/postsFetch";
+import { CategoryType, getCategoriesApi } from "@/services/editCategoryFetch";
 
 // react-quill에 게시물 데이터를 불러오거나, 새롭게 작성하거나 수정한 게시물을 DB에 업데이트합니다.
 const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => {
-  const router = useRouter(); // 작성 완료되면 게시물로 redirect 할겁니다.
+  const router = useRouter(); // 작성 완료되면 게시물로 redirect 합니다.
 
   const [title, setTitle] = useState("");
-  const [subtitles, setSubtitles] = useState("");
+  const [subtitle, setSubtitles] = useState("카테고리 없음");
   const [contents, setContents] = useState("");
+
+  // const [categoryList, setCategoryList] = useState<CategoryType[]>([]);
 
   // 수정 권한이 없는 경우엔 수정을 시도하려던 게시글로 이동합니다.
   useEffect(() => {
@@ -22,6 +25,19 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
       router.push(`/posts/${postId}`);
     }
   }, []);
+
+  // // 카테고리 리스트를 불러옵니다.
+  // useEffect(() => {
+  //   (async () => {
+  //     const res: CategoryType[] | false = await getCategoriesApi();
+  //     console.log(res);
+
+  //     // editor 수정할 게시물 정보 저장
+  //     if (res) {
+  //       setCategoryList(res);
+  //     }
+  //   })();
+  // }, []);
 
   // postId가 있다면 게시물 데이터를 요청하고, state에 데이터를 저장합니다.
   useEffect(() => {
@@ -38,7 +54,7 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
         // editor 수정할 게시물 정보 저장
         if (res) {
           setTitle(res.title);
-          setSubtitles(res.subtitles.join(" "));
+          setSubtitles(res.subtitle);
           setContents(res.contents);
         }
       })();
@@ -51,7 +67,7 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
     try {
       const editContents = {
         title,
-        subtitles,
+        subtitle,
         contents,
       };
 
@@ -94,10 +110,10 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
               onChange={(e) => setTitle(e.target.value)}
             />
             <input
-              className={styles.subtitles}
+              className={styles.subtitle}
               type="text"
               placeholder="부제목"
-              value={subtitles}
+              value={subtitle}
               onChange={(e) => setSubtitles(e.target.value)}
             />
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { CustomInput } from "@/components/inputs/CustomInputs/CustomInputs";
-import { AddCategoryType, addCategoryApi } from "@/services/editCategoryFetch";
+import { CategoryType, addCategoryApi } from "@/services/editCategoryFetch";
 import React, { useState } from "react";
 import styles from "./AddMainCategoryForm.module.scss";
 
@@ -13,7 +13,7 @@ const AddMainCategoryForm = () => {
 
     try {
       // POST 요청을 보냅니다.
-      const body: AddCategoryType = {
+      const body: CategoryType = {
         role: "main",
         parent: "",
         title: addMainCategoryInput,

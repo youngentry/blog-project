@@ -11,11 +11,11 @@ export const POST = async (req: NextRequest, { params }: Params) => {
   const editForm = await req.json();
 
   // 게시물 작성자 정보
-  const { title, subtitles, contents } = editForm; // 게시물 내용
+  const { title, subtitle, contents } = editForm; // 게시물 내용
 
   const saveData = {
     title,
-    subtitles: subtitles.split(" "),
+    subtitle,
     contents,
   };
 

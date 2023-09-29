@@ -1,20 +1,20 @@
 import { ObjectId } from "mongodb";
 import { setFetchOptions } from "./fetchOptions";
 
-export interface AddCategoryType {
+export interface CategoryType {
   _id?: any;
   role: string;
   parent: string;
   title: string;
-  children?: [];
+  children?: string[];
 }
 
 /**
- * 메인 카테고리 조회 요청 POST
- * @param {AddCategoryType} body
+ * 카테고리 조회 요청 GET
+ * @param {CategoryType} body
  * @returns {boolean}
  */
-export const getCategoriesApi = async (query: string, parentId: string = "") => {
+export const getCategoriesApi = async (query: string = "", parentId: string = "") => {
   const url = `/api/manage/category?role=${query}&parentId=${parentId}`;
   const options = setFetchOptions("GET");
 
@@ -26,10 +26,10 @@ export const getCategoriesApi = async (query: string, parentId: string = "") => 
 
 /**
  * 메인 카테고리 추가 요청 POST
- * @param {AddCategoryType} body
+ * @param {CategoryType} body
  * @returns {boolean}
  */
-export const addCategoryApi = async (body: AddCategoryType) => {
+export const addCategoryApi = async (body: CategoryType) => {
   const url = `/api/manage/category`;
   const options = setFetchOptions("POST", body);
 

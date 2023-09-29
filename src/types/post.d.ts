@@ -6,7 +6,7 @@ interface Card {
   id: number;
   src: string;
   title: string;
-  subtitles: string[];
+  subtitle: string;
   languages: string[];
   author: string;
   date: Date | string;
@@ -23,7 +23,7 @@ interface Post extends Card {
 // 게시물 컨텐츠
 interface PostContents {
   title: string;
-  subtitles: string;
+  subtitle: string;
   contents: string;
 }
 
