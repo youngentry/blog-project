@@ -1,25 +1,35 @@
 @import "@/styles/mixins/hover.scss";
 
-$mb-item: 5px;
+.container {
+  padding: 0 0.75rem;
 
-.category {
-  margin-bottom: $mb-item;
-  padding: 0 0.5rem;
-  width: 100%;
-
-  strong {
-    margin-bottom: $mb-item;
-    display: flex;
-    justify-content: center;
-    font-weight: 500;
-    font-size: var(--ft-13);
-  }
-
-  .subject {
-    margin-bottom: $mb-item;
-    padding: 5px 0;
-    border: 1px solid #369;
-    font-size: var(--ft-13);
-    @include hoverBG;
+  h2 {
+    font-size: var(--ft-19);
+    margin-bottom: 1rem;
+    color: var(--color-gray-0);
   }
 }
+
+// $mb-item: 5px;
+
+// .category {
+//   margin-bottom: $mb-item;
+//   padding: 0 0.5rem;
+//   width: 100%;
+
+//   strong {
+//     margin-bottom: $mb-item;
+//     display: flex;
+//     justify-content: center;
+//     font-weight: 500;
+//     font-size: var(--ft-13);
+//   }
+
+//   .subject {
+//     margin-bottom: $mb-item;
+//     padding: 5px 0;
+//     border: 1px solid #369;
+//     font-size: var(--ft-13);
+//     @include hoverBG;
+//   }
+// }

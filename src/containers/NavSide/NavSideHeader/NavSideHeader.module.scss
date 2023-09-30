@@ -1,6 +1,22 @@
 .container {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  padding: 0 0.5rem;
+  padding-bottom: 1rem;
   width: 100%;
+  border-bottom: 1px solid #f00;
+
+  h2 {
+    padding: 0.5rem 0;
+    font-size: var(--ft-17);
+    font-weight: 700;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-10);
+  }
 }

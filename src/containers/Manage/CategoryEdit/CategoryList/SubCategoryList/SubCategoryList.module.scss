@@ -1,6 +1,12 @@
+@import "@/styles/mixins/hover.scss";
 .subTitleBox {
-  border: 1px solid #ddd;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #f00;
   h5 {
-    font-size: 1.25rem;
+    padding: 0.5rem 0;
+    font-size: var(--ft-17);
+    @include hoverBG();
   }
 }

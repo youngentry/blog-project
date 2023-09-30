@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import styles from "./SubCategoryList.module.scss";
 import { getCategoriesApi } from "@/services/editCategoryFetch";
@@ -28,7 +30,7 @@ const SubCategoryList = ({ _id }: { _id: string }) => {
         console.log(parent, title);
         return (
           <li key={_id} className={styles.subTitleItem}>
-            <h5>{title}</h5>
+            <h5>- {title}</h5>
             {/* <ul className={styles.postBox}>
               {["3"].map((postId: string) => {
                 return <SubCategoryPostItem key={postId} postId={postId} />;
