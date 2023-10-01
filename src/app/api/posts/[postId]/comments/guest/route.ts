@@ -1,11 +1,13 @@
 import { connectDB } from "@/utils/db/db";
 import { NextRequest, NextResponse } from "next/server";
-import { Comment } from "@/types/post";
+import { Comment, Post } from "@/types/post";
 import { compare } from "bcrypt";
 import { ObjectId } from "mongodb";
 
 // 게스트 댓글 삭제 API 입니다.
-export const POST = async (req: NextRequest) => {
+export const POST = async (req: NextRequest, { params }: Params) => {
+  const { postId } = params;
+
   const data = await req.json();
   const { password } = data; // 입력 받은 삭제 확인 password
 
@@ -35,13 +37,23 @@ export const POST = async (req: NextRequest) => {
   const isValidPassword = await compare(password, foundComment.password); // 댓글 비밀번호 검사
 
   // 입력한 비밀번호가 다른 경우
-  if (isValidPassword) {
+  if (!isValidPassword) {
     return NextResponse.json({ message: "게스트 댓글 삭제: 비밀번호가 다릅니다." }, { status: 400 });
   }
 
-  // 삭제 결과 응답
+  // DB에서 댓글 삭제
   const deleteResult = await commentsCollection.deleteOne({ _id: new ObjectId(_id) });
-  if (deleteResult) {
+
+  // 게시물 댓글 갯수 정보 업데이트
+  const postsCollection = db.collection<Post>("posts");
+  const commentCountUpdateResult = await postsCollection.findOneAndUpdate(
+    { id: Number(postId) },
+    { $inc: { commentCount: -1 } }
+  );
+
+  console.log(commentCountUpdateResult);
+
+  if (deleteResult && commentCountUpdateResult) {
     return NextResponse.json({ message: "댓글 삭제 완료." }, { status: 200 });
   }
   return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });

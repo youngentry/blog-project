@@ -49,6 +49,8 @@ interface CommentListProps {
   postId: string;
   newUpdate: boolean;
   userEmail: string;
+  postCommentCount: number;
+  setPostCommentCount: Dispatch<SetStateAction<number>>;
 }
 
 // 댓글 CommentFormProps 컴포넌트 프롭스 타입

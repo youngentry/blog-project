@@ -13,7 +13,14 @@ import { postCommentApi } from "@/services/commentsFetch";
 
 // 댓글 입력 폼입니다.
 // 비로그인 상태에서는(userEmail이 존재하지 않을 경우에) nickname, password input이 나타납니다.
-const CommentForm = ({ postId, userEmail, newUpdate, setNewUpdate }: CommentFormProps) => {
+const CommentForm = ({
+  postId,
+  userEmail,
+  newUpdate,
+  setNewUpdate,
+  postCommentCount,
+  setPostCommentCount,
+}: CommentFormProps) => {
   const [nickname, setNickname] = useState<string>(userEmail || "");
   const [password, setPassword] = useState<string>("");
   const [comment, setComment] = useState<string>("");
@@ -72,6 +79,7 @@ const CommentForm = ({ postId, userEmail, newUpdate, setNewUpdate }: CommentForm
 
     // client component 업데이트
     setNewUpdate(!newUpdate);
+    setPostCommentCount(postCommentCount + 1);
   };
 
   // nickname input 속성

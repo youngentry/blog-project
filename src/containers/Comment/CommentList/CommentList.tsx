@@ -14,9 +14,14 @@ import {
   postGuestCommentDeletionApi,
 } from "@/services/commentsFetch";
 
-const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
-  const { MIN_NICKNAME, MIN_PASSWORD, MIN_COMMENT, MAX_NICKNAME, MAX_PASSWORD, MAX_COMMENT } =
-    COMMENT_FORM_LENGTH;
+const CommentList = ({
+  postId,
+  newUpdate,
+  userEmail,
+  postCommentCount,
+  setPostCommentCount,
+}: CommentListProps) => {
+  const { MAX_PASSWORD, MAX_COMMENT } = COMMENT_FORM_LENGTH;
 
   const [commentList, setCommentList] = useState<Comment[]>([]); // API 요청하여 조회할 댓글 목록
 
@@ -94,6 +99,8 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
         (comment: Comment) => String(comment._id) !== _id
       );
       setCommentList(afterDeleteComments);
+
+      setPostCommentCount(postCommentCount - 1);
     } catch (err) {
       console.error(err);
     }
@@ -119,7 +126,7 @@ const CommentList = ({ postId, newUpdate, userEmail }: CommentListProps) => {
         (comment: Comment) => String(comment._id) != _id
       );
       setCommentList(deletedCommentList);
-
+      setPostCommentCount(postCommentCount - 1);
       cancelCheckingPassword(); // 댓글 삭제 작업 초기화
     } catch (err) {
       console.error(err);

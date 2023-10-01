@@ -1,5 +1,4 @@
 import { connectDB } from "@/utils/db/db";
-import { ObjectId } from "mongodb";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -9,7 +8,6 @@ export const POST = async (req: NextRequest) => {
   const db = (await connectDB).db("blog");
   const postCollection = db.collection("posts");
   const countersCollection = db.collection("counters");
-  const categoriesCollection = db.collection("categories");
 
   // 게시물 작성자 정보
   const token = await getToken({ req });

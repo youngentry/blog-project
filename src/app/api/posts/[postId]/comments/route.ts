@@ -1,4 +1,4 @@
-import { CommentForm, Comment } from "@/types/post";
+import { CommentForm, Comment, Post } from "@/types/post";
 import { connectDB } from "@/utils/db/db";
 import { ObjectId } from "mongodb";
 import { JWT, getToken } from "next-auth/jwt";
@@ -85,8 +85,15 @@ export const POST = async (req: NextRequest, { params }: Params) => {
   const commentsCollection = db.collection<Comment>("comments");
   const insertResult = await commentsCollection.insertOne({ ...saveData });
 
+  // 게시물 댓글 갯수 정보 업데이트
+  const postsCollection = db.collection<Post>("posts");
+  const commentCountUpdateResult = await postsCollection.findOneAndUpdate(
+    { id: Number(postId) },
+    { $inc: { commentCount: 1 } }
+  );
+
   // 업데이트 결과 응답
-  if (insertResult) {
+  if (insertResult && commentCountUpdateResult) {
     return NextResponse.json({ id: postId }, { status: 200 }); // 응답에 게시물 id를 포함하여 redirect할 수 있도록 합니다.
   }
 
@@ -139,10 +146,11 @@ export const PATCH = async (req: NextRequest, { params }: Params) => {
 };
 
 // 댓글 삭제 API 입니다.
-export const DELETE = async (req: NextRequest) => {
+export const DELETE = async (req: NextRequest, { params }: Params) => {
   const token: JWT | null = await getToken({ req }); // 유저 정보
   const { searchParams } = new URL(req.url);
   const _id: string | null = searchParams.get("_id"); // DB에서 댓글 찾고 수정하기 위한 _id
+  const { postId } = params; // 게시물 번호
 
   if (!_id) {
     return NextResponse.json({ message: "댓글 삭제: 댓글 조회에 실패하였습니다." }, { status: 400 });
@@ -167,9 +175,16 @@ export const DELETE = async (req: NextRequest) => {
     }
   }
 
+  // 게시물 댓글 갯수 정보 업데이트
+  const postsCollection = db.collection<Post>("posts");
+  const commentCountUpdateResult = await postsCollection.findOneAndUpdate(
+    { id: Number(postId) },
+    { $inc: { commentCount: -1 } }
+  );
+
   // 삭제 결과 응답
   const deleteResult = await commentsCollection.deleteOne({ _id: new ObjectId(_id) });
-  if (deleteResult) {
+  if (deleteResult && commentCountUpdateResult) {
     return NextResponse.json({}, { status: 200 });
   }
   return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
