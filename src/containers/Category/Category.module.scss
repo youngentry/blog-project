@@ -16,10 +16,12 @@
   .cardContainer {
     margin-bottom: 4rem;
     display: inline-block;
-    column-count: 3;
     gap: var(--gap-20);
-    // flex-wrap: wrap;
-    // gap: 1.5rem;
     width: 100%;
+
+    // 컬럼 카운트
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
   }
 }
