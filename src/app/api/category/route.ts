@@ -11,7 +11,7 @@ export const GET = async (req: NextRequest) => {
   const postCollection = db.collection<Post>("posts");
 
   // searchParams.get()의 결과는 string을 반환하기 떄문에 "undefined"를 검사합니다.
-  const query = subtitle === "undefined" ? {} : { subtitle };
+  const query: object = subtitle === "undefined" ? {} : { subtitle };
 
   // card에 불필요한 데이터는 제외합니다.
   const cardsData: Card[] = await postCollection

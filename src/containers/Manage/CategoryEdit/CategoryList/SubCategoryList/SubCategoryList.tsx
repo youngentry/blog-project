@@ -26,11 +26,10 @@ const SubCategoryList = ({ _id }: { _id: string }) => {
   return (
     <ul className={styles.subTitleBox}>
       {subCategories.map((sub) => {
-        const { _id, title, children, parent } = sub;
-        console.log(sub);
+        const { _id, title } = sub;
         return (
           <li key={_id} className={styles.subTitleItem}>
-            <Link href={{ pathname: "category", query: { subtitle: title } }} passHref>
+            <Link href={{ pathname: "/category", query: { subtitle: title } }} passHref>
               <h5>- {title}</h5>
             </Link>
           </li>

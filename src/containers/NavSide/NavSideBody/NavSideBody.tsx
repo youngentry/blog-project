@@ -13,7 +13,7 @@ const NavSideBody = () => {
   // ];
   return (
     <div className={styles.container}>
-      <Link href={"category"}>
+      <Link href={"/category"}>
         <h2>전체 보기</h2>
       </Link>
 

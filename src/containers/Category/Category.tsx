@@ -1,9 +1,11 @@
+"use client";
+
 import CardItem from "./Card/CardItem";
 import styles from "./Category.module.scss";
 import Pagination from "@/components/Pagination/Pagination";
 import { Card } from "@/types/post";
 import { getCardsData } from "@/services/postsFetch";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export interface SearchParams {
   [key: string]: any;
@@ -11,8 +13,15 @@ export interface SearchParams {
 
 // category (게시물 목록)페이지입니다.
 // 게시물 카드를 map으로 렌더링 하고, 각각의 게시물 카드에는 게시물 데이터를 props 전달합니다.
-const Category = async ({ searchParams }: SearchParams) => {
-  const cardsData: Card[] | false = await getCardsData(searchParams);
+const Category = ({ searchParams }: SearchParams) => {
+  const [cardsData, setCardsData] = useState<any>();
+
+  useEffect(() => {
+    (async () => {
+      const res: Card[] | false = await getCardsData(searchParams); // 포스트 요청
+      setCardsData(res);
+    })();
+  }, [searchParams]);
 
   // 요청한 카드 데이터가 없는 경우
   if (!cardsData) {
