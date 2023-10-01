@@ -4,9 +4,30 @@
   padding: 0 0.75rem;
 
   h2 {
-    font-size: var(--ft-19);
     margin-bottom: 1rem;
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    font-size: var(--ft-19);
+    line-height: var(--ft-19);
     color: var(--color-gray-0);
+    @include hoverBG();
+
+    strong {
+      display: inline-block;
+      margin-right: var(--gap-5);
+    }
+
+    span {
+      display: inline-block;
+      font-size: var(--ft-15);
+      padding: 0 0.25rem;
+
+      height: 100%;
+      line-height: var(--ft-17);
+      background: #ffab66;
+      border-radius: var(--br-5);
+    }
 
     cursor: pointer;
   }

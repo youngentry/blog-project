@@ -1,4 +1,4 @@
-import { CategoryType } from "@/services/editCategoryFetch";
+import { CategoryType } from "@/services/categoryFetch";
 import { connectDB } from "@/utils/db/db";
 import { checkBlogAdmin } from "@/utils/sessionCheck/checkBlogAdmin";
 import { ObjectId } from "mongodb";

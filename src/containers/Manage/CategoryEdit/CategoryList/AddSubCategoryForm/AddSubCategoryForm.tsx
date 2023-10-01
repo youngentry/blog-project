@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./AddSubCategoryForm.module.scss";
 import { CustomInput } from "@/components/inputs/CustomInputs/CustomInputs";
-import { CategoryType, addCategoryApi } from "@/services/editCategoryFetch";
+import { CategoryType, addCategoryApi } from "@/services/categoryFetch";
 
 const AddSubCategoryForm = ({ _id }: { _id: string }) => {
   const [addSubCategoryInput, setAddSubCategoryInput] = useState<string>("");

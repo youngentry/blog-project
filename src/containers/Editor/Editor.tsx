@@ -6,14 +6,14 @@ import styles from "./Editor.module.scss";
 import { useRouter } from "next/navigation";
 import { Post } from "@/types/post";
 import { editPostData, getPostData } from "@/services/postsFetch";
-import { CategoryType, getCategoriesApi } from "@/services/editCategoryFetch";
+import { CategoryType, getCategoriesApi } from "@/services/categoryFetch";
 
 // react-quill에 게시물 데이터를 불러오거나, 새롭게 작성하거나 수정한 게시물을 DB에 업데이트합니다.
 const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => {
   const router = useRouter(); // 작성 완료되면 게시물로 redirect 합니다.
 
   const [title, setTitle] = useState("");
-  const [subtitle, setSubtitles] = useState<string>("카테고리 없음");
+  const [subtitle, setSubtitles] = useState<string>("부제목 없음");
   const [categoryId, setCategoryId] = useState<string>("6516f855d44958b59ed7b8d5");
   const [contents, setContents] = useState("");
 

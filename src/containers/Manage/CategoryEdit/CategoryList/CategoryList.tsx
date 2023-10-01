@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./CategoryList.module.scss";
-import { getCategoriesApi } from "@/services/editCategoryFetch";
+import { getCategoriesApi } from "@/services/categoryFetch";
 import AddSubCategoryForm from "./AddSubCategoryForm/AddSubCategoryForm";
 import SubCategoryList from "./SubCategoryList/SubCategoryList";
 

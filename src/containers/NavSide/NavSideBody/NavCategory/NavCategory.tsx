@@ -1,9 +1,9 @@
 import SubCategoryList from "@/containers/Manage/CategoryEdit/CategoryList/SubCategoryList/SubCategoryList";
-import { getCategoriesApi } from "@/services/editCategoryFetch";
+import { getCategoriesApi } from "@/services/categoryFetch";
 import React, { useEffect, useState } from "react";
 import styles from "./NavCategory.module.scss";
 
-const NavCategory = () => {
+const NavCategory = ({ subtitles }: { subtitles: string[] }) => {
   const [mainCategories, setMainCategories] = useState<any[]>([]);
 
   useEffect(() => {
@@ -28,11 +28,11 @@ const NavCategory = () => {
   return (
     <ul className={styles.container}>
       {mainCategories.map((main) => {
-        const { _id, children, title } = main;
+        const { _id, title } = main;
         return (
           <li key={_id} className={styles.mainCategory}>
             <h4>{title}</h4>
-            <SubCategoryList _id={_id} />
+            <SubCategoryList _id={_id} subtitles={subtitles} />
           </li>
         );
       })}

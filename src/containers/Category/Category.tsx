@@ -5,7 +5,7 @@ import styles from "./Category.module.scss";
 import Pagination from "@/components/Pagination/Pagination";
 import { Card } from "@/types/post";
 import { getCardsData } from "@/services/postsFetch";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export interface SearchParams {
   [key: string]: any;

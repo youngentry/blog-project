@@ -1,7 +1,7 @@
 "use client";
 
 import { CustomInput } from "@/components/inputs/CustomInputs/CustomInputs";
-import { CategoryType, addCategoryApi } from "@/services/editCategoryFetch";
+import { CategoryType, addCategoryApi } from "@/services/categoryFetch";
 import React, { useState } from "react";
 import styles from "./AddMainCategoryForm.module.scss";
 

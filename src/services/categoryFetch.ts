@@ -37,3 +37,18 @@ export const addCategoryApi = async (body: CategoryType) => {
   const res = await fetch(url, options);
   return res.ok ? true : false;
 };
+
+/**
+ * 카테고리 게시물 갯수 요청 GET
+ * @param {CategoryType} body
+ * @returns {boolean}
+ */
+export const getCategoryPostCountApi = async () => {
+  const url = `/api/category/count`;
+  const options = setFetchOptions("GET");
+
+  // 요청 결과 반환
+  const res = await fetch(url, options);
+  const data = await res.json();
+  return res.ok ? data : false;
+};

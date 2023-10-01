@@ -1,4 +1,5 @@
 import { connectDB } from "@/utils/db/db";
+import { ObjectId } from "mongodb";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -18,12 +19,12 @@ export const POST = async (req: NextRequest) => {
   const currentCounter = await countersCollection.findOne({ model: "posts" });
   await countersCollection.findOneAndUpdate(
     { model: "posts" },
-    { $inc: { count: 1 } },
+    { $inc: { number: 1, postCount: 1 } },
     { upsert: true }
   );
 
   const { title, subtitle, contents, categoryId, src } = data; // 게시물 내용
-  const id = currentCounter ? currentCounter.count + 1 : 1; // 게시물 번호
+  const id = currentCounter ? currentCounter.number + 1 : 1; // 게시물 번호
   const email = token?.email; // 작성자 email
   const author = token?.name; // 작성자 닉네임
   const date = new Date(); // 게시물 작성 시점
@@ -45,7 +46,6 @@ export const POST = async (req: NextRequest) => {
   };
 
   const result = await postCollection.insertOne({ ...saveData }); // DB에 저장한 결과
-  // const result2 = await categoriesCollection.findOne({ _id: categoryId });
 
   if (result) {
     return NextResponse.json({ id }, { status: 200 });

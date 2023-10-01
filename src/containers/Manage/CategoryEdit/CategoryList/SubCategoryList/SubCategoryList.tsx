@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import styles from "./SubCategoryList.module.scss";
-import { getCategoriesApi } from "@/services/editCategoryFetch";
+import { getCategoriesApi } from "@/services/categoryFetch";
 import Link from "next/link";
 
-const SubCategoryList = ({ _id }: { _id: string }) => {
+const SubCategoryList = ({ _id, subtitles }: { _id: string; subtitles: string[] }) => {
   const [subCategories, setSubCategories] = useState<any[]>([]);
 
   useEffect(() => {
@@ -27,10 +27,14 @@ const SubCategoryList = ({ _id }: { _id: string }) => {
     <ul className={styles.subTitleBox}>
       {subCategories.map((sub) => {
         const { _id, title } = sub;
+        const postCount = subtitles.filter((subtitle) => subtitle === title).length;
         return (
           <li key={_id} className={styles.subTitleItem}>
-            <Link href={{ pathname: "/category", query: { subtitle: title } }} passHref>
-              <h5>- {title}</h5>
+            <Link href={{ pathname: "/category", query: { subtitle: title } }}>
+              <h5>
+                <strong className={styles.subtitle}>- {title}</strong>
+                <span className={styles.postCount}>{postCount}</span>
+              </h5>
             </Link>
           </li>
         );
