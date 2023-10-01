@@ -4,7 +4,8 @@ import styles from "./NavSideBody.module.scss";
 import NavCategory from "./NavCategory/NavCategory";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getCategoriesApi, getCategoryPostCountApi } from "@/services/categoryFetch";
+import { getCategoryPostCountApi } from "@/services/categoryFetch";
+import { useRouter } from "next/navigation";
 
 // 사이드 메뉴의 바디 컴포넌트입니다.
 const NavSideBody = () => {
@@ -25,6 +26,7 @@ const NavSideBody = () => {
       setSubtitles(categoryPostCount);
     })();
   }, []);
+
   // const menus = [
   //   { category: "기능 구현", subjects: ["페이지네이션", "레이지 로딩", "예약 기능"] },
   //   { category: "시각화/알고리즘", subjects: ["bfs/dfs", "stack/queue", "brute force"] },

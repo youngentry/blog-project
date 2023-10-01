@@ -5,7 +5,7 @@ import styles from "./SubCategoryList.module.scss";
 import { getCategoriesApi } from "@/services/categoryFetch";
 import Link from "next/link";
 
-const SubCategoryList = ({ _id, subtitles }: { _id: string; subtitles: string[] }) => {
+const SubCategoryList = ({ _id, subtitles }: { _id: string; subtitles?: string[] }) => {
   const [subCategories, setSubCategories] = useState<any[]>([]);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const SubCategoryList = ({ _id, subtitles }: { _id: string; subtitles: string[] 
     <ul className={styles.subTitleBox}>
       {subCategories.map((sub) => {
         const { _id, title } = sub;
-        const postCount = subtitles.filter((subtitle) => subtitle === title).length;
+        const postCount = subtitles?.filter((subtitle) => subtitle === title).length;
         return (
           <li key={_id} className={styles.subTitleItem}>
             <Link href={{ pathname: "/category", query: { subtitle: title } }}>

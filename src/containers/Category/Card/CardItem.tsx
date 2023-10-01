@@ -23,7 +23,9 @@ const CardItem = ({ data }: { data: Card }) => {
           </Link>
         </h3>
         <ul className={styles.subtitle}>
-          <li className={styles.subtitle}>#{subtitle || "부제목없음"}</li>
+          <Link href={{ pathname: "/category", query: { subtitle } }}>
+            <li className={styles.subtitle}>{subtitle}</li>
+          </Link>
         </ul>
         <div className={styles.more}>
           <div className={styles.write}>

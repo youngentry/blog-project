@@ -13,12 +13,11 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
   const router = useRouter(); // 작성 완료되면 게시물로 redirect 합니다.
 
   const [title, setTitle] = useState("");
-  const [subtitle, setSubtitles] = useState<string>("부제목 없음");
   const [categoryId, setCategoryId] = useState<string>("6516f855d44958b59ed7b8d5");
   const [contents, setContents] = useState("");
 
   const [categoryList, setCategoryList] = useState<any[]>([]);
-  const [selectedSubtitle, setSelectedSubtitle] = useState("부제목 없음");
+  const [selectedSubtitle, setSelectedSubtitle] = useState<string>("부제목 없음");
   const [isSelectCategoryVisible, setIsSelectCategoryVisible] = useState<boolean>(false);
 
   // 수정 권한이 없는 경우엔 수정을 시도하려던 게시글로 이동합니다.
@@ -57,7 +56,7 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
         // editor 수정할 게시물 정보 저장
         if (res) {
           setTitle(res.title);
-          setSubtitles(res.subtitle);
+          setSelectedSubtitle(res.subtitle);
           setContents(res.contents);
         }
       })();
@@ -70,10 +69,12 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
     try {
       const editContents = {
         title,
-        subtitle,
+        subtitle: selectedSubtitle,
         contents,
         categoryId,
       };
+
+      console.log(editContents, selectedSubtitle);
 
       // postId가 없다면 새로운 글 작성, postId가 있다면 수정 api 요청을 보냅니다.
       const res = await editPostData(postId ? postId : "", editContents);
@@ -100,7 +101,6 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
   };
 
   const handleSelectSubtitle = (subTitle: string, categoryId: string) => {
-    setSubtitles(subTitle);
     setCategoryId(categoryId);
     setSelectedSubtitle(subTitle);
     setIsSelectCategoryVisible(false);

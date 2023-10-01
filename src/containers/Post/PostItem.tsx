@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth";
 import { checkSameAuthor } from "@/utils/sessionCheck/checkSameAuthor";
 import { getPostData } from "@/services/postsFetch";
 import { Post } from "@/types/post";
+import Link from "next/link";
 
 // 게시물 하나의 컴포넌트입니다.
 const PostItem = async ({ postId }: { postId: string }) => {
@@ -35,7 +36,9 @@ const PostItem = async ({ postId }: { postId: string }) => {
         <header>
           <h2>{title || "제목없음"}</h2>
           <div className={styles.subtitle}>
-            <span>{subtitle || "부제목없음"}</span>
+            <Link href={{ pathname: "/category", query: { subtitle } }}>
+              <span>{subtitle}</span>
+            </Link>
           </div>
           <div className={styles.info}>
             <span>{author}</span>

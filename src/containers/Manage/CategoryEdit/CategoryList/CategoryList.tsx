@@ -28,7 +28,7 @@ const CategoryList = () => {
       <h3>카테고리 박스</h3>
       <ul className={styles.mainTitleBox}>
         {mainCategories.map((main) => {
-          const { _id, children, title } = main;
+          const { _id, title } = main;
           return (
             <li key={_id} className={styles.mainTitleItem}>
               <h4>{title}</h4>
