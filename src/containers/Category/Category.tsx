@@ -23,9 +23,11 @@ const Category = async ({ searchParams }: SearchParams) => {
     );
   }
 
+  const { subtitle } = searchParams; // 카테고리 쿼리
+
   return (
     <div className={styles.category}>
-      <h2>전체 게시물</h2>
+      <h2>{subtitle ? subtitle : "전체 게시물"} </h2>
       <ul className={styles.cardContainer}>
         {cardsData.map((data: Card) => {
           return <CardItem key={data.id} data={data} />;
