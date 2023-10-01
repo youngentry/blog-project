@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./SubCategoryList.module.scss";
 import { getCategoriesApi } from "@/services/editCategoryFetch";
-import SubCategoryPostItem from "./SubCategoryPostItem/SubCategoryPostItem";
+import Link from "next/link";
 
 const SubCategoryList = ({ _id }: { _id: string }) => {
   const [subCategories, setSubCategories] = useState<any[]>([]);
@@ -27,15 +27,12 @@ const SubCategoryList = ({ _id }: { _id: string }) => {
     <ul className={styles.subTitleBox}>
       {subCategories.map((sub) => {
         const { _id, title, children, parent } = sub;
-        console.log(parent, title);
+        console.log(sub);
         return (
           <li key={_id} className={styles.subTitleItem}>
-            <h5>- {title}</h5>
-            {/* <ul className={styles.postBox}>
-              {["3"].map((postId: string) => {
-                return <SubCategoryPostItem key={postId} postId={postId} />;
-              })}
-            </ul> */}
+            <Link href={{ pathname: "category", query: { subtitle: title } }} passHref>
+              <h5>- {title}</h5>
+            </Link>
           </li>
         );
       })}

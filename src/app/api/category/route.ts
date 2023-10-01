@@ -4,12 +4,18 @@ import { NextRequest, NextResponse } from "next/server";
 
 // 게시물 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest) => {
+  const { searchParams } = new URL(req.url);
+  const subtitle: string | null = searchParams.get("subtitle"); // 카테고리 부제목 이름
+
   const db = (await connectDB).db("blog");
   const postCollection = db.collection<Post>("posts");
 
+  // searchParams.get()의 결과는 string을 반환하기 떄문에 "undefined"를 검사합니다.
+  const query = subtitle === "undefined" ? {} : { subtitle };
+
   // card에 불필요한 데이터는 제외합니다.
   const cardsData: Card[] = await postCollection
-    .find({}, { projection: { email: 0, content: 0, _id: 0 } })
+    .find(query, { projection: { email: 0, content: 0, _id: 0 } })
     .toArray();
 
   if (cardsData) {
