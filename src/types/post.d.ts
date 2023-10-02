@@ -11,7 +11,7 @@ interface Card {
   author: string;
   date: Date | string;
   commentCount: number;
-  likes: number;
+  likes: string[];
 }
 
 // 게시물

@@ -68,7 +68,12 @@ const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) 
           <Image src={src} alt="post content image" width={300} height={300} />
           <div dangerouslySetInnerHTML={{ __html: sanitize(contents) }} />
         </div>
-        <ActivityCounts postCommentCount={postCommentCount} likes={likes} />
+        <ActivityCounts
+          postId={postId}
+          postCommentCount={postCommentCount}
+          likes={likes}
+          userEmail={userEmail}
+        />
         <Comment
           postId={postId}
           userEmail={userEmail}
