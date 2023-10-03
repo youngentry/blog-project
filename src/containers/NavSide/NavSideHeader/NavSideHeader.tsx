@@ -14,9 +14,8 @@ const NavSideHeader = async () => {
       <Image src={"/profile.jpg"} alt="blog profile" width={240} height={200} />
       <h2>Young</h2>
       <div className={styles.buttons}>
-        <i>🧑</i>
-        <div>{session && checkBlogManager(session.user.email) && <NewPostButton />}</div>
         <i>🔎</i>
+        <div>{session && checkBlogManager(session.user.email) && <NewPostButton />}</div>
       </div>
     </header>
   );

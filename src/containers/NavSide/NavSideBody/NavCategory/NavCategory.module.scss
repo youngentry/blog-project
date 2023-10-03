@@ -1,8 +1,17 @@
 .container {
   .mainCategory {
     h4 {
-      font-size: var(--ft-15);
       margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      font-size: var(--ft-13);
+      color: #aaa;
+      line-height: 2;
+      // margin-bottom: 0.25rem;
+      .mainTitleIcon {
+        margin-right: 0.35rem;
+        transform: translateY(2px);
+      }
     }
   }
 }

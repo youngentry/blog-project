@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./SubCategoryList.module.scss";
 import { getCategoriesApi } from "@/services/categoryFetch";
 import Link from "next/link";
+import { BsCircleFill } from "react-icons/bs";
 
 const SubCategoryList = ({ _id, subtitles }: { _id: string; subtitles?: string[] }) => {
   const [subCategories, setSubCategories] = useState<any[]>([]);
@@ -32,7 +33,12 @@ const SubCategoryList = ({ _id, subtitles }: { _id: string; subtitles?: string[]
           <li key={_id} className={styles.subTitleItem}>
             <Link href={{ pathname: "/category", query: { subtitle: title } }}>
               <h5>
-                <strong className={styles.subtitle}>- {title}</strong>
+                <strong className={styles.subtitle}>
+                  <i className={styles.subtitleLeftDot}>
+                    <BsCircleFill />
+                  </i>
+                  {title}
+                </strong>
                 <span className={styles.postCount}>{postCount}</span>
               </h5>
             </Link>

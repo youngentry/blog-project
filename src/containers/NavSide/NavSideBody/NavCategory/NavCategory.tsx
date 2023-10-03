@@ -2,6 +2,7 @@ import SubCategoryList from "@/containers/Manage/CategoryEdit/CategoryList/SubCa
 import { getCategoriesApi } from "@/services/categoryFetch";
 import React, { useEffect, useState } from "react";
 import styles from "./NavCategory.module.scss";
+import { BsThreeDots } from "react-icons/bs";
 
 const NavCategory = ({ subtitles }: { subtitles: string[] }) => {
   const [mainCategories, setMainCategories] = useState<any[]>([]);
@@ -31,7 +32,12 @@ const NavCategory = ({ subtitles }: { subtitles: string[] }) => {
         const { _id, title } = main;
         return (
           <li key={_id} className={styles.mainCategory}>
-            <h4>{title}</h4>
+            <h4>
+              <i className={styles.mainTitleIcon}>
+                <BsThreeDots />
+              </i>
+              <span>{title}</span>
+            </h4>
             <SubCategoryList _id={_id} subtitles={subtitles} />
           </li>
         );
