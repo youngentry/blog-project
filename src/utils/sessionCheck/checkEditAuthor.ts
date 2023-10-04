@@ -2,7 +2,10 @@ import { getServerSession } from "next-auth";
 import { checkBlogAdmin } from "./checkBlogAdmin";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-const baseUrl = process.env.NODE_ENV === "development" ? "http://localhost:3000/api" : "/";
+const baseUrl =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3000/api"
+    : "https://blog-project-rose.vercel.app/";
 
 // 게시글 수정 권한이 있는지 확인합니다.
 export const checkEditAuthor = async (postId: string) => {
