@@ -1,5 +1,7 @@
+import MainPage from "@/containers/MainPage/MainPage";
+
 const Home = async () => {
-  return <div>메인</div>;
+  return <MainPage />;
 };
 
 export default Home;

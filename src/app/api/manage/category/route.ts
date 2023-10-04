@@ -116,7 +116,7 @@ export const POST = async (req: NextRequest) => {
 
   // 서브 추가
   if (role === "sub") {
-    const saveData: CategoryType = {
+    const saveData: any = {
       _id: new ObjectId(),
       ...body,
     };

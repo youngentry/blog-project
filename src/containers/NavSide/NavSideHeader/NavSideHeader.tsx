@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { checkBlogManager } from "@/utils/sessionCheck/checkBlogManager";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Image from "next/image";
+import Link from "next/link";
 
 // 사이드 메뉴의 헤더 컴포넌트입니다.
 const NavSideHeader = async () => {
@@ -15,6 +16,9 @@ const NavSideHeader = async () => {
       <h2>Young</h2>
       <div className={styles.buttons}>
         <i>🔎</i>
+        <Link href={"/"}>
+          <i>💒</i>
+        </Link>
         <div>{session && checkBlogManager(session.user.email) && <NewPostButton />}</div>
       </div>
     </header>

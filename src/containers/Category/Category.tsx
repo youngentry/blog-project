@@ -7,13 +7,9 @@ import { Card } from "@/types/post";
 import { getCardsData } from "@/services/postsFetch";
 import React, { useEffect, useState } from "react";
 
-export interface SearchParams {
-  [key: string]: any;
-}
-
 // category (게시물 목록)페이지입니다.
 // 게시물 카드를 map으로 렌더링 하고, 각각의 게시물 카드에는 게시물 데이터를 props 전달합니다.
-const Category = ({ searchParams }: SearchParams) => {
+const Category = ({ searchParams }: any) => {
   const [cardsData, setCardsData] = useState<any>();
 
   useEffect(() => {

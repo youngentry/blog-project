@@ -27,7 +27,7 @@ export const POST = async (req: NextRequest) => {
   const author = token?.name; // 작성자 닉네임
   const date = new Date(); // 게시물 작성 시점
   const commentCount = 0; // 댓글
-  const likes = 0; // 좋아요
+  const likes: string[] = []; // 좋아요
 
   const saveData = {
     id,

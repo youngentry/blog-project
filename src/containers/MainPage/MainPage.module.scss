@@ -1,0 +1,5 @@
+.container {
+  height: calc(100vh - var(--h-nav-head));
+  width: 100%;
+  background: url("/image/main-wall.jpg") no-repeat center center/cover;
+}
