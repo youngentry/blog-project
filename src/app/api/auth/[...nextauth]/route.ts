@@ -6,6 +6,17 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { JWT } from "next-auth/jwt";
 
+const githubSocial =
+  process.env.NODE_ENV === "development"
+    ? {
+        clientId: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_ID as string,
+        clientSecret: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_SECRET as string,
+      }
+    : {
+        clientId: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_ID_DEPLOYMENT as string,
+        clientSecret: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_SECRET_DEPLOYMENT as string,
+      };
+
 // next-auth 로그인 설정입니다.
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -14,8 +25,8 @@ export const authOptions: NextAuthOptions = {
 
   providers: [
     GithubProvider({
-      clientId: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_ID as string,
-      clientSecret: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_SECRET as string,
+      clientId: githubSocial.clientId,
+      clientSecret: githubSocial.clientSecret,
       // profile(profile: any) { }, // 프로필 설정 기능 검색
     }),
 

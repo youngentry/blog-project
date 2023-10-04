@@ -5,7 +5,6 @@ const baseUrl =
 
 import { Card, Post, PostContents } from "@/types/post";
 import { setFetchOptions } from "./fetchOptions";
-import { json } from "stream/consumers";
 
 /**
  * 게시물 카드 리스트를 조회합니다.
