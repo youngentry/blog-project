@@ -1,7 +1,7 @@
 const baseUrl =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000/api"
-    : "https://blog-project-rose.vercel.app/";
+    : "https://blog-project-rose.vercel.app/api";
 
 import { Card, Post, PostContents } from "@/types/post";
 import { setFetchOptions } from "./fetchOptions";
