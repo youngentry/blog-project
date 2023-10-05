@@ -1,5 +1,35 @@
 .container {
-  height: calc(100vh - var(--h-nav-head));
+  padding: 5rem;
+  display: flex;
+  gap: 2rem;
+  height: calc(85vh - var(--h-nav-head));
   width: 100%;
-  background: url("/image/main-wall.jpg") no-repeat center center/cover;
+  // background: url("/image/main-wall.jpg") no-repeat center center/cover;
+
+  .info {
+    flex: 1;
+
+    .mainTitle {
+      margin-bottom: 1rem;
+      font-size: var(--ft-36);
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      font-size: var(--ft-17);
+      line-height: 1.5;
+    }
+
+    .links {
+      padding: 1rem;
+      background: #2768db;
+      border-radius: 1.5rem;
+    }
+  }
+  .sliderContainer {
+    width: 50%;
+    height: 100%;
+  }
 }
