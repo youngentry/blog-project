@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./CategorySelector.module.scss";
-import { CategorySelectorProps, MainCategoryType, SubCategoryType } from "../../Editor";
+import { CategorySelectorProps, CommonCategoryType, SubCategoryType } from "../../Editor";
 
 const CategorySelector = ({
   categoryList,
@@ -56,11 +56,11 @@ const CategorySelector = ({
       <input type="file" onChange={onFileChange} />
       <button onClick={onFileUpload}>upload</button>
       <div className={`${styles.categoryList} ${!isSelectCategoryVisible && "hide"}`}>
-        {categoryList.map((mainCategory: MainCategoryType) => {
-          const children: SubCategoryType[] = mainCategory.children;
+        {categoryList.map((mainCategory: CommonCategoryType) => {
+          const children = mainCategory.children as SubCategoryType[];
 
           return mainCategory ? (
-            <div key={mainCategory._id}>
+            <div key={mainCategory._id as string}>
               <p className={`${styles.mainCategory}`}>{mainCategory.title}</p>
               <ul>
                 {children?.length &&
@@ -68,7 +68,7 @@ const CategorySelector = ({
                     console.log(subCategory);
                     return (
                       <p
-                        key={subCategory._id}
+                        key={subCategory._id as string}
                         className={styles.subCategory}
                         onClick={() =>
                           handleSelectSubtitle(subCategory.title, mainCategory._id as string)

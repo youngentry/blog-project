@@ -1,9 +1,10 @@
 "use client";
 
 import { CustomInput } from "@/components/inputs/CustomInputs/CustomInputs";
-import { CategoryType, addCategoryApi } from "@/services/categoryFetch";
 import React, { useState } from "react";
 import styles from "./AddMainCategoryForm.module.scss";
+import { CommonCategoryType } from "@/containers/Editor/Editor";
+import { addCategoryApi } from "@/services/categoryFetch";
 
 const AddMainCategoryForm = () => {
   const [addMainCategoryInput, setAddMainCategoryInput] = useState<string>("");
@@ -13,9 +14,8 @@ const AddMainCategoryForm = () => {
 
     try {
       // POST 요청을 보냅니다.
-      const body: CategoryType = {
+      const body: CommonCategoryType = {
         role: "main",
-        parent: "",
         title: addMainCategoryInput,
       };
 

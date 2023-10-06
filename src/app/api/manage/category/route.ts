@@ -1,4 +1,4 @@
-import { CategoryType } from "@/services/categoryFetch";
+import { CommonCategoryType } from "@/containers/Editor/Editor";
 import { connectDB } from "@/utils/db/db";
 import { checkBlogAdmin } from "@/utils/sessionCheck/checkBlogAdmin";
 import { ObjectId } from "mongodb";
@@ -44,22 +44,6 @@ export const GET = async (req: NextRequest) => {
   return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
 };
 
-// 1. 라우터에서 로그인 유저가 admin인지 확인
-//    > 아니라면 '/'으로 보내기
-
-// 2. 요청을 보낸 사람이 admin인지 확인
-//    > 아니라면 '/'으로 보내기
-
-// 3. 메인 카테고리 제목 또는 서브 카테고리 제목 body로 받기
-//    > {_id:"", role:"main", parent:"", title:"메인타이틀"}
-//    or {_id:"", role:"sub", parent:"부모아이디", title:"서브타이틀"}
-
-// 4. role에 따라 저장 방식 분기
-//    > role:"main" 인 경우
-//      > 데이터 저장 {role:"main", parent:"", title:"메인타이틀", children:[]}
-//    > role:"sub" 인 경우
-//      > 데이터 저장 {role:"sub", parent:"부모아이디", title:"서브타이틀", children:[]}
-
 // 새로운 카테고리 작성 API 입니다.
 export const POST = async (req: NextRequest) => {
   // DB와 Collection 연결
@@ -81,7 +65,7 @@ export const POST = async (req: NextRequest) => {
   }
 
   const body = await req.json();
-  let { _id, role, parent, title }: CategoryType = body; // 게시물 내용
+  let { _id, role, parent, title }: CommonCategoryType = body; // 게시물 내용
 
   // 메인 추가/수정
   if (role === "main") {

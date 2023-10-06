@@ -8,23 +8,21 @@ import { Post } from "@/types/post";
 import { editPostData, getPostData } from "@/services/postsFetch";
 import { getCategoriesApi } from "@/services/categoryFetch";
 import CategorySelector from "./components/CategorySelector/CategorySelector";
+import { ObjectId } from "mongodb";
 
-interface CommonCategoryType {
-  _id?: string;
+export interface SubCategoryType {
+  _id?: string | ObjectId;
   role: string;
   title: string;
+  parent?: string;
 }
 
-export interface MainCategoryType extends CommonCategoryType {
-  children: SubCategoryType[];
-}
-
-export interface SubCategoryType extends CommonCategoryType {
-  parent: string;
+export interface CommonCategoryType extends SubCategoryType {
+  children?: SubCategoryType[];
 }
 
 export interface CategorySelectorProps {
-  categoryList: MainCategoryType[];
+  categoryList: CommonCategoryType[];
   setCategoryId: Dispatch<SetStateAction<string>>;
   isSelectCategoryVisible: boolean;
   setIsSelectCategoryVisible: Dispatch<SetStateAction<boolean>>;
@@ -40,7 +38,7 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
   const [categoryId, setCategoryId] = useState<string>("6516f855d44958b59ed7b8d5"); // "카테고리 없음" 메인 카테고리의 디폴트 값입니다.
   const [contents, setContents] = useState(""); // 게시글 내용
 
-  const [categoryList, setCategoryList] = useState<MainCategoryType[]>([]); // 카테고리 목록
+  const [categoryList, setCategoryList] = useState<CommonCategoryType[]>([]); // 카테고리 목록
   const [isSelectCategoryVisible, setIsSelectCategoryVisible] = useState<boolean>(false); // 카테고리 드롭메뉴 visible 여부
   const [selectedSubtitle, setSelectedSubtitle] = useState<string>("부제목 없음"); // 선택된 카테고리의 디폴트 값입니다.
 

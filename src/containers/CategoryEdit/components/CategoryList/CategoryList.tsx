@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./CategoryList.module.scss";
 import { getCategoriesApi } from "@/services/categoryFetch";
-import AddSubCategoryForm from "./AddSubCategoryForm/AddSubCategoryForm";
-import SubCategoryList from "./SubCategoryList/SubCategoryList";
+import AddSubCategoryForm from "../AddSubCategoryForm/AddSubCategoryForm";
+import SubCategoryList from "../SubCategoryList/SubCategoryList";
 
 const CategoryList = () => {
   const [mainCategories, setMainCategories] = useState<any[]>([]);
