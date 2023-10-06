@@ -1,4 +1,4 @@
-import Editor from "@/containers/Editor/Editor";
+import Editor from "@/containers/Editor/PostEditor";
 import { checkEditAuthor } from "@/utils/sessionCheck/checkEditAuthor";
 
 // 게시물 수정 페이지로 라우트합니다.

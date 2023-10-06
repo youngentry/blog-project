@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./CategorySelector.module.scss";
-import { CategorySelectorProps, CommonCategoryType, SubCategoryType } from "../../Editor";
+import { CategorySelectorProps, CommonCategoryType, SubCategoryType } from "../../PostEditor";
 
 const CategorySelector = ({
   categoryList,

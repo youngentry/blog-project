@@ -1,4 +1,4 @@
-import { CommonCategoryType } from "@/containers/Editor/Editor";
+import { CommonCategoryType } from "@/containers/Editor/PostEditor";
 import { connectDB } from "@/utils/db/db";
 import { checkBlogAdmin } from "@/utils/sessionCheck/checkBlogAdmin";
 import { ObjectId } from "mongodb";

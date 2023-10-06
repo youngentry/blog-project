@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import Quill from "./components/Quill/Quill";
-import styles from "./Editor.module.scss";
+import styles from "./PostEditor.module.scss";
 import { useRouter } from "next/navigation";
 import { Post } from "@/types/post";
 import { editPostData, getPostData } from "@/services/postsFetch";
@@ -31,7 +31,7 @@ export interface CategorySelectorProps {
 }
 
 // react-quill에 게시물 데이터를 불러오거나, 새롭게 작성하거나 수정한 게시물을 DB에 업데이트합니다.
-const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => {
+const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => {
   const router = useRouter(); // 작성 완료되면 게시물로 redirect 합니다.
 
   const [title, setTitle] = useState(""); // 게시글 제목
@@ -161,4 +161,4 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
   );
 };
 
-export default Editor;
+export default PostEditor;

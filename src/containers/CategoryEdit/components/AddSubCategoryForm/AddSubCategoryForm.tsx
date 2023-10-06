@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./AddSubCategoryForm.module.scss";
 import { CustomInput } from "@/components/inputs/CustomInputs/CustomInputs";
-import { CommonCategoryType } from "@/containers/Editor/Editor";
+import { CommonCategoryType } from "@/containers/Editor/PostEditor";
 import { addCategoryApi } from "@/services/categoryFetch";
 
 const AddSubCategoryForm = ({ _id }: { _id: string }) => {

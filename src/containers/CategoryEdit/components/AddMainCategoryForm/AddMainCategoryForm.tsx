@@ -3,7 +3,7 @@
 import { CustomInput } from "@/components/inputs/CustomInputs/CustomInputs";
 import React, { useState } from "react";
 import styles from "./AddMainCategoryForm.module.scss";
-import { CommonCategoryType } from "@/containers/Editor/Editor";
+import { CommonCategoryType } from "@/containers/Editor/PostEditor";
 import { addCategoryApi } from "@/services/categoryFetch";
 
 const AddMainCategoryForm = () => {

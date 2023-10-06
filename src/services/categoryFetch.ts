@@ -1,10 +1,10 @@
 import { ObjectId } from "mongodb";
 import { setFetchOptions } from "./fetchOptions";
-import { CategoryType } from "@/containers/Editor/components/CategorySelector/CategorySelector";
+import { CommonCategoryType } from "@/containers/Editor/PostEditor";
 
 /**
  * 카테고리 조회 요청 GET
- * @param {CategoryType} body
+ * @param {CommonCategoryType} body
  * @returns {boolean}
  */
 export const getCategoriesApi = async (query: string = "", parentId: string = "") => {
@@ -22,7 +22,7 @@ export const getCategoriesApi = async (query: string = "", parentId: string = ""
  * @param {CategoryType} body
  * @returns {boolean}
  */
-export const addCategoryApi = async (body: CategoryType) => {
+export const addCategoryApi = async (body: CommonCategoryType) => {
   const url = `/api/manage/category`;
   const options = setFetchOptions("POST", body);
 
