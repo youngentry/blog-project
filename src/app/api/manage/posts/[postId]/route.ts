@@ -1,3 +1,4 @@
+import { Post } from "@/types/post";
 import { connectDB } from "@/utils/db/db";
 import { checkBlogAdmin } from "@/utils/sessionCheck/checkBlogAdmin";
 import { JWT, getToken } from "next-auth/jwt";
@@ -13,15 +14,16 @@ export const DELETE = async (req: NextRequest, { params }: Params) => {
   if (!token) {
     return NextResponse.json({ message: "게시물 삭제: 로그인 되지 않은 유저입니다." }, { status: 400 });
   }
-
   const userEmail = token.email as string; // 로그인 유저 email
+
   // DB와 Collection 연결
   const db = (await connectDB).db("blog");
-  const postCollection = await db.collection("posts");
+  const postCollection = await db.collection<Post>("posts");
 
-  const foundPost = await postCollection.findOne({ id: Number(postId) });
-  const postAuthorEmail = foundPost?.email;
-  const isBlogAdmin = checkBlogAdmin(userEmail);
+  const foundPost: Post | null = await postCollection.findOne({ id: Number(postId) }); // 조회한 게시물
+  const postAuthorEmail = foundPost?.email; // 게시물 작성자 email
+  const isBlogAdmin: boolean = checkBlogAdmin(userEmail); // 관리자 여부 확인
+
   // 로그인 유저와 게시글 작성자가 다른지 확인 && 블로그 관리자가 아닌지 확인
   if (userEmail !== postAuthorEmail && !isBlogAdmin) {
     return NextResponse.json({ message: "게시물 삭제: 유효한 접근이 아닙니다." }, { status: 400 });

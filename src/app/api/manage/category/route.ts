@@ -1,4 +1,4 @@
-import { CommonCategoryType } from "@/containers/Editor/PostEditor";
+import { CommonCategoryType, SubCategoryType } from "@/containers/Editor/PostEditor";
 import { connectDB } from "@/utils/db/db";
 import { checkBlogAdmin } from "@/utils/sessionCheck/checkBlogAdmin";
 import { ObjectId } from "mongodb";
@@ -8,34 +8,33 @@ import { NextRequest, NextResponse } from "next/server";
 // 카테고리 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
-  const role: string | null = searchParams.get("role"); // DB에서 댓글 찾고 수정하기 위한 _id
-  const parentId: string | null = searchParams.get("parentId"); // DB에서 댓글 찾고 수정하기 위한 _id
+  const role: string | null = searchParams.get("role"); // DB에서 댓글 찾고 수정하기 위한 ObjectId
+  const parentId: string | null = searchParams.get("parentId"); // DB에서 댓글 찾고 수정하기 위한 ObjectId
 
   const db = (await connectDB).db("blog");
-  const categoryCollection = db.collection("categories");
+  const categoryCollection = db.collection<CommonCategoryType>("categories");
 
   if (role === "main") {
-    const foundCategory = await categoryCollection.find({ role }).toArray();
-
-    //   해당 카테고리 데이터와 status를 응답합니다.
+    // 메인 카테고리 데이터와 status를 응답합니다.
+    const foundCategory: CommonCategoryType[] = await categoryCollection.find({ role }).toArray();
     if (foundCategory) {
       return NextResponse.json(foundCategory, { status: 200 });
     }
   }
 
   if (role === "sub") {
-    const foundCategory = await categoryCollection.findOne({ _id: new ObjectId(parentId as string) });
-
-    //   해당 카테고리 데이터와 status를 응답합니다.
+    // 서브 카테고리 데이터와 status를 응답합니다.
+    const foundCategory: CommonCategoryType | null = await categoryCollection.findOne({
+      _id: new ObjectId(parentId as string),
+    });
     if (foundCategory) {
       return NextResponse.json(foundCategory, { status: 200 });
     }
   }
 
   if (!role) {
-    const foundCategory = await categoryCollection.find({}).toArray();
-
     //   모든 카테고리 데이터와 status를 응답합니다.
+    const foundCategory: CommonCategoryType[] = await categoryCollection.find({}).toArray();
     if (foundCategory) {
       return NextResponse.json(foundCategory, { status: 200 });
     }
@@ -50,9 +49,7 @@ export const POST = async (req: NextRequest) => {
   const db = (await connectDB).db("blog");
   const categoryCollection = db.collection("categories");
 
-  // 권한 검사
-  const token = await getToken({ req });
-
+  const token = await getToken({ req }); // 로그인 유저 정보
   // 로그인 되지 않은 사용자 경고
   if (!token) {
     return NextResponse.json({ message: "카테고리 편집: 유효하지 않은 접근입니다." }, { status: 400 });
@@ -64,21 +61,21 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({ message: "카테고리 편집: 유효하지 않은 접근입니다." }, { status: 400 });
   }
 
-  const body = await req.json();
-  let { _id, role, parent, title }: CommonCategoryType = body; // 게시물 내용
+  const body: CommonCategoryType = await req.json();
+  let { _id, role, parent, title } = body; // 요청 받은 카테고리 데이터
 
   // 메인 추가/수정
   if (role === "main") {
     _id = _id ? new ObjectId(_id) : "";
 
     const saveData = {
-      _id: new ObjectId(),
-      title,
-      role,
-      children: [],
+      _id: new ObjectId(), // 메인 카테고리 id
+      title, // 메인 카테고리 이름
+      role, // "main"
+      children: [], // 서브 카테고리가 추가되는 배열
     };
 
-    // _id가 존재하면 수정
+    // _id가 존재하면 메인 카테고리 수정
     if (_id) {
       const result = await categoryCollection.updateOne({ _id }, { $set: { title } }, { upsert: true }); // DB에 저장한 결과
 
@@ -90,15 +87,14 @@ export const POST = async (req: NextRequest) => {
       }
     }
 
-    // _id가 존재하지 않으면 추가
+    // _id가 존재하지 않으면 메인 카테고리 추가
     const result = await categoryCollection.insertOne({ ...saveData }); // DB에 저장한 결과
-
     if (result) {
       return NextResponse.json({ message: "카테고리 편집: 메인 카테고리 추가 성공." }, { status: 200 });
     }
   }
 
-  // 서브 추가
+  // 서브 카테고리를 메인 카테고리의 children 배열의 요소로 추가합니다.
   if (role === "sub") {
     const saveData: any = {
       _id: new ObjectId(),

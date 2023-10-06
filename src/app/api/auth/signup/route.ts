@@ -12,7 +12,7 @@ export const POST = async (req: NextRequest) => {
   const signUpForm = await req.json();
   let { name, email, password } = signUpForm;
 
-  // a@a.a 최소한의 email 형식을 갖추지 못한 경우에는 visitor 강제 할당
+  // a@a.a 최소한의 email 형식을 갖추지 못한 경우에는 visitor 할당
   if (email.length < MIN_EMAIL) {
     email = "visitor";
   }
@@ -29,7 +29,7 @@ export const POST = async (req: NextRequest) => {
 
   // 중복되는 name, email 비교
   const db = (await connectDB).db("blog");
-  // 크레덴션 로그인 유저
+  // 크레덴셜 로그인 유저
   const credentialsCollection = db.collection("user_credentials");
   const isDuplicateCredentialName = await credentialsCollection.findOne({ name });
   const isDuplicateCredentialEmail = await credentialsCollection.findOne({ email });
