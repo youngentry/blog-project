@@ -1,17 +1,20 @@
 .container {
   padding: 5rem;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 2rem;
-  height: calc(85vh - var(--h-nav-head));
+  height: calc(80vh - var(--h-nav-head));
   width: 100%;
-  // background: url("/image/main-wall.jpg") no-repeat center center/cover;
+  background: url("/images/main-wall.jpg") no-repeat bottom center/cover;
 
   .info {
     flex: 1;
 
     .mainTitle {
       margin-bottom: 1rem;
-      font-size: var(--ft-36);
+      font-size: 2.5vw;
       font-weight: 600;
       line-height: 1.5;
     }
