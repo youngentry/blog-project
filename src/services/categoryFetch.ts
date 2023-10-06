@@ -1,13 +1,6 @@
 import { ObjectId } from "mongodb";
 import { setFetchOptions } from "./fetchOptions";
-
-export interface CategoryType {
-  _id?: any;
-  role: string;
-  parent: string;
-  title: string;
-  children?: string[];
-}
+import { CategoryType } from "@/containers/Editor/components/CategorySelector/CategorySelector";
 
 /**
  * 카테고리 조회 요청 GET

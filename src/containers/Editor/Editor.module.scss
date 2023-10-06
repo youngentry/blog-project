@@ -8,31 +8,6 @@
     .title {
       font-size: 1.5rem;
     }
-
-    .categoryBox {
-      position: relative;
-      .selectedSubtitle {
-        @include hoverBG();
-        font-size: 1rem;
-      }
-
-      .categoryList {
-        position: absolute;
-        width: 100%;
-        background: #fff;
-        z-index: 9999;
-
-        .mainCategory {
-          font-size: 1.25rem;
-          color: #555;
-        }
-        .subCategory {
-          @include hoverBG();
-          font-size: 1rem;
-          margin-left: 0.5rem;
-        }
-      }
-    }
   }
 
   .quillContainer {

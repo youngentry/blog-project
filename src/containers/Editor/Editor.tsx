@@ -1,24 +1,48 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Quill from "./Quill/Quill";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
+import Quill from "./components/Quill/Quill";
 import styles from "./Editor.module.scss";
 import { useRouter } from "next/navigation";
 import { Post } from "@/types/post";
 import { editPostData, getPostData } from "@/services/postsFetch";
-import { CategoryType, getCategoriesApi } from "@/services/categoryFetch";
+import { getCategoriesApi } from "@/services/categoryFetch";
+import CategorySelector from "./components/CategorySelector/CategorySelector";
+
+interface CommonCategoryType {
+  _id?: string;
+  role: string;
+  title: string;
+}
+
+export interface MainCategoryType extends CommonCategoryType {
+  children: SubCategoryType[];
+}
+
+export interface SubCategoryType extends CommonCategoryType {
+  parent: string;
+}
+
+export interface CategorySelectorProps {
+  categoryList: MainCategoryType[];
+  setCategoryId: Dispatch<SetStateAction<string>>;
+  isSelectCategoryVisible: boolean;
+  setIsSelectCategoryVisible: Dispatch<SetStateAction<boolean>>;
+  selectedSubtitle: string;
+  setSelectedSubtitle: Dispatch<SetStateAction<string>>;
+}
 
 // react-quill에 게시물 데이터를 불러오거나, 새롭게 작성하거나 수정한 게시물을 DB에 업데이트합니다.
 const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => {
   const router = useRouter(); // 작성 완료되면 게시물로 redirect 합니다.
 
-  const [title, setTitle] = useState("");
-  const [categoryId, setCategoryId] = useState<string>("6516f855d44958b59ed7b8d5");
-  const [contents, setContents] = useState("");
+  const [title, setTitle] = useState(""); // 게시글 제목
+  const [categoryId, setCategoryId] = useState<string>("6516f855d44958b59ed7b8d5"); // "카테고리 없음" 메인 카테고리의 디폴트 값입니다.
+  const [contents, setContents] = useState(""); // 게시글 내용
 
-  const [categoryList, setCategoryList] = useState<any[]>([]);
-  const [selectedSubtitle, setSelectedSubtitle] = useState<string>("부제목 없음");
-  const [isSelectCategoryVisible, setIsSelectCategoryVisible] = useState<boolean>(false);
+  const [categoryList, setCategoryList] = useState<MainCategoryType[]>([]); // 카테고리 목록
+  const [isSelectCategoryVisible, setIsSelectCategoryVisible] = useState<boolean>(false); // 카테고리 드롭메뉴 visible 여부
+  const [selectedSubtitle, setSelectedSubtitle] = useState<string>("부제목 없음"); // 선택된 카테고리의 디폴트 값입니다.
 
   // 수정 권한이 없는 경우엔 수정을 시도하려던 게시글로 이동합니다.
   useEffect(() => {
@@ -33,7 +57,7 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
     (async () => {
       const res = await getCategoriesApi();
 
-      // editor 수정할 게시물 정보 저장
+      // editor에 수정할 게시물 정보 불러오기
       if (res) {
         setCategoryList(res);
         setSelectedSubtitle(res[0].children[0].title); // 카테고리 선택 초기값 설정
@@ -94,44 +118,20 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
     }
   };
 
-  // quill에 전달할 state props
+  // 카테고리 선택에 전달할 props
+  const categorySelectorProps: CategorySelectorProps = {
+    categoryList,
+    setCategoryId,
+    isSelectCategoryVisible,
+    setIsSelectCategoryVisible,
+    selectedSubtitle,
+    setSelectedSubtitle,
+  };
+
+  // quill에 전달할 props
   const quillProps = {
     contents,
     setContents,
-  };
-
-  const handleSelectSubtitle = (subTitle: string, categoryId: string) => {
-    setCategoryId(categoryId);
-    setSelectedSubtitle(subTitle);
-    setIsSelectCategoryVisible(false);
-  };
-
-  const [file, setFile] = useState<any>();
-
-  const onFileUpload = async () => {
-    /* FormData 선언 */
-    const formData: any = new FormData();
-    formData.append("file", file);
-
-    console.log(process.env.NEXT_PUBLIC_IMGUR_CLIENT_ID);
-    const res = await fetch("https://api.imgur.com/3/image", {
-      method: "POST",
-      headers: {
-        Authorization: `Client-ID ${process.env.NEXT_PUBLIC_IMGUR_CLIENT_ID}`,
-        Accept: "application/json",
-      },
-      body: formData,
-    });
-
-    const data = await res.json(); // imgur 업로드 결과 데이터
-    const link = data.link; // 이미지 링크
-
-    console.log(data);
-    return link;
-  };
-
-  const onFileChange = (e: any) => {
-    setFile({ file: e.target.files[0] });
   };
 
   return (
@@ -148,39 +148,7 @@ const Editor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => 
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
-            <div className={styles.categoryBox}>
-              <div
-                className={styles.selectedSubtitle}
-                onClick={() => setIsSelectCategoryVisible(!isSelectCategoryVisible)}
-              >
-                {selectedSubtitle}
-              </div>
-
-              <input type="file" onChange={onFileChange} />
-              <button onClick={onFileUpload}>upload</button>
-              <div className={`${styles.categoryList} ${!isSelectCategoryVisible && "hide"}`}>
-                {categoryList.map((mainCategory) => {
-                  return (
-                    <div key={mainCategory._id}>
-                      <p className={`${styles.mainCategory}`}>{mainCategory.title}</p>
-                      <ul>
-                        {mainCategory.children?.map((subCategory: CategoryType) => {
-                          return (
-                            <p
-                              key={subCategory._id}
-                              className={styles.subCategory}
-                              onClick={() => handleSelectSubtitle(subCategory.title, mainCategory._id)}
-                            >
-                              - {subCategory.title}
-                            </p>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+            <CategorySelector {...categorySelectorProps} />
           </div>
           <div className={styles.quillContainer}>
             <Quill {...quillProps} />
