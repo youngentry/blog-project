@@ -13,11 +13,10 @@ export const GET = async (req: NextRequest) => {
   // searchParams.get()의 결과는 string을 반환하기 떄문에 "undefined"를 검사합니다.
   const query: object = subtitle === "undefined" ? {} : { subtitle };
 
-  // card에 불필요한 데이터는 제외합니다.
+  // card에 불필요한 데이터는 제외하고 반환합니다.
   const cardsData: Card[] = await postCollection
     .find(query, { projection: { email: 0, content: 0, _id: 0 } })
     .toArray();
-
   if (cardsData) {
     return NextResponse.json(cardsData, { status: 200 });
   }
