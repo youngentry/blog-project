@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./MainPage.module.scss";
-import Slider from "./Slider/Slider";
+import Slider from "./components/Slider/Slider";
 
 const MainPage = () => {
   return (
