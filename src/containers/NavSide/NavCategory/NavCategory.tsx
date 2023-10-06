@@ -1,4 +1,4 @@
-import SubCategoryList from "@/containers/Manage/CategoryEdit/CategoryList/SubCategoryList/SubCategoryList";
+import SubCategoryList from "@/containers/CategoryEdit/components/SubCategoryList/SubCategoryList";
 import { getCategoriesApi } from "@/services/categoryFetch";
 import React, { useEffect, useState } from "react";
 import styles from "./NavCategory.module.scss";

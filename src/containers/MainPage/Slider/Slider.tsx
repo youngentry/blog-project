@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import styles from "./Slider.module.scss";
 import { Pagination, Autoplay } from "swiper/modules";
-import SliderItem from "./SliderItem/SliderItem";
+import SliderItem from "../SliderItem/SliderItem";
 
 export interface SlideItemProps {
   title: string;

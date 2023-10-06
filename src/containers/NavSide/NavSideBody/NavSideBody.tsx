@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./NavSideBody.module.scss";
-import NavCategory from "./NavCategory/NavCategory";
+import NavCategory from "../NavCategory/NavCategory";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getCategoryPostCountApi } from "@/services/categoryFetch";

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./SliderItem.module.scss";
-import { SlideItemProps } from "../Slider";
+import { SlideItemProps } from "../Slider/Slider";
 import Image from "next/image";
 import Link from "next/link";
 

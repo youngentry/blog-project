@@ -17,9 +17,9 @@ const MainPage = () => {
         </p>
         <div className={styles.links}>Github Tistory</div>
       </div>
-      {/* <div className={styles.sliderContainer}>
+      <div className={styles.sliderContainer}>
         <Slider />
-      </div> */}
+      </div>
     </div>
   );
 };
