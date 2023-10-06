@@ -1,6 +1,6 @@
 "use client";
 
-import CardItem from "./Card/CardItem";
+import CardItem from "./components/Card/CardItem";
 import styles from "./Category.module.scss";
 import Pagination from "@/components/Pagination/Pagination";
 import { Card } from "@/types/post";
@@ -32,7 +32,7 @@ const Category = ({ searchParams }: any) => {
 
   return (
     <div className={styles.category}>
-      <h2>{subtitle ? subtitle : "전체 게시물"} </h2>
+      <h2>{subtitle ? subtitle : "전체 게시물"}</h2>
       <ul className={styles.cardContainer}>
         {cardsData.map((data: Card) => {
           return <CardItem key={data.id} data={data} />;
