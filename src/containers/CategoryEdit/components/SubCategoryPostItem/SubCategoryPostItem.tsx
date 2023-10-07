@@ -11,7 +11,6 @@ const SubCategoryPostItem = ({ postId }: { postId: string }) => {
   useEffect(() => {
     const getSubCategories = async (postId: string) => {
       const res = await getPostData(postId);
-      console.log(res, "res");
 
       // 메인 카테고리 조회 성공 시 메인 카테고리 목록 반환
       if (res) {

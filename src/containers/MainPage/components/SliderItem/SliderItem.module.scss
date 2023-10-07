@@ -22,27 +22,41 @@
     .contents {
       position: absolute;
       padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       height: 100%;
-      h3 {
+
+      .title {
         margin-bottom: 0.35rem;
         font-size: 1.3vw;
         word-break: keep-all;
-        @include hoverText();
       }
 
-      p {
+      .description {
         margin-bottom: 0.85rem;
         font-size: 0.9vw;
+        color: #ddd;
       }
 
       .linkBox {
-        display: inline-block;
-        width: 100%;
-        .linkButton {
-          padding: 0.25rem 2rem;
-          background: #2768db;
-          border-radius: 1rem;
-          @include hoverBG(#5795ff);
+        padding: 0.25rem 0;
+        display: flex;
+        width: 50%;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 1.4vw;
+        background: #369;
+        transition: 0.3s;
+        border-radius: 1.5rem;
+
+        p {
+          margin-right: 0.5rem;
+        }
+
+        &:hover {
+          background: rgb(84, 149, 213);
         }
       }
     }

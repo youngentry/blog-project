@@ -17,7 +17,6 @@ const CategorySelector = ({
     const formData: any = new FormData();
     formData.append("file", file);
 
-    console.log(process.env.NEXT_PUBLIC_IMGUR_CLIENT_ID);
     const res = await fetch("https://api.imgur.com/3/image", {
       method: "POST",
       headers: {
@@ -30,7 +29,6 @@ const CategorySelector = ({
     const data = await res.json(); // imgur 업로드 결과 데이터
     const link = data.link; // 이미지 링크
 
-    console.log(data);
     return link;
   };
 
@@ -65,7 +63,6 @@ const CategorySelector = ({
               <ul>
                 {children?.length &&
                   children.map((subCategory) => {
-                    console.log(subCategory);
                     return (
                       <p
                         key={subCategory._id as string}

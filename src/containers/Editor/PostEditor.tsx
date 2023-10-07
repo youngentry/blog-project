@@ -96,8 +96,6 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
         categoryId,
       };
 
-      console.log(editContents, selectedSubtitle);
-
       // postId가 없다면 새로운 글 작성, postId가 있다면 수정 api 요청을 보냅니다.
       const res = await editPostData(postId ? postId : "", editContents);
 

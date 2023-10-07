@@ -5,34 +5,8 @@
   justify-content: center;
   text-align: center;
   gap: 2rem;
-  height: calc(80vh - var(--h-nav-head));
+  height: calc(100vh - var(--h-nav-head));
   width: 100%;
-  background: url("/images/main-wall.jpg") no-repeat bottom center/cover;
-
-  .info {
-    flex: 1;
-
-    .mainTitle {
-      margin-bottom: 1rem;
-      font-size: 2.5vw;
-      font-weight: 600;
-      line-height: 1.5;
-    }
-
-    p {
-      margin-bottom: 1.5rem;
-      font-size: var(--ft-17);
-      line-height: 1.5;
-    }
-
-    .links {
-      padding: 1rem;
-      background: #2768db;
-      border-radius: 1.5rem;
-    }
-  }
-  .sliderContainer {
-    width: 50%;
-    height: 100%;
-  }
+  // background: url("/images/blue-250770_640.jpg") no-repeat bottom center/cover;
+  background: url("/images/4eee8328m2008n22c3.png") repeat bottom center/contain;
 }

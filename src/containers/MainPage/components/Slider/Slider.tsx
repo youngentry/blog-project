@@ -31,7 +31,7 @@ const Slider = () => {
       link: "https://sakuraop.tistory.com/591",
     },
     {
-      title: "Session방식 소셜 로그인 구현 + MongoDB 유저정보 저장",
+      title: "소셜 로그인 구현 + MongoDB 유저정보 저장",
       src: "/images/mainSliderItems/m03.png",
       content:
         "Next.js에서는 next-auth로 소셜 로그인을 간단하게 구현할 수 있다. MongoDB와 연동하여 회원가입, 로그인 기능을 구현해보자.",
@@ -40,29 +40,31 @@ const Slider = () => {
   ];
 
   return (
-    <Swiper
-      spaceBetween={30}
-      pagination={{
-        clickable: true,
-      }}
-      autoplay={{
-        delay: 4500,
-        disableOnInteraction: false,
-      }}
-      modules={[Pagination, Autoplay]}
-      className={styles.swiper}
-    >
-      {slideItem.map((item, index) => {
-        const slideItemProps: SlideItemProps = {
-          ...item,
-        };
-        return (
-          <SwiperSlide key={index}>
-            <SliderItem slideItemProps={slideItemProps} />
-          </SwiperSlide>
-        );
-      })}
-    </Swiper>
+    <div className={styles.sliderContainer}>
+      <Swiper
+        spaceBetween={30}
+        pagination={{
+          clickable: true,
+        }}
+        autoplay={{
+          delay: 4500,
+          disableOnInteraction: false,
+        }}
+        modules={[Pagination, Autoplay]}
+        className={styles.swiper}
+      >
+        {slideItem.map((item, index) => {
+          const slideItemProps: SlideItemProps = {
+            ...item,
+          };
+          return (
+            <SwiperSlide key={index}>
+              <SliderItem slideItemProps={slideItemProps} />
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </div>
   );
 };
 
