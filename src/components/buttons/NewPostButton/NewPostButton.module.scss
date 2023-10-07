@@ -1,0 +1,10 @@
+@import "@/styles/mixins/notice.scss";
+
+.newPostButton {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  @include noticeHover(); // hover 시 notice를 나타나게 합니다.
+}

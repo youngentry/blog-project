@@ -1,0 +1,12 @@
+// hover 시 notice 창을 표시합니다.
+@mixin noticeHover() {
+  .notice {
+    display: none;
+  }
+
+  &:hover {
+    .notice {
+      display: block;
+    }
+  }
+}
