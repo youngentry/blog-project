@@ -44,40 +44,38 @@ const NavHead = async () => {
             <Image
               className={styles.profile}
               alt="user thumbnail"
-              src="/images/thumbnail/fox.jpg"
+              src={`/images/thumbnail/${session ? "fox.jpg" : "guest.jpg"}`}
               width={40}
               height={40}
             ></Image>
             <ul className={styles.menuList}>
-              <li className={`${styles.accountSetting} ${styles.menuItem}`}>
-                {session ? (
-                  <>
+              {session && (
+                <>
+                  <li className={`${styles.accountSetting} ${styles.menuItem}`}>
                     <strong>{session.user.name}</strong>
                     <p className={styles.userId}>
                       <span>{session.user.email}</span>
                       <button>계정 관리</button>
                     </p>
-                  </>
-                ) : (
-                  "게스트"
-                )}
-              </li>
-              <li className={`${styles.myList} `}>
-                <ul className={`${styles.myListItemBox} ${styles.menuItem}`}>
-                  <li className={styles.myListItem}>
-                    <p>좋아요 한 게시물</p>
-                    <i>
-                      <BsChevronRight />
-                    </i>
                   </li>
-                  <li className={styles.myListItem}>
-                    <p>작성한 댓글</p>
-                    <i>
-                      <BsChevronRight />
-                    </i>
+                  <li className={`${styles.myList} `}>
+                    <ul className={`${styles.myListItemBox} ${styles.menuItem}`}>
+                      <li className={styles.myListItem}>
+                        <p>좋아요 한 게시물</p>
+                        <i>
+                          <BsChevronRight />
+                        </i>
+                      </li>
+                      <li className={styles.myListItem}>
+                        <p>작성한 댓글</p>
+                        <i>
+                          <BsChevronRight />
+                        </i>
+                      </li>
+                    </ul>
                   </li>
-                </ul>
-              </li>
+                </>
+              )}
               <li className={`${styles.logout} ${styles.menuItem}`}>
                 {session ? <LogOutButton /> : <LogInButton />}
               </li>

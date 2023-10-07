@@ -91,7 +91,6 @@
           bottom: 0;
           right: 0;
           transform: translateY(calc(100% + 20px));
-          min-width: 10rem;
           font-size: var(--ft-15);
           background: #fff;
           border: 1px solid #ddd;
@@ -118,9 +117,11 @@
               font-size: var(--ft-13);
 
               span {
+                margin-right: 1rem;
                 color: #a0a0a0;
               }
               button {
+                white-space: nowrap;
                 font-weight: 500;
                 background: none;
                 border: none;
