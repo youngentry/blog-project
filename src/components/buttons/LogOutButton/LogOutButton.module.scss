@@ -1,0 +1,10 @@
+@import "@/styles/mixins/hover.scss";
+
+.logout {
+  display: flex;
+  background: none;
+  border: none;
+  font-size: var(--ft-13);
+  color: #a0a0a0;
+  @include hoverText();
+}
