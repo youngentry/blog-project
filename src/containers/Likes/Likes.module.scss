@@ -1,0 +1,23 @@
+.container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: var(--w-manage);
+
+  .dates {
+    .oneDate {
+      .likedDate {
+        padding: 1rem;
+        font-size: var(--ft-19);
+        background: #f8f9fa;
+        border-radius: 0.5rem;
+      }
+      .postList {
+        margin-bottom: 1rem;
+        padding: 1.5rem;
+        border-bottom: var(--1-solid);
+      }
+    }
+  }
+}

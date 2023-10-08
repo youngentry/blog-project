@@ -2,7 +2,7 @@
 
 .container {
   margin: var(--m-post);
-  padding: var(--p-post);
+  padding: 0 2.5rem;
   @include flex(row, flex-start, center, start);
   width: var(--w-post);
 

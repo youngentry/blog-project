@@ -1,0 +1,34 @@
+.container {
+  .itemHead {
+    display: flex;
+    justify-content: space-between;
+
+    .author {
+      margin-bottom: 1rem;
+      font-size: var(--ft-17);
+      font-weight: 700;
+    }
+    .deleteLikeButton {
+    }
+  }
+  .itemBody {
+    .description {
+      display: flex;
+      justify-content: space-between;
+      .title {
+        margin-bottom: 1rem;
+        font-size: var(--ft-19);
+      }
+      .postImage {
+        width: 8rem;
+        height: 6rem;
+        border-radius: 0.5rem;
+        background: #f00;
+      }
+    }
+    .time {
+      font-size: var(--ft-15);
+      color: var(--color-text-week);
+    }
+  }
+}
