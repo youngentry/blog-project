@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import styles from "./BlogFunctions.module.scss";
 import NewPostButton from "@/components/buttons/NewPostButton/NewPostButton";
 import SearchPostButton from "@/components/buttons/SearchPostButton/SearchPostButton";

@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./UserMenu.module.scss";
 import UserProfile from "@/components/UserProfile/UserProfile";
 import { BsChevronRight } from "react-icons/bs";
 import LogOutButton from "@/components/buttons/LogOutButton/LogOutButton";
 import LogInButton from "@/components/buttons/LogInButton/LogInButton";
 import Notice from "@/components/notices/Notice";
+import useClickOutside from "@/hooks/useClickOutside";
 
 /**
  * 블로그 유저 메뉴 컴포넌트입니다.
@@ -23,21 +24,8 @@ const UserMenu = ({ session }: { session: UserSessionData | null }) => {
     setIsMenuVisible(!isMenuVisible);
   };
 
-  useEffect(() => {
-    // 메뉴 모달의 바깥쪽을 눌렀을 때 창 닫기
-    const clickOutside = (e: MouseEvent) => {
-      console.log(e.target, "e.target");
-      if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
-        setIsMenuVisible(false);
-      }
-    };
-    document.addEventListener("mousedown", clickOutside);
-
-    // 컴포넌트 해제되면 이벤트 삭제
-    return () => {
-      document.removeEventListener("mousedown", clickOutside);
-    };
-  }, [isMenuVisible]);
+  // 메뉴 모달의 바깥쪽을 눌렀을 때 창 닫기
+  useClickOutside(userMenuRef, setIsMenuVisible, false);
 
   return (
     <div className={styles.userMenus} ref={userMenuRef}>
