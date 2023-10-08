@@ -15,8 +15,8 @@ const BlogFunctions = async () => {
 
   return (
     <div className={styles.blogFunctions}>
-      <SearchPostButton />
-      <NewPostButton />
+      <SearchPostButton boxPosition="right" />
+      {session && <NewPostButton />}
       <UserMenus session={session} />
     </div>
   );

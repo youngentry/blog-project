@@ -12,7 +12,7 @@
     font-size: var(--ft-15);
     line-height: 1.5;
     border-radius: 10px;
-    @include hoverBG();
+    @include hoverBg();
 
     strong {
       display: inline-block;
@@ -26,8 +26,8 @@
       font-size: var(--ft-9);
       height: 100%;
       line-height: var(--ft-17);
-      color: #2466da;
-      border: 1px solid #2466da;
+      color: var(--color-blue-dark);
+      border: 1px solid var(--color-blue-dark);
       border-radius: 9px;
     }
 

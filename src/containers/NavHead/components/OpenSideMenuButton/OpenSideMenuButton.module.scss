@@ -1,18 +1,9 @@
+@import "@/styles/mixins/notice.scss";
+@import "@/styles/mixins/hover.scss";
+
 .container {
   .openMenuButton {
-    position: relative;
-    background: none;
-    border: none;
-    cursor: pointer;
-
-    .notice {
-      display: none;
-    }
-
-    &:hover {
-      .notice {
-        display: block;
-      }
-    }
+    @include hoverIcon();
+    @include noticeHover(); // hover 시 notice를 나타나게 합니다.
   }
 }

@@ -1,9 +1,9 @@
 .profile {
   border-radius: 50%;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-d);
   cursor: pointer;
 
   &:hover {
-    border: 1px solid #369;
+    border: 1px solid var(--color-blue-dark);
   }
 }

@@ -1,23 +1,5 @@
 :root {
-  --color-white: #ffffff;
-  --color-black: #000000;
-  --color-black-rgb: 0, 0, 0;
-  --color-gray-1: #111111;
-  --color-gray-2: #232323;
-  --color-gray-4: #4c4c4c;
-  --color-gray-4-rgb: 76, 76, 76;
-  --color-gray-7: #767676; /* Minimum WCAG AA Pass */
-  --color-gray-8: #8c8c8c; /* Fail to WCAG AA */
-  --color-gray-9: #999999;
-  --color-gray-a: #aaaaaa;
-  --color-gray-c: #cccccc;
-  --color-gray-d: #dddddd;
-  --color-gray-e: #eeeeee;
-  --color-gray-f: #f6f6f6;
-
   --color-bg: #f6f6f6;
-  --color-blue: #0071f0; /* Minimum WCAG AA Pass */
-  --color-blue-dark: #0053b3;
   --color-red: #eb0d00; /* Minimum WCAG AA Pass */
   --color-red-rgb: 235, 13, 0;
   --color-orange: #ff9500;
@@ -27,17 +9,34 @@
   --color-indigo: #5856d6;
   --color-purple: #af52de;
   --color-pink: #ff2d55;
-
   --color-em: #ff59e3;
 
+  --color-text-week: #a0a0a0;
   --color-border: #dddddd;
+
+  --color-0: #000;
+  --color-1: #111;
+  --color-2: #222;
+  --color-3: #333;
+  --color-4: #444;
+  --color-5: #555;
+  --color-6: #666;
+  --color-7: #777;
+  --color-8: #888;
+  --color-9: #999;
+  --color-d: #ddd;
+  --color-e: #eee;
+  --color-f: #fff;
+
+  --color-blue-hover: #dbe4ff;
+  --color-blue-dark: #2273ff;
 
   /* Sizes */
   --h-section-gap: 4rem; // section gap
   --w-max-page: 1366px; // page max width
 
   --w-nav-side: 12rem;
-  --h-nav-head: 2.5rem;
+  --h-nav-head: 2.8rem;
 
   --h-footer: 10rem;
 

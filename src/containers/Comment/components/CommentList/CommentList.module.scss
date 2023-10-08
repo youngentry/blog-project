@@ -22,7 +22,7 @@
   .commentItem {
     padding: 1rem;
     display: flex;
-    background: #ddd;
+    background: var(--color-d);
     border-radius: var(--br-30);
 
     .thumbnail {
@@ -42,7 +42,7 @@
           padding: 0.5rem;
           display: inline-block;
           border-radius: 1rem;
-          background: #eee;
+          background: #f00;
         }
 
         .editButton,
@@ -53,12 +53,12 @@
 
       .comment {
         padding: 1rem 0;
-        background: #fff;
+        background: var(--color-f);
       }
 
       .date {
         padding: 0.5rem 0;
-        background: #eee;
+        background: #f00;
       }
 
       .textarea {

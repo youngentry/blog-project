@@ -1,5 +1,7 @@
 // hover 시 notice 창을 표시합니다.
 @mixin noticeHover() {
+  position: relative;
+
   .notice {
     display: none;
   }

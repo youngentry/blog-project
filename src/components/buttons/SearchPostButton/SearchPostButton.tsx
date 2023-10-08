@@ -3,12 +3,12 @@ import styles from "./SearchPostButton.module.scss";
 import { BsSearch } from "react-icons/bs";
 import Notice from "@/components/notices/Notice";
 
-const SearchPostButton = () => {
+const SearchPostButton = ({ boxPosition }: { boxPosition: string }) => {
   return (
     <button className={styles.searchPostButton}>
       <BsSearch />
       <div className={styles.notice}>
-        <Notice boxPosition="right">게시물 검색기능은 개발 중입니다.</Notice>
+        <Notice boxPosition={boxPosition}>개발 중입니다.</Notice>
       </div>
     </button>
   );

@@ -39,7 +39,7 @@
       background: var(--color-gray-e);
       border-radius: var(--br-5);
       width: 100%;
-      @include hoverBG(var(--color-gray-d));
+      @include hoverBg(var(--color-d));
     }
   }
 }

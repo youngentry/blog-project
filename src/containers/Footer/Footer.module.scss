@@ -3,6 +3,6 @@
 .container {
   height: var(--h-footer);
   width: calc(100% - var(--w-nav-side));
-  background: rgba(0, 255, 0, 0.147);
+  background: #f00;
   @include flex(row, center, center, center);
 }

@@ -1,15 +1,21 @@
+"use client";
+
 import React from "react";
 import { BsPencil } from "react-icons/bs";
 import styles from "./NewPostButton.module.scss";
-import Notice from "@/components/notices/Notice";
+import { useRouter } from "next/navigation";
 
 const NewPostButton = () => {
+  const router = useRouter();
+
   return (
-    <button className={styles.newPostButton}>
+    <button
+      className={styles.newPostButton}
+      onClick={() => {
+        router.push("/manage/newpost");
+      }}
+    >
       <BsPencil />
-      <div className={styles.notice}>
-        <Notice boxPosition="right">글쓰기</Notice>
-      </div>
     </button>
   );
 };

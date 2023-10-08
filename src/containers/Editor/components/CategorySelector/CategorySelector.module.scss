@@ -3,22 +3,22 @@
 .categoryBox {
   position: relative;
   .selectedSubtitle {
-    @include hoverBG();
+    @include hoverBg();
     font-size: 1rem;
   }
 
   .categoryList {
     position: absolute;
     width: 100%;
-    background: #fff;
+    background: var(--color-f);
     z-index: 9999;
 
     .mainCategory {
       font-size: 1.25rem;
-      color: #555;
+      color: #f00;
     }
     .subCategory {
-      @include hoverBG();
+      @include hoverBg();
       font-size: 1rem;
       margin-left: 0.5rem;
     }

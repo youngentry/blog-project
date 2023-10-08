@@ -16,8 +16,8 @@
     width: 100%;
     height: 100%;
     line-height: 1.5;
-    color: #fff;
-    background: #000000cc;
+    color: var(--color-f);
+    background: #f00;
 
     .contents {
       position: absolute;
@@ -36,7 +36,7 @@
       .description {
         margin-bottom: 0.85rem;
         font-size: 0.9vw;
-        color: #ddd;
+        color: var(--color-d);
       }
 
       .linkBox {
@@ -47,7 +47,7 @@
         align-items: center;
 
         font-size: 1.4vw;
-        background: #369;
+        background: #f00;
         transition: 0.3s;
         border-radius: 1.5rem;
 
@@ -56,7 +56,7 @@
         }
 
         &:hover {
-          background: rgb(84, 149, 213);
+          background: #f0f;
         }
       }
     }

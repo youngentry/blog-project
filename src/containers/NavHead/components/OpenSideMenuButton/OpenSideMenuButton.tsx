@@ -12,7 +12,7 @@ const OpenSideMenuButton = () => {
       <button className={styles.openMenuButton}>
         <BsGrid />
         <div className={styles.notice}>
-          <Notice boxPosition="left">사이드 메뉴 열기</Notice>
+          <Notice boxPosition="left">개발 중입니다</Notice>
         </div>
       </button>
     </div>

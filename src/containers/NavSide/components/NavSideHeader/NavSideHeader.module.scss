@@ -1,22 +1,26 @@
 .container {
   margin-bottom: 1rem;
+  padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
   text-align: center;
-  padding-bottom: 1rem;
   width: 100%;
-  border-bottom: 1px solid #ddd;
+  font-size: var(--ft-17);
+  border-bottom: 1px solid var(--color-d);
 
   h2 {
-    padding: 0.5rem 0;
-    font-size: var(--ft-17);
+    padding: 1rem 0;
     font-weight: 700;
   }
 
   .buttons {
+    margin: 0 1rem;
+    padding: 0.5rem 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: var(--gap-10);
+    gap: var(--gap-25);
+    border-radius: 1.5rem;
+    box-shadow: 0 0 3px var(--color-text-week);
   }
 }
