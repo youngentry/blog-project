@@ -13,7 +13,7 @@ interface CommentProps {
 }
 
 const Comment = ({ title, postId, userEmail, postCommentCount, setPostCommentCount }: CommentProps) => {
-  const [newUpdate, setNewUpdate] = useState<boolean>(false);
+  const [newUpdate, setNewUpdate] = useState<boolean>(false); // 댓글 변경 시 컴포넌트 재렌더링에 이용될 의존성
 
   const commentListProps = {
     postId,

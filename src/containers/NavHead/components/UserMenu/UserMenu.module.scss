@@ -69,8 +69,12 @@
         .myListItem {
           display: flex;
           justify-content: space-between;
+          white-space: nowrap;
           @include hoverText();
 
+          p {
+            margin-right: 0.5rem;
+          }
           i {
             color: var(--color-text-week);
           }

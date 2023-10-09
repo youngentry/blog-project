@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import styles from "./UserMenu.module.scss";
 import UserProfile from "@/components/UserProfile/UserProfile";
+import styles from "./UserMenu.module.scss";
 import { BsChevronRight } from "react-icons/bs";
 import LogOutButton from "@/components/buttons/LogOutButton/LogOutButton";
 import LogInButton from "@/components/buttons/LogInButton/LogInButton";

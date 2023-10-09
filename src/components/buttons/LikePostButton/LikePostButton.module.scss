@@ -1,0 +1,15 @@
+@import "@/styles/mixins/hover.scss";
+
+.likePost {
+  padding: 0.25rem 0.45rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--ft-15);
+  white-space: nowrap;
+  color: var(--color-0);
+  background: none;
+  border: var(--1-solid);
+  border-radius: 0.25rem;
+  @include hoverBg();
+}

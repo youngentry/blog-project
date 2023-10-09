@@ -15,9 +15,8 @@ import { useEffect, useState } from "react";
 
 // 게시물 하나의 컴포넌트입니다.
 const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) => {
-  const [postData, setPostData] = useState<Post | false>();
-
-  const [postCommentCount, setPostCommentCount] = useState<number>(0);
+  const [postData, setPostData] = useState<Post | false>(); // 게시물 데이터
+  const [postCommentCount, setPostCommentCount] = useState<number>(0); // 댓글 갯수
 
   useEffect(() => {
     (async () => {

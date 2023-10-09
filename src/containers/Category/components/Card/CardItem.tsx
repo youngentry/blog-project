@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Card } from "@/types/post";
 import { getDateForm } from "@/utils/getDateForm";
-import LikePostButton from "@/components/buttons/LikePostButton";
+import LikePostButton from "@/components/buttons/LikePostButton/LikePostButton";
 
 // category (게시물 목록)페이지에서 하나의 게시물 카드입니다.
 const CardItem = ({ data }: { data: Card }) => {

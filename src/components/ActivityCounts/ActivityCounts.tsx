@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ActivityCounts.module.scss";
-import LikePostButton from "../buttons/LikePostButton";
+import LikePostButton from "../buttons/LikePostButton/LikePostButton";
+import { BsChatDots } from "react-icons/bs";
 
 const ActivityCounts = ({
   postId,
@@ -15,7 +16,10 @@ const ActivityCounts = ({
 }) => {
   return (
     <div className={styles.counts}>
-      <div>💬 {postCommentCount}</div>
+      <div>
+        <BsChatDots />
+        {postCommentCount}
+      </div>
       <LikePostButton likes={likes} postId={postId} userEmail={userEmail} />
     </div>
   );

@@ -16,6 +16,7 @@ interface Card {
 
 // 게시물
 interface Post extends Card {
+  _id?: string;
   contents: string;
   email: string;
 }

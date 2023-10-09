@@ -1,21 +1,27 @@
 @import "@/styles/mixins/hover";
 
 .container {
+  min-width: 40rem;
   .itemHead {
     margin-bottom: 1.5rem;
     display: flex;
     text-align: center;
     justify-content: space-between;
 
-    .title {
+    .head {
       display: flex;
       align-items: center;
-      color: var(--color-blue-dark);
+      text-align: center;
+      justify-content: center;
       font-size: var(--ft-17);
 
       .postLink {
-        margin-right: 0.25rem;
+        color: var(--color-blue-dark);
+        display: flex;
         @include hoverText();
+        .title {
+          margin-right: 0.25rem;
+        }
       }
 
       span {
@@ -24,19 +30,20 @@
         font-weight: 400;
       }
     }
-    .deleteLikeButton {
-      margin: 0;
-      padding: 0;
-      @include hoverText();
+    .likeButton {
     }
   }
   .itemBody {
     .description {
       display: flex;
       justify-content: space-between;
-      .comment {
+      .contents {
         margin-bottom: 0.5rem;
         font-size: var(--ft-19);
+      }
+
+      .image {
+        border-radius: 0.5rem;
       }
     }
     .time {

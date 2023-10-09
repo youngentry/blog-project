@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "./ManageComments.module.scss";
 import ManageCommentItem from "./components/ManageCommentItem/ManageCommentItem";
-import useComments, { UseCommentsInterface } from "@/hooks/useComments";
+import useManageComments, { useManageCommentsInterface } from "@/hooks/useManageComments";
 import { Comment } from "@/types/post";
 import { getDateForm } from "@/utils/getDateForm";
 
@@ -12,18 +12,19 @@ interface ManageCommentsInterface {
 }
 
 const ManageComments = () => {
-  const { comments, setComments }: UseCommentsInterface = useComments();
+  // 댓글 목록 state
+  const { comments, setComments }: useManageCommentsInterface = useManageComments();
 
   /**
    * 날짜별로 comment data 반환
    * @param comments
-   * @returns {ManageCommentsInterface} ex) ['2023.10.05']
+   * @returns {ManageCommentsInterface}
    */
   const getManageCommentData = (comments: Comment[]) => {
-    const result: any = {};
+    const result: ManageCommentsInterface = {};
 
     comments.forEach((comment) => {
-      const date = getDateForm(comment.date);
+      const date: string = getDateForm(comment.date);
       result[date] = result[date] ? [...result[date], comment] : [comment];
     });
 
@@ -31,11 +32,14 @@ const ManageComments = () => {
   };
 
   const manageCommentData: ManageCommentsInterface = getManageCommentData(comments);
-  const dates = Object.keys(manageCommentData);
-  const eachDayComments = Object.values(manageCommentData);
+  const dates: string[] = Object.keys(manageCommentData); // 날짜 배열
+  // 날짜 인덱스별로 좋아요한 댓글이 담긴 배열 [[]]
+  // n은 날짜 배열 index일 때. n=0 일 경우 [[comment1, comment2],[comment3, comment4]][0]과 같은 형태로 컴포넌트에 댓글 배열이 전달됩니다.
+  const eachDayComments: Comment[][] = Object.values(manageCommentData);
 
   return (
     <div className={styles.container}>
+      <h2 className={styles.manageTitle}>내가 작성한 댓글</h2>
       {comments.length ? (
         dates.map((date: string, index: number) => {
           const comments = eachDayComments[index];

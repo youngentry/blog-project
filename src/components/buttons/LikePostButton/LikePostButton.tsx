@@ -2,13 +2,17 @@
 
 import { postLikeCountData } from "@/services/postsFetch";
 import React, { useState } from "react";
+import { BsFillHeartFill, BsHeart } from "react-icons/bs";
+import styles from "./LikePostButton.module.scss";
 
 // 게시물 좋아요 버튼을 클릭 요청.
 const LikePostButton = ({
+  className,
   likes,
   postId,
   userEmail,
 }: {
+  className?: string;
   likes: string[];
   postId: string;
   userEmail?: string;
@@ -39,8 +43,8 @@ const LikePostButton = ({
   };
 
   return (
-    <button onClick={() => handleClickLikePostButton()}>
-      {isLiked ? "❤" : "🤍"} {likeCount}
+    <button className={`${styles.likePost} ${className}`} onClick={() => handleClickLikePostButton()}>
+      {isLiked ? <BsFillHeartFill /> : <BsHeart />} {likeCount}
     </button>
   );
 };

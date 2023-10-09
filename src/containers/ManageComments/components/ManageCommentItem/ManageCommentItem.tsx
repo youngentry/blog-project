@@ -6,10 +6,10 @@ import { Comment } from "@/types/post";
 import { getDateForm } from "@/utils/getDateForm";
 import Link from "next/link";
 import { BsArrowUpRightSquare } from "react-icons/bs";
-import { UseCommentsInterface } from "@/hooks/useComments";
+import { useManageCommentsInterface } from "@/hooks/useManageComments";
 import { deleteCommentApi } from "@/services/commentsFetch";
 
-const ManageCommentItem = ({ comments, setComments }: UseCommentsInterface) => {
+const ManageCommentItem = ({ comments, setComments }: useManageCommentsInterface) => {
   // 삭제 버튼 클릭 이벤트
   const handleClickDeleteButton = async (postId: string, _id: string) => {
     // 댓글 삭제 확인
