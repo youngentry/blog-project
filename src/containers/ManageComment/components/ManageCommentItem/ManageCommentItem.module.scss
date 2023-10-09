@@ -1,0 +1,50 @@
+@import "@/styles/mixins/hover";
+
+.container {
+  .itemHead {
+    margin-bottom: 1.5rem;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+
+    .title {
+      display: flex;
+      align-items: center;
+      color: var(--color-blue-dark);
+      font-size: var(--ft-17);
+
+      .postLink {
+        margin-right: 0.25rem;
+        @include hoverText();
+      }
+
+      span {
+        margin-right: 0.25rem;
+        color: var(--color-0);
+        font-weight: 400;
+      }
+    }
+    .deleteLikeButton {
+      margin: 0;
+      padding: 0;
+      @include hoverText();
+    }
+  }
+  .itemBody {
+    .description {
+      display: flex;
+      justify-content: space-between;
+      .comment {
+        margin-bottom: 0.5rem;
+        font-size: var(--ft-19);
+      }
+    }
+    .time {
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      font-size: var(--ft-15);
+      color: var(--color-text-week);
+      border-bottom: var(--1-solid);
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { connectDB } from "@/utils/db/db";
 import { hash } from "bcrypt";
-import { SIGN_UP_FORM_LENGTH } from "@/constants/commentConstants";
+import { SIGN_UP_FORM_LENGTH } from "@/constants/COMMENT_LENGTH";
 import { NextRequest, NextResponse } from "next/server";
 
 // 회원 가입에 필요한 형태를 갖추었는지 조건을 검사하고 문제가 없다면 회원 정보를 DB에 저장합니다.

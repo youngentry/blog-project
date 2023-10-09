@@ -1,6 +1,6 @@
 import MainPage from "@/containers/MainPage/MainPage";
 
-const Home = async () => {
+const Home = () => {
   return <MainPage />;
 };
 

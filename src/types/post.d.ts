@@ -29,6 +29,7 @@ interface PostContents {
 
 // 댓글 입력 폼
 interface CommentForm {
+  title: string;
   nickname: string;
   password: string;
   comment: string;
@@ -55,5 +56,6 @@ interface CommentListProps {
 
 // 댓글 CommentFormProps 컴포넌트 프롭스 타입
 interface CommentFormProps extends CommentListProps {
+  title: string;
   setNewUpdate: Dispatch<SetStateAction<boolean>>;
 }

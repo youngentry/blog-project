@@ -1,17 +1,13 @@
-const baseUrl =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:3000/api"
-    : "https://blog-project-rose.vercel.app/api";
-
 import { Card, Post, PostContents } from "@/types/post";
 import { setFetchOptions } from "./fetchOptions";
+import BASE_URL from "@/constants/BASE_URL";
 
 /**
  * 게시물 카드 리스트를 조회합니다.
  * @returns {Card[]} commentsData or false
  */
 export const getCardsData = async ({ subtitle }: { subtitle: string }) => {
-  const url = `${baseUrl}/category?subtitle=${subtitle}`;
+  const url = `${BASE_URL}/category?subtitle=${subtitle}`;
   const options = setFetchOptions("GET");
 
   // 요청 결과 반환
@@ -26,7 +22,7 @@ export const getCardsData = async ({ subtitle }: { subtitle: string }) => {
  * @returns {Post} commentsData or false
  */
 export const getPostData = async (postId: string) => {
-  const url = `${baseUrl}/posts/${postId}`;
+  const url = `${BASE_URL}/posts/${postId}`;
   const options = setFetchOptions("GET");
 
   // 요청 결과 반환
@@ -40,7 +36,7 @@ export const getPostData = async (postId: string) => {
  * @returns {boolean} 삭제 결과
  */
 export const editPostData = async (postId: string, editContents: PostContents) => {
-  const url = `${baseUrl}/manage/newpost/${postId}`;
+  const url = `${BASE_URL}/manage/newpost/${postId}`;
   const options = setFetchOptions("POST", editContents);
 
   // "redirect 경로"로 쓰일 "새로운 게시물 id" 또는 "수정한 게시물 id"를 반환합니다.
@@ -57,7 +53,7 @@ export const editPostData = async (postId: string, editContents: PostContents) =
  * @returns {boolean} 삭제 결과
  */
 export const deletePostData = async (postId: string) => {
-  const url = `${baseUrl}/manage/posts/${postId}`;
+  const url = `${BASE_URL}/manage/posts/${postId}`;
   const options = setFetchOptions("DELETE");
 
   // 요청 결과 반환
@@ -70,7 +66,7 @@ export const deletePostData = async (postId: string) => {
  * @returns {boolean} 삭제 결과
  */
 export const postLikeCountData = async (postId: string, currentLikeCount: number) => {
-  const url = `${baseUrl}/posts/${postId}/likes`;
+  const url = `${BASE_URL}/posts/${postId}/likes`;
   const options = setFetchOptions("PATCH", { currentLikeCount });
 
   // 좋아요 버튼 클릭 결과를 반환합니다.

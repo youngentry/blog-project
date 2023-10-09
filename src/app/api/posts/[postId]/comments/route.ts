@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 import { JWT, getToken } from "next-auth/jwt";
 import { hash } from "bcrypt";
 import { checkBlogAdmin } from "@/utils/sessionCheck/checkBlogAdmin";
-import { COMMENT_FORM_LENGTH } from "@/constants/commentConstants";
+import { COMMENT_FORM_LENGTH } from "@/constants/COMMENT_LENGTH";
 import { NextRequest, NextResponse } from "next/server";
 
 // 댓글 정보를 불러오는 API입니다.
@@ -36,7 +36,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
   const { MIN_NICKNAME, MIN_PASSWORD, MIN_COMMENT, MAX_NICKNAME, MAX_PASSWORD, MAX_COMMENT } =
     COMMENT_FORM_LENGTH;
 
-  let { nickname, password, comment }: CommentForm = data;
+  let { nickname, password, comment, title }: CommentForm = data;
 
   // nickname또는 password를 입력했는지 검사합니다.
   if (!token && (nickname.length < MIN_NICKNAME || password.length < MIN_PASSWORD)) {
@@ -71,6 +71,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
 
   // DB에 저장할 데이터
   const saveData: Comment = {
+    title,
     parentId: Number(postId), // 게시물 번호
     nickname: token ? (token.name as string) : nickname, // 작성자 닉네임
     author: token ? (token.email as string) : "", // 로그인 유저인 경우에는 유저 email을 저장

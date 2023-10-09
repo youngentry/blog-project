@@ -75,6 +75,7 @@ const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) 
           userEmail={userEmail}
         />
         <Comment
+          title={title}
           postId={postId}
           userEmail={userEmail}
           postCommentCount={postCommentCount}

@@ -5,13 +5,14 @@ import CommentForm from "./components/CommentForm/CommentForm";
 import CommentList from "./components/CommentList/CommentList";
 
 interface CommentProps {
+  title: string;
   postId: string;
   userEmail: string;
   postCommentCount: number;
   setPostCommentCount: Dispatch<SetStateAction<number>>;
 }
 
-const Comment = ({ postId, userEmail, postCommentCount, setPostCommentCount }: CommentProps) => {
+const Comment = ({ title, postId, userEmail, postCommentCount, setPostCommentCount }: CommentProps) => {
   const [newUpdate, setNewUpdate] = useState<boolean>(false);
 
   const commentListProps = {
@@ -24,6 +25,7 @@ const Comment = ({ postId, userEmail, postCommentCount, setPostCommentCount }: C
 
   const commentFormProps = {
     ...commentListProps,
+    title,
     setNewUpdate,
   };
 

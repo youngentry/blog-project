@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import styles from "./CommentForm.module.scss";
 import { CommentFormProps, CommentForm } from "@/types/post";
-import { COMMENT_FORM_LENGTH } from "@/constants/commentConstants";
+import { COMMENT_FORM_LENGTH } from "@/constants/COMMENT_LENGTH";
 import {
   CustomInput,
   CustomTextarea,
@@ -14,6 +14,7 @@ import { postCommentApi } from "@/services/commentsFetch";
 // 댓글 입력 폼입니다.
 // 비로그인 상태에서는(userEmail이 존재하지 않을 경우에) nickname, password input이 나타납니다.
 const CommentForm = ({
+  title,
   postId,
   userEmail,
   newUpdate,
@@ -46,7 +47,7 @@ const CommentForm = ({
   };
 
   // 댓글 작성
-  const submitComment = async (e: React.FormEvent<HTMLFormElement>) => {
+  const submitComment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // input이 유효한지 검사합니다.
@@ -55,7 +56,7 @@ const CommentForm = ({
       return false;
     }
 
-    const commentForm: CommentForm = { nickname, password, comment };
+    const commentForm: CommentForm = { nickname, password, comment, title };
 
     try {
       // POST 요청을 보냅니다.

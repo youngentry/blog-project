@@ -1,12 +1,12 @@
-import Likes from "@/containers/Likes/Likes";
+import ManageComments from "@/containers/ManageComment/ManageComments";
 import React from "react";
 
-const ManageLikesRouter = () => {
+const ManageCommentRouter = () => {
   return (
     <div>
-      <Likes />
+      <ManageComments />
     </div>
   );
 };
 
-export default ManageLikesRouter;
+export default ManageCommentRouter;

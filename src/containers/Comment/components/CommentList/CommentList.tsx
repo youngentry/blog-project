@@ -5,7 +5,7 @@ import styles from "./CommentList.module.scss";
 import { CommentListProps, Comment } from "@/types/post";
 import { getDateForm } from "@/utils/getDateForm";
 import { checkBlogAdmin } from "@/utils/sessionCheck/checkBlogAdmin";
-import { COMMENT_FORM_LENGTH } from "@/constants/commentConstants";
+import { COMMENT_FORM_LENGTH } from "@/constants/COMMENT_LENGTH";
 import { CustomInput, CustomTextarea } from "@/components/inputs/CustomInputs/CustomInputs";
 import {
   deleteCommentApi,
@@ -13,6 +13,7 @@ import {
   patchCommentApi,
   postGuestCommentDeletionApi,
 } from "@/services/commentsFetch";
+import useCommentList from "@/hooks/useCommentList";
 
 const CommentList = ({
   postId,
@@ -23,8 +24,6 @@ const CommentList = ({
 }: CommentListProps) => {
   const { MAX_PASSWORD, MAX_COMMENT } = COMMENT_FORM_LENGTH;
 
-  const [commentList, setCommentList] = useState<Comment[]>([]); // API 요청하여 조회할 댓글 목록
-
   const [editComment, setEditComment] = useState<string>(""); // 수정 input
   const [editingCommentId, setEditingCommentId] = useState<string>(""); // 수정중인 댓글 ObjectId
 
@@ -32,22 +31,7 @@ const CommentList = ({
   const [deletePassword, setDeletePassword] = useState<string>(""); // 게스트 댓글 비밀번호 input
   const [deletingCommentId, setDeletingCommentId] = useState<string>(""); // 수정중인 댓글 ObjectId
 
-  // 게시물의 댓글을 조회하여 state에 저장합니다.
-  useEffect(() => {
-    (async () => {
-      try {
-        // GET 요청을 보냅니다.
-        const res: Comment[] | false = await getCommentsDataApi(postId);
-
-        // 작성 요청 성공 시 불러온 댓글을 state에 저장합니다.
-        if (res) {
-          setCommentList(res);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    })();
-  }, [postId, newUpdate]);
+  const { commentList, setCommentList } = useCommentList(postId, newUpdate);
 
   // 수정 확인 버튼 클릭 이벤트
   const handleClickConfirmEditButton = async (_id: string) => {
@@ -172,68 +156,71 @@ const CommentList = ({
 
   return (
     <ul className={styles.commentList}>
-      {commentList.map((commentItem: Comment) => {
-        let { comment, date, isLoggedIn, nickname, author, thumbnail, _id } = commentItem;
-        date = new Date(date); // YYYY.MM.DD 형태로 변환하기 위해 Date 객체로 만듭니다.
-        const commentId = String(_id); // key에 할당하기 위해 직렬화합니다.
+      {commentList &&
+        commentList.map((commentItem: Comment) => {
+          let { comment, date, isLoggedIn, nickname, author, thumbnail, _id } = commentItem;
+          date = new Date(date); // YYYY.MM.DD 형태로 변환하기 위해 Date 객체로 만듭니다.
+          const commentId = String(_id); // key에 할당하기 위해 직렬화합니다.
 
-        // 댓글 수정 및 삭제 권한이 있는지 여부에 따라 삭제 버튼이 나타나도록 합니다.
-        const isSameCommenter: boolean = isLoggedIn && userEmail === author; // 동일한 댓글 작성자
-        const isBlogAdmin: boolean = checkBlogAdmin(userEmail); // 블로그 관리자
-        const canEdit: boolean = isSameCommenter || !isLoggedIn || isBlogAdmin; // 수정 권한
-        const isVisibleConfirmDeletePassword =
-          deletingCommentId === commentId && checkingGuestPassword && !isLoggedIn; // 게스트 댓글 삭제버튼 visible 여부
-        return (
-          <li key={commentId} className={`${styles.commentItem}`}>
-            <div className={styles.thumbnail}>{isLoggedIn ? "✅" : "😀"}</div>
-            <div className={styles.content}>
-              <div className={styles.header}>
-                <div className={styles.nickname}>{nickname}</div>
-                {canEdit && (
-                  <div>
-                    <button
-                      className={`${styles.editButton} ${!isLoggedIn && "hide"}`}
-                      onClick={() => handleClickEditButton(commentId, comment)}
-                    >
-                      수정
-                    </button>
-                    <button
-                      className={styles.deleteButton}
-                      onClick={
-                        isSameCommenter || isBlogAdmin
-                          ? () => handleClickDeleteButton(commentId)
-                          : () => handleClickGuestDeleteButton(commentId)
-                      }
-                    >
-                      삭제
-                    </button>
-                    <div
-                      className={`${styles.guestConfirm} ${isVisibleConfirmDeletePassword && "visible"}`}
-                    >
-                      <CustomInput placeholder="비밀번호" {...deletePasswordInputProps} />
-                      <button onClick={() => handleClickConfirmGuestPassword(commentId)}>확인</button>
-                      <button onClick={() => cancelCheckingPassword()}>취소</button>
+          // 댓글 수정 및 삭제 권한이 있는지 여부에 따라 삭제 버튼이 나타나도록 합니다.
+          const isSameCommenter: boolean = isLoggedIn && userEmail === author; // 동일한 댓글 작성자
+          const isBlogAdmin: boolean = checkBlogAdmin(userEmail); // 블로그 관리자
+          const canEdit: boolean = isSameCommenter || !isLoggedIn || isBlogAdmin; // 수정 권한
+          const isVisibleConfirmDeletePassword =
+            deletingCommentId === commentId && checkingGuestPassword && !isLoggedIn; // 게스트 댓글 삭제버튼 visible 여부
+          return (
+            <li key={commentId} className={`${styles.commentItem}`}>
+              <div className={styles.thumbnail}>{isLoggedIn ? "✅" : "😀"}</div>
+              <div className={styles.content}>
+                <div className={styles.header}>
+                  <div className={styles.nickname}>{nickname}</div>
+                  {canEdit && (
+                    <div>
+                      <button
+                        className={`${styles.editButton} ${!isLoggedIn && "hide"}`}
+                        onClick={() => handleClickEditButton(commentId, comment)}
+                      >
+                        수정
+                      </button>
+                      <button
+                        className={styles.deleteButton}
+                        onClick={
+                          isSameCommenter || isBlogAdmin
+                            ? () => handleClickDeleteButton(commentId)
+                            : () => handleClickGuestDeleteButton(commentId)
+                        }
+                      >
+                        삭제
+                      </button>
+                      <div
+                        className={`${styles.guestConfirm} ${
+                          isVisibleConfirmDeletePassword && "visible"
+                        }`}
+                      >
+                        <CustomInput placeholder="비밀번호" {...deletePasswordInputProps} />
+                        <button onClick={() => handleClickConfirmGuestPassword(commentId)}>확인</button>
+                        <button onClick={() => cancelCheckingPassword()}>취소</button>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
+                <div className={`${styles.body} ${editingCommentId === commentId && "hide"}`}>
+                  <p className={`${styles.comment} `}>{comment}</p>
+                  <p className={styles.date}>{getDateForm(date, true)}</p>
+                </div>
+                <div className={`${styles.editForm} ${editingCommentId === commentId && "visible"}`}>
+                  <CustomTextarea
+                    className={`${styles.textarea}`}
+                    placeholder="댓글을 입력하세요."
+                    {...editCommentInputProps}
+                  />
+                  <button onClick={() => cancelEdit()}>취소</button>
+                  <button onClick={() => handleClickConfirmEditButton(commentId)}>확인</button>
+                </div>
               </div>
-              <div className={`${styles.body} ${editingCommentId === commentId && "hide"}`}>
-                <p className={`${styles.comment} `}>{comment}</p>
-                <p className={styles.date}>{getDateForm(date, true)}</p>
-              </div>
-              <div className={`${styles.editForm} ${editingCommentId === commentId && "visible"}`}>
-                <CustomTextarea
-                  className={`${styles.textarea}`}
-                  placeholder="댓글을 입력하세요."
-                  {...editCommentInputProps}
-                />
-                <button onClick={() => cancelEdit()}>취소</button>
-                <button onClick={() => handleClickConfirmEditButton(commentId)}>확인</button>
-              </div>
-            </div>
-          </li>
-        );
-      })}
+            </li>
+          );
+        })}
     </ul>
   );
 };
