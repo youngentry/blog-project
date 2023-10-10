@@ -46,7 +46,9 @@ const ManageComments = () => {
     <div className={styles.container}>
       <h2 className={styles.manageTitle}>내가 작성한 댓글</h2>
       <ManageDescription description={DESCRIPTION.MANAGE_COMMENTS} />
-      {comments.length ? (
+      {loading ? (
+        <Spin />
+      ) : comments.length ? (
         dates.map((date: string, index: number) => {
           const comments = eachDayComments[index];
           return (
@@ -60,8 +62,6 @@ const ManageComments = () => {
             </ul>
           );
         })
-      ) : loading ? (
-        <Spin />
       ) : (
         <NoItem
           h2={"아직 댓글을 작성한 게시물이 없습니다."}

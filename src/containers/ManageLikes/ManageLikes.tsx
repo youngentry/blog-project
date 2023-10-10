@@ -47,7 +47,9 @@ const ManageLikes = ({ email }: { email: string }) => {
       <h2 className={styles.manageTitle}>좋아요 한 게시물</h2>
       <ManageDescription description={DESCRIPTION.MANAGE_LIKES} />
 
-      {likes.length ? (
+      {loading ? (
+        <Spin />
+      ) : likes.length ? (
         dates.map((date: string, index: number) => {
           const likes = eachDayLikes[index];
           return (
@@ -61,8 +63,6 @@ const ManageLikes = ({ email }: { email: string }) => {
             </ul>
           );
         })
-      ) : loading ? (
-        <Spin />
       ) : (
         <NoItem
           h2={"아직 좋아요 한 게시물이 없습니다."}

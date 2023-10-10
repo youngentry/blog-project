@@ -21,6 +21,7 @@ const useLikes = () => {
         const likes = await getManageLikesApi();
         // 게시물 리스트를 state에 저장합니다.
         setLikes(likes);
+        setLoading(false);
       } catch (err) {
         console.error(err);
       }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const useLoading = () => {
-  const [loading, setLoading] = useState<boolean>(true); // 좋아요 한 게시물 리스트
+  const [loading, setLoading] = useState<boolean>(true); // 로딩 여부
 
   useEffect(() => {
     // 3초 후에 loading을 false로 설정

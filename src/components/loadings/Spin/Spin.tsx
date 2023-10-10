@@ -6,6 +6,7 @@ const Spin = () => {
   return (
     <div className={styles.loadingBox}>
       <Image src="/images/loadings/loading-s.gif" alt="loading" fill />
+      <p>로딩중입니다.</p>
     </div>
   );
 };

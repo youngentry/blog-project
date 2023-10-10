@@ -1,5 +1,10 @@
 .loadingBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   img {
+    margin-bottom: 0.5rem;
     position: relative !important;
     object-fit: cover;
     width: 100%;
