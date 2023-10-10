@@ -48,7 +48,7 @@ const ManageLikes = ({ email }: { email: string }) => {
       <ManageDescription description={DESCRIPTION.MANAGE_LIKES} />
 
       {loading ? (
-        <Spin />
+        <Spin size="s" />
       ) : likes.length ? (
         dates.map((date: string, index: number) => {
           const likes = eachDayLikes[index];

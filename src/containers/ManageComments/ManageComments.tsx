@@ -47,7 +47,7 @@ const ManageComments = () => {
       <h2 className={styles.manageTitle}>내가 작성한 댓글</h2>
       <ManageDescription description={DESCRIPTION.MANAGE_COMMENTS} />
       {loading ? (
-        <Spin />
+        <Spin size="s" />
       ) : comments.length ? (
         dates.map((date: string, index: number) => {
           const comments = eachDayComments[index];

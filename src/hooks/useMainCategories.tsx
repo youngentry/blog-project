@@ -4,15 +4,10 @@ import { getManageCommentsApi } from "@/services/manageFetch";
 import { Comment } from "@/types/post";
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import useLoading from "./useLoading";
+import { getCategoriesApi } from "@/services/categoryFetch";
 
-export interface useManageCommentsInterface {
-  comments: Comment[];
-  setComments: Dispatch<SetStateAction<any>>;
-  loading?: boolean;
-}
-
-const useManageComments = () => {
-  const [comments, setComments] = useState<Comment[]>([]); // 댓글 리스트
+const useMainCategories = () => {
+  const [mainCategories, setMainCategories] = useState([]);
   const { loading, setLoading } = useLoading();
 
   // 작성한 댓글 리스트를 조회하여 state에 저장합니다.
@@ -20,9 +15,9 @@ const useManageComments = () => {
     (async () => {
       try {
         // GET 요청을 보냅니다.
-        const comments = await getManageCommentsApi();
+        const mainCategories = await getCategoriesApi("main");
         // 불러온 댓글 리스트를 state에 저장합니다.
-        setComments(comments);
+        setMainCategories(mainCategories);
         setLoading(false);
       } catch (err) {
         console.error(err);
@@ -30,7 +25,7 @@ const useManageComments = () => {
     })();
   }, []);
 
-  return { comments, setComments, loading };
+  return { mainCategories, setMainCategories, loading };
 };
 
-export default useManageComments;
+export default useMainCategories;
