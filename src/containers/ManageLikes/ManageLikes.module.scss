@@ -1,5 +1,5 @@
 .container {
-  margin: 8rem auto 0 auto;
+  margin: 8rem auto 4rem auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,7 +7,7 @@
   max-width: var(--w-manage);
 
   .manageTitle {
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     font-size: var(--ft-36);
   }
 

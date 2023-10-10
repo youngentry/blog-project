@@ -2,6 +2,7 @@
 
 import { getManageLikesApi } from "@/services/manageFetch";
 import React, { useState, useEffect } from "react";
+import useLoading from "./useLoading";
 
 // export interface useManageCommentsInterface {
 //   likes: Comment[];
@@ -10,6 +11,7 @@ import React, { useState, useEffect } from "react";
 
 const useLikes = () => {
   const [likes, setLikes] = useState([]); // 좋아요 한 게시물 리스트
+  const { loading, setLoading } = useLoading();
 
   // 좋아요 한 게시물 리스트를 조회하여 state에 저장합니다.
   useEffect(() => {
@@ -25,7 +27,7 @@ const useLikes = () => {
     })();
   }, []);
 
-  return { likes, setLikes };
+  return { likes, setLikes, loading };
 };
 
 export default useLikes;

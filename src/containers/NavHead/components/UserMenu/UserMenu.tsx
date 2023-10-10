@@ -8,6 +8,7 @@ import LogOutButton from "@/components/buttons/LogOutButton/LogOutButton";
 import LogInButton from "@/components/buttons/LogInButton/LogInButton";
 import Notice from "@/components/notices/Notice";
 import useClickOutside from "@/hooks/useClickOutside";
+import Link from "next/link";
 
 /**
  * 블로그 유저 메뉴 컴포넌트입니다.
@@ -50,13 +51,13 @@ const UserMenu = ({ session }: { session: UserSessionData | null }) => {
             <li className={`${styles.myList} `}>
               <ul className={`${styles.myListItemBox} ${styles.menuItem}`}>
                 <li className={styles.myListItem}>
-                  <p>좋아요 한 게시물</p>
+                  <Link href="/manage/likes">좋아요 한 게시물</Link>
                   <i>
                     <BsChevronRight />
                   </i>
                 </li>
                 <li className={styles.myListItem}>
-                  <p>작성한 댓글</p>
+                  <Link href="/manage/comments">작성한 댓글</Link>
                   <i>
                     <BsChevronRight />
                   </i>
