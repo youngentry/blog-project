@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import styles from "./CommentList.module.scss";
 import { CommentListProps, Comment } from "@/types/post";
-import { getDateForm } from "@/utils/getDateForm";
 import { checkBlogAdmin } from "@/utils/sessionCheck/checkBlogAdmin";
 import { COMMENT_FORM_LENGTH } from "@/constants/COMMENT_LENGTH";
 import { CustomInput, CustomTextarea } from "@/components/inputs/CustomInputs/CustomInputs";
@@ -232,8 +231,15 @@ const CommentList = ({
                     placeholder="댓글을 입력하세요."
                     {...editCommentInputProps}
                   />
-                  <button onClick={() => cancelEdit()}>취소</button>
-                  <button onClick={() => handleClickConfirmEditButton(commentId)}>확인</button>
+                  <button
+                    className={styles.editConfirmButton}
+                    onClick={() => handleClickConfirmEditButton(commentId)}
+                  >
+                    수정
+                  </button>
+                  <button className={styles.editCancelButton} onClick={() => cancelEdit()}>
+                    취소
+                  </button>
                 </div>
               </div>
             </li>

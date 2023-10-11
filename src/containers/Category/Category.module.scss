@@ -3,8 +3,8 @@
 .category {
   @include flex(column, center, center, start);
   margin: 0 auto;
-  padding: 7rem;
-  max-width: var(--w-max-page);
+  padding: 7rem 0;
+  max-width: var(--w-post);
 
   h2 {
     margin-bottom: 4rem;

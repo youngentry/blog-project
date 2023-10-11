@@ -1,6 +1,6 @@
 @import "@/styles/mixins/hover.scss";
 
-.likePost {
+.goPostCommentButton {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -8,6 +8,4 @@
   white-space: nowrap;
   color: var(--color-0);
   background: none;
-  border-radius: 0.25rem;
-  cursor: pointer;
 }

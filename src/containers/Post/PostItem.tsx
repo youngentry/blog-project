@@ -8,10 +8,11 @@ import DeletePostButton from "@/components/buttons/DeletePostButton";
 import Comment from "../Comment/Comment";
 import { checkSameAuthor } from "@/utils/sessionCheck/checkSameAuthor";
 import Link from "next/link";
-import ActivityCounts from "@/components/ActivityCounts/ActivityCounts";
 import { useEffect, useState } from "react";
 import usePostItem, { UsePostItemInterface } from "@/hooks/usePostItem";
 import Spin from "@/components/loadings/Spin/Spin";
+import GoPostCommentButton from "@/components/buttons/GoPostCommentButton/GoPostCommentButton";
+import LikePostButton from "@/components/buttons/LikePostButton/LikePostButton";
 
 // 게시물 하나의 컴포넌트입니다.
 const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) => {
@@ -67,12 +68,10 @@ const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) 
           <Image src={src} alt="post content image" width={300} height={300} />
           <div dangerouslySetInnerHTML={{ __html: sanitize(contents) }} />
         </div>
-        <ActivityCounts
-          postId={postId}
-          postCommentCount={postCommentCount}
-          likes={likes}
-          userEmail={userEmail}
-        />
+        <div className={styles.countsBox}>
+          <GoPostCommentButton postId={postId}>{postCommentCount}</GoPostCommentButton>
+          <LikePostButton likes={likes} postId={postId} userEmail={userEmail} />
+        </div>
         <Comment
           title={title}
           postId={postId}

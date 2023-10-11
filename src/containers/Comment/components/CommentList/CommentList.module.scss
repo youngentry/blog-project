@@ -2,10 +2,10 @@
 @import "@/styles/mixins/hover.scss";
 
 .commentList {
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
-  border: var(--1-solid);
-  border-bottom: none;
+  border-top: var(--1-solid);
 
   .editForm {
     display: none;
@@ -20,7 +20,7 @@
   }
 
   .commentItem {
-    padding: 1rem;
+    padding: 1rem 0.5rem;
     display: flex;
     border-bottom: var(--1-solid);
     &:hover {
@@ -38,27 +38,25 @@
       width: 100%;
       .header {
         display: flex;
-        align-items: center;
-        gap: var(--gap-10);
-        margin-bottom: var(--gap-10);
+        align-items: flex-end;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
 
         .user {
           display: flex;
-          align-items: center;
-          margin-right: auto;
           .nickname {
             font-weight: 700;
             margin-right: 0.5rem;
           }
           .date {
-            margin-right: 0.5rem;
-            font-size: var(--ft-13);
+            font-size: var(--ft-14);
             color: var(--color-text-week);
           }
         }
 
         .buttons {
           position: relative;
+          margin-left: auto;
           display: flex;
           gap: 0.25rem;
           .editButton,
@@ -69,10 +67,10 @@
           }
           .deleteConfirmModal {
             position: absolute;
-            top: 0;
+            top: 50%;
             left: 0;
             padding: 0.1rem;
-            transform: translateX(calc(-100% - 5px));
+            transform: translate(calc(-100% - 5px), -50%);
             display: none;
             background: var(--color-blue);
             border-radius: 0.25rem;
@@ -102,11 +100,38 @@
       }
 
       .comment {
+        line-height: 1.5;
       }
 
-      .textarea {
-        width: 100%;
-        height: 8rem;
+      .editForm {
+        .textarea {
+          margin-bottom: 0.15rem;
+          width: 100%;
+          height: 4rem;
+          line-height: 1.5;
+        }
+
+        .editConfirmButton,
+        .editCancelButton {
+          margin-right: 0.25rem;
+          padding: 0.25rem 1rem;
+          white-space: nowrap;
+          background: var(--color-blue);
+          color: var(--color-f);
+          border-radius: 0.25rem;
+          transition: 0.3s;
+          cursor: pointer;
+          &:hover {
+            background: var(--color-blue-dark);
+          }
+        }
+
+        .editCancelButton {
+          background: var(--color-9);
+          &:hover {
+            background: var(--color-6);
+          }
+        }
       }
     }
   }

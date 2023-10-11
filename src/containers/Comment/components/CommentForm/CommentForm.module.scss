@@ -3,31 +3,39 @@
 
   .form {
     display: flex;
+    flex-direction: column;
+    width: 100%;
 
-    .thumbnail {
-      margin-right: 0.5rem;
-      font-size: 1.5rem;
-    }
+    .account {
+      margin-bottom: 5px;
+      display: flex;
+      gap: var(--gap-5);
 
-    .write {
-      width: 100%;
-      .account {
-        margin-bottom: 5px;
-        display: flex;
-        gap: var(--gap-5);
-
-        input {
-          width: 100%;
-        }
-
-        &.sameAuthor {
-          display: none;
-        }
+      input {
+        width: 100%;
       }
 
-      .textarea {
-        width: 100%;
-        height: 8rem;
+      &.sameAuthor {
+        display: none;
+      }
+    }
+
+    .textarea {
+      margin-bottom: 0.5rem;
+      width: 100%;
+      height: 4rem;
+    }
+
+    .writeCommentButton {
+      padding: 0.25rem 1rem;
+      white-space: nowrap;
+      background: var(--color-blue);
+      color: var(--color-f);
+      border-radius: 0.25rem;
+      transition: 0.3s;
+      cursor: pointer;
+      &:hover {
+        background: var(--color-blue-dark);
       }
     }
   }

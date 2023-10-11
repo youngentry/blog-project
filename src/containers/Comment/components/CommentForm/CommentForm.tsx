@@ -107,25 +107,23 @@ const CommentForm = ({
   return (
     <div className={styles.comment}>
       <form className={styles.form} onSubmit={(e) => submitComment(e)}>
-        <div className={styles.write}>
-          {userEmail ? (
-            <div className={`${styles.account} ${styles.sameAuthor}`}>
-              <ReadOnlyInput placeholder={"닉네임"} value={userEmail} />
-              <ReadOnlyInput placeholder={"비밀번호"} value={""} />
-            </div>
-          ) : (
-            <div className={styles.account}>
-              <CustomInput placeholder={"닉네임"} {...nicknameInputProps} />
-              <CustomInput placeholder={"비밀번호"} {...passwordInputProps} />
-            </div>
-          )}
-          <CustomTextarea
-            className={styles.textarea}
-            placeholder={"댓글을 입력하세요"}
-            {...commentInputProps}
-          />
-          <button>댓글 작성</button>
-        </div>
+        {userEmail ? (
+          <div className={`${styles.account} ${styles.sameAuthor}`}>
+            <ReadOnlyInput placeholder={"닉네임"} value={userEmail} />
+            <ReadOnlyInput placeholder={"비밀번호"} value={""} />
+          </div>
+        ) : (
+          <div className={styles.account}>
+            <CustomInput placeholder={"닉네임"} {...nicknameInputProps} />
+            <CustomInput placeholder={"비밀번호"} {...passwordInputProps} />
+          </div>
+        )}
+        <CustomTextarea
+          className={styles.textarea}
+          placeholder={"댓글을 입력하세요"}
+          {...commentInputProps}
+        />
+        <button className={styles.writeCommentButton}>댓글 작성</button>
       </form>
     </div>
   );

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Card } from "@/types/post";
 import { getDateForm } from "@/utils/getDateForm";
 import LikePostButton from "@/components/buttons/LikePostButton/LikePostButton";
+import GoPostCommentButton from "@/components/buttons/GoPostCommentButton/GoPostCommentButton";
 
 // category (게시물 목록)페이지에서 하나의 게시물 카드입니다.
 const CardItem = ({ data }: { data: Card }) => {
@@ -33,13 +34,8 @@ const CardItem = ({ data }: { data: Card }) => {
             <div className={styles.date}>{date}</div>
           </div>
           <div className={styles.counts}>
-            <div className={styles.comments}>
-              <i>💬</i>
-              <p>{commentCount}</p>
-            </div>
-            <div className={styles.likes}>
-              <LikePostButton likes={likes} postId={String(id)} />
-            </div>
+            <GoPostCommentButton postId={String(id)}>{commentCount}</GoPostCommentButton>
+            <LikePostButton likes={likes} postId={String(id)} />
           </div>
         </div>
       </div>

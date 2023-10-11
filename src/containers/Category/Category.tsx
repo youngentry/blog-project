@@ -4,8 +4,7 @@ import CardItem from "./components/Card/CardItem";
 import styles from "./Category.module.scss";
 import Pagination from "@/components/Pagination/Pagination";
 import { Card } from "@/types/post";
-import React, { useEffect, useState } from "react";
-import { getPostCardsData } from "@/services/postsFetch";
+import React from "react";
 import usePostCards from "@/hooks/usePostCards";
 import Spin from "@/components/loadings/Spin/Spin";
 

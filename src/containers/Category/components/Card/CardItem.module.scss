@@ -7,7 +7,14 @@
   background: var(--color-f);
   border-radius: var(--br-20);
   overflow: hidden;
-  margin-bottom: var(--gap-20);
+  margin-bottom: 1rem;
+  box-shadow: 0 0 4px var(--color-c);
+  transition: 0.3s;
+  &:hover {
+    transform: scale(1.025);
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  }
+
   .image {
     width: 100%;
     height: 100%;
@@ -20,7 +27,7 @@
     justify-content: space-between;
 
     .title {
-      margin-bottom: var(--gap-10);
+      margin-bottom: 0.5rem;
       font-size: var(--ft-17);
       @include hoverText;
     }
@@ -30,12 +37,12 @@
       //   height: 2rem;
       display: flex;
       flex-wrap: wrap;
-      gap: var(--gap-5);
+      gap: 0.25rem;
 
       .subtitle,
       .language {
         @include hoverText;
-        margin-bottom: var(--gap-10);
+        margin-bottom: 0.5rem;
       }
     }
 
@@ -43,12 +50,12 @@
       top: auto;
       display: flex;
       justify-content: space-between;
-      gap: var(--gap-10);
+      gap: 0.5rem;
 
       .write {
         display: flex;
         flex-direction: column;
-        gap: var(--gap-5);
+        gap: 0.25rem;
 
         .author {
           font-weight: 500;
@@ -61,16 +68,7 @@
       .counts {
         display: flex;
         align-items: flex-end;
-        gap: var(--gap-5);
-        .comments {
-          display: flex;
-          gap: var(--gap-5);
-        }
-
-        .likes {
-          display: flex;
-          gap: var(--gap-5);
-        }
+        gap: 0.5rem;
       }
     }
   }
