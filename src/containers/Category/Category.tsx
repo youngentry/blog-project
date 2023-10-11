@@ -20,7 +20,7 @@ const Category = ({ searchParams }: any) => {
       <h2>{subtitle ? subtitle : "전체 게시물"}</h2>
 
       {loading ? (
-        <Spin size="m" message />
+        <Spin size="m" message="게시물 목록을 불러오는 중입니다." />
       ) : postCards ? (
         <>
           <ul className={styles.cardContainer}>

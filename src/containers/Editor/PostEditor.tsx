@@ -9,6 +9,9 @@ import { editPostData, getPostItemData } from "@/services/postsFetch";
 import { getCategoriesApi } from "@/services/categoryFetch";
 import CategorySelector from "./components/CategorySelector/CategorySelector";
 import { ObjectId } from "mongodb";
+import usePostItem, { UsePostItemInterface } from "@/hooks/usePostItem";
+import useCategoryList from "@/hooks/useCategoryList";
+import Spin from "@/components/loadings/Spin/Spin";
 
 export interface SubCategoryType {
   _id?: string | ObjectId;
@@ -31,16 +34,18 @@ export interface CategorySelectorProps {
 }
 
 // react-quill에 게시물 데이터를 불러오거나, 새롭게 작성하거나 수정한 게시물을 DB에 업데이트합니다.
-const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => {
+const PostEditor = ({ postId, canEdit }: { postId: string; canEdit?: boolean }) => {
   const router = useRouter(); // 작성 완료되면 게시물로 redirect 합니다.
+
+  const { postData, setPostData, loading }: UsePostItemInterface = usePostItem(postId); // 수정하기 에디터에 불러올 게시물 내용
+  const { categoryList, setCategoryList } = useCategoryList(); // 카테고리 목록
 
   const [title, setTitle] = useState(""); // 게시글 제목
   const [categoryId, setCategoryId] = useState<string>("6516f855d44958b59ed7b8d5"); // "카테고리 없음" 메인 카테고리의 디폴트 값입니다.
   const [contents, setContents] = useState(""); // 게시글 내용
 
-  const [categoryList, setCategoryList] = useState<CommonCategoryType[]>([]); // 카테고리 목록
   const [isSelectCategoryVisible, setIsSelectCategoryVisible] = useState<boolean>(false); // 카테고리 드롭메뉴 visible 여부
-  const [selectedSubtitle, setSelectedSubtitle] = useState<string>("부제목 없음"); // 선택된 카테고리의 디폴트 값입니다.
+  const [selectedSubtitle, setSelectedSubtitle] = useState<string>("부제목 없음"); // 선택된 카테고리
 
   // 수정 권한이 없는 경우엔 수정을 시도하려던 게시글로 이동합니다.
   useEffect(() => {
@@ -48,44 +53,26 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
       window.alert("수정 권한 없음");
       router.push(`/posts/${postId}`);
     }
-  }, []);
+  }, [postId, canEdit, router]);
 
-  // 카테고리 리스트를 불러옵니다.
+  // 수정할 게시물이 존재하지 않을 경우 category로 redirect 합니다.
   useEffect(() => {
-    (async () => {
-      const res = await getCategoriesApi();
-
-      // editor에 수정할 게시물 정보 불러오기
-      if (res) {
-        setCategoryList(res);
-        setSelectedSubtitle(res[0].children[0].title); // 카테고리 선택 초기값 설정
-      }
-    })();
-  }, []);
-
-  // postId가 있다면 게시물 데이터를 요청하고, state에 데이터를 저장합니다.
-  useEffect(() => {
-    if (postId) {
-      (async () => {
-        const res: Post | false = await getPostItemData(postId);
-
-        // 수정할 게시물이 존재하지 않을 경우 category로 redirect 합니다.
-        if (!res) {
-          window.alert("수정할 게시물이 존재하지 않습니다.");
-          router.push(`/category`);
-        }
-
-        // editor 수정할 게시물 정보 저장
-        if (res) {
-          setTitle(res.title);
-          setSelectedSubtitle(res.subtitle);
-          setContents(res.contents);
-        }
-      })();
+    if (postId && !loading && !postData) {
+      window.alert("수정할 게시물이 존재하지 않습니다.");
+      router.push(`/category`);
     }
-  }, []);
+  }, [router, postId, loading, postData]);
 
-  // 수정하기 버튼 클릭하면,
+  // editor에 수정할 게시물 정보 저장합니다.
+  useEffect(() => {
+    if (postData) {
+      setTitle(postData.title);
+      setSelectedSubtitle(postData.subtitle);
+      setContents(postData.contents);
+    }
+  }, [loading, postData]);
+
+  // 수정하기 버튼 클릭 이벤트
   const handleClickEditButton = async (e: any) => {
     e.preventDefault();
     try {
@@ -96,7 +83,8 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
         categoryId,
       };
 
-      // postId가 없다면 새로운 글 작성, postId가 있다면 수정 api 요청을 보냅니다.
+      // postId 여부에 따라 POST 요청을 보내는 api가 다릅니다.
+      // postId가 없다면 새로운 글을 작성하고, postId가 있다면 게시글을 수정합니다.
       const res = await editPostData(postId ? postId : "", editContents);
 
       // 수정할 게시물이 존재하지 않을 경우
@@ -132,7 +120,9 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
 
   return (
     <>
-      {postId && !canEdit ? (
+      {postId && loading ? (
+        <Spin size="m" message="에디터를 불러오는 중입니다." />
+      ) : postId && (!canEdit || !postData) ? (
         <div>{null}</div>
       ) : (
         <div className={styles.container}>

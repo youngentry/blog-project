@@ -1,9 +1,10 @@
 @import "@/styles/mixins/flex.scss";
 
 .container {
-  margin: var(--m-post);
+  margin: 6rem auto;
   padding: 0 2.5rem;
-  @include flex(row, flex-start, center, start);
+  display: flex;
+  justify-content: center;
   width: var(--w-post);
 
   .post {

@@ -7,7 +7,7 @@ import styles from "./Spin.module.scss";
  * @param {string} size 작은사이즈: "s" 중간사이즈: "m"
  * @param {boolean} message "로딩중입니다." 메시지 출력 원하면 true
  */
-const Spin = ({ size, message = false }: { size: string; message?: boolean }) => {
+const Spin = ({ size, message = "" }: { size: string; message?: string }) => {
   const squareSize = size === "s" ? 50 : 100;
   return (
     <div className={styles.loadingBox}>
@@ -17,7 +17,7 @@ const Spin = ({ size, message = false }: { size: string; message?: boolean }) =>
         width={squareSize}
         height={squareSize}
       />
-      {message && <p>로딩중입니다.</p>}
+      <p>{message || "로딩중입니다."}</p>
     </div>
   );
 };

@@ -7,8 +7,6 @@ import { sanitize } from "dompurify";
 import DeletePostButton from "@/components/buttons/DeletePostButton";
 import Comment from "../Comment/Comment";
 import { checkSameAuthor } from "@/utils/sessionCheck/checkSameAuthor";
-import { getPostItemData } from "@/services/postsFetch";
-import { Post } from "@/types/post";
 import Link from "next/link";
 import ActivityCounts from "@/components/ActivityCounts/ActivityCounts";
 import { useEffect, useState } from "react";
@@ -29,15 +27,13 @@ const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) 
   // postData가 존재하지 않는 경우
   if (!postData) {
     return (
-      <>
+      <article className={styles.container}>
         {loading ? (
-          <Spin size="m" message />
+          <Spin size="m" message="게시물을 불러오는 중입니다." />
         ) : (
-          <article className={styles.container}>
-            <div>게시물이 존재하지 않습니다.</div>
-          </article>
+          <div>게시물이 존재하지 않습니다.</div>
         )}
-      </>
+      </article>
     );
   }
 
