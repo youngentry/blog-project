@@ -32,10 +32,10 @@ export interface CategorySelectorProps {
 }
 
 // react-quill에 게시물 데이터를 불러오거나, 새롭게 작성하거나 수정한 게시물을 DB에 업데이트합니다.
-const PostEditor = ({ postId, canEdit }: { postId: string; canEdit?: boolean }) => {
+const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => {
   const router = useRouter(); // 작성 완료되면 게시물로 redirect 합니다.
 
-  const { postData, setPostData, loading }: UsePostItemInterface = usePostItem(postId); // 수정하기 에디터에 불러올 게시물 내용
+  const { postData, setPostData, loading }: UsePostItemInterface = usePostItem(postId || ""); // 수정하기 에디터에 불러올 게시물 내용
   const { categoryList, setCategoryList } = useCategoryList(); // 카테고리 목록
 
   const [title, setTitle] = useState(""); // 게시글 제목
