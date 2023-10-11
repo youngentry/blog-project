@@ -1,6 +1,6 @@
 "use client";
 
-import { getPostData } from "@/services/postsFetch";
+import { getPostItemData } from "@/services/postsFetch";
 import styles from "./SubCategoryPostItem.module.scss";
 import React, { useEffect, useState } from "react";
 import { Post } from "@/types/post";
@@ -10,7 +10,7 @@ const SubCategoryPostItem = ({ postId }: { postId: string }) => {
 
   useEffect(() => {
     const getSubCategories = async (postId: string) => {
-      const res = await getPostData(postId);
+      const res = await getPostItemData(postId);
 
       // 메인 카테고리 조회 성공 시 메인 카테고리 목록 반환
       if (res) {

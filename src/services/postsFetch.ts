@@ -21,14 +21,14 @@ export const getPostCardsData = async (subtitle: string) => {
  * 게시물을 조회합니다.
  * @returns {Post} commentsData or false
  */
-export const getPostData = async (postId: string) => {
+export const getPostItemData = async (postId: string) => {
   const url = `${BASE_URL}/posts/${postId}`;
   const options = setFetchOptions("GET");
 
   // 요청 결과 반환
   const res = await fetch(url, options);
   const data: Post = await res.json(); // 게시물 리스트
-  return res.ok ? data : false;
+  return res.ok ? data : undefined;
 };
 
 /**

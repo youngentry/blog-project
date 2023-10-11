@@ -5,7 +5,7 @@ import Quill from "./components/Quill/Quill";
 import styles from "./PostEditor.module.scss";
 import { useRouter } from "next/navigation";
 import { Post } from "@/types/post";
-import { editPostData, getPostData } from "@/services/postsFetch";
+import { editPostData, getPostItemData } from "@/services/postsFetch";
 import { getCategoriesApi } from "@/services/categoryFetch";
 import CategorySelector from "./components/CategorySelector/CategorySelector";
 import { ObjectId } from "mongodb";
@@ -67,7 +67,7 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
   useEffect(() => {
     if (postId) {
       (async () => {
-        const res: Post | false = await getPostData(postId);
+        const res: Post | false = await getPostItemData(postId);
 
         // 수정할 게시물이 존재하지 않을 경우 category로 redirect 합니다.
         if (!res) {
