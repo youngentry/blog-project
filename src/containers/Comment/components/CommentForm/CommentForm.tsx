@@ -107,7 +107,6 @@ const CommentForm = ({
   return (
     <div className={styles.comment}>
       <form className={styles.form} onSubmit={(e) => submitComment(e)}>
-        <div className={styles.thumbnail}>{userEmail ? <div>✅</div> : <div>😀</div>}</div>
         <div className={styles.write}>
           {userEmail ? (
             <div className={`${styles.account} ${styles.sameAuthor}`}>

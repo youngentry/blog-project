@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./CommentList.module.scss";
 import { CommentListProps, Comment } from "@/types/post";
 import { getDateForm } from "@/utils/getDateForm";
@@ -9,11 +9,12 @@ import { COMMENT_FORM_LENGTH } from "@/constants/COMMENT_LENGTH";
 import { CustomInput, CustomTextarea } from "@/components/inputs/CustomInputs/CustomInputs";
 import {
   deleteCommentApi,
-  getCommentsDataApi,
   patchCommentApi,
   postGuestCommentDeletionApi,
 } from "@/services/commentsFetch";
 import useCommentList from "@/hooks/useCommentList";
+import UserProfile from "@/components/UserProfile/UserProfile";
+import { getRelativeTime } from "@/utils/getRelativeTime";
 
 const CommentList = ({
   postId,
@@ -83,7 +84,6 @@ const CommentList = ({
         (comment: Comment) => String(comment._id) !== _id
       );
       setCommentList(afterDeleteComments);
-
       setPostCommentCount(postCommentCount - 1);
     } catch (err) {
       console.error(err);
@@ -159,7 +159,6 @@ const CommentList = ({
       {commentList &&
         commentList.map((commentItem: Comment) => {
           let { comment, date, isLoggedIn, nickname, author, thumbnail, _id } = commentItem;
-          date = new Date(date); // YYYY.MM.DD 형태로 변환하기 위해 Date 객체로 만듭니다.
           const commentId = String(_id); // key에 할당하기 위해 직렬화합니다.
 
           // 댓글 수정 및 삭제 권한이 있는지 여부에 따라 삭제 버튼이 나타나도록 합니다.
@@ -170,18 +169,47 @@ const CommentList = ({
             deletingCommentId === commentId && checkingGuestPassword && !isLoggedIn; // 게스트 댓글 삭제버튼 visible 여부
           return (
             <li key={commentId} className={`${styles.commentItem}`}>
-              <div className={styles.thumbnail}>{isLoggedIn ? "✅" : "😀"}</div>
+              <div className={styles.thumbnail}>
+                <UserProfile isLoggedIn={isLoggedIn} />
+              </div>
               <div className={styles.content}>
                 <div className={styles.header}>
-                  <div className={styles.nickname}>{nickname}</div>
+                  <div className={styles.user}>
+                    <p className={styles.nickname}>{nickname}</p>
+                    <p className={styles.date}>{getRelativeTime(String(date))}</p>
+                  </div>
                   {canEdit && (
-                    <div>
+                    <div className={styles.buttons}>
                       <button
                         className={`${styles.editButton} ${!isLoggedIn && "hide"}`}
                         onClick={() => handleClickEditButton(commentId, comment)}
                       >
                         수정
                       </button>
+                      <div
+                        className={`${styles.deleteConfirmModal} ${
+                          isVisibleConfirmDeletePassword && `${styles.visible}`
+                        }`}
+                      >
+                        <CustomInput
+                          className={`${styles.deleteConfirmInput}`}
+                          placeholder="비밀번호"
+                          type="password"
+                          {...deletePasswordInputProps}
+                        />
+                        <button
+                          className={styles.deleteConfirmButton}
+                          onClick={() => handleClickConfirmGuestPassword(commentId)}
+                        >
+                          삭제
+                        </button>
+                        <button
+                          className={styles.deleteCancelButton}
+                          onClick={() => cancelCheckingPassword()}
+                        >
+                          취소
+                        </button>
+                      </div>
                       <button
                         className={styles.deleteButton}
                         onClick={
@@ -192,21 +220,11 @@ const CommentList = ({
                       >
                         삭제
                       </button>
-                      <div
-                        className={`${styles.guestConfirm} ${
-                          isVisibleConfirmDeletePassword && "visible"
-                        }`}
-                      >
-                        <CustomInput placeholder="비밀번호" {...deletePasswordInputProps} />
-                        <button onClick={() => handleClickConfirmGuestPassword(commentId)}>확인</button>
-                        <button onClick={() => cancelCheckingPassword()}>취소</button>
-                      </div>
                     </div>
                   )}
                 </div>
                 <div className={`${styles.body} ${editingCommentId === commentId && "hide"}`}>
                   <p className={`${styles.comment} `}>{comment}</p>
-                  <p className={styles.date}>{getDateForm(date, true)}</p>
                 </div>
                 <div className={`${styles.editForm} ${editingCommentId === commentId && "visible"}`}>
                   <CustomTextarea

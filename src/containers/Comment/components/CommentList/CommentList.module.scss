@@ -2,10 +2,10 @@
 @import "@/styles/mixins/hover.scss";
 
 .commentList {
-  padding: 0 0 1rem 0;
   display: flex;
   flex-direction: column;
-  gap: var(--gap-10);
+  border: var(--1-solid);
+  border-bottom: none;
 
   .editForm {
     display: none;
@@ -22,10 +22,14 @@
   .commentItem {
     padding: 1rem;
     display: flex;
-    background: var(--color-d);
-    border-radius: var(--br-30);
+    border-bottom: var(--1-solid);
+    &:hover {
+      background: #f8f8f8;
+    }
 
     .thumbnail {
+      width: 3rem;
+      height: 3rem;
       margin-right: 0.5rem;
       font-size: 1.5rem;
     }
@@ -38,27 +42,66 @@
         gap: var(--gap-10);
         margin-bottom: var(--gap-10);
 
-        .nickname {
-          padding: 0.5rem;
-          display: inline-block;
-          border-radius: 1rem;
-          background: #f00;
+        .user {
+          display: flex;
+          align-items: center;
+          margin-right: auto;
+          .nickname {
+            font-weight: 700;
+            margin-right: 0.5rem;
+          }
+          .date {
+            margin-right: 0.5rem;
+            font-size: var(--ft-13);
+            color: var(--color-text-week);
+          }
         }
 
-        .editButton,
-        .deleteButton {
-          @include hoverText();
+        .buttons {
+          position: relative;
+          display: flex;
+          gap: 0.25rem;
+          .editButton,
+          .deleteButton {
+            font-size: var(--ft-14);
+            color: var(--color-text-week);
+            @include hoverText();
+          }
+          .deleteConfirmModal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 0.1rem;
+            transform: translateX(calc(-100% - 5px));
+            display: none;
+            background: var(--color-blue);
+            border-radius: 0.25rem;
+            &.visible {
+              display: flex;
+            }
+
+            .deleteConfirmInput {
+              margin-right: 0.25rem;
+            }
+            .deleteConfirmButton {
+              margin-right: 0.25rem;
+              padding-right: 0.25rem;
+              color: #fff;
+              white-space: nowrap;
+              border-right: 1px solid var(--color-f);
+              cursor: pointer;
+            }
+            .deleteCancelButton {
+              margin-right: 0.25rem;
+              white-space: nowrap;
+              color: #fff;
+              cursor: pointer;
+            }
+          }
         }
       }
 
       .comment {
-        padding: 1rem 0;
-        background: var(--color-f);
-      }
-
-      .date {
-        padding: 0.5rem 0;
-        background: #f00;
       }
 
       .textarea {

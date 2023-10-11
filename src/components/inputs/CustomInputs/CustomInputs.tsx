@@ -23,6 +23,7 @@ interface CustomInputProps {
   value: string;
   maxLength?: number;
   dispatch: Dispatch<SetStateAction<string>>;
+  type?: string;
 }
 
 /**
@@ -37,6 +38,7 @@ export const CustomInput = ({
   value,
   maxLength,
   dispatch,
+  type,
 }: CustomInputProps) => {
   // input 초기화 버튼
   const clickInitialize = () => {
@@ -49,7 +51,7 @@ export const CustomInput = ({
         ❌
       </div>
       <input
-        type="text"
+        type={type || "text"}
         placeholder={placeholder}
         value={value}
         maxLength={maxLength}

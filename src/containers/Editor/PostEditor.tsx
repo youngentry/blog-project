@@ -4,9 +4,7 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import Quill from "./components/Quill/Quill";
 import styles from "./PostEditor.module.scss";
 import { useRouter } from "next/navigation";
-import { Post } from "@/types/post";
-import { editPostData, getPostItemData } from "@/services/postsFetch";
-import { getCategoriesApi } from "@/services/categoryFetch";
+import { editPostData } from "@/services/postsFetch";
 import CategorySelector from "./components/CategorySelector/CategorySelector";
 import { ObjectId } from "mongodb";
 import usePostItem, { UsePostItemInterface } from "@/hooks/usePostItem";
@@ -121,7 +119,9 @@ const PostEditor = ({ postId, canEdit }: { postId: string; canEdit?: boolean }) 
   return (
     <>
       {postId && loading ? (
-        <Spin size="m" message="에디터를 불러오는 중입니다." />
+        <div className={styles.spinContainer}>
+          <Spin size="m" message="에디터를 불러오는 중입니다." />
+        </div>
       ) : postId && (!canEdit || !postData) ? (
         <div>{null}</div>
       ) : (

@@ -4,6 +4,13 @@
 .userMenus {
   position: relative;
 
+  .thumbnail {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
   .menuList {
     position: absolute;
     bottom: 0;

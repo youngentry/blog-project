@@ -7,14 +7,19 @@ import Image from "next/image";
  * @param {UserSessionData} session
  * @returns
  */
-const UserProfile = ({ session }: { session: UserSessionData | null }) => {
+const UserProfile = ({
+  session,
+  isLoggedIn,
+}: {
+  session?: UserSessionData | null;
+  isLoggedIn?: boolean;
+}) => {
   return (
     <Image
       className={styles.profile}
       alt="user thumbnail"
-      src={`/images/thumbnail/${session ? "fox.jpg" : "guest.jpg"}`}
-      width={40}
-      height={40}
+      src={`/images/thumbnail/${session || isLoggedIn ? "fox.jpg" : "guest.jpg"}`}
+      fill
     ></Image>
   );
 };

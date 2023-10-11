@@ -30,7 +30,7 @@ const UserMenu = ({ session }: { session: UserSessionData | null }) => {
 
   return (
     <div className={styles.userMenus} ref={userMenuRef}>
-      <div onClick={(e) => toggleUserMenuVisible(e)}>
+      <div className={styles.thumbnail} onClick={(e) => toggleUserMenuVisible(e)}>
         <UserProfile session={session} />
       </div>
       <ul className={`${styles.menuList} ${isMenuVisible && "visible"}`}>

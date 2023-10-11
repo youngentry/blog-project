@@ -1,5 +1,9 @@
 @import "@/styles/mixins/hover.scss";
 
+.spinContainer {
+  padding: 8rem 0;
+}
+
 .container {
   .head {
     display: flex;
