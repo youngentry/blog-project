@@ -6,7 +6,7 @@ import BASE_URL from "@/constants/BASE_URL";
  * 게시물 카드 리스트를 조회합니다.
  * @returns {Card[]} commentsData or false
  */
-export const getCardsData = async ({ subtitle }: { subtitle: string }) => {
+export const getPostCardsData = async (subtitle: string) => {
   const url = `${BASE_URL}/category?subtitle=${subtitle}`;
   const options = setFetchOptions("GET");
 
@@ -14,7 +14,7 @@ export const getCardsData = async ({ subtitle }: { subtitle: string }) => {
   const res = await fetch(url, options);
   const data: Card[] = await res.json(); // 댓글 리스트
 
-  return res.ok ? data : false;
+  return res.ok ? data : [];
 };
 
 /**
