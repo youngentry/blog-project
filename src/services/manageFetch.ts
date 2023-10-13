@@ -1,12 +1,12 @@
-import BASE_URL from "@/constants/BASE_URL";
-import { setFetchOptions } from "./fetchOptions";
+import BASE_URL from '@/constants/BASE_URL';
+import { setFetchOptions } from './fetchOptions';
 
 /**
  * 댓글을 작성한 포스트를 조회합니다.
  */
 export const getManageCommentsApi = async () => {
   const url = `${BASE_URL}/manage/comments`;
-  const options = setFetchOptions("GET");
+  const options = setFetchOptions('GET');
 
   // 요청 결과 반환
   const res = await fetch(url, options);
@@ -19,7 +19,7 @@ export const getManageCommentsApi = async () => {
  */
 export const getManageLikesApi = async () => {
   const url = `${BASE_URL}/manage/likes`;
-  const options = setFetchOptions("GET");
+  const options = setFetchOptions('GET');
 
   // 요청 결과 반환
   const res = await fetch(url, options);

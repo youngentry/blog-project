@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./SearchPostButton.module.scss";
-import { BsSearch } from "react-icons/bs";
-import Notice from "@/components/notices/Notice";
+import React from 'react';
+import styles from './SearchPostButton.module.scss';
+import { BsSearch } from 'react-icons/bs';
+import Notice from '@/components/notices/Notice';
 
 const SearchPostButton = ({ boxPosition }: { boxPosition: string }) => {
   return (

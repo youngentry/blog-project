@@ -1,15 +1,11 @@
-"use client";
+'use client';
 
-import React, { useState, FormEvent } from "react";
-import styles from "./CommentForm.module.scss";
-import { CommentFormProps, CommentForm } from "@/types/post";
-import { COMMENT_FORM_LENGTH } from "@/constants/COMMENT_LENGTH";
-import {
-  CustomInput,
-  CustomTextarea,
-  ReadOnlyInput,
-} from "@/components/inputs/CustomInputs/CustomInputs";
-import { postCommentApi } from "@/services/commentsFetch";
+import React, { useState, FormEvent } from 'react';
+import styles from './CommentForm.module.scss';
+import { CommentFormProps, CommentForm } from '@/types/post';
+import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
+import { CustomInput, CustomTextarea, ReadOnlyInput } from '@/components/inputs/CustomInputs/CustomInputs';
+import { postCommentApi } from '@/services/commentsFetch';
 
 // 댓글 입력 폼입니다.
 // 비로그인 상태에서는(userEmail이 존재하지 않을 경우에) nickname, password input이 나타납니다.
@@ -22,24 +18,23 @@ const CommentForm = ({
   postCommentCount,
   setPostCommentCount,
 }: CommentFormProps) => {
-  const [nickname, setNickname] = useState<string>(userEmail || "");
-  const [password, setPassword] = useState<string>("");
-  const [comment, setComment] = useState<string>("");
+  const [nickname, setNickname] = useState<string>(userEmail || '');
+  const [password, setPassword] = useState<string>('');
+  const [comment, setComment] = useState<string>('');
 
-  const { MIN_NICKNAME, MIN_PASSWORD, MIN_COMMENT, MAX_NICKNAME, MAX_PASSWORD, MAX_COMMENT } =
-    COMMENT_FORM_LENGTH; // input length 조건
+  const { MIN_NICKNAME, MIN_PASSWORD, MIN_COMMENT, MAX_NICKNAME, MAX_PASSWORD, MAX_COMMENT } = COMMENT_FORM_LENGTH; // input length 조건
 
   // input 유효성 검사
   const checkValidInput = () => {
     // 비로그인 유저가 nickname또는 password입력을 했는지 검사합니다.
     if (!userEmail && (nickname.length < MIN_NICKNAME || password.length < MIN_PASSWORD)) {
-      window.alert("닉네임 또는 비밀번호를 입력해주세요.");
+      window.alert('닉네임 또는 비밀번호를 입력해주세요.');
       return false;
     }
 
     // 댓글을 입력했는지 검사합니다.
     if (comment.length < MIN_COMMENT) {
-      window.alert("댓글을 입력해주세요.");
+      window.alert('댓글을 입력해주세요.');
       return false;
     }
 
@@ -68,15 +63,15 @@ const CommentForm = ({
       }
     } catch (err) {
       console.error(err);
-      window.alert("댓글 작성 중에 오류가 발생했습니다. 잠시 후에 다시 시도해주세요.");
+      window.alert('댓글 작성 중에 오류가 발생했습니다. 잠시 후에 다시 시도해주세요.');
     }
   };
 
   const successSubmit = () => {
     // form 초기화
-    setComment("");
-    setNickname("");
-    setPassword("");
+    setComment('');
+    setNickname('');
+    setPassword('');
 
     // client component 업데이트
     setNewUpdate(!newUpdate);
@@ -109,20 +104,16 @@ const CommentForm = ({
       <form className={styles.form} onSubmit={(e) => submitComment(e)}>
         {userEmail ? (
           <div className={`${styles.account} ${styles.sameAuthor}`}>
-            <ReadOnlyInput placeholder={"닉네임"} value={userEmail} />
-            <ReadOnlyInput placeholder={"비밀번호"} value={""} />
+            <ReadOnlyInput placeholder={'닉네임'} value={userEmail} />
+            <ReadOnlyInput placeholder={'비밀번호'} value={''} />
           </div>
         ) : (
           <div className={styles.account}>
-            <CustomInput placeholder={"닉네임"} {...nicknameInputProps} />
-            <CustomInput placeholder={"비밀번호"} {...passwordInputProps} />
+            <CustomInput placeholder={'닉네임'} {...nicknameInputProps} />
+            <CustomInput placeholder={'비밀번호'} {...passwordInputProps} />
           </div>
         )}
-        <CustomTextarea
-          className={styles.textarea}
-          placeholder={"댓글을 입력하세요"}
-          {...commentInputProps}
-        />
+        <CustomTextarea className={styles.textarea} placeholder={'댓글을 입력하세요'} {...commentInputProps} />
         <button className={styles.writeCommentButton}>댓글 작성</button>
       </form>
     </div>

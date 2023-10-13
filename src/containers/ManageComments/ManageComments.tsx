@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import React from "react";
-import styles from "./ManageComments.module.scss";
-import ManageCommentItem from "./components/ManageCommentItem/ManageCommentItem";
-import useManageComments, { useManageCommentsInterface } from "@/hooks/useManageComments";
-import { Comment } from "@/types/post";
-import { getDateForm } from "@/utils/getDateForm";
-import ManageDescription from "../../components/descriptions/ManageDescription/ManageDescription";
-import { DESCRIPTION } from "@/constants/DESCRIPTION";
-import NoItem from "../ManageLikes/components/NoItem/NoItem";
-import useLoading from "@/hooks/useLoading";
-import Spin from "@/components/loadings/Spin/Spin";
+import React from 'react';
+import styles from './ManageComments.module.scss';
+import ManageCommentItem from './components/ManageCommentItem/ManageCommentItem';
+import useManageComments, { useManageCommentsInterface } from '@/hooks/useManageComments';
+import { Comment } from '@/types/post';
+import { getDateForm } from '@/utils/getDateForm';
+import ManageDescription from '../../components/descriptions/ManageDescription/ManageDescription';
+import { DESCRIPTION } from '@/constants/DESCRIPTION';
+import NoItem from '../ManageLikes/components/NoItem/NoItem';
+import useLoading from '@/hooks/useLoading';
+import Spin from '@/components/loadings/Spin/Spin';
 
 interface ManageCommentsInterface {
   [key: string]: Comment[];
@@ -47,7 +47,7 @@ const ManageComments = () => {
       <h2 className={styles.manageTitle}>내가 작성한 댓글</h2>
       <ManageDescription description={DESCRIPTION.MANAGE_COMMENTS} />
       {loading ? (
-        <Spin size="s" />
+        <Spin size='s' />
       ) : comments.length ? (
         dates.map((date: string, index: number) => {
           const comments = eachDayComments[index];
@@ -64,8 +64,8 @@ const ManageComments = () => {
         })
       ) : (
         <NoItem
-          h2={"아직 댓글을 작성한 게시물이 없습니다."}
-          src={"/images/manageActivity/comment-activity-sample.png"}
+          h2={'아직 댓글을 작성한 게시물이 없습니다.'}
+          src={'/images/manageActivity/comment-activity-sample.png'}
         />
       )}
     </div>

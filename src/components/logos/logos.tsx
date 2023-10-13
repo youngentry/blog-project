@@ -1,8 +1,8 @@
-import React from "react";
-import styles from "./logos.module.scss";
-import Image from "next/image";
-import { BsArrowUpRightSquare } from "react-icons/bs";
-import Link from "next/link";
+import React from 'react';
+import styles from './logos.module.scss';
+import Image from 'next/image';
+import { BsArrowUpRightSquare } from 'react-icons/bs';
+import Link from 'next/link';
 
 interface LogoProps {
   domainName: string; // ex) github, tistory
@@ -19,18 +19,18 @@ export const Logo = (props: LogoProps) => {
   const UpperCase = domainName.toUpperCase();
 
   const getLink = (lowerCase: string) => {
-    if (lowerCase === "github") {
-      return "https://github.com/youngentry/blog-project";
+    if (lowerCase === 'github') {
+      return 'https://github.com/youngentry/blog-project';
     }
-    if (lowerCase === "tistory") {
-      return "https://sakuraop.tistory.com/category/blog";
+    if (lowerCase === 'tistory') {
+      return 'https://sakuraop.tistory.com/category/blog';
     }
   };
 
   const link = getLink(lowerCase); // 로고 클릭하면 연결되는 주소
 
   return (
-    <Link href={link as string} target="_blank" rel="noopener noreferrer">
+    <Link href={link as string} target='_blank' rel='noopener noreferrer'>
       <div className={styles.logo}>
         <Image
           src={`/images/logos/${lowerCase}.png`}

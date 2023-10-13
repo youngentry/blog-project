@@ -1,12 +1,12 @@
-import { getServerSession } from "next-auth";
-import { checkBlogAdmin } from "./checkBlogAdmin";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import BASE_URL from "@/constants/BASE_URL";
+import { getServerSession } from 'next-auth';
+import { checkBlogAdmin } from './checkBlogAdmin';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import BASE_URL from '@/constants/BASE_URL';
 
 // 게시글 수정 권한이 있는지 확인합니다.
 export const checkEditAuthor = async (postId: string) => {
   // 게시글을 작성한 유저를 확인합니다.
-  const result = await fetch(`${BASE_URL}/posts/${postId}`, { method: "GET" });
+  const result = await fetch(`${BASE_URL}/posts/${postId}`, { method: 'GET' });
   const jsonData = await result.json();
   const postEmail = jsonData.email;
 

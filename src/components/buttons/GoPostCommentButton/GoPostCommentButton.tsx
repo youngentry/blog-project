@@ -1,7 +1,7 @@
-import Link from "next/link";
-import React from "react";
-import styles from "./GoPostCommentButton.module.scss";
-import { BsChatDots } from "react-icons/bs";
+import Link from 'next/link';
+import React from 'react';
+import styles from './GoPostCommentButton.module.scss';
+import { BsChatDots } from 'react-icons/bs';
 
 const GoPostCommentButton = ({ children, postId }: { children: any; postId: string }) => {
   return (

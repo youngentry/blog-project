@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import React from "react";
+import { useRouter } from 'next/navigation';
+import React from 'react';
 
 // 수정하기 버튼을 클릭하면 해당 게시물 수정 페이지로 이동합니다.
 const NewPostButton = () => {
@@ -10,7 +10,7 @@ const NewPostButton = () => {
   return (
     <button
       onClick={() => {
-        router.push("/manage/newpost");
+        router.push('/manage/newpost');
       }}
     >
       글쓰기

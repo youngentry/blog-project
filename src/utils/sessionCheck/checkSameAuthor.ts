@@ -1,4 +1,4 @@
-import { checkBlogAdmin } from "./checkBlogAdmin";
+import { checkBlogAdmin } from './checkBlogAdmin';
 
 interface CheckSameAuthor {
   (userEmail: string, postAuthor: string): boolean;

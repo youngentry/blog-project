@@ -1,5 +1,5 @@
-import exp from "constants";
-import { ObjectId } from "mongodb";
+import exp from 'constants';
+import { ObjectId } from 'mongodb';
 
 // 게시물 카드
 interface Card {

@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React from "react";
-import { BsPencil } from "react-icons/bs";
-import styles from "./NewPostButton.module.scss";
-import { useRouter } from "next/navigation";
+import React from 'react';
+import { BsPencil } from 'react-icons/bs';
+import styles from './NewPostButton.module.scss';
+import { useRouter } from 'next/navigation';
 
 const NewPostButton = () => {
   const router = useRouter();
@@ -12,7 +12,7 @@ const NewPostButton = () => {
     <button
       className={styles.newPostButton}
       onClick={() => {
-        router.push("/manage/newpost");
+        router.push('/manage/newpost');
       }}
     >
       <BsPencil />

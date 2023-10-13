@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import React from "react";
-import styles from "./ManageLikes.module.scss";
-import { Post } from "@/types/post";
-import { getDateForm } from "@/utils/getDateForm";
-import useLikes from "@/hooks/useLikes";
-import ManageLikeItem from "./components/ManageLikeItem/ManageLikeItem";
-import ManageDescription from "@/components/descriptions/ManageDescription/ManageDescription";
-import { DESCRIPTION } from "@/constants/DESCRIPTION";
-import Image from "next/image";
-import NoItem from "./components/NoItem/NoItem";
-import Spin from "@/components/loadings/Spin/Spin";
+import React from 'react';
+import styles from './ManageLikes.module.scss';
+import { Post } from '@/types/post';
+import { getDateForm } from '@/utils/getDateForm';
+import useLikes from '@/hooks/useLikes';
+import ManageLikeItem from './components/ManageLikeItem/ManageLikeItem';
+import ManageDescription from '@/components/descriptions/ManageDescription/ManageDescription';
+import { DESCRIPTION } from '@/constants/DESCRIPTION';
+import Image from 'next/image';
+import NoItem from './components/NoItem/NoItem';
+import Spin from '@/components/loadings/Spin/Spin';
 
 export interface ManageLikesInterface {
   [key: string]: Post[];
@@ -48,7 +48,7 @@ const ManageLikes = ({ email }: { email: string }) => {
       <ManageDescription description={DESCRIPTION.MANAGE_LIKES} />
 
       {loading ? (
-        <Spin size="s" />
+        <Spin size='s' />
       ) : likes.length ? (
         dates.map((date: string, index: number) => {
           const likes = eachDayLikes[index];
@@ -64,10 +64,7 @@ const ManageLikes = ({ email }: { email: string }) => {
           );
         })
       ) : (
-        <NoItem
-          h2={"아직 좋아요 한 게시물이 없습니다."}
-          src={"/images/manageActivity/likes-activity-sample.png"}
-        />
+        <NoItem h2={'아직 좋아요 한 게시물이 없습니다.'} src={'/images/manageActivity/likes-activity-sample.png'} />
       )}
     </div>
   );

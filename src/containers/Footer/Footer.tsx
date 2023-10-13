@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./Footer.module.scss";
+import React from 'react';
+import styles from './Footer.module.scss';
 
 // footer 레이아웃 컴포넌트입니다.
 const Footer = () => {

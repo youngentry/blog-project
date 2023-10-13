@@ -1,11 +1,11 @@
-import { Card, Post } from "@/types/post";
-import { connectDB } from "@/utils/db/db";
-import { NextRequest, NextResponse } from "next/server";
+import { Card, Post } from '@/types/post';
+import { connectDB } from '@/utils/db/db';
+import { NextRequest, NextResponse } from 'next/server';
 
 // 게시물의 서브 카테고리 배열을 불러오는 API입니다.
 export const GET = async (req: NextRequest) => {
-  const db = (await connectDB).db("blog");
-  const postCollection = db.collection<Post>("posts");
+  const db = (await connectDB).db('blog');
+  const postCollection = db.collection<Post>('posts');
 
   const cardsData: Card[] = await postCollection.find({}).toArray();
 
@@ -15,5 +15,5 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.json(postSubtitleList, { status: 200 });
   }
 
-  return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+  return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
 };

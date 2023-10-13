@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { getCommentsDataApi } from "@/services/commentsFetch";
-import { Comment } from "@/types/post";
-import React, { useState, useEffect } from "react";
+import { getCommentsDataApi } from '@/services/commentsFetch';
+import { Comment } from '@/types/post';
+import React, { useState, useEffect } from 'react';
 
 const useCommentList = (postId: string, newUpdate: any = null) => {
   const [commentList, setCommentList] = useState<Comment[]>([]); // API 요청하여 조회할 댓글 목록

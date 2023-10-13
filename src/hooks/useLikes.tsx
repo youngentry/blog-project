@@ -1,14 +1,9 @@
-"use client";
+'use client';
 
-import { getManageLikesApi } from "@/services/manageFetch";
-import React, { useState, useEffect } from "react";
-import useLoading from "./useLoading";
-import { Post } from "@/types/post";
-
-// export interface useManageCommentsInterface {
-//   likes: Comment[];
-//   setLikes: Dispatch<SetStateAction<any>>;
-// }
+import { getManageLikesApi } from '@/services/manageFetch';
+import React, { useState, useEffect } from 'react';
+import useLoading from './useLoading';
+import { Post } from '@/types/post';
 
 const useLikes = () => {
   const [likes, setLikes] = useState<Post[]>([]); // 좋아요 한 게시물 리스트

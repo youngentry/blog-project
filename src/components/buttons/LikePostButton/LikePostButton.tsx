@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { postLikeCountData } from "@/services/postsFetch";
-import React, { useState } from "react";
-import { BsFillHeartFill, BsHeart } from "react-icons/bs";
-import styles from "./LikePostButton.module.scss";
+import { postLikeCountData } from '@/services/postsFetch';
+import React, { useState } from 'react';
+import { BsFillHeartFill, BsHeart } from 'react-icons/bs';
+import styles from './LikePostButton.module.scss';
 
 // 게시물 좋아요 버튼을 클릭 요청.
 const LikePostButton = ({
@@ -27,7 +27,7 @@ const LikePostButton = ({
       handleSuccess(res); // 요청 성공 시 실행
     } catch (err) {
       console.error(err);
-      window.alert("서버에 문제가 발생하였습니다. 잠시 후에 시도해주세요.");
+      window.alert('서버에 문제가 발생하였습니다. 잠시 후에 시도해주세요.');
     }
   };
 

@@ -1,5 +1,5 @@
-import React, { Dispatch, SetStateAction } from "react";
-import styles from "./CustomInputs.module.scss";
+import React, { Dispatch, SetStateAction } from 'react';
+import styles from './CustomInputs.module.scss';
 
 interface ReadOnlyInputProps {
   className?: string;
@@ -14,7 +14,7 @@ interface ReadOnlyInputProps {
  * @returns
  */
 export const ReadOnlyInput = ({ placeholder, value }: ReadOnlyInputProps) => {
-  return <input type="text" placeholder={placeholder} value={value} readOnly />;
+  return <input type='text' placeholder={placeholder} value={value} readOnly />;
 };
 
 interface CustomInputProps {
@@ -32,17 +32,10 @@ interface CustomInputProps {
  * @param dispatch setState
  * @returns
  */
-export const CustomInput = ({
-  className,
-  placeholder,
-  value,
-  maxLength,
-  dispatch,
-  type,
-}: CustomInputProps) => {
+export const CustomInput = ({ className, placeholder, value, maxLength, dispatch, type }: CustomInputProps) => {
   // input 초기화 버튼
   const clickInitialize = () => {
-    dispatch("");
+    dispatch('');
   };
 
   return (
@@ -51,7 +44,7 @@ export const CustomInput = ({
         ❌
       </div>
       <input
-        type={type || "text"}
+        type={type || 'text'}
         placeholder={placeholder}
         value={value}
         maxLength={maxLength}
@@ -68,13 +61,7 @@ export const CustomInput = ({
  * @param param0
  * @returns
  */
-export const CustomTextarea = ({
-  className,
-  placeholder,
-  value,
-  maxLength,
-  dispatch,
-}: CustomInputProps) => {
+export const CustomTextarea = ({ className, placeholder, value, maxLength, dispatch }: CustomInputProps) => {
   return (
     <textarea
       className={`${className} ${styles.textarea}`}

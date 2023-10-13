@@ -1,9 +1,9 @@
-import SubCategoryList from "@/containers/CategoryEdit/components/SubCategoryList/SubCategoryList";
-import React from "react";
-import styles from "./NavCategory.module.scss";
-import { BsThreeDots } from "react-icons/bs";
-import useMainCategories from "@/hooks/useMainCategories";
-import Spin from "@/components/loadings/Spin/Spin";
+import SubCategoryList from '@/containers/CategoryEdit/components/SubCategoryList/SubCategoryList';
+import React from 'react';
+import styles from './NavCategory.module.scss';
+import { BsThreeDots } from 'react-icons/bs';
+import useMainCategories from '@/hooks/useMainCategories';
+import Spin from '@/components/loadings/Spin/Spin';
 
 const NavCategory = ({ subtitles }: { subtitles: string[] }) => {
   const { mainCategories, setMainCategories, loading } = useMainCategories();
@@ -11,7 +11,7 @@ const NavCategory = ({ subtitles }: { subtitles: string[] }) => {
   return (
     <ul className={styles.container}>
       {loading ? (
-        <Spin size="s" />
+        <Spin size='s' />
       ) : (
         mainCategories.map((main) => {
           const { _id, title } = main;

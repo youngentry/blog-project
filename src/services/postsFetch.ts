@@ -1,6 +1,6 @@
-import { Card, Post, PostContents } from "@/types/post";
-import { setFetchOptions } from "./fetchOptions";
-import BASE_URL from "@/constants/BASE_URL";
+import { Card, Post, PostContents } from '@/types/post';
+import { setFetchOptions } from './fetchOptions';
+import BASE_URL from '@/constants/BASE_URL';
 
 /**
  * 게시물 카드 리스트를 조회합니다.
@@ -8,7 +8,7 @@ import BASE_URL from "@/constants/BASE_URL";
  */
 export const getPostCardsData = async (subtitle: string) => {
   const url = `${BASE_URL}/category?subtitle=${subtitle}`;
-  const options = setFetchOptions("GET");
+  const options = setFetchOptions('GET');
 
   // 요청 결과 반환
   const res = await fetch(url, options);
@@ -23,7 +23,7 @@ export const getPostCardsData = async (subtitle: string) => {
  */
 export const getPostItemData = async (postId: string) => {
   const url = `${BASE_URL}/posts/${postId}`;
-  const options = setFetchOptions("GET");
+  const options = setFetchOptions('GET');
 
   // 요청 결과 반환
   const res = await fetch(url, options);
@@ -37,7 +37,7 @@ export const getPostItemData = async (postId: string) => {
  */
 export const editPostData = async (postId: string, editContents: PostContents) => {
   const url = `${BASE_URL}/manage/newpost/${postId}`;
-  const options = setFetchOptions("POST", editContents);
+  const options = setFetchOptions('POST', editContents);
 
   // "redirect 경로"로 쓰일 "새로운 게시물 id" 또는 "수정한 게시물 id"를 반환합니다.
   const res = await fetch(url, options);
@@ -54,7 +54,7 @@ export const editPostData = async (postId: string, editContents: PostContents) =
  */
 export const deletePostData = async (postId: string) => {
   const url = `${BASE_URL}/manage/posts/${postId}`;
-  const options = setFetchOptions("DELETE");
+  const options = setFetchOptions('DELETE');
 
   // 요청 결과 반환
   const res = await fetch(url, options);
@@ -67,7 +67,7 @@ export const deletePostData = async (postId: string) => {
  */
 export const postLikeCountData = async (postId: string, currentLikeCount: number) => {
   const url = `${BASE_URL}/posts/${postId}/likes`;
-  const options = setFetchOptions("PATCH", { currentLikeCount });
+  const options = setFetchOptions('PATCH', { currentLikeCount });
 
   // 좋아요 버튼 클릭 결과를 반환합니다.
   const res = await fetch(url, options);

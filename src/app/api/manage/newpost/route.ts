@@ -1,6 +1,6 @@
-import { connectDB } from "@/utils/db/db";
-import { JWT, getToken } from "next-auth/jwt";
-import { NextRequest, NextResponse } from "next/server";
+import { connectDB } from '@/utils/db/db';
+import { JWT, getToken } from 'next-auth/jwt';
+import { NextRequest, NextResponse } from 'next/server';
 
 interface FormData {
   title: string;
@@ -13,20 +13,20 @@ interface FormData {
 // 새로운 게시물 작성 API 입니다.
 export const POST = async (req: NextRequest) => {
   // DB와 Collection 연결
-  const db = (await connectDB).db("blog");
-  const postCollection = db.collection("posts");
-  const countersCollection = db.collection("counters");
+  const db = (await connectDB).db('blog');
+  const postCollection = db.collection('posts');
+  const countersCollection = db.collection('counters');
 
   // 게시물 작성 정보 확인
   const token: JWT | null = await getToken({ req }); // 로그인 유저 정보
   const formData: FormData = await req.json(); // 요청 받은 form 데이터
 
   // 게시물 번호 정보 업데이트하기
-  const currentCounter = await countersCollection.findOne({ model: "posts" });
+  const currentCounter = await countersCollection.findOne({ model: 'posts' });
   await countersCollection.findOneAndUpdate(
-    { model: "posts" },
+    { model: 'posts' },
     { $inc: { number: 1, postCount: 1 } },
-    { upsert: true }
+    { upsert: true },
   );
 
   const { title, subtitle, contents, categoryId, src } = formData; // 게시물 내용
@@ -45,7 +45,7 @@ export const POST = async (req: NextRequest) => {
     contents, // 본문
     email, // 작성자 이메일
     categoryId, // 게시물 ObjectId
-    src: src || "https://cdn.pixabay.com/photo/2023/09/03/11/13/mountains-8230502_1280.jpg", // 대표이미지 설정하지 않은 경우 디폴트 이미지
+    src: src || 'https://cdn.pixabay.com/photo/2023/09/03/11/13/mountains-8230502_1280.jpg', // 대표이미지 설정하지 않은 경우 디폴트 이미지
     author, // 작성자 닉네임
     date, // 작성 시간
     commentCount, // 댓글 수
@@ -58,5 +58,5 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({ id }, { status: 200 });
   }
 
-  return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+  return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
 };

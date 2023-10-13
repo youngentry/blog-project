@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import styles from "./CategoryList.module.scss";
-import { getCategoriesApi } from "@/services/categoryFetch";
-import AddSubCategoryForm from "../AddSubCategoryForm/AddSubCategoryForm";
-import SubCategoryList from "../SubCategoryList/SubCategoryList";
+import React, { useEffect, useState } from 'react';
+import styles from './CategoryList.module.scss';
+import { getCategoriesApi } from '@/services/categoryFetch';
+import AddSubCategoryForm from '../AddSubCategoryForm/AddSubCategoryForm';
+import SubCategoryList from '../SubCategoryList/SubCategoryList';
 
 const CategoryList = () => {
   const [mainCategories, setMainCategories] = useState<any[]>([]);
 
   useEffect(() => {
     const getMainCategories = async () => {
-      const res = await getCategoriesApi("main");
+      const res = await getCategoriesApi('main');
 
       // 메인 카테고리 조회 성공 시 메인 카테고리 목록 반환
       if (res) {

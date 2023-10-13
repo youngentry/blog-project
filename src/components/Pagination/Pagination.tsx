@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./Pagination.module.scss";
+import React from 'react';
+import styles from './Pagination.module.scss';
 
 // 페이지네이션입니다.
 const Pagination = () => {

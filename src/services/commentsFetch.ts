@@ -1,5 +1,5 @@
-import { Comment, CommentForm } from "@/types/post";
-import { setFetchOptions } from "./fetchOptions";
+import { Comment, CommentForm } from '@/types/post';
+import { setFetchOptions } from './fetchOptions';
 
 /**
  * 댓글 리스트를 조회합니다.
@@ -8,7 +8,7 @@ import { setFetchOptions } from "./fetchOptions";
  */
 export const getCommentsDataApi = async (postId: string) => {
   const url = `/api/posts/${postId}/comments`;
-  const options = setFetchOptions("GET");
+  const options = setFetchOptions('GET');
 
   // 요청 결과 반환
   const res = await fetch(url, options);
@@ -24,7 +24,7 @@ export const getCommentsDataApi = async (postId: string) => {
  */
 export const postCommentApi = async (postId: string, body: CommentForm) => {
   const url = `/api/posts/${postId}/comments`;
-  const options = setFetchOptions("POST", body);
+  const options = setFetchOptions('POST', body);
 
   // 요청 결과 반환
   const res = await fetch(url, options);
@@ -40,7 +40,7 @@ export const postCommentApi = async (postId: string, body: CommentForm) => {
  */
 export const patchCommentApi = async (postId: string, _id: string, body: string) => {
   const url = `/api/posts/${postId}/comments?_id=${_id}`;
-  const options = setFetchOptions("PATCH", { comment: body });
+  const options = setFetchOptions('PATCH', { comment: body });
 
   // 요청 결과 반환
   const res = await fetch(url, options);
@@ -57,7 +57,7 @@ export const deleteCommentApi = async (postId: string, _id: string) => {
   // post 요청 주소, 옵션
   const url = `/api/posts/${postId}/comments?_id=${_id}`;
 
-  const options = setFetchOptions("DELETE");
+  const options = setFetchOptions('DELETE');
 
   // 요청 결과 반환
   const res = await fetch(url, options);
@@ -73,7 +73,7 @@ export const deleteCommentApi = async (postId: string, _id: string) => {
  */
 export const postGuestCommentDeletionApi = async (postId: string, _id: string, password: string) => {
   const url = `/api/posts/${postId}/comments/guest?_id=${_id}`;
-  const options = setFetchOptions("POST", { password });
+  const options = setFetchOptions('POST', { password });
 
   // 요청 결과 반환
   const res = await fetch(url, options);

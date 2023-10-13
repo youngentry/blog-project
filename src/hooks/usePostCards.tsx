@@ -1,7 +1,7 @@
-import { getPostCardsData } from "@/services/postsFetch";
-import { Card } from "@/types/post";
-import React, { useEffect, useState } from "react";
-import useLoading from "./useLoading";
+import { getPostCardsData } from '@/services/postsFetch';
+import { Card } from '@/types/post';
+import React, { useEffect, useState } from 'react';
+import useLoading from './useLoading';
 
 const usePostCards = (subtitle: string) => {
   const [postCards, setPostCards] = useState<Card[]>([]); // 게시물 카드

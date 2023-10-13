@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
-import Quill from "./components/Quill/Quill";
-import styles from "./PostEditor.module.scss";
-import { useRouter } from "next/navigation";
-import { editPostData } from "@/services/postsFetch";
-import CategorySelector from "./components/CategorySelector/CategorySelector";
-import { ObjectId } from "mongodb";
-import usePostItem, { UsePostItemInterface } from "@/hooks/usePostItem";
-import useCategoryList from "@/hooks/useCategoryList";
-import Spin from "@/components/loadings/Spin/Spin";
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import Quill from './components/Quill/Quill';
+import styles from './PostEditor.module.scss';
+import { useRouter } from 'next/navigation';
+import { editPostData } from '@/services/postsFetch';
+import CategorySelector from './components/CategorySelector/CategorySelector';
+import { ObjectId } from 'mongodb';
+import usePostItem, { UsePostItemInterface } from '@/hooks/usePostItem';
+import useCategoryList from '@/hooks/useCategoryList';
+import Spin from '@/components/loadings/Spin/Spin';
 
 export interface SubCategoryType {
   _id?: string | ObjectId;
@@ -35,20 +35,20 @@ export interface CategorySelectorProps {
 const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => {
   const router = useRouter(); // 작성 완료되면 게시물로 redirect 합니다.
 
-  const { postData, setPostData, loading }: UsePostItemInterface = usePostItem(postId || ""); // 수정하기 에디터에 불러올 게시물 내용
+  const { postData, setPostData, loading }: UsePostItemInterface = usePostItem(postId || ''); // 수정하기 에디터에 불러올 게시물 내용
   const { categoryList, setCategoryList } = useCategoryList(); // 카테고리 목록
 
-  const [title, setTitle] = useState(""); // 게시글 제목
-  const [categoryId, setCategoryId] = useState<string>("6516f855d44958b59ed7b8d5"); // "카테고리 없음" 메인 카테고리의 디폴트 값입니다.
-  const [contents, setContents] = useState(""); // 게시글 내용
+  const [title, setTitle] = useState(''); // 게시글 제목
+  const [categoryId, setCategoryId] = useState<string>('6516f855d44958b59ed7b8d5'); // "카테고리 없음" 메인 카테고리의 디폴트 값입니다.
+  const [contents, setContents] = useState(''); // 게시글 내용
 
   const [isSelectCategoryVisible, setIsSelectCategoryVisible] = useState<boolean>(false); // 카테고리 드롭메뉴 visible 여부
-  const [selectedSubtitle, setSelectedSubtitle] = useState<string>("부제목 없음"); // 선택된 카테고리
+  const [selectedSubtitle, setSelectedSubtitle] = useState<string>('부제목 없음'); // 선택된 카테고리
 
   // 수정 권한이 없는 경우엔 수정을 시도하려던 게시글로 이동합니다.
   useEffect(() => {
     if (postId && !canEdit) {
-      window.alert("수정 권한 없음");
+      window.alert('수정 권한 없음');
       router.push(`/posts/${postId}`);
     }
   }, [postId, canEdit, router]);
@@ -56,7 +56,7 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
   // 수정할 게시물이 존재하지 않을 경우 category로 redirect 합니다.
   useEffect(() => {
     if (postId && !loading && !postData) {
-      window.alert("수정할 게시물이 존재하지 않습니다.");
+      window.alert('수정할 게시물이 존재하지 않습니다.');
       router.push(`/category`);
     }
   }, [router, postId, loading, postData]);
@@ -83,11 +83,11 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
 
       // postId 여부에 따라 POST 요청을 보내는 api가 다릅니다.
       // postId가 없다면 새로운 글을 작성하고, postId가 있다면 게시글을 수정합니다.
-      const res = await editPostData(postId ? postId : "", editContents);
+      const res = await editPostData(postId ? postId : '', editContents);
 
       // 수정할 게시물이 존재하지 않을 경우
       if (!res) {
-        window.alert("수정할 게시물이 존재하지 않습니다.");
+        window.alert('수정할 게시물이 존재하지 않습니다.');
         router.push(`/category`);
         return;
       }
@@ -96,7 +96,7 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
       router.push(`/posts/${res.id}`); // 해당 게시물로 redirect 합니다.
       router.refresh();
     } catch (error) {
-      console.error("게시물 수정 오류:", error);
+      console.error('게시물 수정 오류:', error);
     }
   };
 
@@ -120,7 +120,7 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
     <>
       {postId && loading ? (
         <div className={styles.spinContainer}>
-          <Spin size="m" message="에디터를 불러오는 중입니다." />
+          <Spin size='m' message='에디터를 불러오는 중입니다.' />
         </div>
       ) : postId && (!canEdit || !postData) ? (
         <div>{null}</div>
@@ -129,8 +129,8 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
           <div className={styles.head}>
             <input
               className={styles.title}
-              type="text"
-              placeholder="제목"
+              type='text'
+              placeholder='제목'
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />

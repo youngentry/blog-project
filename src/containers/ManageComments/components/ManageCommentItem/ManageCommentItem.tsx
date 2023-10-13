@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import React from "react";
-import styles from "./ManageCommentItem.module.scss";
-import { Comment } from "@/types/post";
-import { getDateForm } from "@/utils/getDateForm";
-import Link from "next/link";
-import { BsArrowUpRightSquare } from "react-icons/bs";
-import { useManageCommentsInterface } from "@/hooks/useManageComments";
-import { deleteCommentApi } from "@/services/commentsFetch";
+import React from 'react';
+import styles from './ManageCommentItem.module.scss';
+import { Comment } from '@/types/post';
+import { getDateForm } from '@/utils/getDateForm';
+import Link from 'next/link';
+import { BsArrowUpRightSquare } from 'react-icons/bs';
+import { useManageCommentsInterface } from '@/hooks/useManageComments';
+import { deleteCommentApi } from '@/services/commentsFetch';
 
 const ManageCommentItem = ({ comments, setComments }: useManageCommentsInterface) => {
   // 삭제 버튼 클릭 이벤트
   const handleClickDeleteButton = async (postId: string, _id: string) => {
     // 댓글 삭제 확인
-    if (!window.confirm("정말로 댓글을 삭제하시겠습니까?")) {
+    if (!window.confirm('정말로 댓글을 삭제하시겠습니까?')) {
       return;
     }
 
@@ -23,14 +23,12 @@ const ManageCommentItem = ({ comments, setComments }: useManageCommentsInterface
 
       // 삭제 권한이 없는 경우
       if (!res) {
-        window.alert("삭제 권한이 없습니다.");
+        window.alert('삭제 권한이 없습니다.');
         return;
       }
 
       // 삭제한 댓글을 제외한 결과를 state에 저장합니다.
-      const afterDeleteComments: Comment[] = comments.filter(
-        (comment: Comment) => String(comment._id) !== _id
-      );
+      const afterDeleteComments: Comment[] = comments.filter((comment: Comment) => String(comment._id) !== _id);
       setComments(afterDeleteComments);
     } catch (err) {
       console.error(err);
@@ -47,12 +45,7 @@ const ManageCommentItem = ({ comments, setComments }: useManageCommentsInterface
             <div className={styles.itemHead}>
               <h3 className={styles.title}>
                 <span>게시물</span>
-                <Link
-                  className={styles.postLink}
-                  href={`/posts/${parentId}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link className={styles.postLink} href={`/posts/${parentId}`} target='_blank' rel='noopener noreferrer'>
                   {title}
                   <BsArrowUpRightSquare />
                 </Link>

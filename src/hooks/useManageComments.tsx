@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { getManageCommentsApi } from "@/services/manageFetch";
-import { Comment } from "@/types/post";
-import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
-import useLoading from "./useLoading";
+import { getManageCommentsApi } from '@/services/manageFetch';
+import { Comment } from '@/types/post';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import useLoading from './useLoading';
 
 export interface useManageCommentsInterface {
   comments: Comment[];

@@ -1,15 +1,11 @@
-"use client";
+'use client';
 
-import React, { RefObject, SetStateAction, useEffect, Dispatch } from "react";
+import React, { RefObject, SetStateAction, useEffect, Dispatch } from 'react';
 
 /**
  * ref로 가리키고 있는 Node의 바깥을 클릭하면 setState에 value를 넣어 실행합니다.
  */
-const useClickOutside = (
-  ref: RefObject<HTMLElement>,
-  setState: Dispatch<SetStateAction<any>>,
-  value: any
-) => {
+const useClickOutside = (ref: RefObject<HTMLElement>, setState: Dispatch<SetStateAction<any>>, value: any) => {
   return useEffect(() => {
     // 메뉴 모달의 바깥쪽을 눌렀을 때 실행
     const clickOutside = (e: MouseEvent) => {
@@ -19,11 +15,11 @@ const useClickOutside = (
     };
 
     // event 실행
-    document.addEventListener("mousedown", clickOutside);
+    document.addEventListener('mousedown', clickOutside);
 
     // 컴포넌트 해제되면 이벤트 삭제
     return () => {
-      document.removeEventListener("mousedown", clickOutside);
+      document.removeEventListener('mousedown', clickOutside);
     };
   }, []);
 };

@@ -1,6 +1,6 @@
-import NextAuth from "next-auth";
+import NextAuth from 'next-auth';
 
-declare module "next-atuh" {
+declare module 'next-atuh' {
   interface JWT {
     name: string;
     email: string;

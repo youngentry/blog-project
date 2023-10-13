@@ -1,5 +1,5 @@
 const transformPadUnit = (unit: number) => {
-  return unit.toString().padStart(2, "0");
+  return unit.toString().padStart(2, '0');
 };
 
 /**

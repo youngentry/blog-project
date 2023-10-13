@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import CardItem from "./components/Card/CardItem";
-import styles from "./Category.module.scss";
-import Pagination from "@/components/Pagination/Pagination";
-import { Card } from "@/types/post";
-import React from "react";
-import usePostCards from "@/hooks/usePostCards";
-import Spin from "@/components/loadings/Spin/Spin";
+import CardItem from './components/Card/CardItem';
+import styles from './Category.module.scss';
+import Pagination from '@/components/Pagination/Pagination';
+import { Card } from '@/types/post';
+import React from 'react';
+import usePostCards from '@/hooks/usePostCards';
+import Spin from '@/components/loadings/Spin/Spin';
 
 // category (게시물 목록)페이지입니다.
 // 게시물 카드를 map으로 렌더링 하고, 각각의 게시물 카드에는 게시물 데이터를 props 전달합니다.
@@ -16,10 +16,10 @@ const Category = ({ searchParams }: any) => {
 
   return (
     <div className={styles.category}>
-      <h2>{subtitle ? subtitle : "전체 게시물"}</h2>
+      <h2>{subtitle ? subtitle : '전체 게시물'}</h2>
 
       {loading ? (
-        <Spin size="m" message="게시물 목록을 불러오는 중입니다." />
+        <Spin size='m' message='게시물 목록을 불러오는 중입니다.' />
       ) : postCards ? (
         <>
           <ul className={styles.cardContainer}>

@@ -1,13 +1,13 @@
-import { connectDB } from "@/utils/db/db";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import NextAuth, { NextAuthOptions, Session } from "next-auth";
-import GithubProvider from "next-auth/providers/github";
-import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcrypt";
-import { JWT } from "next-auth/jwt";
+import { connectDB } from '@/utils/db/db';
+import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
+import NextAuth, { NextAuthOptions, Session } from 'next-auth';
+import GithubProvider from 'next-auth/providers/github';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import bcrypt from 'bcrypt';
+import { JWT } from 'next-auth/jwt';
 
 const githubSocial =
-  process.env.NODE_ENV === "development"
+  process.env.NODE_ENV === 'development'
     ? {
         clientId: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_ID as string,
         clientSecret: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_SECRET as string,
@@ -20,7 +20,7 @@ const githubSocial =
 // next-auth 로그인 설정입니다.
 export const authOptions: NextAuthOptions = {
   pages: {
-    newUser: "/auth/new-user",
+    newUser: '/auth/new-user',
   },
 
   providers: [
@@ -32,23 +32,27 @@ export const authOptions: NextAuthOptions = {
 
     CredentialsProvider({
       //1. 로그인페이지로 이동하여 작성할 form을 생성
-      name: "credentials",
+      name: 'credentials',
       credentials: {
         name: {
-          label: "테스터 아이디",
-          type: "text",
-          placeholder: "tester id",
+          label: '테스터 아이디',
+          type: 'text',
+          placeholder: 'tester id',
         },
-        password: { label: "비밀번호", type: "password", placeholder: "tester password" },
+        password: {
+          label: '비밀번호',
+          type: 'password',
+          placeholder: 'tester password',
+        },
       },
 
       //2. form을 통해 로그인 요청시 db와 회원정보 대조
       async authorize(credentials) {
-        let db = (await connectDB).db("blog");
-        let user = await db.collection("user_credentials").findOne({ name: credentials?.name });
+        let db = (await connectDB).db('blog');
+        let user = await db.collection('user_credentials').findOne({ name: credentials?.name });
 
         // db에 존재하는 email이 아니면 로그인 실패
-        if (!user || user.email === "visitor") {
+        if (!user || user.email === 'visitor') {
           return null;
         }
 
@@ -64,7 +68,7 @@ export const authOptions: NextAuthOptions = {
 
   // cookie에 session token을 저장할 때 만료시간 설정
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: 3 * 24 * 60 * 60, // 3일
   },
 

@@ -1,6 +1,6 @@
-import { connectDB } from "@/utils/db/db";
-import { ObjectId } from "mongodb";
-import { NextRequest, NextResponse } from "next/server";
+import { connectDB } from '@/utils/db/db';
+import { ObjectId } from 'mongodb';
+import { NextRequest, NextResponse } from 'next/server';
 
 interface EditPostForm {
   title: string;
@@ -14,8 +14,8 @@ export const POST = async (req: NextRequest, { params }: Params) => {
   const { postId } = params; // 게시물 번호
 
   // DB와 Collection 연결
-  const db = (await connectDB).db("blog");
-  const postCollection = db.collection("posts");
+  const db = (await connectDB).db('blog');
+  const postCollection = db.collection('posts');
   const editFormData = await req.json();
 
   // 게시물 작성자 정보
@@ -35,5 +35,5 @@ export const POST = async (req: NextRequest, { params }: Params) => {
   if (result) {
     return NextResponse.json({ id: postId }, { status: 200 }); // 응답에 게시물 id를 포함하여 redirect할 수 있도록 합니다.
   }
-  return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+  return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
 };

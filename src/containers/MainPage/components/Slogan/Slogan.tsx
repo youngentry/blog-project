@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./Slogan.module.scss";
-import { Logo } from "@/components/logos/logos";
+import React from 'react';
+import styles from './Slogan.module.scss';
+import { Logo } from '@/components/logos/logos';
 
 const Slogan = () => {
   return (
@@ -15,8 +15,8 @@ const Slogan = () => {
         궁금하면 만들어 봐! (ง •_•)ง
       </p>
       <div className={styles.links}>
-        <Logo domainName="github" />
-        <Logo domainName="tistory" />
+        <Logo domainName='github' />
+        <Logo domainName='tistory' />
       </div>
     </div>
   );

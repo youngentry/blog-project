@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import styles from "./PostItem.module.scss";
-import EditPostButton from "@/components/buttons/EditPostButton/EditPostButton";
-import { sanitize } from "dompurify";
-import DeletePostButton from "@/components/buttons/DeletePostButton/DeletePostButton";
-import Comment from "../Comment/Comment";
-import { checkSameAuthor } from "@/utils/sessionCheck/checkSameAuthor";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import usePostItem, { UsePostItemInterface } from "@/hooks/usePostItem";
-import Spin from "@/components/loadings/Spin/Spin";
-import GoPostCommentButton from "@/components/buttons/GoPostCommentButton/GoPostCommentButton";
-import LikePostButton from "@/components/buttons/LikePostButton/LikePostButton";
-import { getDateForm } from "@/utils/getDateForm";
+import Image from 'next/image';
+import styles from './PostItem.module.scss';
+import EditPostButton from '@/components/buttons/EditPostButton/EditPostButton';
+import { sanitize } from 'dompurify';
+import DeletePostButton from '@/components/buttons/DeletePostButton/DeletePostButton';
+import Comment from '../Comment/Comment';
+import { checkSameAuthor } from '@/utils/sessionCheck/checkSameAuthor';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import usePostItem, { UsePostItemInterface } from '@/hooks/usePostItem';
+import Spin from '@/components/loadings/Spin/Spin';
+import GoPostCommentButton from '@/components/buttons/GoPostCommentButton/GoPostCommentButton';
+import LikePostButton from '@/components/buttons/LikePostButton/LikePostButton';
+import { getDateForm } from '@/utils/getDateForm';
 
 // 게시물 하나의 컴포넌트입니다.
 const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) => {
@@ -30,11 +30,7 @@ const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) 
   if (!postData) {
     return (
       <article className={styles.container}>
-        {loading ? (
-          <Spin size="m" message="게시물을 불러오는 중입니다." />
-        ) : (
-          <div>게시물이 존재하지 않습니다.</div>
-        )}
+        {loading ? <Spin size='m' message='게시물을 불러오는 중입니다.' /> : <div>게시물이 존재하지 않습니다.</div>}
       </article>
     );
   }
@@ -49,11 +45,11 @@ const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) 
       <div className={styles.post}>
         <header className={styles.header}>
           <div className={styles.subtitle}>
-            <Link href={{ pathname: "/category", query: { subtitle } }}>
+            <Link href={{ pathname: '/category', query: { subtitle } }}>
               <span>#{subtitle}</span>
             </Link>
           </div>
-          <h2>{title || "제목없음"}</h2>
+          <h2>{title || '제목없음'}</h2>
           <div className={styles.info}>
             <span className={styles.author}>{author}</span>
             <span className={styles.author}>{getDateForm(String(date), true)}</span>
@@ -66,7 +62,7 @@ const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) 
           </div>
         </header>
         <div className={styles.content}>
-          <Image src={src} alt="post content image" width={300} height={300} />
+          <Image src={src} alt='post content image' width={300} height={300} />
           <div dangerouslySetInnerHTML={{ __html: sanitize(contents) }} />
         </div>
         <div className={styles.countsBox}>
