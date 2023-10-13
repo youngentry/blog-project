@@ -9,6 +9,7 @@ interface Card {
   subtitle: string;
   languages: string[];
   author: string;
+  email: string;
   date: Date | string;
   commentCount: number;
   likes: string[];
@@ -18,7 +19,6 @@ interface Card {
 interface Post extends Card {
   _id?: string;
   contents: string;
-  email: string;
 }
 
 // 게시물 컨텐츠

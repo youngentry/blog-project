@@ -15,7 +15,7 @@ export const GET = async (req: NextRequest) => {
 
   // card에 불필요한 데이터는 제외하고 반환합니다.
   const cardsData: Card[] = await postCollection
-    .find(query, { projection: { email: 0, content: 0, _id: 0 } })
+    .find(query, { projection: { content: 0, _id: 0 } })
     .toArray();
   if (cardsData) {
     return NextResponse.json(cardsData, { status: 200 });

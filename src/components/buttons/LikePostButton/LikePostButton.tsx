@@ -33,18 +33,14 @@ const LikePostButton = ({
 
   // 좋아요 요청 성공 시 이벤트
   const handleSuccess = (likeCount: number) => {
-    // like 숫자 변경
-    setPostLike(likeCount);
-
-    // card 페이지에서는 로그인 여부와 관계 없이 heart 표시를 합니다.
-    if (userEmail) {
-      setIsLiked(!isLiked);
-    }
+    setPostLike(likeCount); // like 숫자 변경
+    setIsLiked(!isLiked);
   };
 
   return (
     <button className={`${styles.likePost} ${className}`} onClick={() => handleClickLikePostButton()}>
-      {isLiked ? <BsFillHeartFill /> : <BsHeart />} {likeCount}
+      {isLiked ? <BsFillHeartFill /> : <BsHeart />}
+      {likeCount}
     </button>
   );
 };

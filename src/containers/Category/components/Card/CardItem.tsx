@@ -8,7 +8,7 @@ import GoPostCommentButton from "@/components/buttons/GoPostCommentButton/GoPost
 
 // category (게시물 목록)페이지에서 하나의 게시물 카드입니다.
 const CardItem = ({ data }: { data: Card }) => {
-  let { id, src, title, subtitle, commentCount, likes, author, date } = data;
+  let { id, src, title, subtitle, commentCount, likes, author, date, email } = data;
   date = getDateForm(date);
   const link = `/posts/${id}`;
 
@@ -35,7 +35,7 @@ const CardItem = ({ data }: { data: Card }) => {
           </div>
           <div className={styles.counts}>
             <GoPostCommentButton postId={String(id)}>{commentCount}</GoPostCommentButton>
-            <LikePostButton likes={likes} postId={String(id)} />
+            <LikePostButton likes={likes} postId={String(id)} userEmail={email} />
           </div>
         </div>
       </div>
