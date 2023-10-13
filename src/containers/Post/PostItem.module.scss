@@ -1,4 +1,5 @@
 @import "@/styles/mixins/flex.scss";
+@import "@/styles/mixins/after.scss";
 
 .container {
   margin: 6rem auto;
@@ -8,23 +9,43 @@
 
   .post {
     width: 100%;
-    h2 {
-      padding: 1rem 0;
-      text-align: center;
-      font-size: var(--ft-36);
-    }
-
-    .subtitle {
-      margin-bottom: 5px;
-    }
-
-    .info {
-      padding-bottom: 1rem;
-      border-bottom: var(--1-solid);
-      .author {
-        margin-right: 5px;
+    .header {
+      margin-bottom: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      h2 {
+        margin-bottom: 0.5rem;
+        font-size: var(--ft-36);
       }
-      .date {
+
+      .subtitle {
+        margin-bottom: 0.5rem;
+        margin-right: auto;
+        color: var(--color-blue-dark);
+        span {
+          font-size: var(--ft-17);
+          font-weight: 500;
+        }
+      }
+
+      .info {
+        display: flex;
+        align-items: center;
+        padding-bottom: 1rem;
+        border-bottom: var(--1-solid);
+        color: var(--color-text-week);
+        .author {
+          @include afterBar();
+        }
+        .date {
+          @include afterBar();
+        }
+
+        .buttons {
+          display: flex;
+          gap: 0.25rem;
+        }
       }
     }
 

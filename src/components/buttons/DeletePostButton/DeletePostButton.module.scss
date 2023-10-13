@@ -1,0 +1,7 @@
+@import "@/styles/mixins/hover.scss";
+
+.deletePostButton {
+  display: flex;
+  color: var(--color-text-week);
+  @include hoverText();
+}

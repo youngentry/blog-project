@@ -3,6 +3,7 @@
 import { deletePostData } from "@/services/postsFetch";
 import { useRouter } from "next/navigation";
 import React from "react";
+import styles from "./DeletePostButton.module.scss";
 
 // 삭제하기 버튼을 클릭하면 해당 게시물을 삭제합니다.
 const DeletePostButton = ({ postId }: { postId: string }) => {
@@ -31,7 +32,11 @@ const DeletePostButton = ({ postId }: { postId: string }) => {
     router.refresh();
   };
 
-  return <button onClick={() => handleClickDeleteButton()}>삭제</button>;
+  return (
+    <button className={styles.deletePostButton} onClick={() => handleClickDeleteButton()}>
+      삭제
+    </button>
+  );
 };
 
 export default DeletePostButton;

@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import styles from "./PostItem.module.scss";
-import EditPostButton from "@/components/buttons/EditPostButton";
+import EditPostButton from "@/components/buttons/EditPostButton/EditPostButton";
 import { sanitize } from "dompurify";
-import DeletePostButton from "@/components/buttons/DeletePostButton";
+import DeletePostButton from "@/components/buttons/DeletePostButton/DeletePostButton";
 import Comment from "../Comment/Comment";
 import { checkSameAuthor } from "@/utils/sessionCheck/checkSameAuthor";
 import Link from "next/link";
@@ -13,6 +13,7 @@ import usePostItem, { UsePostItemInterface } from "@/hooks/usePostItem";
 import Spin from "@/components/loadings/Spin/Spin";
 import GoPostCommentButton from "@/components/buttons/GoPostCommentButton/GoPostCommentButton";
 import LikePostButton from "@/components/buttons/LikePostButton/LikePostButton";
+import { getDateForm } from "@/utils/getDateForm";
 
 // 게시물 하나의 컴포넌트입니다.
 const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) => {
@@ -46,21 +47,21 @@ const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) 
   return (
     <article className={styles.container}>
       <div className={styles.post}>
-        <header>
-          <h2>{title || "제목없음"}</h2>
+        <header className={styles.header}>
           <div className={styles.subtitle}>
             <Link href={{ pathname: "/category", query: { subtitle } }}>
-              <span>{subtitle}</span>
+              <span>#{subtitle}</span>
             </Link>
           </div>
+          <h2>{title || "제목없음"}</h2>
           <div className={styles.info}>
-            <span>{author}</span>
-            <span>{date.toString()}</span>
+            <span className={styles.author}>{author}</span>
+            <span className={styles.author}>{getDateForm(String(date), true)}</span>
             {isSameAuthor && (
-              <>
+              <div className={styles.buttons}>
                 <EditPostButton postId={postId} />
                 <DeletePostButton postId={postId} />
-              </>
+              </div>
             )}
           </div>
         </header>
