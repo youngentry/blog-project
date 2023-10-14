@@ -108,7 +108,7 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
   };
 
   return (
-    <>
+    <div className={styles.container}>
       {postId && loading ? (
         <div className={styles.spinContainer}>
           <Spin size='m' message='에디터를 불러오는 중입니다.' />
@@ -116,7 +116,7 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
       ) : postId && (!canEdit || !postData) ? (
         <div>{null}</div>
       ) : (
-        <div className={styles.container}>
+        <>
           <div className={styles.head}>
             <input
               className={styles.title}
@@ -136,9 +136,9 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
             </button>
             <button type='button'>취소하기</button>
           </div>
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 };
 
