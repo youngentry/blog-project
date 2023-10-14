@@ -29,7 +29,7 @@ export interface PostContents {
 }
 
 // 댓글 입력 폼
-export interface CommentForm {
+export interface CommentFormInterface {
   title: string;
   nickname: string;
   password: string;
@@ -37,7 +37,7 @@ export interface CommentForm {
 }
 
 // 댓글
-export interface Comment extends CommentForm {
+export interface Comment extends CommentFormInterface {
   _id?: ObjectId;
   parentId: number;
   author: string;
@@ -47,7 +47,7 @@ export interface Comment extends CommentForm {
 }
 
 // 댓글 CommentListProps 컴포넌트 프롭스 타입
-export interface CommentListProps {
+export interface CommentListPropsInterface {
   postId: string;
   newUpdate: boolean;
   userEmail: string;
@@ -56,7 +56,7 @@ export interface CommentListProps {
 }
 
 // 댓글 CommentFormProps 컴포넌트 프롭스 타입
-export interface CommentFormProps extends CommentListProps {
+export interface CommentFormPropsInterface extends CommentListPropsInterface {
   title: string;
   setNewUpdate: Dispatch<SetStateAction<boolean>>;
 }
@@ -68,6 +68,6 @@ export interface SubCategoryType {
   parent?: string;
 }
 
-export interface CommonCategoryInterface extends SubCategoryType {
+export interface CommonCategoryType extends SubCategoryType {
   children?: SubCategoryType[];
 }

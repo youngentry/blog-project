@@ -33,9 +33,9 @@ const UserMenu = ({ session }: { session: UserSessionData | null }) => {
 
   return (
     <div className={styles.userMenus} ref={userMenuRef}>
-      <div className={styles.thumbnail} onClick={toggleUserMenuVisible}>
+      <button className={styles.thumbnail} onClick={toggleUserMenuVisible} type='button'>
         <UserProfile session={session} />
-      </div>
+      </button>
       <ul className={`${styles.menuList} ${isMenuVisible && 'visible'}`}>
         {session && (
           <>
