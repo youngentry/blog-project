@@ -1,26 +1,17 @@
 'use client';
 
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
-import Quill from './components/Quill/Quill';
-import styles from './PostEditor.module.scss';
 import { useRouter } from 'next/navigation';
+
 import { editPostData } from '@/services/postsFetch';
-import CategorySelector from './components/CategorySelector/CategorySelector';
-import { ObjectId } from 'mongodb';
 import usePostItem, { UsePostItemInterface } from '@/hooks/usePostItem';
 import useCategoryList from '@/hooks/useCategoryList';
+import { CommonCategoryType } from '@/types/post';
+
+import CategorySelector from './components/CategorySelector/CategorySelector';
+import styles from './PostEditor.module.scss';
+import Quill from './components/Quill/Quill';
 import Spin from '@/components/loadings/Spin/Spin';
-
-export interface SubCategoryType {
-  _id?: string | ObjectId;
-  role: string;
-  title: string;
-  parent?: string;
-}
-
-export interface CommonCategoryType extends SubCategoryType {
-  children?: SubCategoryType[];
-}
 
 export interface CategorySelectorProps {
   categoryList: CommonCategoryType[];
@@ -35,8 +26,8 @@ export interface CategorySelectorProps {
 const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => {
   const router = useRouter(); // 작성 완료되면 게시물로 redirect 합니다.
 
-  const { postData, setPostData, loading }: UsePostItemInterface = usePostItem(postId || ''); // 수정하기 에디터에 불러올 게시물 내용
-  const { categoryList, setCategoryList } = useCategoryList(); // 카테고리 목록
+  const { postData, loading }: UsePostItemInterface = usePostItem(postId || ''); // 수정하기 에디터에 불러올 게시물 내용
+  const { categoryList } = useCategoryList(); // 카테고리 목록
 
   const [title, setTitle] = useState(''); // 게시글 제목
   const [categoryId, setCategoryId] = useState<string>('6516f855d44958b59ed7b8d5'); // "카테고리 없음" 메인 카테고리의 디폴트 값입니다.
@@ -83,7 +74,7 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
 
       // postId 여부에 따라 POST 요청을 보내는 api가 다릅니다.
       // postId가 없다면 새로운 글을 작성하고, postId가 있다면 게시글을 수정합니다.
-      const res = await editPostData(postId ? postId : '', editContents);
+      const res = await editPostData(postId || '', editContents);
 
       // 수정할 게시물이 존재하지 않을 경우
       if (!res) {
@@ -140,8 +131,10 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
             <Quill {...quillProps} />
           </div>
           <div>
-            <button onClick={(e) => handleClickEditButton(e)}>작성하기</button>
-            <button>취소하기</button>
+            <button onClick={(e) => handleClickEditButton(e)} type='button'>
+              작성하기
+            </button>
+            <button type='button'>취소하기</button>
           </div>
         </div>
       )}

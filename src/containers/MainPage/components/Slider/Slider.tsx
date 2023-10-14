@@ -3,8 +3,9 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import styles from './Slider.module.scss';
 import { Pagination, Autoplay } from 'swiper/modules';
+
+import styles from './Slider.module.scss';
 import SliderItem from '../SliderItem/SliderItem';
 
 export interface SlideItemProps {
@@ -53,12 +54,12 @@ const Slider = () => {
         modules={[Pagination, Autoplay]}
         className={styles.swiper}
       >
-        {slideItem.map((item, index) => {
+        {slideItem.map((item) => {
           const slideItemProps: SlideItemProps = {
             ...item,
           };
           return (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={item.link}>
               <SliderItem slideItemProps={slideItemProps} />
             </SwiperSlide>
           );

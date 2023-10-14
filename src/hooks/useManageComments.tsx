@@ -1,8 +1,9 @@
 'use client';
 
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+
 import { getManageCommentsApi } from '@/services/manageFetch';
 import { Comment } from '@/types/post';
-import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import useLoading from './useLoading';
 
 export interface useManageCommentsInterface {
@@ -20,17 +21,17 @@ const useManageComments = () => {
     (async () => {
       try {
         // GET 요청을 보냅니다.
-        const comments = await getManageCommentsApi();
+        const commentsResponse = await getManageCommentsApi();
         // 불러온 댓글 리스트를 state에 저장합니다.
-        setComments(comments);
+        setComments(commentsResponse);
         setLoading(false);
       } catch (err) {
         console.error(err);
       }
     })();
-  }, []);
+  }, [setLoading]);
 
-  return { comments, setComments, loading };
+  return { comments, setComments, loading, setLoading };
 };
 
 export default useManageComments;

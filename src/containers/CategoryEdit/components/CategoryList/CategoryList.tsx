@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import styles from './CategoryList.module.scss';
+
 import { getCategoriesApi } from '@/services/categoryFetch';
+
+import styles from './CategoryList.module.scss';
 import AddSubCategoryForm from '../AddSubCategoryForm/AddSubCategoryForm';
 import SubCategoryList from '../SubCategoryList/SubCategoryList';
 
@@ -15,6 +17,8 @@ const CategoryList = () => {
       if (res) {
         return res;
       }
+
+      return [];
     };
 
     (async () => {

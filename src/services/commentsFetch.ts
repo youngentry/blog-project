@@ -1,4 +1,5 @@
 import { Comment, CommentForm } from '@/types/post';
+
 import { setFetchOptions } from './fetchOptions';
 
 /**
@@ -28,7 +29,7 @@ export const postCommentApi = async (postId: string, body: CommentForm) => {
 
   // 요청 결과 반환
   const res = await fetch(url, options);
-  return res.ok ? true : false;
+  return !!res.ok;
 };
 
 /**
@@ -44,7 +45,7 @@ export const patchCommentApi = async (postId: string, _id: string, body: string)
 
   // 요청 결과 반환
   const res = await fetch(url, options);
-  return res.ok ? true : false;
+  return !!res.ok;
 };
 
 /**
@@ -61,7 +62,7 @@ export const deleteCommentApi = async (postId: string, _id: string) => {
 
   // 요청 결과 반환
   const res = await fetch(url, options);
-  return res.ok ? true : false;
+  return !!res.ok;
 };
 
 /**
@@ -77,5 +78,5 @@ export const postGuestCommentDeletionApi = async (postId: string, _id: string, p
 
   // 요청 결과 반환
   const res = await fetch(url, options);
-  return res.ok ? true : false;
+  return !!res.ok;
 };

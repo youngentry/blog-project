@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './NavHead.module.scss';
 import BlogTitle from './components/BlogTitle/BlogTitle';
 import OpenSideMenuButton from './components/OpenSideMenuButton/OpenSideMenuButton';

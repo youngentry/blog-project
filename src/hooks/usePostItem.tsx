@@ -1,6 +1,7 @@
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+
 import { getPostItemData } from '@/services/postsFetch';
 import { Post } from '@/types/post';
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import useLoading from './useLoading';
 
 export interface UsePostItemInterface {
@@ -22,7 +23,7 @@ const usePostItem = (postId: string) => {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [postId, setLoading]);
 
   return { postData, setPostData, loading };
 };

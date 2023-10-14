@@ -4,5 +4,5 @@
  * @returns
  */
 export const statusCheck = (status: number) => {
-  return ~~(status / 100) === 2;
+  return Math.floor(status / 100) === 2;
 };

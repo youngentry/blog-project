@@ -1,6 +1,7 @@
-import { Post } from '@/types/post';
-import { connectDB } from '@/utils/db/db';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { connectDB } from '@/utils/db/db';
+import { Params } from '@/types/session';
 
 // 게시물 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest, { params }: Params) => {

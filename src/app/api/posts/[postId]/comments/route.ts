@@ -1,11 +1,13 @@
-import { CommentForm, Comment, Post } from '@/types/post';
-import { connectDB } from '@/utils/db/db';
 import { ObjectId } from 'mongodb';
 import { JWT, getToken } from 'next-auth/jwt';
 import { hash } from 'bcrypt';
+import { NextRequest, NextResponse } from 'next/server';
+
+import { CommentForm, Comment, Post } from '@/types/post';
+import { connectDB } from '@/utils/db/db';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
-import { NextRequest, NextResponse } from 'next/server';
+import { Params } from '@/types/session';
 
 // 댓글 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest, { params }: Params) => {
@@ -35,7 +37,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
 
   const { MIN_NICKNAME, MIN_PASSWORD, MIN_COMMENT, MAX_NICKNAME, MAX_PASSWORD, MAX_COMMENT } = COMMENT_FORM_LENGTH;
 
-  let { nickname, password, comment, title }: CommentForm = data;
+  const { nickname, password, comment, title }: CommentForm = data;
 
   // nickname또는 password를 입력했는지 검사합니다.
   if (!token && (nickname.length < MIN_NICKNAME || password.length < MIN_PASSWORD)) {
@@ -69,7 +71,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
     comment, // 댓글 내용
     date: new Date(), // 작성 시간
     thumbnail: '', // 댓글 옆에 표시되는 이미지 주소
-    isLoggedIn: token ? true : false, // 게스트 댓글 or 유저 댓글 여부
+    isLoggedIn: !!token, // 게스트 댓글 or 유저 댓글 여부
   };
 
   // 댓글 작성 결과

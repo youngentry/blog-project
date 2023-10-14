@@ -1,7 +1,10 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import ManageLikes from '@/containers/ManageLikes/ManageLikes';
 import { getServerSession } from 'next-auth';
 import React from 'react';
+
+import ManageLikes from '@/containers/ManageLikes/ManageLikes';
+import { UserSessionData } from '@/types/session';
+
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 const ManageLikesRouter = async () => {
   const session: UserSessionData | null = await getServerSession(authOptions); // 유저 세션

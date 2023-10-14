@@ -1,12 +1,14 @@
 'use client';
 
 import 'react-quill/dist/quill.snow.css';
-import styles from './Quill.module.scss';
 import dynamic from 'next/dynamic';
+import { Dispatch, SetStateAction } from 'react';
+
+import styles from './Quill.module.scss';
 
 interface quillProps {
   contents: string;
-  setContents: React.Dispatch<React.SetStateAction<string>>;
+  setContents: Dispatch<SetStateAction<string>>;
 }
 
 // dynamic import. srr: false 옵션으로 클라이언트에서 동적으로 로드하도록 합니다.

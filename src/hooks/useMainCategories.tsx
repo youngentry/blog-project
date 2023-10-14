@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
 import useLoading from './useLoading';
 import { getCategoriesApi } from '@/services/categoryFetch';
 
@@ -13,15 +14,15 @@ const useMainCategories = () => {
     (async () => {
       try {
         // GET 요청을 보냅니다.
-        const mainCategories = await getCategoriesApi('main');
+        const categoriesResponse = await getCategoriesApi('main');
         // 불러온 댓글 리스트를 state에 저장합니다.
-        setMainCategories(mainCategories);
+        setMainCategories(categoriesResponse);
         setLoading(false);
       } catch (err) {
         console.error(err);
       }
     })();
-  }, []);
+  }, [setLoading]);
 
   return { mainCategories, setMainCategories, loading };
 };

@@ -1,8 +1,10 @@
 'use client';
 
-import { deletePostData } from '@/services/postsFetch';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+
+import { deletePostData } from '@/services/postsFetch';
+
 import styles from './DeletePostButton.module.scss';
 
 // 삭제하기 버튼을 클릭하면 해당 게시물을 삭제합니다.
@@ -33,7 +35,7 @@ const DeletePostButton = ({ postId }: { postId: string }) => {
   };
 
   return (
-    <button className={styles.deletePostButton} onClick={() => handleClickDeleteButton()}>
+    <button className={styles.deletePostButton} onClick={() => handleClickDeleteButton()} type='button'>
       삭제
     </button>
   );

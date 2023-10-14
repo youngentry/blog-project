@@ -1,5 +1,6 @@
-import ManageComments from '@/containers/ManageComments/ManageComments';
 import React from 'react';
+
+import ManageComments from '@/containers/ManageComments/ManageComments';
 
 const ManageCommentsRouter = () => {
   return (

@@ -1,6 +1,7 @@
-import { connectDB } from '@/utils/db/db';
 import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { connectDB } from '@/utils/db/db';
 
 // 좋아요 한 게시글을 불러오는 API입니다.
 export const GET = async (req: NextRequest) => {

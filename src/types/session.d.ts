@@ -1,4 +1,4 @@
-interface UserSessionData {
+export interface UserSessionData {
   user: {
     name: string;
     email: string;
@@ -6,7 +6,7 @@ interface UserSessionData {
   };
 }
 
-interface Params {
+export interface Params {
   params: {
     [key: string]: string;
   };

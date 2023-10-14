@@ -1,6 +1,6 @@
-import PostItem from '@/containers/Post/PostItem';
-import { checkSameAuthor } from '@/utils/sessionCheck/checkSameAuthor';
 import { getServerSession } from 'next-auth';
+
+import PostItem from '@/containers/Post/PostItem';
 
 // 게시글 페이지로 라우트합니다.
 // 게시글의 id를 Post component에 전달합니다.

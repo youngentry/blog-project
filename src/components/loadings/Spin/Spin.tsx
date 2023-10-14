@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
+
 import styles from './Spin.module.scss';
 
 /**
@@ -11,7 +12,7 @@ const Spin = ({ size, message = '' }: { size: string; message?: string }) => {
   const squareSize = size === 's' ? 50 : 100;
   return (
     <div className={styles.loadingBox}>
-      <Image src={`/images/loadings/loading-s.gif`} alt='loading' width={squareSize} height={squareSize} />
+      <Image src="/images/loadings/loading-s.gif" alt='loading' width={squareSize} height={squareSize} />
       <p>{message || '로딩중입니다.'}</p>
     </div>
   );

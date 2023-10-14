@@ -12,6 +12,7 @@ const NewPostButton = () => {
       onClick={() => {
         router.push('/manage/newpost');
       }}
+      type='button'
     >
       글쓰기
     </button>

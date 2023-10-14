@@ -1,5 +1,6 @@
-import { setFetchOptions } from './fetchOptions';
 import { CommonCategoryType } from '@/containers/Editor/PostEditor';
+
+import { setFetchOptions } from './fetchOptions';
 
 /**
  * 카테고리 조회 요청 GET
@@ -27,7 +28,7 @@ export const addCategoryApi = async (body: CommonCategoryType) => {
 
   // 요청 결과 반환
   const res = await fetch(url, options);
-  return res.ok ? true : false;
+  return !!res.ok;
 };
 
 /**

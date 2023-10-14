@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from './NoItem.module.scss';
 import Image from 'next/image';
+
+import styles from './NoItem.module.scss';
 
 const NoItem = ({ h2, src }: { h2: string; src: string }) => {
   return (

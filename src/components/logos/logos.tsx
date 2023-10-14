@@ -1,8 +1,9 @@
 import React from 'react';
-import styles from './logos.module.scss';
 import Image from 'next/image';
 import { BsArrowUpRightSquare } from 'react-icons/bs';
 import Link from 'next/link';
+
+import styles from './logos.module.scss';
 
 interface LogoProps {
   domainName: string; // ex) github, tistory
@@ -15,31 +16,33 @@ interface LogoProps {
  */
 export const Logo = (props: LogoProps) => {
   const { domainName, width, height } = props;
-  const lowerCase = domainName.toLocaleLowerCase();
-  const UpperCase = domainName.toUpperCase();
+  const lowerCasedHost = domainName.toLocaleLowerCase();
+  const UpperCasedHost = domainName.toUpperCase();
 
-  const getLink = (lowerCase: string) => {
-    if (lowerCase === 'github') {
+  const getLink = (domain: string) => {
+    if (domain === 'github') {
       return 'https://github.com/youngentry/blog-project';
     }
-    if (lowerCase === 'tistory') {
+    if (domain === 'tistory') {
       return 'https://sakuraop.tistory.com/category/blog';
     }
+
+    return '';
   };
 
-  const link = getLink(lowerCase); // 로고 클릭하면 연결되는 주소
+  const link = getLink(lowerCasedHost); // 로고 클릭하면 연결되는 주소
 
   return (
     <Link href={link as string} target='_blank' rel='noopener noreferrer'>
       <div className={styles.logo}>
         <Image
-          src={`/images/logos/${lowerCase}.png`}
-          alt={`${lowerCase} logo`}
+          src={`/images/logos/${lowerCasedHost}.png`}
+          alt={`${lowerCasedHost} logo`}
           width={width || 25}
           height={height || 25}
         />
         <p>
-          <span>{UpperCase}</span>
+          <span>{UpperCasedHost}</span>
           <i>
             <BsArrowUpRightSquare />
           </i>

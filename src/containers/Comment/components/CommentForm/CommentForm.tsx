@@ -1,11 +1,13 @@
 'use client';
 
 import React, { useState, FormEvent } from 'react';
-import styles from './CommentForm.module.scss';
+
 import { CommentFormProps, CommentForm } from '@/types/post';
 import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
-import { CustomInput, CustomTextarea, ReadOnlyInput } from '@/components/inputs/CustomInputs/CustomInputs';
 import { postCommentApi } from '@/services/commentsFetch';
+
+import { CustomInput, CustomTextarea, ReadOnlyInput } from '@/components/inputs/CustomInputs/CustomInputs';
+import styles from './CommentForm.module.scss';
 
 // 댓글 입력 폼입니다.
 // 비로그인 상태에서는(userEmail이 존재하지 않을 경우에) nickname, password input이 나타납니다.
@@ -41,6 +43,18 @@ const CommentForm = ({
     return true;
   };
 
+  // submit 성공 시 이벤트
+  const successSubmit = () => {
+    // form 초기화
+    setComment('');
+    setNickname('');
+    setPassword('');
+
+    // client component 업데이트
+    setNewUpdate(!newUpdate);
+    setPostCommentCount(postCommentCount + 1);
+  };
+
   // 댓글 작성
   const submitComment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -65,17 +79,6 @@ const CommentForm = ({
       console.error(err);
       window.alert('댓글 작성 중에 오류가 발생했습니다. 잠시 후에 다시 시도해주세요.');
     }
-  };
-
-  const successSubmit = () => {
-    // form 초기화
-    setComment('');
-    setNickname('');
-    setPassword('');
-
-    // client component 업데이트
-    setNewUpdate(!newUpdate);
-    setPostCommentCount(postCommentCount + 1);
   };
 
   // nickname input 속성
@@ -104,17 +107,19 @@ const CommentForm = ({
       <form className={styles.form} onSubmit={(e) => submitComment(e)}>
         {userEmail ? (
           <div className={`${styles.account} ${styles.sameAuthor}`}>
-            <ReadOnlyInput placeholder={'닉네임'} value={userEmail} />
-            <ReadOnlyInput placeholder={'비밀번호'} value={''} />
+            <ReadOnlyInput placeholder='닉네임' value={userEmail} />
+            <ReadOnlyInput placeholder='비밀번호' value='' />
           </div>
         ) : (
           <div className={styles.account}>
-            <CustomInput placeholder={'닉네임'} {...nicknameInputProps} />
-            <CustomInput placeholder={'비밀번호'} {...passwordInputProps} />
+            <CustomInput placeholder='닉네임' {...nicknameInputProps} />
+            <CustomInput placeholder='비밀번호' {...passwordInputProps} />
           </div>
         )}
-        <CustomTextarea className={styles.textarea} placeholder={'댓글을 입력하세요'} {...commentInputProps} />
-        <button className={styles.writeCommentButton}>댓글 작성</button>
+        <CustomTextarea className={styles.textarea} placeholder='댓글을 입력하세요' {...commentInputProps} />
+        <button className={styles.writeCommentButton} type='submit'>
+          댓글 작성
+        </button>
       </form>
     </div>
   );

@@ -1,6 +1,7 @@
 import { Card, Post, PostContents } from '@/types/post';
-import { setFetchOptions } from './fetchOptions';
 import BASE_URL from '@/constants/BASE_URL';
+
+import { setFetchOptions } from './fetchOptions';
 
 /**
  * 게시물 카드 리스트를 조회합니다.
@@ -58,7 +59,7 @@ export const deletePostData = async (postId: string) => {
 
   // 요청 결과 반환
   const res = await fetch(url, options);
-  return res.ok ? true : false;
+  return !!res.ok;
 };
 
 /**

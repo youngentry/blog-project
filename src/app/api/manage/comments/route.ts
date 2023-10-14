@@ -1,6 +1,7 @@
-import { connectDB } from '@/utils/db/db';
 import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { connectDB } from '@/utils/db/db';
 
 // 댓글 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest) => {

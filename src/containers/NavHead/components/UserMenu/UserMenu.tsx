@@ -1,14 +1,17 @@
-"use client";
+'use client';
 
-import React, { useRef, useState } from "react";
-import UserProfile from "@/components/UserProfile/UserProfile";
-import styles from "./UserMenu.module.scss";
-import { BsChevronRight } from "react-icons/bs";
-import LogOutButton from "@/components/buttons/LogOutButton/LogOutButton";
-import LogInButton from "@/components/buttons/LogInButton/LogInButton";
-import Notice from "@/components/notices/Notice";
-import useClickOutside from "@/hooks/useClickOutside";
-import Link from "next/link";
+import React, { useRef, useState } from 'react';
+import { BsChevronRight } from 'react-icons/bs';
+import Link from 'next/link';
+
+import useClickOutside from '@/hooks/useClickOutside';
+import { UserSessionData } from '@/types/session';
+
+import UserProfile from '@/components/UserProfile/UserProfile';
+import styles from './UserMenu.module.scss';
+import LogOutButton from '@/components/buttons/LogOutButton/LogOutButton';
+import LogInButton from '@/components/buttons/LogInButton/LogInButton';
+import Notice from '@/components/notices/Notice';
 
 /**
  * 블로그 유저 메뉴 컴포넌트입니다.
@@ -21,7 +24,7 @@ const UserMenu = ({ session }: { session: UserSessionData | null }) => {
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false); // 메뉴 visible 여부
 
   // 유저 프로필 클릭 시 menu visible 상태를 토글합니다.
-  const toggleUserMenuVisible = (e: React.MouseEvent) => {
+  const toggleUserMenuVisible = () => {
     setIsMenuVisible(!isMenuVisible);
   };
 
@@ -30,20 +33,20 @@ const UserMenu = ({ session }: { session: UserSessionData | null }) => {
 
   return (
     <div className={styles.userMenus} ref={userMenuRef}>
-      <div className={styles.thumbnail} onClick={(e) => toggleUserMenuVisible(e)}>
+      <div className={styles.thumbnail} onClick={toggleUserMenuVisible}>
         <UserProfile session={session} />
       </div>
-      <ul className={`${styles.menuList} ${isMenuVisible && "visible"}`}>
+      <ul className={`${styles.menuList} ${isMenuVisible && 'visible'}`}>
         {session && (
           <>
             <li className={`${styles.accountSetting} ${styles.menuItem}`}>
               <strong>{session.user.name}</strong>
               <p className={styles.userId}>
                 <span>{session.user.email}</span>
-                <button className={styles.manageAccountButton}>
+                <button className={styles.manageAccountButton} type='button'>
                   계정 관리
                   <div className={styles.notice}>
-                    <Notice boxPosition="right">계정 관리기능은 개발 중입니다.</Notice>
+                    <Notice boxPosition='right'>계정 관리기능은 개발 중입니다.</Notice>
                   </div>
                 </button>
               </p>
@@ -51,13 +54,13 @@ const UserMenu = ({ session }: { session: UserSessionData | null }) => {
             <li className={`${styles.myList} `}>
               <ul className={`${styles.myListItemBox} ${styles.menuItem}`}>
                 <li className={styles.myListItem}>
-                  <Link href="/manage/likes">좋아요 한 게시물</Link>
+                  <Link href='/manage/likes'>좋아요 한 게시물</Link>
                   <i>
                     <BsChevronRight />
                   </i>
                 </li>
                 <li className={styles.myListItem}>
-                  <Link href="/manage/comments">작성한 댓글</Link>
+                  <Link href='/manage/comments'>작성한 댓글</Link>
                   <i>
                     <BsChevronRight />
                   </i>
@@ -66,9 +69,7 @@ const UserMenu = ({ session }: { session: UserSessionData | null }) => {
             </li>
           </>
         )}
-        <li className={`${styles.logout} ${styles.menuItem}`}>
-          {session ? <LogOutButton /> : <LogInButton />}
-        </li>
+        <li className={`${styles.logout} ${styles.menuItem}`}>{session ? <LogOutButton /> : <LogInButton />}</li>
       </ul>
     </div>
   );

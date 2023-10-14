@@ -1,13 +1,15 @@
 'use client';
 
 import React from 'react';
-import styles from './ManageCommentItem.module.scss';
-import { Comment } from '@/types/post';
-import { getDateForm } from '@/utils/getDateForm';
 import Link from 'next/link';
 import { BsArrowUpRightSquare } from 'react-icons/bs';
+
+import { Comment } from '@/types/post';
+import { getDateForm } from '@/utils/getDateForm';
 import { useManageCommentsInterface } from '@/hooks/useManageComments';
 import { deleteCommentApi } from '@/services/commentsFetch';
+
+import styles from './ManageCommentItem.module.scss';
 
 const ManageCommentItem = ({ comments, setComments }: useManageCommentsInterface) => {
   // 삭제 버튼 클릭 이벤트
@@ -54,6 +56,7 @@ const ManageCommentItem = ({ comments, setComments }: useManageCommentsInterface
               <button
                 className={styles.deleteLikeButton}
                 onClick={() => handleClickDeleteButton(String(parentId), String(_id))}
+                type='button'
               >
                 삭제하기
               </button>

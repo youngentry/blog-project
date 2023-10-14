@@ -1,11 +1,12 @@
-import { CommonCategoryType } from '@/containers/Editor/PostEditor';
+import { useEffect, useState } from 'react';
+
 import { getCategoriesApi } from '@/services/categoryFetch';
-import React, { useEffect, useState } from 'react';
 import useLoading from './useLoading';
+import { CommonCategoryType } from '@/types/post';
 
 const useCategoryList = () => {
   const [categoryList, setCategoryList] = useState<CommonCategoryType[]>([]); // 카테고리 목록
-  const { loading, setLoading } = useLoading(); // 로딩 상태
+  const { loading } = useLoading(); // 로딩 상태
 
   useEffect(() => {
     (async () => {

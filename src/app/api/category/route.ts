@@ -1,6 +1,7 @@
+import { NextRequest, NextResponse } from 'next/server';
+
 import { Card, Post } from '@/types/post';
 import { connectDB } from '@/utils/db/db';
-import { NextRequest, NextResponse } from 'next/server';
 
 // 게시물 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest) => {

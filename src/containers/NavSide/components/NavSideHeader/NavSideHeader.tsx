@@ -1,8 +1,11 @@
-import styles from './NavSideHeader.module.scss';
 import { getServerSession } from 'next-auth';
-import { checkBlogManager } from '@/utils/sessionCheck/checkBlogManager';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Image from 'next/image';
+
+import { checkBlogManager } from '@/utils/sessionCheck/checkBlogManager';
+import { UserSessionData } from '@/types/session';
+
+import styles from './NavSideHeader.module.scss';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import NewPostButton from '@/components/buttons/NewPostButton/NewPostButton';
 import SearchPostButton from '@/components/buttons/SearchPostButton/SearchPostButton';
 import GoHomeButton from '@/components/buttons/GoHomeButton/GoHomeButton';
@@ -13,7 +16,7 @@ const NavSideHeader = async () => {
 
   return (
     <header className={styles.container}>
-      <Image src={'/profile.jpg'} alt='blog profile' width={240} height={200} />
+      <Image src='/profile.jpg' alt='blog profile' width={240} height={200} />
       <h2>Youngentry</h2>
       <div className={styles.buttons}>
         <SearchPostButton boxPosition='left' />

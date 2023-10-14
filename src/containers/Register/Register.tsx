@@ -1,9 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import styles from './Register.module.scss';
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
+
 import { postSignUpApi } from '@/services/registerFetch';
+
+import styles from './Register.module.scss';
 
 // 가입 페이지 컴포넌트입니다.
 // 현재는 비활성화하여 5초 뒤에 '/'로 되돌려 보냅니다.
@@ -30,8 +32,19 @@ const Register = () => {
   //   }, 1000);
   // }, []);
 
+  // submit 성공 시 실행
+  const successSubmit = () => {
+    // form 초기화
+    setNickname('');
+    setEmail('');
+    setPassword('');
+
+    window.alert('회원가입 되었습니다.');
+    router.push('/');
+  };
+
   // 댓글 작성
-  const submitSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+  const submitSignUp = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const signUpForm = {
@@ -51,16 +64,6 @@ const Register = () => {
       console.error(err);
       window.alert('댓글 작성 중에 오류가 발생했습니다. 잠시 후에 다시 시도해주세요.');
     }
-  };
-
-  const successSubmit = () => {
-    // form 초기화
-    setNickname('');
-    setEmail('');
-    setPassword('');
-
-    window.alert('회원가입 되었습니다.');
-    router.push('/');
   };
 
   return (

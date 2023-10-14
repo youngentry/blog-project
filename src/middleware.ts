@@ -1,7 +1,8 @@
 import { getToken } from 'next-auth/jwt';
-import { NextResponse } from 'next/server';
-import { NextRequest } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
+
 import { checkBlogManager } from './utils/sessionCheck/checkBlogManager';
+
 export { withAuth } from 'next-auth/middleware';
 
 // '/manage' 경로에 접근하는 클라이언트의 권한을 확인합니다.

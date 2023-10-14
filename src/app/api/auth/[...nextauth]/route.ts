@@ -1,10 +1,11 @@
-import { connectDB } from '@/utils/db/db';
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
 import NextAuth, { NextAuthOptions, Session } from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 import { JWT } from 'next-auth/jwt';
+
+import { connectDB } from '@/utils/db/db';
 
 const githubSocial =
   process.env.NODE_ENV === 'development'
@@ -31,7 +32,7 @@ export const authOptions: NextAuthOptions = {
     }),
 
     CredentialsProvider({
-      //1. 로그인페이지로 이동하여 작성할 form을 생성
+      // 1. 로그인페이지로 이동하여 작성할 form을 생성
       name: 'credentials',
       credentials: {
         name: {
@@ -46,10 +47,10 @@ export const authOptions: NextAuthOptions = {
         },
       },
 
-      //2. form을 통해 로그인 요청시 db와 회원정보 대조
+      // 2. form을 통해 로그인 요청시 db와 회원정보 대조
       async authorize(credentials) {
-        let db = (await connectDB).db('blog');
-        let user = await db.collection('user_credentials').findOne({ name: credentials?.name });
+        const db = (await connectDB).db('blog');
+        const user = await db.collection('user_credentials').findOne({ name: credentials?.name });
 
         // db에 존재하는 email이 아니면 로그인 실패
         if (!user || user.email === 'visitor') {
@@ -73,11 +74,11 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
-    //4. jwt 생성 시 실행되는 코드
+    // 4. jwt 생성 시 실행되는 코드
     jwt: async ({ token }: { token: JWT }) => {
       return token;
     },
-    //5. 유저 세션이 조회될 때 session에 user 정보를 저장하여 이용할 수 있도록 함
+    // 5. 유저 세션이 조회될 때 session에 user 정보를 저장하여 이용할 수 있도록 함
     session: async ({ session }: { session: Session }) => {
       return session;
     },

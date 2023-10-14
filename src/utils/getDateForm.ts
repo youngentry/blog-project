@@ -10,13 +10,13 @@ const transformPadUnit = (unit: number) => {
  * @returns
  */
 export const getDateForm = (date: Date | string, time: boolean = false) => {
-  date = new Date(date);
-  const year = date.getFullYear();
-  const month = transformPadUnit(date.getMonth() + 1);
-  const day = transformPadUnit(date.getDate());
-  const hour = transformPadUnit(date.getHours());
-  const minute = transformPadUnit(date.getMinutes());
-  const second = transformPadUnit(date.getSeconds());
+  const dateObj = new Date(date);
+  const year = dateObj.getFullYear();
+  const month = transformPadUnit(dateObj.getMonth() + 1);
+  const day = transformPadUnit(dateObj.getDate());
+  const hour = transformPadUnit(dateObj.getHours());
+  const minute = transformPadUnit(dateObj.getMinutes());
+  const second = transformPadUnit(dateObj.getSeconds());
 
   return time ? `${year}.${month}.${day} ${hour}:${minute}:${second}` : `${year}.${month}.${day}`;
 };

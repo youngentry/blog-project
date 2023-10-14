@@ -1,6 +1,7 @@
-import { connectDB } from '@/utils/db/db';
 import { ObjectId } from 'mongodb';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { connectDB } from '@/utils/db/db';
 
 // 카테고리 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest) => {

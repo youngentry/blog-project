@@ -1,9 +1,10 @@
 import React from 'react';
-import styles from './SliderItem.module.scss';
-import { SlideItemProps } from '../Slider/Slider';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BsArrowUpRightSquare } from 'react-icons/bs';
+
+import { SlideItemProps } from '../Slider/Slider';
+import styles from './SliderItem.module.scss';
 
 const SliderItem = ({ slideItemProps }: { slideItemProps: SlideItemProps }) => {
   const { title, src, content, link } = slideItemProps;
@@ -11,7 +12,7 @@ const SliderItem = ({ slideItemProps }: { slideItemProps: SlideItemProps }) => {
     <Link href={link} target='_blank' rel='noopener noreferrer'>
       <div className={styles.container}>
         <div className={styles.imageBox}>
-          <Image className={styles.image} src={src} alt={`post image`} fill />
+          <Image className={styles.image} src={src} alt="post image" fill />
         </div>
         <div className={styles.contentsBox}>
           <div className={styles.contents}>

@@ -1,4 +1,4 @@
-// 애플리케이션 실행 시 db에 1회 연결합니다.
+/* eslint-disable */
 
 import { MongoClient } from 'mongodb';
 

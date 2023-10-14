@@ -1,7 +1,8 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+
 import { getManageLikesApi } from '@/services/manageFetch';
-import React, { useState, useEffect } from 'react';
 import useLoading from './useLoading';
 import { Post } from '@/types/post';
 
@@ -14,15 +15,15 @@ const useLikes = () => {
     (async () => {
       try {
         // GET 요청을 보냅니다.
-        const likes = await getManageLikesApi();
+        const likesResponse = await getManageLikesApi();
         // 게시물 리스트를 state에 저장합니다.
-        setLikes(likes);
+        setLikes(likesResponse);
         setLoading(false);
       } catch (err) {
         console.error(err);
       }
     })();
-  }, []);
+  }, [setLoading]);
 
   return { likes, setLikes, loading };
 };

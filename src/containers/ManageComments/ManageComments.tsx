@@ -1,15 +1,16 @@
 'use client';
 
 import React from 'react';
-import styles from './ManageComments.module.scss';
-import ManageCommentItem from './components/ManageCommentItem/ManageCommentItem';
+
 import useManageComments, { useManageCommentsInterface } from '@/hooks/useManageComments';
 import { Comment } from '@/types/post';
 import { getDateForm } from '@/utils/getDateForm';
-import ManageDescription from '../../components/descriptions/ManageDescription/ManageDescription';
 import { DESCRIPTION } from '@/constants/DESCRIPTION';
+
+import ManageDescription from '../../components/descriptions/ManageDescription/ManageDescription';
 import NoItem from '../ManageLikes/components/NoItem/NoItem';
-import useLoading from '@/hooks/useLoading';
+import ManageCommentItem from './components/ManageCommentItem/ManageCommentItem';
+import styles from './ManageComments.module.scss';
 import Spin from '@/components/loadings/Spin/Spin';
 
 interface ManageCommentsInterface {
@@ -25,10 +26,10 @@ const ManageComments = () => {
    * @param comments
    * @returns {ManageCommentsInterface}
    */
-  const getManageCommentData = (comments: Comment[]) => {
+  const getManageCommentData = (commentsData: Comment[]) => {
     const result: ManageCommentsInterface = {};
 
-    comments.forEach((comment) => {
+    commentsData.forEach((comment) => {
       const date: string = getDateForm(comment.date);
       result[date] = result[date] ? [...result[date], comment] : [comment];
     });
@@ -50,23 +51,20 @@ const ManageComments = () => {
         <Spin size='s' />
       ) : comments.length ? (
         dates.map((date: string, index: number) => {
-          const comments = eachDayComments[index];
+          const comment = eachDayComments[index];
           return (
             <ul key={date} className={styles.dates}>
               <li className={styles.oneDate}>
                 <div className={styles.likedDate}>오늘</div>
                 <ul className={styles.postList}>
-                  <ManageCommentItem comments={comments} setComments={setComments} />
+                  <ManageCommentItem comments={comment} setComments={setComments} />
                 </ul>
               </li>
             </ul>
           );
         })
       ) : (
-        <NoItem
-          h2={'아직 댓글을 작성한 게시물이 없습니다.'}
-          src={'/images/manageActivity/comment-activity-sample.png'}
-        />
+        <NoItem h2='아직 댓글을 작성한 게시물이 없습니다.' src='/images/manageActivity/comment-activity-sample.png' />
       )}
     </div>
   );

@@ -1,9 +1,10 @@
-import { CommonCategoryType, SubCategoryType } from '@/containers/Editor/PostEditor';
-import { connectDB } from '@/utils/db/db';
-import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { ObjectId } from 'mongodb';
 import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { CommonCategoryType } from '@/containers/Editor/PostEditor';
+import { connectDB } from '@/utils/db/db';
+import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 
 // 카테고리 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest) => {
@@ -62,7 +63,9 @@ export const POST = async (req: NextRequest) => {
   }
 
   const body: CommonCategoryType = await req.json();
-  let { _id, role, parent, title } = body; // 요청 받은 카테고리 데이터
+  // 요청 받은 카테고리 데이터
+  const { role, parent, title } = body;
+  let { _id } = body;
 
   // 메인 추가/수정
   if (role === 'main') {

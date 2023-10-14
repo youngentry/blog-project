@@ -1,8 +1,10 @@
-import { connectDB } from '@/utils/db/db';
 import { NextRequest, NextResponse } from 'next/server';
-import { Comment, Post } from '@/types/post';
 import { compare } from 'bcrypt';
 import { ObjectId } from 'mongodb';
+
+import { Comment, Post } from '@/types/post';
+import { connectDB } from '@/utils/db/db';
+import { Params } from '@/types/session';
 
 // 게스트 댓글 삭제 API 입니다.
 export const POST = async (req: NextRequest, { params }: Params) => {

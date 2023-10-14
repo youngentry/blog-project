@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+
+import { CommonCategoryType } from '@/types/post';
+
+import { CategorySelectorProps, SubCategoryType } from '../../PostEditor';
 import styles from './CategorySelector.module.scss';
-import { CategorySelectorProps, CommonCategoryType, SubCategoryType } from '../../PostEditor';
 
 const CategorySelector = ({
   categoryList,
@@ -27,7 +30,7 @@ const CategorySelector = ({
     });
 
     const data = await res.json(); // imgur 업로드 결과 데이터
-    const link = data.link; // 이미지 링크
+    const { link } = data; // 이미지 링크
 
     return link;
   };
@@ -44,12 +47,18 @@ const CategorySelector = ({
 
   return (
     <div className={styles.categoryBox}>
-      <div className={styles.selectedSubtitle} onClick={() => setIsSelectCategoryVisible(!isSelectCategoryVisible)}>
+      <button
+        className={styles.selectedSubtitle}
+        onClick={() => setIsSelectCategoryVisible(!isSelectCategoryVisible)}
+        type='button'
+      >
         {selectedSubtitle}
-      </div>
+      </button>
 
       <input type='file' onChange={onFileChange} />
-      <button onClick={onFileUpload}>upload</button>
+      <button onClick={onFileUpload} type='button'>
+        upload
+      </button>
       <div className={`${styles.categoryList} ${!isSelectCategoryVisible && 'hide'}`}>
         {categoryList.map((mainCategory: CommonCategoryType) => {
           const children = mainCategory.children as SubCategoryType[];
@@ -61,13 +70,14 @@ const CategorySelector = ({
                 {children?.length &&
                   children.map((subCategory) => {
                     return (
-                      <p
+                      <button
                         key={subCategory._id as string}
                         className={styles.subCategory}
                         onClick={() => handleSelectSubtitle(subCategory.title, mainCategory._id as string)}
+                        type='button'
                       >
                         - {subCategory.title}
-                      </p>
+                      </button>
                     );
                   })}
               </ul>

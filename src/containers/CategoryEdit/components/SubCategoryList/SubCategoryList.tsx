@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import styles from './SubCategoryList.module.scss';
-import { getCategoriesApi } from '@/services/categoryFetch';
 import Link from 'next/link';
 import { BsCircleFill } from 'react-icons/bs';
+
+import { getCategoriesApi } from '@/services/categoryFetch';
+
+import styles from './SubCategoryList.module.scss';
 
 const SubCategoryList = ({ _id, subtitles }: { _id: string; subtitles?: string[] }) => {
   const [subCategories, setSubCategories] = useState<any[]>([]);
@@ -16,21 +18,24 @@ const SubCategoryList = ({ _id, subtitles }: { _id: string; subtitles?: string[]
       if (res) {
         return res.children;
       }
+
+      return [];
     };
 
     (async () => {
       const subCategoryData = await getSubCategories(_id);
       setSubCategories(subCategoryData);
     })();
-  }, []);
+  }, [_id]);
 
   return (
     <ul className={styles.subTitleBox}>
       {subCategories.map((sub) => {
-        const { _id, title } = sub;
+        const { title } = sub;
+        const subCategoryId = sub._id;
         const postCount = subtitles?.filter((subtitle) => subtitle === title).length;
         return (
-          <li key={_id} className={styles.subTitleItem}>
+          <li key={subCategoryId} className={styles.subTitleItem}>
             <Link href={{ pathname: '/category', query: { subtitle: title } }}>
               <h5>
                 <strong className={styles.subtitle}>

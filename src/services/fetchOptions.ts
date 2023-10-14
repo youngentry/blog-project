@@ -6,13 +6,13 @@
  */
 export const setFetchOptions = (method: string, body: object | null = null) => {
   if (method === 'GET' || method === 'DELETE') {
-    const options = { method: method };
+    const options = { method };
     return options;
   }
 
   if (method === 'POST' || method === 'PATCH') {
     const options = {
-      method: method,
+      method,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -22,4 +22,6 @@ export const setFetchOptions = (method: string, body: object | null = null) => {
     };
     return options;
   }
+
+  throw Error('method not found');
 };

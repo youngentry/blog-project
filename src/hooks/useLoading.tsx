@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const useLoading = () => {
   const [loading, setLoading] = useState<boolean>(true); // 로딩 여부

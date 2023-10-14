@@ -1,7 +1,8 @@
-import { connectDB } from '@/utils/db/db';
 import { hash } from 'bcrypt';
-import { SIGN_UP_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { connectDB } from '@/utils/db/db';
+import { SIGN_UP_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
 
 // 회원 가입에 필요한 형태를 갖추었는지 조건을 검사하고 문제가 없다면 회원 정보를 DB에 저장합니다.
 export const POST = async (req: NextRequest) => {
@@ -10,7 +11,8 @@ export const POST = async (req: NextRequest) => {
 
   // 회원가입 요청 폼
   const signUpForm = await req.json();
-  let { name, email, password } = signUpForm;
+  let { email, password } = signUpForm;
+  const { name } = signUpForm;
 
   // a@a.a 최소한의 email 형식을 갖추지 못한 경우에는 visitor 할당
   if (email.length < MIN_EMAIL) {

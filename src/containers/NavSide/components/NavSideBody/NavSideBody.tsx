@@ -1,10 +1,12 @@
 'use client';
 
-import styles from './NavSideBody.module.scss';
-import NavCategory from '../NavCategory/NavCategory';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+
 import { getCategoryPostCountApi } from '@/services/categoryFetch';
+
+import NavCategory from '../NavCategory/NavCategory';
+import styles from './NavSideBody.module.scss';
 
 // 사이드 메뉴의 바디 컴포넌트입니다.
 const NavSideBody = () => {
@@ -18,6 +20,8 @@ const NavSideBody = () => {
       if (res) {
         return res;
       }
+
+      return [];
     };
 
     (async () => {
@@ -28,7 +32,7 @@ const NavSideBody = () => {
 
   return (
     <div className={styles.container}>
-      <Link href={'/category'}>
+      <Link href='/category'>
         <h2>
           <strong>전체 보기</strong>
           <span>{subtitles.length}</span>

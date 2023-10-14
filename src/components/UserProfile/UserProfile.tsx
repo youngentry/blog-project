@@ -1,6 +1,9 @@
 import React from 'react';
-import styles from './UserProfile.module.scss';
 import Image from 'next/image';
+
+import { UserSessionData } from '@/types/session';
+
+import styles from './UserProfile.module.scss';
 
 /**
  * 유저 프로필 이미지 컴포넌트입니다.
@@ -14,7 +17,7 @@ const UserProfile = ({ session, isLoggedIn }: { session?: UserSessionData | null
       alt='user thumbnail'
       src={`/images/thumbnail/${session || isLoggedIn ? 'fox.jpg' : 'guest.jpg'}`}
       fill
-    ></Image>
+    />
   );
 };
 

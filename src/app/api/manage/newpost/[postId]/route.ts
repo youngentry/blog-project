@@ -1,6 +1,7 @@
-import { connectDB } from '@/utils/db/db';
-import { ObjectId } from 'mongodb';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { connectDB } from '@/utils/db/db';
+import { Params } from '@/types/session';
 
 interface EditPostForm {
   title: string;

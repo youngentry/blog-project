@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
+
 import { getPostCardsData } from '@/services/postsFetch';
 import { Card } from '@/types/post';
-import React, { useEffect, useState } from 'react';
 import useLoading from './useLoading';
 
 const usePostCards = (subtitle: string) => {
@@ -18,7 +19,7 @@ const usePostCards = (subtitle: string) => {
         console.error(err);
       }
     })();
-  }, [subtitle]);
+  }, [subtitle, setLoading]);
 
   return { postCards, setPostCards, loading };
 };

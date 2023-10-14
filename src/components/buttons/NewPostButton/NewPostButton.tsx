@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { BsPencil } from 'react-icons/bs';
-import styles from './NewPostButton.module.scss';
 import { useRouter } from 'next/navigation';
+
+import styles from './NewPostButton.module.scss';
 
 const NewPostButton = () => {
   const router = useRouter();
@@ -14,6 +15,7 @@ const NewPostButton = () => {
       onClick={() => {
         router.push('/manage/newpost');
       }}
+      type='button'
     >
       <BsPencil />
     </button>

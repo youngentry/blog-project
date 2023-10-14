@@ -1,12 +1,12 @@
 // 게시물 글자 간 경계 나타내는 "|" 모양
-@mixin afterBar {
+@mixin beforeBar {
   position: relative;
-  margin-right: 1rem;
-  &::after {
+  margin-left: 1rem;
+  &::before {
     content: 'deco bar';
     position: absolute;
     top: 50%;
-    right: -0.55rem;
+    left: -0.55rem;
     transform: translateY(-50%);
     width: 1px;
     height: 75%;

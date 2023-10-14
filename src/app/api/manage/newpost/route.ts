@@ -1,6 +1,7 @@
-import { connectDB } from '@/utils/db/db';
 import { JWT, getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { connectDB } from '@/utils/db/db';
 
 interface FormData {
   title: string;

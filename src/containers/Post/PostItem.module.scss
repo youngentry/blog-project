@@ -1,5 +1,5 @@
-@import "@/styles/mixins/flex.scss";
-@import "@/styles/mixins/after.scss";
+@import '@/styles/mixins/flex.scss';
+@import '@/styles/mixins/before.scss';
 
 .container {
   margin: 8rem auto;
@@ -38,15 +38,14 @@
         border-bottom: var(--1-solid);
         color: var(--color-text-week);
         .author {
-          @include afterBar();
         }
         .date {
-          @include afterBar();
+          @include beforeBar();
         }
-
         .buttons {
           display: flex;
           gap: 0.25rem;
+          @include beforeBar();
         }
       }
     }
@@ -56,6 +55,13 @@
       padding: 1rem 0;
       @include flex(column, flex-start, flex-start, start);
       line-height: 1.5;
+
+      .thumbnail {
+        position: relative !important;
+        object-fit: cover;
+        width: 500px;
+        height: 500px;
+      }
     }
 
     .countsBox {

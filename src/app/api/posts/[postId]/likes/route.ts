@@ -1,7 +1,9 @@
-import { Post } from '@/types/post';
-import { connectDB } from '@/utils/db/db';
 import { JWT, getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { Post } from '@/types/post';
+import { connectDB } from '@/utils/db/db';
+import { Params } from '@/types/session';
 
 // 게시물 좋아요 API 입니다.
 export const PATCH = async (req: NextRequest, { params }: Params) => {

@@ -1,8 +1,8 @@
-import exp from 'constants';
 import { ObjectId } from 'mongodb';
+import { Dispatch, SetStateAction } from 'react';
 
 // 게시물 카드
-interface Card {
+export interface Card {
   id: number;
   src: string;
   title: string;
@@ -16,20 +16,20 @@ interface Card {
 }
 
 // 게시물
-interface Post extends Card {
+export interface Post extends Card {
   _id?: string;
   contents: string;
 }
 
 // 게시물 컨텐츠
-interface PostContents {
+export interface PostContents {
   title: string;
   subtitle: string;
   contents: string;
 }
 
 // 댓글 입력 폼
-interface CommentForm {
+export interface CommentForm {
   title: string;
   nickname: string;
   password: string;
@@ -37,7 +37,7 @@ interface CommentForm {
 }
 
 // 댓글
-interface Comment extends CommentForm {
+export interface Comment extends CommentForm {
   _id?: ObjectId;
   parentId: number;
   author: string;
@@ -47,7 +47,7 @@ interface Comment extends CommentForm {
 }
 
 // 댓글 CommentListProps 컴포넌트 프롭스 타입
-interface CommentListProps {
+export interface CommentListProps {
   postId: string;
   newUpdate: boolean;
   userEmail: string;
@@ -56,7 +56,18 @@ interface CommentListProps {
 }
 
 // 댓글 CommentFormProps 컴포넌트 프롭스 타입
-interface CommentFormProps extends CommentListProps {
+export interface CommentFormProps extends CommentListProps {
   title: string;
   setNewUpdate: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface SubCategoryType {
+  _id?: string | ObjectId;
+  role: string;
+  title: string;
+  parent?: string;
+}
+
+export interface CommonCategoryType extends SubCategoryType {
+  children?: SubCategoryType[];
 }

@@ -1,19 +1,27 @@
 'use client';
 
 import React from 'react';
-import styles from './ManageLikeItem.module.scss';
-import { Post } from '@/types/post';
-import { getDateForm } from '@/utils/getDateForm';
 import Link from 'next/link';
 import { BsArrowUpRightSquare } from 'react-icons/bs';
 import { sanitize } from 'dompurify';
 import Image from 'next/image';
+
+import { getDateForm } from '@/utils/getDateForm';
+import { Post } from '@/types/post';
+
+import styles from './ManageLikeItem.module.scss';
 import LikePostButton from '@/components/buttons/LikePostButton/LikePostButton';
 
-const ManageLikeItem = ({ likes, email }: { likes: Post[]; email: string }) => {
+interface ManageLikeItemPropsInterface {
+  likedPost: Post[];
+  email: string;
+}
+
+const ManageLikeItem = (props: ManageLikeItemPropsInterface) => {
+  const { likedPost, email } = props;
   return (
     <>
-      {likes.map((likePostData: Post) => {
+      {likedPost.map((likePostData: Post) => {
         const { contents, id, title, date, _id, src, likes } = likePostData;
 
         return (

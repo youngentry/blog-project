@@ -1,6 +1,6 @@
 'use client';
 
-import React, { RefObject, SetStateAction, useEffect, Dispatch } from 'react';
+import { RefObject, SetStateAction, useEffect, Dispatch } from 'react';
 
 /**
  * ref로 가리키고 있는 Node의 바깥을 클릭하면 setState에 value를 넣어 실행합니다.
@@ -21,7 +21,7 @@ const useClickOutside = (ref: RefObject<HTMLElement>, setState: Dispatch<SetStat
     return () => {
       document.removeEventListener('mousedown', clickOutside);
     };
-  }, []);
+  }, [ref, setState, value]);
 };
 
 export default useClickOutside;
