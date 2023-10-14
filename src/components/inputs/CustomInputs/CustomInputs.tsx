@@ -41,9 +41,9 @@ export const CustomInput = (props: CustomInputPropsInterface) => {
 
   return (
     <div className={`${styles.inputBox} ${className}`}>
-      <div className={`${styles.reset} ${value.length && styles.visible}`} onClick={clickInitialize}>
+      <button className={`${styles.reset} ${value.length && styles.visible}`} onClick={clickInitialize} type='button'>
         ❌
-      </div>
+      </button>
       <input
         type='text'
         placeholder={placeholder}
