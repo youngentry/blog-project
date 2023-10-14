@@ -3,17 +3,17 @@
 import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
 import { getManageCommentsApi } from '@/services/manageFetch';
-import { Comment } from '@/types/post';
+import { CommentInterface } from '@/types/post';
 import useLoading from './useLoading';
 
 export interface useManageCommentsInterface {
-  comments: Comment[];
+  comments: CommentInterface[];
   setComments: Dispatch<SetStateAction<any>>;
   loading?: boolean;
 }
 
 const useManageComments = () => {
-  const [comments, setComments] = useState<Comment[]>([]); // 댓글 리스트
+  const [comments, setComments] = useState<CommentInterface[]>([]); // 댓글 리스트
   const { loading, setLoading } = useLoading();
 
   // 작성한 댓글 리스트를 조회하여 state에 저장합니다.

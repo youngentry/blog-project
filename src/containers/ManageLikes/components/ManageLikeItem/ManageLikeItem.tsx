@@ -8,13 +8,13 @@ import { sanitize } from 'dompurify';
 import Image from 'next/image';
 
 import { getDateForm } from '@/utils/getDateForm';
-import { Post } from '@/types/post';
+import { PostInterface } from '@/types/post';
 
 import styles from './ManageLikeItem.module.scss';
 import LikePostButton from '@/components/buttons/LikePostButton/LikePostButton';
 
 interface ManageLikeItemPropsInterface {
-  likedPost: Post[];
+  likedPosts: PostInterface[];
   email: string;
 }
 
@@ -30,12 +30,12 @@ const SanitizedInnerHTML = ({ contents }: { contents: string }) => {
 };
 
 const ManageLikeItem = (props: ManageLikeItemPropsInterface) => {
-  const { likedPost, email } = props;
+  const { likedPosts, email } = props;
 
   return (
     <>
-      {likedPost.map((likePostData: Post) => {
-        const { contents, id, title, date, _id, src, likes } = likePostData;
+      {likedPosts.map((likePost: PostInterface) => {
+        const { contents, id, title, date, _id, src, likes } = likePost;
 
         return (
           <li key={String(_id)} className={styles.container}>

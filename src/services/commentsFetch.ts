@@ -1,11 +1,11 @@
-import { Comment, CommentForm } from '@/types/post';
+import { CommentInterface, CommentFormInterface } from '@/types/post';
 
 import { setFetchOptions } from './fetchOptions';
 
 /**
  * 댓글 리스트를 조회합니다.
  * @param {string} postId
- * @returns {Comment | boolean} commentsData or false
+ * @returns {CommentInterface | boolean} commentsData or false
  */
 export const getCommentsDataApi = async (postId: string) => {
   const url = `/api/posts/${postId}/comments`;
@@ -13,17 +13,17 @@ export const getCommentsDataApi = async (postId: string) => {
 
   // 요청 결과 반환
   const res = await fetch(url, options);
-  const data: Comment[] = await res.json(); // 댓글 리스트
+  const data: CommentInterface[] = await res.json(); // 댓글 리스트
   return res.ok ? data : false;
 };
 
 /**
  * 댓글 작성 요청 POST
  * @param {string} postId
- * @param {CommentForm} body
+ * @param {CommentFormInterface} body
  * @returns {boolean}
  */
-export const postCommentApi = async (postId: string, body: CommentForm) => {
+export const postCommentApi = async (postId: string, body: CommentFormInterface) => {
   const url = `/api/posts/${postId}/comments`;
   const options = setFetchOptions('POST', body);
 

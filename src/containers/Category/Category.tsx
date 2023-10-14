@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { Card } from '@/types/post';
+import { CardInterface } from '@/types/post';
 import usePostCards from '@/hooks/usePostCards';
 
 import CardItem from './components/Card/CardItem';
@@ -25,8 +25,8 @@ const Category = ({ searchParams }: any) => {
       ) : postCards ? (
         <>
           <ul className={styles.cardContainer}>
-            {postCards.map((data: Card) => {
-              return <CardItem key={data.id} data={data} />;
+            {postCards.map((card: CardInterface) => {
+              return <CardItem key={card.id} data={card} />;
             })}
           </ul>
           <Pagination />

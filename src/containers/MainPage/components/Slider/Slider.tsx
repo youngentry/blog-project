@@ -5,13 +5,13 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
 
-import { SlideItemProps } from '@/types/post';
+import { SlideItemPropsInterface } from '@/types/post';
 
 import styles from './Slider.module.scss';
 import SliderItem from '../SliderItem/SliderItem';
 
 const Slider = () => {
-  const slideItem: SlideItemProps[] = [
+  const slideItem: SlideItemPropsInterface[] = [
     {
       title: '나만의 Next.js Blog 프로젝트 구상',
       src: '/images/mainSliderItems/m01.png',
@@ -50,7 +50,7 @@ const Slider = () => {
         className={styles.swiper}
       >
         {slideItem.map((item) => {
-          const slideItemProps: SlideItemProps = {
+          const slideItemProps: SlideItemPropsInterface = {
             ...item,
           };
           return (

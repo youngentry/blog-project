@@ -1,7 +1,7 @@
 import { JWT, getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { Post } from '@/types/post';
+import { PostInterface } from '@/types/post';
 import { connectDB } from '@/utils/db/db';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { Params } from '@/types/session';
@@ -20,9 +20,9 @@ export const DELETE = async (req: NextRequest, { params }: Params) => {
 
   // DB와 Collection 연결
   const db = (await connectDB).db('blog');
-  const postCollection = await db.collection<Post>('posts');
+  const postCollection = await db.collection<PostInterface>('posts');
 
-  const foundPost: Post | null = await postCollection.findOne({ id: Number(postId) }); // 조회한 게시물
+  const foundPost: PostInterface | null = await postCollection.findOne({ id: Number(postId) }); // 조회한 게시물
   const postAuthorEmail = foundPost?.email; // 게시물 작성자 email
   const isBlogAdmin: boolean = checkBlogAdmin(userEmail); // 관리자 여부 확인
 

@@ -14,6 +14,8 @@ interface CustomInputPropsInterface {
   value: string;
   maxLength?: number;
   dispatch: Dispatch<SetStateAction<string>>;
+  // eslint-disable-next-line
+  inputType?: string;
 }
 
 /**
@@ -32,7 +34,7 @@ export const ReadOnlyInput = ({ className, placeholder, value }: ReadOnlyInputPr
  * @returns
  */
 export const CustomInput = (props: CustomInputPropsInterface) => {
-  const { className, placeholder, value, maxLength, dispatch } = props;
+  const { className, placeholder, value, maxLength, dispatch, inputType } = props;
 
   // input 초기화 버튼
   const clickInitialize = () => {
@@ -45,7 +47,7 @@ export const CustomInput = (props: CustomInputPropsInterface) => {
         ❌
       </button>
       <input
-        type='text'
+        type={`${inputType || 'text'}`}
         placeholder={placeholder}
         value={value}
         maxLength={maxLength}

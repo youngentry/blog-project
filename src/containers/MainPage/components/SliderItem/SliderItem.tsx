@@ -3,11 +3,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { BsArrowUpRightSquare } from 'react-icons/bs';
 
-import { SlideItemProps } from '@/types/post';
+import { SlideItemPropsInterface } from '@/types/post';
 
 import styles from './SliderItem.module.scss';
 
-const SliderItem = ({ slideItemProps }: { slideItemProps: SlideItemProps }) => {
+const SliderItem = ({ slideItemProps }: { slideItemProps: SlideItemPropsInterface }) => {
   const { title, src, content, link } = slideItemProps;
   return (
     <Link href={link} target='_blank' rel='noopener noreferrer'>

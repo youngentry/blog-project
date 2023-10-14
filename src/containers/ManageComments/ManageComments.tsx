@@ -3,7 +3,7 @@
 import React from 'react';
 
 import useManageComments, { useManageCommentsInterface } from '@/hooks/useManageComments';
-import { Comment } from '@/types/post';
+import { CommentInterface } from '@/types/post';
 import { getDateForm } from '@/utils/getDateForm';
 import { DESCRIPTION } from '@/constants/DESCRIPTION';
 
@@ -14,7 +14,7 @@ import styles from './ManageComments.module.scss';
 import Spin from '@/components/loadings/Spin/Spin';
 
 interface ManageCommentsInterface {
-  [key: string]: Comment[];
+  [key: string]: CommentInterface[];
 }
 
 const ManageComments = () => {
@@ -26,7 +26,7 @@ const ManageComments = () => {
    * @param comments
    * @returns {ManageCommentsInterface}
    */
-  const getManageCommentData = (commentsData: Comment[]) => {
+  const getManageCommentData = (commentsData: CommentInterface[]) => {
     const result: ManageCommentsInterface = {};
 
     commentsData.forEach((comment) => {
@@ -41,7 +41,7 @@ const ManageComments = () => {
   const dates: string[] = Object.keys(manageCommentData); // 날짜 배열
   // 날짜 인덱스별로 좋아요한 댓글이 담긴 배열 [[]]
   // n은 날짜 배열 index일 때. n=0 일 경우 [[comment1, comment2],[comment3, comment4]][0]과 같은 형태로 컴포넌트에 댓글 배열이 전달됩니다.
-  const eachDayComments: Comment[][] = Object.values(manageCommentData);
+  const eachDayComments: CommentInterface[][] = Object.values(manageCommentData);
 
   return (
     <div className={styles.container}>

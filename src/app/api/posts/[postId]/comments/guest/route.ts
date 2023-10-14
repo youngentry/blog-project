@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { compare } from 'bcrypt';
 import { ObjectId } from 'mongodb';
 
-import { Comment, Post } from '@/types/post';
+import { CommentInterface, PostInterface } from '@/types/post';
 import { connectDB } from '@/utils/db/db';
 import { Params } from '@/types/session';
 
@@ -22,7 +22,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
 
   // DB에 연결합니다.
   const db = (await connectDB).db('blog');
-  const commentsCollection = db.collection<Comment>('comments');
+  const commentsCollection = db.collection<CommentInterface>('comments');
   const foundComment = await commentsCollection.findOne({ _id: new ObjectId(_id) }); // DB에서 조회한 댓글
 
   // 찾는 댓글이 DB에 존재하지 않을 경우
@@ -42,7 +42,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
   const deleteResult = await commentsCollection.deleteOne({ _id: new ObjectId(_id) });
 
   // 게시물 댓글갯수 정보 -1 업데이트
-  const postsCollection = db.collection<Post>('posts');
+  const postsCollection = db.collection<PostInterface>('posts');
   const commentCountUpdateResult = await postsCollection.findOneAndUpdate(
     { id: Number(postId) },
     { $inc: { commentCount: -1 } },

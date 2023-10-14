@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { CommentListProps, Comment } from '@/types/post';
+import { CommentInterface, CommentListPropsInterface } from '@/types/post';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
 import { deleteCommentApi, patchCommentApi, postGuestCommentDeletionApi } from '@/services/commentsFetch';
@@ -13,7 +13,13 @@ import UserProfile from '@/components/UserProfile/UserProfile';
 import { CustomInput, CustomTextarea } from '@/components/inputs/CustomInputs/CustomInputs';
 import styles from './CommentList.module.scss';
 
-const CommentList = ({ postId, newUpdate, userEmail, postCommentCount, setPostCommentCount }: CommentListProps) => {
+const CommentList = ({
+  postId,
+  newUpdate,
+  userEmail,
+  postCommentCount,
+  setPostCommentCount,
+}: CommentListPropsInterface) => {
   const { MAX_PASSWORD, MAX_COMMENT } = COMMENT_FORM_LENGTH;
 
   const [editComment, setEditComment] = useState<string>(''); // 수정 input
@@ -38,8 +44,8 @@ const CommentList = ({ postId, newUpdate, userEmail, postCommentCount, setPostCo
       }
 
       // 수정한 댓글을 반영한 결과를 state에 저장합니다.
-      const copiedComments: Comment[] = [...commentList];
-      const editedComment: Comment | undefined = copiedComments.find((comment) => String(comment._id) === _id);
+      const copiedComments: CommentInterface[] = [...commentList];
+      const editedComment: CommentInterface | undefined = copiedComments.find((comment) => String(comment._id) === _id);
       if (editedComment) {
         editedComment.comment = editComment;
       }
@@ -69,7 +75,9 @@ const CommentList = ({ postId, newUpdate, userEmail, postCommentCount, setPostCo
       }
 
       // 삭제한 댓글을 제외한 결과를 state에 저장합니다.
-      const afterDeleteComments: Comment[] = commentList.filter((comment: Comment) => String(comment._id) !== _id);
+      const afterDeleteComments: CommentInterface[] = commentList.filter(
+        (comment: CommentInterface) => String(comment._id) !== _id,
+      );
       setCommentList(afterDeleteComments);
       setPostCommentCount(postCommentCount - 1);
     } catch (err) {
@@ -93,7 +101,7 @@ const CommentList = ({ postId, newUpdate, userEmail, postCommentCount, setPostCo
       }
 
       // 삭제된 댓글 리스트 렌더링
-      const deletedCommentList = [...commentList].filter((comment: Comment) => String(comment._id) !== _id);
+      const deletedCommentList = [...commentList].filter((comment: CommentInterface) => String(comment._id) !== _id);
       setCommentList(deletedCommentList);
       setPostCommentCount(postCommentCount - 1);
       cancelCheckingPassword(); // 댓글 삭제 작업 초기화
@@ -142,7 +150,7 @@ const CommentList = ({ postId, newUpdate, userEmail, postCommentCount, setPostCo
   return (
     <ul className={styles.commentList}>
       {commentList &&
-        commentList.map((commentItem: Comment) => {
+        commentList.map((commentItem: CommentInterface) => {
           const { comment, date, isLoggedIn, nickname, author, _id } = commentItem;
           const commentId = String(_id); // key에 할당하기 위해 직렬화합니다.
 
@@ -180,7 +188,7 @@ const CommentList = ({ postId, newUpdate, userEmail, postCommentCount, setPostCo
                         <CustomInput
                           className={`${styles.deleteConfirmInput}`}
                           placeholder='비밀번호'
-                          type='password'
+                          inputType='password'
                           {...deletePasswordInputProps}
                         />
                         <button

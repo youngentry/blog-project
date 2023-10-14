@@ -3,7 +3,7 @@ import { JWT, getToken } from 'next-auth/jwt';
 import { hash } from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { Comment, CommentFormInterface, Post } from '@/types/post';
+import { CommentInterface, CommentFormInterface, PostInterface } from '@/types/post';
 import { connectDB } from '@/utils/db/db';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
@@ -14,10 +14,10 @@ export const GET = async (req: NextRequest, { params }: Params) => {
   const { postId } = params; // 게시물 번호
 
   const db = (await connectDB).db('blog');
-  const commentsCollection = db.collection<Comment>('comments');
+  const commentsCollection = db.collection<CommentInterface>('comments');
 
   // 댓글 조회 결과
-  const foundResult: Comment[] = await commentsCollection
+  const foundResult: CommentInterface[] = await commentsCollection
     .find({ parentId: Number(postId) }, { projection: { password: 0, parentId: 0 } })
     .toArray();
 
@@ -62,7 +62,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
   const hashedPassword: string = await hash(password, 10); // 해시화한 비밀번호
 
   // DB에 저장할 데이터
-  const saveData: Comment = {
+  const saveData: CommentInterface = {
     title,
     parentId: Number(postId), // 게시물 번호
     nickname: token ? (token.name as string) : nickname, // 작성자 닉네임
@@ -76,11 +76,11 @@ export const POST = async (req: NextRequest, { params }: Params) => {
 
   // 댓글 작성 결과
   const db = (await connectDB).db('blog');
-  const commentsCollection = db.collection<Comment>('comments');
+  const commentsCollection = db.collection<CommentInterface>('comments');
   const insertResult = await commentsCollection.insertOne({ ...saveData });
 
   // 게시물의 댓글 갯수를 +1 업데이트 합니다.
-  const postsCollection = db.collection<Post>('posts');
+  const postsCollection = db.collection<PostInterface>('posts');
   const commentCountUpdateResult = await postsCollection.findOneAndUpdate(
     { id: Number(postId) },
     { $inc: { commentCount: 1 } },
@@ -111,7 +111,7 @@ export const PATCH = async (req: NextRequest, { params }: Params) => {
 
   // DB에서 댓글 작성자 정보 확인
   const db = (await connectDB).db('blog');
-  const commentsCollection = db.collection<Comment>('comments');
+  const commentsCollection = db.collection<CommentInterface>('comments');
   const foundResult = await commentsCollection.findOne({ _id: new ObjectId(_id) });
 
   // 삭제할 댓글이 DB에 존재하지 않을 경우
@@ -150,7 +150,7 @@ export const DELETE = async (req: NextRequest, { params }: Params) => {
 
   // DB에서 댓글 작성자 정보 확인
   const db = (await connectDB).db('blog');
-  const commentsCollection = db.collection<Comment>('comments');
+  const commentsCollection = db.collection<CommentInterface>('comments');
   const foundResult = await commentsCollection.findOne({ _id: new ObjectId(_id) });
 
   // 삭제할 댓글이 DB에 존재하지 않을 경우 에러 반환
@@ -168,7 +168,7 @@ export const DELETE = async (req: NextRequest, { params }: Params) => {
   }
 
   // 게시물 댓글 갯수를 -1 업데이트합니다.
-  const postsCollection = db.collection<Post>('posts');
+  const postsCollection = db.collection<PostInterface>('posts');
   const commentCountUpdateResult = await postsCollection.findOneAndUpdate(
     { id: Number(postId) },
     { $inc: { commentCount: -1 } },

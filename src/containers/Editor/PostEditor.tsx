@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { editPostData } from '@/services/postsFetch';
 import usePostItem, { UsePostItemInterface } from '@/hooks/usePostItem';
 import useCategoryList from '@/hooks/useCategoryList';
-import { CategorySelectorProps } from '@/types/post';
+import { CategorySelectorPropsInterface } from '@/types/post';
 
 import styles from './PostEditor.module.scss';
 import Quill from './components/Quill/Quill';
@@ -83,7 +83,7 @@ const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean })
   };
 
   // 카테고리 선택에 전달할 props
-  const categorySelectorProps: CategorySelectorProps = {
+  const categorySelectorProps: CategorySelectorPropsInterface = {
     categoryList,
     setCategoryId,
     isSelectCategoryVisible,

@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { BsArrowUpRightSquare } from 'react-icons/bs';
 
-import { Comment } from '@/types/post';
+import { CommentInterface } from '@/types/post';
 import { getDateForm } from '@/utils/getDateForm';
 import { useManageCommentsInterface } from '@/hooks/useManageComments';
 import { deleteCommentApi } from '@/services/commentsFetch';
@@ -30,7 +30,9 @@ const ManageCommentItem = ({ comments, setComments }: useManageCommentsInterface
       }
 
       // 삭제한 댓글을 제외한 결과를 state에 저장합니다.
-      const afterDeleteComments: Comment[] = comments.filter((comment: Comment) => String(comment._id) !== _id);
+      const afterDeleteComments: CommentInterface[] = comments.filter(
+        (comment: CommentInterface) => String(comment._id) !== _id,
+      );
       setComments(afterDeleteComments);
     } catch (err) {
       console.error(err);
@@ -39,7 +41,7 @@ const ManageCommentItem = ({ comments, setComments }: useManageCommentsInterface
 
   return (
     <>
-      {comments.map((commentData: Comment) => {
+      {comments.map((commentData: CommentInterface) => {
         const { comment, parentId, title, date, _id } = commentData;
 
         return (

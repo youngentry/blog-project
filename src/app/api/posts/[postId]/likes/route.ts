@@ -1,7 +1,7 @@
 import { JWT, getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { Post } from '@/types/post';
+import { PostInterface } from '@/types/post';
 import { connectDB } from '@/utils/db/db';
 import { Params } from '@/types/session';
 
@@ -23,8 +23,8 @@ export const PATCH = async (req: NextRequest, { params }: Params) => {
   try {
     // 좋아요 업데이트
     const db = (await connectDB).db('blog');
-    const postsCollection = db.collection<Post>('posts');
-    const foundPostResult: Post | null = await postsCollection.findOne({ id: Number(postId) });
+    const postsCollection = db.collection<PostInterface>('posts');
+    const foundPostResult: PostInterface | null = await postsCollection.findOne({ id: Number(postId) });
 
     // 게시물이 존재하지 않으면 에러 반환
     if (!foundPostResult) {

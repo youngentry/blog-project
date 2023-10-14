@@ -1,11 +1,11 @@
-import { Card, Post, PostContents } from '@/types/post';
+import { CardInterface, PostInterface, PostContentsInterface } from '@/types/post';
 import BASE_URL from '@/constants/BASE_URL';
 
 import { setFetchOptions } from './fetchOptions';
 
 /**
  * 게시물 카드 리스트를 조회합니다.
- * @returns {Card[]} commentsData or false
+ * @returns {CardInterface[]} commentsData or false
  */
 export const getPostCardsData = async (subtitle: string) => {
   const url = `${BASE_URL}/category?subtitle=${subtitle}`;
@@ -13,14 +13,14 @@ export const getPostCardsData = async (subtitle: string) => {
 
   // 요청 결과 반환
   const res = await fetch(url, options);
-  const data: Card[] = await res.json(); // 댓글 리스트
+  const data: CardInterface[] = await res.json(); // 댓글 리스트
 
   return res.ok ? data : [];
 };
 
 /**
  * 게시물을 조회합니다.
- * @returns {Post} commentsData or false
+ * @returns {PostInterface} commentsData or false
  */
 export const getPostItemData = async (postId: string) => {
   const url = `${BASE_URL}/posts/${postId}`;
@@ -28,7 +28,7 @@ export const getPostItemData = async (postId: string) => {
 
   // 요청 결과 반환
   const res = await fetch(url, options);
-  const data: Post = await res.json(); // 게시물 리스트
+  const data: PostInterface = await res.json(); // 게시물 리스트
   return res.ok ? data : undefined;
 };
 
@@ -36,7 +36,7 @@ export const getPostItemData = async (postId: string) => {
  * 게시물을 수정합니다.
  * @returns {boolean} 삭제 결과
  */
-export const editPostData = async (postId: string, editContents: PostContents) => {
+export const editPostData = async (postId: string, editContents: PostContentsInterface) => {
   const url = `${BASE_URL}/manage/newpost/${postId}`;
   const options = setFetchOptions('POST', editContents);
 

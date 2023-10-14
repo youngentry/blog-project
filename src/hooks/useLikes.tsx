@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 
 import { getManageLikesApi } from '@/services/manageFetch';
 import useLoading from './useLoading';
-import { Post } from '@/types/post';
+import { PostInterface } from '@/types/post';
 
 const useLikes = () => {
-  const [likes, setLikes] = useState<Post[]>([]); // 좋아요 한 게시물 리스트
+  const [likes, setLikes] = useState<PostInterface[]>([]); // 좋아요 한 게시물 리스트
   const { loading, setLoading } = useLoading();
 
   // 좋아요 한 게시물 리스트를 조회하여 state에 저장합니다.

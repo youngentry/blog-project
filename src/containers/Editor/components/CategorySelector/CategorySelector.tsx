@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { CategorySelectorProps, CommonCategoryType, SubCategoryType } from '@/types/post';
+import { CategorySelectorPropsInterface, CommonCategoryInterface, SubCategoryInterface } from '@/types/post';
 
 import styles from './CategorySelector.module.scss';
 
@@ -11,7 +11,7 @@ const CategorySelector = ({
   setIsSelectCategoryVisible,
   selectedSubtitle,
   setSelectedSubtitle,
-}: CategorySelectorProps) => {
+}: CategorySelectorPropsInterface) => {
   const [file, setFile] = useState<any>();
 
   const onFileUpload = async () => {
@@ -59,8 +59,8 @@ const CategorySelector = ({
         upload
       </button>
       <div className={`${styles.categoryList} ${!isSelectCategoryVisible && 'hide'}`}>
-        {categoryList.map((mainCategory: CommonCategoryType) => {
-          const children = mainCategory.children as SubCategoryType[];
+        {categoryList.map((mainCategory: CommonCategoryInterface) => {
+          const children = mainCategory.children as SubCategoryInterface[];
 
           return mainCategory ? (
             <div key={mainCategory._id as string}>

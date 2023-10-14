@@ -2,7 +2,7 @@ import { ObjectId } from 'mongodb';
 import { Dispatch, SetStateAction } from 'react';
 
 // 게시물 카드
-export interface Card {
+export interface CardInterface {
   id: number;
   src: string;
   title: string;
@@ -16,13 +16,13 @@ export interface Card {
 }
 
 // 게시물
-export interface Post extends Card {
+export interface PostInterface extends CardInterface {
   _id?: string;
   contents: string;
 }
 
 // 게시물 컨텐츠
-export interface PostContents {
+export interface PostContentsInterface {
   title: string;
   subtitle: string;
   contents: string;
@@ -37,7 +37,7 @@ export interface CommentFormInterface {
 }
 
 // 댓글
-export interface Comment extends CommentFormInterface {
+export interface CommentInterface extends CommentFormInterface {
   _id?: ObjectId;
   parentId: number;
   author: string;
@@ -61,19 +61,19 @@ export interface CommentFormPropsInterface extends CommentListPropsInterface {
   setNewUpdate: Dispatch<SetStateAction<boolean>>;
 }
 
-export interface SubCategoryType {
+export interface SubCategoryInterface {
   _id?: string | ObjectId;
   role: string;
   title: string;
   parent?: string;
 }
 
-export interface CommonCategoryType extends SubCategoryType {
-  children?: SubCategoryType[];
+export interface CommonCategoryInterface extends SubCategoryInterface {
+  children?: SubCategoryInterface[];
 }
 
-export interface CategorySelectorProps {
-  categoryList: CommonCategoryType[];
+export interface CategorySelectorPropsInterface {
+  categoryList: CommonCategoryInterface[];
   setCategoryId: Dispatch<SetStateAction<string>>;
   isSelectCategoryVisible: boolean;
   setIsSelectCategoryVisible: Dispatch<SetStateAction<boolean>>;
@@ -81,7 +81,7 @@ export interface CategorySelectorProps {
   setSelectedSubtitle: Dispatch<SetStateAction<string>>;
 }
 
-export interface SlideItemProps {
+export interface SlideItemPropsInterface {
   title: string;
   src: string;
   content: string;
