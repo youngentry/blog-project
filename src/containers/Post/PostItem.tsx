@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { sanitize } from 'isomorphic-dompurify';
+// eslint-disable-next-line
+import { sanitize } from 'dompurify';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 

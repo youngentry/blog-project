@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import { CommonCategoryType } from '@/containers/Editor/PostEditor';
 import { addCategoryApi } from '@/services/categoryFetch';
+import { CommonCategoryType } from '@/types/post';
 
 import { CustomInput } from '@/components/inputs/CustomInputs/CustomInputs';
 

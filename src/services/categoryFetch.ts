@@ -1,4 +1,4 @@
-import { CommonCategoryType } from '@/containers/Editor/PostEditor';
+import { CommonCategoryType } from '@/types/post';
 
 import { setFetchOptions } from './fetchOptions';
 
