@@ -71,3 +71,19 @@ export interface SubCategoryType {
 export interface CommonCategoryType extends SubCategoryType {
   children?: SubCategoryType[];
 }
+
+export interface CategorySelectorProps {
+  categoryList: CommonCategoryType[];
+  setCategoryId: Dispatch<SetStateAction<string>>;
+  isSelectCategoryVisible: boolean;
+  setIsSelectCategoryVisible: Dispatch<SetStateAction<boolean>>;
+  selectedSubtitle: string;
+  setSelectedSubtitle: Dispatch<SetStateAction<string>>;
+}
+
+export interface SlideItemProps {
+  title: string;
+  src: string;
+  content: string;
+  link: string;
+}

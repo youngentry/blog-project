@@ -5,15 +5,10 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
 
+import { SlideItemProps } from '@/types/post';
+
 import styles from './Slider.module.scss';
 import SliderItem from '../SliderItem/SliderItem';
-
-export interface SlideItemProps {
-  title: string;
-  src: string;
-  content: string;
-  link: string;
-}
 
 const Slider = () => {
   const slideItem: SlideItemProps[] = [

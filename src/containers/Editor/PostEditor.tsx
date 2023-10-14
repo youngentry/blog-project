@@ -1,26 +1,17 @@
 'use client';
 
-import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { editPostData } from '@/services/postsFetch';
 import usePostItem, { UsePostItemInterface } from '@/hooks/usePostItem';
 import useCategoryList from '@/hooks/useCategoryList';
-import { CommonCategoryInterface } from '@/types/post';
+import { CategorySelectorProps } from '@/types/post';
 
-import CategorySelector from './components/CategorySelector/CategorySelector';
 import styles from './PostEditor.module.scss';
 import Quill from './components/Quill/Quill';
 import Spin from '@/components/loadings/Spin/Spin';
-
-export interface CategorySelectorProps {
-  categoryList: CommonCategoryInterface[];
-  setCategoryId: Dispatch<SetStateAction<string>>;
-  isSelectCategoryVisible: boolean;
-  setIsSelectCategoryVisible: Dispatch<SetStateAction<boolean>>;
-  selectedSubtitle: string;
-  setSelectedSubtitle: Dispatch<SetStateAction<string>>;
-}
+import CategorySelector from './components/CategorySelector/CategorySelector';
 
 // react-quill에 게시물 데이터를 불러오거나, 새롭게 작성하거나 수정한 게시물을 DB에 업데이트합니다.
 const PostEditor = ({ postId, canEdit }: { postId?: string; canEdit?: boolean }) => {

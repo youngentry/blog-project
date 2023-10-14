@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 
 import { addCategoryApi } from '@/services/categoryFetch';
-import { CommonCategoryInterface } from '@/types/post';
+import { CommonCategoryType } from '@/types/post';
 
 import { CustomInput } from '@/components/inputs/CustomInputs/CustomInputs';
 // import styles from './AddMainCategoryForm.module.scss';
@@ -21,7 +21,7 @@ const AddMainCategoryForm = () => {
 
     try {
       // POST 요청을 보냅니다.
-      const body: CommonCategoryInterface = {
+      const body: CommonCategoryType = {
         role: 'main',
         title: addMainCategoryInput,
       };
