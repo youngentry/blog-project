@@ -62,7 +62,7 @@ const CommentForm = ({
     // input이 유효한지 검사합니다.
     const isValidInput = checkValidInput();
     if (!isValidInput) {
-      return false;
+      return;
     }
 
     const commentForm: CommentForm = { nickname, password, comment, title };

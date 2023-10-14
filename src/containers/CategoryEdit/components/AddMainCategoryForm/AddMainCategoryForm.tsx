@@ -6,7 +6,7 @@ import { addCategoryApi } from '@/services/categoryFetch';
 import { CommonCategoryInterface } from '@/types/post';
 
 import { CustomInput } from '@/components/inputs/CustomInputs/CustomInputs';
-import styles from './AddMainCategoryForm.module.scss';
+// import styles from './AddMainCategoryForm.module.scss';
 
 const AddMainCategoryForm = () => {
   const [addMainCategoryInput, setAddMainCategoryInput] = useState<string>('');
