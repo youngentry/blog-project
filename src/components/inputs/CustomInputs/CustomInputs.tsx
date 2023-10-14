@@ -2,10 +2,18 @@ import React, { Dispatch, SetStateAction } from 'react';
 
 import styles from './CustomInputs.module.scss';
 
-interface ReadOnlyInputProps {
+interface ReadOnlyInputPropsInterface {
   className?: string;
   placeholder: string;
   value?: string;
+}
+
+interface CustomInputPropsInterface {
+  className?: string;
+  placeholder: string;
+  value: string;
+  maxLength?: number;
+  dispatch: Dispatch<SetStateAction<string>>;
 }
 
 /**
@@ -14,26 +22,18 @@ interface ReadOnlyInputProps {
  * @param value string 고정 input 값
  * @returns
  */
-export const ReadOnlyInput = ({ placeholder, value }: ReadOnlyInputProps) => {
-  return <input type='text' placeholder={placeholder} value={value} readOnly />;
+export const ReadOnlyInput = ({ className, placeholder, value }: ReadOnlyInputPropsInterface) => {
+  return <input className={`${className}`} type='text' placeholder={placeholder} value={value} readOnly />;
 };
 
-interface CustomInputProps {
-  className?: string;
-  placeholder: string;
-  value: string;
-  maxLength?: number;
-  dispatch: Dispatch<SetStateAction<string>>;
-  type?: string;
-}
-
 /**
- * 존재하지 않는 input 속성은 타입 추가 후에 작성하여야 합니다. 추가할 때 ex) require?: boolean
  * onChange에 setState를 전달하여야 합니다.
  * @param dispatch setState
  * @returns
  */
-export const CustomInput = ({ className, placeholder, value, maxLength, dispatch, type }: CustomInputProps) => {
+export const CustomInput = (props: CustomInputPropsInterface) => {
+  const { className, placeholder, value, maxLength, dispatch } = props;
+
   // input 초기화 버튼
   const clickInitialize = () => {
     dispatch('');
@@ -45,7 +45,7 @@ export const CustomInput = ({ className, placeholder, value, maxLength, dispatch
         ❌
       </div>
       <input
-        type={type || 'text'}
+        type='text'
         placeholder={placeholder}
         value={value}
         maxLength={maxLength}
@@ -62,7 +62,7 @@ export const CustomInput = ({ className, placeholder, value, maxLength, dispatch
  * @param param0
  * @returns
  */
-export const CustomTextarea = ({ className, placeholder, value, maxLength, dispatch }: CustomInputProps) => {
+export const CustomTextarea = ({ className, placeholder, value, maxLength, dispatch }: CustomInputPropsInterface) => {
   return (
     <textarea
       className={`${className} ${styles.textarea}`}

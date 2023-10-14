@@ -74,7 +74,7 @@ const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) 
           <div {...innerHTML} />
         </div>
         <div className={styles.countsBox}>
-          <GoPostCommentButton postId={postId}>{postCommentCount}</GoPostCommentButton>
+          <GoPostCommentButton>{postCommentCount}</GoPostCommentButton>
           <LikePostButton likes={likes} postId={postId} userEmail={userEmail} />
         </div>
         <Comment

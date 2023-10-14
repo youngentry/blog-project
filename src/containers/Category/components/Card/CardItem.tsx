@@ -36,7 +36,7 @@ const CardItem = ({ data }: { data: Card }) => {
             <div className={styles.date}>{formedDate}</div>
           </div>
           <div className={styles.counts}>
-            <GoPostCommentButton postId={String(id)}>{commentCount}</GoPostCommentButton>
+            <GoPostCommentButton>{commentCount}</GoPostCommentButton>
             <LikePostButton likes={likes} postId={String(id)} userEmail={email} />
           </div>
         </div>

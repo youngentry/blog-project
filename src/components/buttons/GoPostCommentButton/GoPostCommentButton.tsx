@@ -3,7 +3,7 @@ import { BsChatDots } from 'react-icons/bs';
 
 import styles from './GoPostCommentButton.module.scss';
 
-const GoPostCommentButton = ({ children }: { children: any; postId: string }) => {
+const GoPostCommentButton = ({ children }: { children: any }) => {
   return (
     <button className={styles.goPostCommentButton} type='button'>
       <BsChatDots />
