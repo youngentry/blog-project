@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import { CommonCategoryType } from '@/types/post';
+import { CommonCategoryInterface, SubCategoryType } from '@/types/post';
 
-import { CategorySelectorProps, SubCategoryType } from '../../PostEditor';
 import styles from './CategorySelector.module.scss';
+import { CategorySelectorProps } from '../../PostEditor';
 
 const CategorySelector = ({
   categoryList,
@@ -60,7 +60,7 @@ const CategorySelector = ({
         upload
       </button>
       <div className={`${styles.categoryList} ${!isSelectCategoryVisible && 'hide'}`}>
-        {categoryList.map((mainCategory: CommonCategoryType) => {
+        {categoryList.map((mainCategory: CommonCategoryInterface) => {
           const children = mainCategory.children as SubCategoryType[];
 
           return mainCategory ? (

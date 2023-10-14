@@ -68,6 +68,6 @@ export interface SubCategoryType {
   parent?: string;
 }
 
-export interface CommonCategoryType extends SubCategoryType {
+export interface CommonCategoryInterface extends SubCategoryType {
   children?: SubCategoryType[];
 }

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { editPostData } from '@/services/postsFetch';
 import usePostItem, { UsePostItemInterface } from '@/hooks/usePostItem';
 import useCategoryList from '@/hooks/useCategoryList';
-import { CommonCategoryType } from '@/types/post';
+import { CommonCategoryInterface } from '@/types/post';
 
 import CategorySelector from './components/CategorySelector/CategorySelector';
 import styles from './PostEditor.module.scss';
@@ -14,7 +14,7 @@ import Quill from './components/Quill/Quill';
 import Spin from '@/components/loadings/Spin/Spin';
 
 export interface CategorySelectorProps {
-  categoryList: CommonCategoryType[];
+  categoryList: CommonCategoryInterface[];
   setCategoryId: Dispatch<SetStateAction<string>>;
   isSelectCategoryVisible: boolean;
   setIsSelectCategoryVisible: Dispatch<SetStateAction<boolean>>;

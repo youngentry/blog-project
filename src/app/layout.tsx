@@ -1,3 +1,6 @@
+import { Inter } from 'next/font/google';
+import { ReactNode } from 'react';
+
 import NavHead from '@/containers/NavHead/NavHead';
 import NavSide from '@/containers/NavSide/NavSide';
 import '@/styles/globals.scss';
@@ -5,12 +8,7 @@ import '@/styles/variables.scss';
 import '@/styles/animations.scss';
 import '@/styles/zIndex.scss';
 import type { Metadata } from 'next';
-
-import { Inter } from 'next/font/google';
-
 import Footer from '@/containers/Footer/Footer';
-
-import { ReactNode } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 

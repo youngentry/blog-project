@@ -18,8 +18,20 @@ interface ManageLikeItemPropsInterface {
   email: string;
 }
 
+const SanitizedInnerHTML = ({ contents }: { contents: string }) => {
+  return (
+    <div
+      // eslint-disable-next-line
+      dangerouslySetInnerHTML={{
+        __html: sanitize(contents.substring(0, 200)),
+      }}
+    />
+  );
+};
+
 const ManageLikeItem = (props: ManageLikeItemPropsInterface) => {
   const { likedPost, email } = props;
+
   return (
     <>
       {likedPost.map((likePostData: Post) => {
@@ -39,11 +51,7 @@ const ManageLikeItem = (props: ManageLikeItemPropsInterface) => {
             </div>
             <div className={styles.itemBody}>
               <div className={styles.description}>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: sanitize(contents.substring(0, 200)),
-                  }}
-                />
+                <SanitizedInnerHTML contents={contents} />
                 <Image className={styles.image} src={src} alt='post image' width={160} height={120} />
               </div>
               <p className={styles.time}>{getDateForm(date, true)}</p>

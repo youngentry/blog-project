@@ -1,10 +1,10 @@
-import { CommonCategoryType } from '@/types/post';
+import { CommonCategoryInterface } from '@/types/post';
 
 import { setFetchOptions } from './fetchOptions';
 
 /**
  * 카테고리 조회 요청 GET
- * @param {CommonCategoryType} body
+ * @param {CommonCategoryInterface} body
  * @returns {boolean}
  */
 export const getCategoriesApi = async (query: string = '', parentId: string = '') => {
@@ -22,7 +22,7 @@ export const getCategoriesApi = async (query: string = '', parentId: string = ''
  * @param {CategoryType} body
  * @returns {boolean}
  */
-export const addCategoryApi = async (body: CommonCategoryType) => {
+export const addCategoryApi = async (body: CommonCategoryInterface) => {
   const url = `/api/manage/category`;
   const options = setFetchOptions('POST', body);
 

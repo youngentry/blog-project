@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { addCategoryApi } from '@/services/categoryFetch';
-import { CommonCategoryType } from '@/types/post';
+import { CommonCategoryInterface } from '@/types/post';
 
 import { CustomInput } from '@/components/inputs/CustomInputs/CustomInputs';
 
@@ -18,7 +18,7 @@ const AddSubCategoryForm = ({ _id }: { _id: string }) => {
 
     try {
       // POST 요청을 보냅니다.
-      const body: CommonCategoryType = {
+      const body: CommonCategoryInterface = {
         role: 'sub',
         parent: parentId,
         title: addSubCategoryInput,
