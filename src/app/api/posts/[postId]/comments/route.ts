@@ -3,7 +3,7 @@ import { JWT, getToken } from 'next-auth/jwt';
 import { hash } from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { CommentForm, Comment, Post } from '@/types/post';
+import { Comment, CommentFormInterface, Post } from '@/types/post';
 import { connectDB } from '@/utils/db/db';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
@@ -33,11 +33,11 @@ export const GET = async (req: NextRequest, { params }: Params) => {
 export const POST = async (req: NextRequest, { params }: Params) => {
   const token: JWT | null = await getToken({ req }); // 유저 정보
   const { postId } = params; // 게시물 번호
-  const data: CommentForm = await req.json(); // 요청 받은 댓글 작성 form
+  const data: CommentFormInterface = await req.json(); // 요청 받은 댓글 작성 form
 
   const { MIN_NICKNAME, MIN_PASSWORD, MIN_COMMENT, MAX_NICKNAME, MAX_PASSWORD, MAX_COMMENT } = COMMENT_FORM_LENGTH;
 
-  const { nickname, password, comment, title }: CommentForm = data;
+  const { nickname, password, comment, title }: CommentFormInterface = data;
 
   // nickname또는 password를 입력했는지 검사합니다.
   if (!token && (nickname.length < MIN_NICKNAME || password.length < MIN_PASSWORD)) {
