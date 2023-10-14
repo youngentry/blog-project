@@ -8,8 +8,5 @@
   "singleQuote": true,
   "htmlWhitespaceSensitivity": "css",
   "jsxSingleQuote": true,
-  "endOfLine": "lf",
-  "importOrder": ["^[./]"],
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "endOfLine": "lf"
 }

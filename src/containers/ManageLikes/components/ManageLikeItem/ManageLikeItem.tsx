@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { BsArrowUpRightSquare } from 'react-icons/bs';
+// eslint-disable-next-line
 import { sanitize } from 'dompurify';
 import Image from 'next/image';
 

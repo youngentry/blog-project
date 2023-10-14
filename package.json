@@ -6,18 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint": "next lint --cache .",
+    "lint:fix": "next lint --cache --fix"
   },
   "dependencies": {
     "@next-auth/mongodb-adapter": "^1.1.3",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.5.0",
     "bcrypt": "^5.1.1",
-    "eslint": "8.48.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-next": "13.4.19",
-    "eslint-plugin-import": "^2.28.1",
     "isomorphic-dompurify": "^1.8.0",
     "mongodb": "^4.17.1",
     "next": "13.4.19",
@@ -27,8 +23,7 @@
     "react-icons": "^4.11.0",
     "react-quill": "^2.0.0",
     "react-redux": "^8.1.2",
-    "swiper": "^10.3.1",
-    "typescript": "5.2.2"
+    "swiper": "^10.3.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -37,12 +32,17 @@
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "eslint": "8.48.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-next": "13.4.19",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-prettier": "^5.0.1",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "prettier": "3.0.3",
-    "sass": "^1.66.1"
+    "sass": "^1.66.1",
+    "typescript": "5.2.2"
   },
   "lint-staged": {
     "*.js": [
