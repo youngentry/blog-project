@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { connectDB } from '@/utils/db/db';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
-import { CommonCategoryInterface } from '@/types/post';
+import { CommonCategoryType } from '@/types/post';
 
 // 카테고리 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest) => {
@@ -13,11 +13,11 @@ export const GET = async (req: NextRequest) => {
   const parentId: string | null = searchParams.get('parentId'); // DB에서 댓글 찾고 수정하기 위한 ObjectId
 
   const db = (await connectDB).db('blog');
-  const categoryCollection = db.collection<CommonCategoryInterface>('categories');
+  const categoryCollection = db.collection<CommonCategoryType>('categories');
 
   if (role === 'main') {
     // 메인 카테고리 데이터와 status를 응답합니다.
-    const foundCategory: CommonCategoryInterface[] = await categoryCollection.find({ role }).toArray();
+    const foundCategory: CommonCategoryType[] = await categoryCollection.find({ role }).toArray();
     if (foundCategory) {
       return NextResponse.json(foundCategory, { status: 200 });
     }
@@ -25,7 +25,7 @@ export const GET = async (req: NextRequest) => {
 
   if (role === 'sub') {
     // 서브 카테고리 데이터와 status를 응답합니다.
-    const foundCategory: CommonCategoryInterface | null = await categoryCollection.findOne({
+    const foundCategory: CommonCategoryType | null = await categoryCollection.findOne({
       _id: new ObjectId(parentId as string),
     });
     if (foundCategory) {
@@ -35,7 +35,7 @@ export const GET = async (req: NextRequest) => {
 
   if (!role) {
     //   모든 카테고리 데이터와 status를 응답합니다.
-    const foundCategory: CommonCategoryInterface[] = await categoryCollection.find({}).toArray();
+    const foundCategory: CommonCategoryType[] = await categoryCollection.find({}).toArray();
     if (foundCategory) {
       return NextResponse.json(foundCategory, { status: 200 });
     }
@@ -62,7 +62,7 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({ message: '카테고리 편집: 유효하지 않은 접근입니다.' }, { status: 400 });
   }
 
-  const body: CommonCategoryInterface = await req.json();
+  const body: CommonCategoryType = await req.json();
   // 요청 받은 카테고리 데이터
   const { role, parent, title } = body;
   let { _id } = body;
