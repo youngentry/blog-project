@@ -31,7 +31,6 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
     "@types/bcrypt": "^5.0.0",
     "@types/dompurify": "^3.0.2",
     "@types/node": "20.5.9",
