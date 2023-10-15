@@ -1,4 +1,3 @@
-import React from 'react';
 import { BsThreeDots } from 'react-icons/bs';
 
 import SubCategoryList from '@/containers/CategoryEdit/components/SubCategoryList/SubCategoryList';

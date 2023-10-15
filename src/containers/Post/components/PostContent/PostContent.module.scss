@@ -1,0 +1,15 @@
+@import '@/styles/mixins/flex.scss';
+
+.content {
+  margin-bottom: 1rem;
+  padding: 1rem 0;
+  @include flex(column, flex-start, flex-start, start);
+  line-height: 1.5;
+
+  .thumbnail {
+    position: relative !important;
+    object-fit: cover;
+    width: 500px;
+    height: 500px;
+  }
+}

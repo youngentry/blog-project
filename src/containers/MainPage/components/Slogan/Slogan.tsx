@@ -1,5 +1,3 @@
-import React from 'react';
-
 import styles from './Slogan.module.scss';
 import { Logo } from '@/components/logos/logos';
 

@@ -1,7 +1,3 @@
-'use client';
-
-import React from 'react';
-
 import styles from './CategoryEdit.module.scss';
 import AddMainCategoryForm from './components/AddMainCategoryForm/AddMainCategoryForm';
 import CategoryList from './components/CategoryList/CategoryList';

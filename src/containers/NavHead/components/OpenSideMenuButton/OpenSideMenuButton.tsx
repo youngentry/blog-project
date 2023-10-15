@@ -1,4 +1,3 @@
-import React from 'react';
 import { BsGrid } from 'react-icons/bs';
 
 import styles from './OpenSideMenuButton.module.scss';

@@ -29,7 +29,7 @@ const Category = ({ searchParams }: any) => {
               return <CardItem key={card.id} data={card} />;
             })}
           </ul>
-          <Pagination />
+          {/* <Pagination /> */}
         </>
       ) : (
         <div>게시물이 존재하지 않습니다.</div>
