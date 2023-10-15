@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { BsArrowUpRightSquare } from 'react-icons/bs';
 
-import { CommentInterface } from '@/types/post';
+import { CommentInterface } from '@/types/types';
 import { getDateForm } from '@/utils/getDateForm';
 import { useManageCommentsInterface } from '@/hooks/useManageComments';
 import { deleteCommentApi } from '@/services/commentsFetch';

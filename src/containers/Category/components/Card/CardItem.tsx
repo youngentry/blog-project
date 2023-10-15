@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { CardInterface } from '@/types/post';
+import { CardInterface } from '@/types/types';
 import { getDateForm } from '@/utils/getDateForm';
 
 import styles from './CardItem.module.scss';

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import usePostItem, { UsePostItemInterface } from '@/hooks/usePostItem';
-import { PostInterface } from '@/types/post';
+import { PostInterface } from '@/types/types';
 
 import styles from './PostItem.module.scss';
 import Comment from '../Comment/Comment';

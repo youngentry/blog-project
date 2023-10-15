@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 
 import { getCommentsDataApi } from '@/services/commentsFetch';
-import { CommentInterface } from '@/types/post';
+import { CommentInterface } from '@/types/types';
 
 const useCommentList = (postId: string, newUpdate: any = null) => {
   const [commentList, setCommentList] = useState<CommentInterface[]>([]); // API 요청하여 조회할 댓글 목록

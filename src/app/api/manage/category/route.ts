@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { connectDB } from '@/utils/db/db';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
-import { CommonCategoryInterface } from '@/types/post';
+import { CommonCategoryInterface } from '@/types/types';
 
 // 카테고리 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest) => {

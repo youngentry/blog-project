@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { CardInterface, PostInterface } from '@/types/post';
+import { CardInterface, PostInterface } from '@/types/types';
 import { connectDB } from '@/utils/db/db';
 
 // 게시물 정보를 불러오는 API입니다.

@@ -8,7 +8,7 @@ import { sanitize } from 'dompurify';
 import Image from 'next/image';
 
 import { getDateForm } from '@/utils/getDateForm';
-import { PostInterface } from '@/types/post';
+import { PostInterface } from '@/types/types';
 
 import styles from './ManageLikeItem.module.scss';
 import LikePostButton from '@/components/buttons/LikePostButton/LikePostButton';

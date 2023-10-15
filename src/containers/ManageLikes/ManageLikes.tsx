@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { PostInterface } from '@/types/post';
+import { PostInterface } from '@/types/types';
 import { getDateForm } from '@/utils/getDateForm';
 import useLikes from '@/hooks/useLikes';
 import { DESCRIPTION } from '@/constants/DESCRIPTION';

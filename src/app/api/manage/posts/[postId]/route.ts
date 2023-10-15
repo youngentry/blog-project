@@ -1,7 +1,7 @@
 import { JWT, getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { PostInterface } from '@/types/post';
+import { PostInterface } from '@/types/types';
 import { connectDB } from '@/utils/db/db';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { Params } from '@/types/session';

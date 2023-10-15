@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { CommentInterface, CommentListPropsInterface } from '@/types/post';
+import { CommentInterface, CommentListPropsInterface } from '@/types/types';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
 import { deleteCommentApi, patchCommentApi, postGuestCommentDeletionApi } from '@/services/commentsFetch';

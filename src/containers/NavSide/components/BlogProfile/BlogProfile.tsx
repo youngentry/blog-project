@@ -1,30 +1,29 @@
-import { getServerSession } from 'next-auth';
 import Image from 'next/image';
+import { getServerSession } from 'next-auth';
 
-import { checkBlogManager } from '@/utils/sessionCheck/checkBlogManager';
 import { UserSessionData } from '@/types/session';
+import { checkBlogManager } from '@/utils/sessionCheck/checkBlogManager';
 
-import styles from './NavSideHeader.module.scss';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import NewPostButton from '@/components/buttons/NewPostButton/NewPostButton';
+import styles from './BlogProfile.module.scss';
 import SearchPostButton from '@/components/buttons/SearchPostButton/SearchPostButton';
 import GoHomeButton from '@/components/buttons/GoHomeButton/GoHomeButton';
+import NewPostButton from '@/components/buttons/NewPostButton/NewPostButton';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
-// 사이드 메뉴의 헤더 컴포넌트입니다.
-const NavSideHeader = async () => {
+const BlogProfile = async () => {
   const session: UserSessionData | null = await getServerSession(authOptions);
 
   return (
-    <header className={styles.container}>
+    <div className={styles.container}>
       <Image src='/profile.jpg' alt='blog profile' width={240} height={200} />
-      <h2>Youngentry</h2>
+      <h2 className={styles.blogName}>Youngentry</h2>
       <div className={styles.buttons}>
         <SearchPostButton boxPosition='left' />
         <GoHomeButton />
         {session && checkBlogManager(session.user.email) && <NewPostButton />}
       </div>
-    </header>
+    </div>
   );
 };
 
-export default NavSideHeader;
+export default BlogProfile;

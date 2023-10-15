@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
 
-import { SlideItemPropsInterface } from '@/types/post';
+import { SlideItemPropsInterface } from '@/types/types';
 
 import styles from './Slider.module.scss';
 import SliderItem from '../SliderItem/SliderItem';

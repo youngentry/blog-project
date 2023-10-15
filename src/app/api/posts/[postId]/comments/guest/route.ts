@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { compare } from 'bcrypt';
 import { ObjectId } from 'mongodb';
 
-import { CommentInterface, PostInterface } from '@/types/post';
+import { CommentInterface, PostInterface } from '@/types/types';
 import { connectDB } from '@/utils/db/db';
 import { Params } from '@/types/session';
 

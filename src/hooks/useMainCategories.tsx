@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react';
 
 import useLoading from './useLoading';
 import { getCategoriesApi } from '@/services/categoryFetch';
+import { CommonCategoryInterface } from '@/types/types';
 
-const useMainCategories = () => {
-  const [mainCategories, setMainCategories] = useState([]);
+const useCategories = () => {
+  const [categories, setMainCategories] = useState<CommonCategoryInterface[]>([]);
   const { loading, setLoading } = useLoading();
 
   // 작성한 댓글 리스트를 조회하여 state에 저장합니다.
@@ -24,7 +25,7 @@ const useMainCategories = () => {
     })();
   }, [setLoading]);
 
-  return { mainCategories, setMainCategories, loading };
+  return { categories, setMainCategories, loading };
 };
 
-export default useMainCategories;
+export default useCategories;

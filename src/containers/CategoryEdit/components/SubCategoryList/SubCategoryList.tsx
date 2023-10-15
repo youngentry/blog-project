@@ -8,7 +8,7 @@ import { getCategoriesApi } from '@/services/categoryFetch';
 
 import styles from './SubCategoryList.module.scss';
 
-const SubCategoryList = ({ _id, subtitles }: { _id: string; subtitles?: string[] }) => {
+const SubCategoryList = ({ mainCategoryId, subtitles }: { mainCategoryId: string; subtitles?: string[] }) => {
   const [subCategories, setSubCategories] = useState<any[]>([]);
 
   useEffect(() => {
@@ -23,16 +23,16 @@ const SubCategoryList = ({ _id, subtitles }: { _id: string; subtitles?: string[]
     };
 
     (async () => {
-      const subCategoryData = await getSubCategories(_id);
+      const subCategoryData = await getSubCategories(mainCategoryId);
       setSubCategories(subCategoryData);
     })();
-  }, [_id]);
+  }, [mainCategoryId]);
 
   return (
     <ul className={styles.subTitleBox}>
       {subCategories.map((sub) => {
         const { title } = sub;
-        const subCategoryId = sub._id;
+        const subCategoryId = String(sub._id);
         const postCount = subtitles?.filter((subtitle) => subtitle === title).length;
         return (
           <li key={subCategoryId} className={styles.subTitleItem}>

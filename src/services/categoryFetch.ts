@@ -1,4 +1,4 @@
-import { CommonCategoryInterface } from '@/types/post';
+import { CommonCategoryInterface } from '@/types/types';
 
 import { setFetchOptions } from './fetchOptions';
 

@@ -3,7 +3,7 @@
 import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
 import { getManageCommentsApi } from '@/services/manageFetch';
-import { CommentInterface } from '@/types/post';
+import { CommentInterface } from '@/types/types';
 import useLoading from './useLoading';
 
 export interface useManageCommentsInterface {

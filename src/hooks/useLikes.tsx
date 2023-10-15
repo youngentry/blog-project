@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 import { getManageLikesApi } from '@/services/manageFetch';
 import useLoading from './useLoading';
-import { PostInterface } from '@/types/post';
+import { PostInterface } from '@/types/types';
 
 const useLikes = () => {
   const [likes, setLikes] = useState<PostInterface[]>([]); // 좋아요 한 게시물 리스트

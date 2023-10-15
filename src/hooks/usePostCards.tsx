@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { getPostCardsData } from '@/services/postsFetch';
-import { CardInterface } from '@/types/post';
+import { CardInterface } from '@/types/types';
 import useLoading from './useLoading';
 
 const usePostCards = (subtitle: string) => {

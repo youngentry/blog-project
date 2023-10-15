@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { editPostData } from '@/services/postsFetch';
 import usePostItem, { UsePostItemInterface } from '@/hooks/usePostItem';
 import useCategoryList from '@/hooks/useCategoryList';
-import { CategorySelectorPropsInterface } from '@/types/post';
+import { CategorySelectorPropsInterface } from '@/types/types';
 
 import styles from './PostEditor.module.scss';
 import Quill from './components/Quill/Quill';

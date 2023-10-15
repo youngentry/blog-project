@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { addCategoryApi } from '@/services/categoryFetch';
-import { CommonCategoryInterface } from '@/types/post';
+import { CommonCategoryInterface } from '@/types/types';
 
 import { CustomInput } from '@/components/inputs/CustomInputs/CustomInputs';
 

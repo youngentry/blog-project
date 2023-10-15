@@ -1,4 +1,4 @@
-import { CardInterface, PostInterface, PostContentsInterface } from '@/types/post';
+import { CardInterface, PostInterface, PostContentsInterface } from '@/types/types';
 import BASE_URL from '@/constants/BASE_URL';
 
 import { setFetchOptions } from './fetchOptions';

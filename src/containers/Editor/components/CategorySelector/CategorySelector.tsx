@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { CategorySelectorPropsInterface, CommonCategoryInterface, SubCategoryInterface } from '@/types/post';
+import { CategorySelectorPropsInterface, CommonCategoryInterface, SubCategoryInterface } from '@/types/types';
 
 import styles from './CategorySelector.module.scss';
 

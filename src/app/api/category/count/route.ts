@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { CardInterface, PostInterface } from '@/types/post';
+import { CardInterface, PostInterface } from '@/types/types';
 import { connectDB } from '@/utils/db/db';
 
 // 게시물의 서브 카테고리 배열을 불러오는 API입니다.

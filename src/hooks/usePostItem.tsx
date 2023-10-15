@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { getPostItemData } from '@/services/postsFetch';
-import { PostInterface } from '@/types/post';
+import { PostInterface } from '@/types/types';
 import useLoading from './useLoading';
 
 export interface UsePostItemInterface {

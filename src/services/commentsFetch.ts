@@ -1,4 +1,4 @@
-import { CommentInterface, CommentFormInterface } from '@/types/post';
+import { CommentInterface, CommentFormInterface } from '@/types/types';
 
 import { setFetchOptions } from './fetchOptions';
 

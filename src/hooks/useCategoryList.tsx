@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { getCategoriesApi } from '@/services/categoryFetch';
 import useLoading from './useLoading';
-import { CommonCategoryInterface } from '@/types/post';
+import { CommonCategoryInterface } from '@/types/types';
 
 const useCategoryList = () => {
   const [categoryList, setCategoryList] = useState<CommonCategoryInterface[]>([]); // 카테고리 목록

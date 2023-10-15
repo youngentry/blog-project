@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { BsArrowUpRightSquare } from 'react-icons/bs';
 
-import { SlideItemPropsInterface } from '@/types/post';
+import { SlideItemPropsInterface } from '@/types/types';
 
 import styles from './SliderItem.module.scss';
 

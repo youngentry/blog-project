@@ -3,7 +3,7 @@
 import React from 'react';
 
 import useManageComments, { useManageCommentsInterface } from '@/hooks/useManageComments';
-import { CommentInterface } from '@/types/post';
+import { CommentInterface } from '@/types/types';
 import { getDateForm } from '@/utils/getDateForm';
 import { DESCRIPTION } from '@/constants/DESCRIPTION';
 

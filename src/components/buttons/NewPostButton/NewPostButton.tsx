@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { BsPencil } from 'react-icons/bs';
 import { useRouter } from 'next/navigation';
 

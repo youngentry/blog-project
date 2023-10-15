@@ -2,12 +2,11 @@
 
 import React from 'react';
 
-import { CardInterface } from '@/types/post';
+import { CardInterface } from '@/types/types';
 import usePostCards from '@/hooks/usePostCards';
 
 import CardItem from './components/Card/CardItem';
 import styles from './Category.module.scss';
-import Pagination from '@/components/Pagination/Pagination';
 import Spin from '@/components/loadings/Spin/Spin';
 
 // category (게시물 목록)페이지입니다.
@@ -23,14 +22,11 @@ const Category = ({ searchParams }: any) => {
       {loading ? (
         <Spin size='m' message='게시물 목록을 불러오는 중입니다.' />
       ) : postCards ? (
-        <>
-          <ul className={styles.cardContainer}>
-            {postCards.map((card: CardInterface) => {
-              return <CardItem key={card.id} data={card} />;
-            })}
-          </ul>
-          {/* <Pagination /> */}
-        </>
+        <ul className={styles.cardContainer}>
+          {postCards.map((card: CardInterface) => {
+            return <CardItem key={card.id} data={card} />;
+          })}
+        </ul>
       ) : (
         <div>게시물이 존재하지 않습니다.</div>
       )}
