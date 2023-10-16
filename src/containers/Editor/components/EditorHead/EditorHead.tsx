@@ -1,20 +1,24 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 
-import { CategorySelectorPropsInterface } from '@/types/types';
+import { CommonCategoryInterface } from '@/types/types';
 
 import CategorySelector from '../CategorySelector/CategorySelector';
 import styles from './EditorHead.module.scss';
 
-export interface EditorHeadPropsInterface extends CategorySelectorPropsInterface {
+interface EditorHeadPropsInterface {
+  setMainCategoryId: Dispatch<SetStateAction<string>>;
+  categoryList: CommonCategoryInterface[];
   title: string;
   setTitle: Dispatch<SetStateAction<string>>;
+  selectedSubtitle: string;
+  setSelectedSubtitle: Dispatch<SetStateAction<string>>;
 }
 
 const EditorHead = (props: EditorHeadPropsInterface) => {
   const { title, setTitle, categoryList, setMainCategoryId, selectedSubtitle, setSelectedSubtitle } = props;
   const [isSelectCategoryVisible, setIsSelectCategoryVisible] = useState<boolean>(false); // 카테고리 드롭메뉴 visible 여부
 
-  const categorySelectorProps: CategorySelectorPropsInterface = {
+  const categorySelectorProps = {
     categoryList,
     setMainCategoryId,
     isSelectCategoryVisible,

@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 
-import { CategorySelectorPropsInterface, CommonCategoryInterface, SubCategoryInterface } from '@/types/types';
+import { CommonCategoryInterface, SubCategoryInterface } from '@/types/types';
 
 import styles from './CategorySelector.module.scss';
+
+// postEditor 카테고리 선택
+interface CategorySelectorPropsInterface {
+  categoryList: CommonCategoryInterface[];
+  setMainCategoryId: Dispatch<SetStateAction<string>>;
+  selectedSubtitle: string;
+  setSelectedSubtitle: Dispatch<SetStateAction<string>>;
+  isSelectCategoryVisible: boolean;
+  setIsSelectCategoryVisible: Dispatch<SetStateAction<boolean>>;
+}
 
 // 게시물 작성 시 카테고리 선택 드롭메뉴
 const CategorySelector = ({
   categoryList,
-  setCategoryId,
-  isSelectCategoryVisible,
-  setIsSelectCategoryVisible,
+  setMainCategoryId,
   selectedSubtitle,
   setSelectedSubtitle,
+  isSelectCategoryVisible,
+  setIsSelectCategoryVisible,
 }: CategorySelectorPropsInterface) => {
   const [file, setFile] = useState<any>();
 
@@ -39,8 +49,8 @@ const CategorySelector = ({
     setFile({ file: e.target.files[0] });
   };
 
-  const handleSelectSubtitle = (subTitle: string, categoryId: string) => {
-    setCategoryId(categoryId);
+  const handleSelectSubtitle = (subTitle: string, mainCategoryId: string) => {
+    setMainCategoryId(mainCategoryId);
     setSelectedSubtitle(subTitle);
     setIsSelectCategoryVisible(false);
   };
