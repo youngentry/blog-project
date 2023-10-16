@@ -10,7 +10,7 @@ export interface UsePostCardsInterface {
   loading: boolean;
 }
 
-const usePostCards = (subtitle: string) => {
+const usePostCards = (subtitle: string | undefined) => {
   const [postCards, setPostCards] = useState<CardInterface[]>([]); // 게시물 카드
   const { loading, setLoading } = useLoading(); // 로딩 상태
 
