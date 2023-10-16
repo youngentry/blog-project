@@ -1,6 +1,7 @@
-@import "@/styles/mixins/hover.scss";
+@import '@/styles/mixins/hover.scss';
 
 .likePost {
+  padding: 0.25rem;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -10,4 +11,5 @@
   background: none;
   border-radius: 0.25rem;
   cursor: pointer;
+  @include hoverBg();
 }

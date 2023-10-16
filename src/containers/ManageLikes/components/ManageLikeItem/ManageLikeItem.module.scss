@@ -12,6 +12,11 @@
     .postList {
       margin-bottom: 1rem;
       padding: 1.5rem;
+      border-bottom: var(--1-solid);
+
+      &:last-child {
+        border-bottom: none;
+      }
 
       .postItem {
         .itemHead {
@@ -50,8 +55,8 @@
             display: flex;
             justify-content: space-between;
             .contents {
-              margin-bottom: 0.5rem;
-              font-size: var(--ft-19);
+              font-size: var(--ft-17);
+              line-height: 1.5;
             }
 
             .image {
@@ -59,11 +64,9 @@
             }
           }
           .time {
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            padding-top: 1.5rem;
             font-size: var(--ft-15);
             color: var(--color-text-week);
-            border-bottom: var(--1-solid);
           }
         }
       }
