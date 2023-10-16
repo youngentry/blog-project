@@ -28,15 +28,15 @@ const CardItem = ({ postCards }: { postCards: CardInterface[] }) => {
                   {title || '제목 없음'}
                 </Link>
               </h3>
-              <ul className={styles.subtitle}>
+              <div className={styles.subtitle}>
                 <Link href={{ pathname: '/category', query: { subtitle } }}>
-                  <li className={styles.subtitle}>{subtitle}</li>
+                  <span>#{subtitle}</span>
                 </Link>
-              </ul>
+              </div>
               <div className={styles.more}>
                 <div className={styles.write}>
-                  <div className={styles.author}>{author}</div>
-                  <div className={styles.date}>{formedDate}</div>
+                  <strong className={styles.author}>{author}</strong>
+                  <span className={styles.date}>{formedDate}</span>
                 </div>
                 <div className={styles.counts}>
                   <GoPostCommentButton>{commentCount}</GoPostCommentButton>

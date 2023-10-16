@@ -45,18 +45,13 @@
         @include hoverText;
       }
 
-      .subtitle,
-      .languages {
+      .subtitle {
         //   height: 2rem;
         display: flex;
         flex-wrap: wrap;
         gap: 0.25rem;
-
-        .subtitle,
-        .language {
-          @include hoverText;
-          margin-bottom: 0.5rem;
-        }
+        @include hoverText;
+        margin-bottom: 0.5rem;
       }
 
       .more {
