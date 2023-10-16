@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
 import { connectDB } from '@/utils/db/db';
-import { Params } from '@/types/session';
 
 // 게시물 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest, { params }: Params) => {

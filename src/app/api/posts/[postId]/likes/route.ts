@@ -1,9 +1,9 @@
 import { JWT, getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
 import { PostInterface } from '@/types/types';
 import { connectDB } from '@/utils/db/db';
-import { Params } from '@/types/session';
 
 // 게시물 좋아요 API 입니다.
 export const PATCH = async (req: NextRequest, { params }: Params) => {

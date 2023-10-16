@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 import { Dispatch, SetStateAction } from 'react';
 
-// 게시물 카드
+// postCard
 export interface CardInterface {
   id: number;
   src: string;
@@ -15,20 +15,20 @@ export interface CardInterface {
   likes: string[];
 }
 
-// 게시물
+// postItem
 export interface PostInterface extends CardInterface {
   _id?: string;
   contents: string;
 }
 
-// 게시물 컨텐츠
+// write, edit post form
 export interface PostContentsInterface {
   title: string;
   subtitle: string;
   contents: string;
 }
 
-// 댓글 입력 폼
+// comment form
 export interface CommentFormInterface {
   title: string;
   nickname: string;
@@ -36,7 +36,7 @@ export interface CommentFormInterface {
   comment: string;
 }
 
-// 댓글
+// comment
 export interface CommentInterface extends CommentFormInterface {
   _id?: ObjectId;
   parentId: number;
@@ -46,7 +46,7 @@ export interface CommentInterface extends CommentFormInterface {
   isLoggedIn: boolean;
 }
 
-// 댓글 CommentListProps 컴포넌트 프롭스 타입
+// 댓글 CommentListProps 컴포넌트 props
 export interface CommentListPropsInterface {
   postId: string;
   newUpdate: boolean;
@@ -55,12 +55,13 @@ export interface CommentListPropsInterface {
   setPostCommentCount: Dispatch<SetStateAction<number>>;
 }
 
-// 댓글 CommentFormProps 컴포넌트 프롭스 타입
+// 댓글 CommentFormProps 컴포넌트 props
 export interface CommentFormPropsInterface extends CommentListPropsInterface {
   title: string;
   setNewUpdate: Dispatch<SetStateAction<boolean>>;
 }
 
+// subCategory
 export interface SubCategoryInterface {
   _id?: string | ObjectId;
   role: string;
@@ -68,10 +69,12 @@ export interface SubCategoryInterface {
   parent?: string;
 }
 
+// mainCategory
 export interface CommonCategoryInterface extends SubCategoryInterface {
   children?: SubCategoryInterface[];
 }
 
+// postEditor 카테고리 선택
 export interface CategorySelectorPropsInterface {
   categoryList: CommonCategoryInterface[];
   setMainCategoryId: Dispatch<SetStateAction<string>>;
@@ -81,9 +84,17 @@ export interface CategorySelectorPropsInterface {
   setIsSelectCategoryVisible?: Dispatch<SetStateAction<boolean>>;
 }
 
+// 메인페이지 slideItem props
 export interface SlideItemPropsInterface {
   title: string;
   src: string;
   content: string;
   link: string;
+}
+
+// credential signUp form
+export interface SignUpFormInterface {
+  name: string;
+  email: string;
+  password: string;
 }

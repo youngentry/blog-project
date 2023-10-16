@@ -5,9 +5,3 @@ export interface UserSessionData {
     image: string;
   };
 }
-
-export interface Params {
-  params: {
-    [key: string]: string;
-  };
-}

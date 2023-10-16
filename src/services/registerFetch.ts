@@ -1,4 +1,4 @@
-import { SignUp } from '@/types/register';
+import { SignUpFormInterface } from '@/types/types';
 
 import { setFetchOptions } from './fetchOptions';
 /**
@@ -7,7 +7,7 @@ import { setFetchOptions } from './fetchOptions';
  * @param {CommentForm} body
  * @returns {boolean}
  */
-export const postSignUpApi = async (body: SignUp) => {
+export const postSignUpApi = async (body: SignUpFormInterface) => {
   const url = `/api/auth/signup`;
   const options = setFetchOptions('POST', body);
 

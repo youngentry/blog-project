@@ -1,10 +1,10 @@
 import { JWT, getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
 import { PostInterface } from '@/types/types';
 import { connectDB } from '@/utils/db/db';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
-import { Params } from '@/types/session';
 
 // 게시물 삭제 API 입니다.
 export const DELETE = async (req: NextRequest, { params }: Params) => {

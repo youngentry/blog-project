@@ -2,12 +2,12 @@ import { ObjectId } from 'mongodb';
 import { JWT, getToken } from 'next-auth/jwt';
 import { hash } from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
 import { CommentInterface, CommentFormInterface, PostInterface } from '@/types/types';
 import { connectDB } from '@/utils/db/db';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
-import { Params } from '@/types/session';
 
 // 댓글 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest, { params }: Params) => {

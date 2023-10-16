@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
 import { connectDB } from '@/utils/db/db';
-import { Params } from '@/types/session';
 
 interface EditPostForm {
   title: string;
