@@ -15,7 +15,9 @@ interface quillProps {
 // window와 같은 브라우저 API에 의존할 경우 필요합니다.
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
-const Quill = ({ contents, setContents }: quillProps) => {
+const Quill = (props: quillProps) => {
+  const { contents, setContents } = props;
+
   const modules = {
     toolbar: {
       container: [
@@ -28,13 +30,15 @@ const Quill = ({ contents, setContents }: quillProps) => {
   };
 
   return (
-    <ReactQuill
-      className={styles.quill}
-      value={contents}
-      onChange={setContents}
-      modules={modules}
-      placeholder='내용을 입력해주세요.'
-    />
+    <div className={styles.quillContainer}>
+      <ReactQuill
+        className={styles.quill}
+        value={contents}
+        onChange={setContents}
+        modules={modules}
+        placeholder='내용을 입력해주세요.'
+      />
+    </div>
   );
 };
 

@@ -5,7 +5,8 @@ import { CommonCategoryInterface } from '@/types/types';
 
 import { CustomInput } from '@/components/inputs/CustomInputs/CustomInputs';
 
-const AddSubCategoryForm = ({ _id }: { _id: string }) => {
+// 서브 카테고리 추가 폼
+const AddSubCategoryForm = ({ mainCategoryId }: { mainCategoryId: string }) => {
   const [addSubCategoryInput, setAddSubCategoryInput] = useState<string>('');
 
   const addSubCategory = async (e: React.FormEvent, parentId: string) => {
@@ -44,7 +45,7 @@ const AddSubCategoryForm = ({ _id }: { _id: string }) => {
   };
 
   return (
-    <form onSubmit={(e) => addSubCategory(e, _id)}>
+    <form onSubmit={(e) => addSubCategory(e, mainCategoryId)}>
       <CustomInput placeholder='서브 카테고리 추가하기' {...subInputProps} />
       <button type='submit'>확인</button>
     </form>

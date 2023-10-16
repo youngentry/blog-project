@@ -4,6 +4,7 @@ import { CategorySelectorPropsInterface, CommonCategoryInterface, SubCategoryInt
 
 import styles from './CategorySelector.module.scss';
 
+// 게시물 작성 시 카테고리 선택 드롭메뉴
 const CategorySelector = ({
   categoryList,
   setCategoryId,
@@ -16,7 +17,7 @@ const CategorySelector = ({
 
   const onFileUpload = async () => {
     /* FormData 선언 */
-    const formData: any = new FormData();
+    const formData = new FormData();
     formData.append('file', file);
 
     const res = await fetch('https://api.imgur.com/3/image', {

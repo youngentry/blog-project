@@ -1,8 +1,14 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { getCategoriesApi } from '@/services/categoryFetch';
 import useLoading from './useLoading';
 import { CommonCategoryInterface } from '@/types/types';
+
+export interface UseCategoryInterface {
+  categoryList: CommonCategoryInterface[];
+  setCategoryList: Dispatch<SetStateAction<CommonCategoryInterface[]>>;
+  loading?: boolean;
+}
 
 const useCategoryList = () => {
   const [categoryList, setCategoryList] = useState<CommonCategoryInterface[]>([]); // 카테고리 목록

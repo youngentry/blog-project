@@ -8,6 +8,7 @@ import styles from './CategoryList.module.scss';
 import AddSubCategoryForm from '../AddSubCategoryForm/AddSubCategoryForm';
 import SubCategoryList from '../SubCategoryList/SubCategoryList';
 
+// 카테고리 리스트
 const CategoryList = () => {
   const [mainCategories, setMainCategories] = useState<any[]>([]);
 
@@ -38,8 +39,8 @@ const CategoryList = () => {
           return (
             <li key={_id} className={styles.mainTitleItem}>
               <h4>{title}</h4>
-              <AddSubCategoryForm _id={_id} />
-              <SubCategoryList _id={_id} />
+              <AddSubCategoryForm mainCategoryId={_id} />
+              <SubCategoryList mainCategoryId={_id} />
             </li>
           );
         })}

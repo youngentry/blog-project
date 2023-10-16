@@ -2,6 +2,7 @@ import styles from './CategoryEdit.module.scss';
 import AddMainCategoryForm from './components/AddMainCategoryForm/AddMainCategoryForm';
 import CategoryList from './components/CategoryList/CategoryList';
 
+// 카테고리 에디터
 const CategoryEdit = () => {
   return (
     <div className={styles.container}>

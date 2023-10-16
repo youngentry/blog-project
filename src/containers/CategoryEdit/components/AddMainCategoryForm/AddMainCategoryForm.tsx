@@ -8,6 +8,7 @@ import { CommonCategoryInterface } from '@/types/types';
 import { CustomInput } from '@/components/inputs/CustomInputs/CustomInputs';
 // import styles from './AddMainCategoryForm.module.scss';
 
+// 메인 카테고리 추가 폼
 const AddMainCategoryForm = () => {
   const [addMainCategoryInput, setAddMainCategoryInput] = useState<string>('');
 

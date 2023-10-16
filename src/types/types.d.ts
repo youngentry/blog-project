@@ -74,11 +74,11 @@ export interface CommonCategoryInterface extends SubCategoryInterface {
 
 export interface CategorySelectorPropsInterface {
   categoryList: CommonCategoryInterface[];
-  setCategoryId: Dispatch<SetStateAction<string>>;
-  isSelectCategoryVisible: boolean;
-  setIsSelectCategoryVisible: Dispatch<SetStateAction<boolean>>;
+  setMainCategoryId: Dispatch<SetStateAction<string>>;
   selectedSubtitle: string;
   setSelectedSubtitle: Dispatch<SetStateAction<string>>;
+  isSelectCategoryVisible?: boolean;
+  setIsSelectCategoryVisible?: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface SlideItemPropsInterface {

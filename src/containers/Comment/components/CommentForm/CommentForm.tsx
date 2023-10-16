@@ -10,7 +10,7 @@ import { CustomInput, CustomTextarea, ReadOnlyInput } from '@/components/inputs/
 import styles from './CommentForm.module.scss';
 
 // 댓글 입력 폼입니다.
-// 비로그인 상태에서는(userEmail이 존재하지 않을 경우에) nickname, password input이 나타납니다.
+// 비로그인 상태에서는 nickname, password input이 나타납니다.
 const CommentForm = (props: CommentFormPropsInterface) => {
   const { title, postId, userEmail, newUpdate, setNewUpdate, postCommentCount, setPostCommentCount } = props;
 

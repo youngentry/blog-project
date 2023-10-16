@@ -13,6 +13,7 @@ import UserProfile from '@/components/UserProfile/UserProfile';
 import { CustomInput, CustomTextarea } from '@/components/inputs/CustomInputs/CustomInputs';
 import styles from './CommentList.module.scss';
 
+// 댓글 목록입니다.
 const CommentList = ({
   postId,
   newUpdate,
