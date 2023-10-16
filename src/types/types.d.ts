@@ -74,16 +74,6 @@ export interface CommonCategoryInterface extends SubCategoryInterface {
   children?: SubCategoryInterface[];
 }
 
-// postEditor 카테고리 선택
-export interface CategorySelectorPropsInterface {
-  categoryList: CommonCategoryInterface[];
-  setMainCategoryId: Dispatch<SetStateAction<string>>;
-  selectedSubtitle: string;
-  setSelectedSubtitle: Dispatch<SetStateAction<string>>;
-  isSelectCategoryVisible?: boolean;
-  setIsSelectCategoryVisible?: Dispatch<SetStateAction<boolean>>;
-}
-
 // 메인페이지 slideItem props
 export interface SlideItemPropsInterface {
   title: string;

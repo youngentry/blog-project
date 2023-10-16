@@ -11,7 +11,7 @@ import styles from './PostEditor.module.scss';
 import Quill from './components/Quill/Quill';
 import Spin from '@/components/loadings/Spin/Spin';
 import ConfirmEditPost from './components/ConfirmEditPost/ConfirmEditPost';
-import EditorHead, { EditorHeadPropsInterface } from './components/EditorHead/EditorHead';
+import EditorHead from './components/EditorHead/EditorHead';
 
 // react-quill에 게시물 데이터를 불러오거나, 새롭게 작성하거나 수정한 게시물을 DB에 업데이트합니다.
 const PostEditor = ({ canEdit }: { canEdit?: boolean }) => {
@@ -61,7 +61,7 @@ const PostEditor = ({ canEdit }: { canEdit?: boolean }) => {
   }
 
   // Editor Head props
-  const editorHeadProps: EditorHeadPropsInterface = {
+  const editorHeadProps = {
     title,
     setTitle,
     categoryList,
