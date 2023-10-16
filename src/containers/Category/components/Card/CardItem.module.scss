@@ -1,74 +1,88 @@
-@import "@/styles/mixins/flex.scss";
-@import "@/styles/mixins/hover.scss";
+@import '@/styles/mixins/flex.scss';
+@import '@/styles/mixins/hover.scss';
 
-.card {
-  font-size: 0.75rem;
+.cardContainer {
+  margin-bottom: 4rem;
+  display: inline-block;
+  gap: var(--gap-20);
   width: 100%;
-  background: var(--color-f);
-  border-radius: var(--br-20);
-  overflow: hidden;
-  margin-bottom: 1rem;
-  box-shadow: 0 0 4px var(--color-c);
-  transition: 0.3s;
-  &:hover {
-    transform: scale(1.025);
-    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  }
 
-  .image {
+  // 컬럼 카운트
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+
+  .card {
+    font-size: 0.75rem;
     width: 100%;
-    height: 100%;
-  }
-
-  .content {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    .title {
-      margin-bottom: 0.5rem;
-      font-size: var(--ft-17);
-      @include hoverText;
+    background: var(--color-f);
+    border-radius: var(--br-20);
+    overflow: hidden;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 4px var(--color-c);
+    transition: 0.3s;
+    &:hover {
+      transform: scale(1.025);
+      box-shadow:
+        0 8px 17px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.15);
     }
 
-    .subtitle,
-    .languages {
-      //   height: 2rem;
+    .image {
+      width: 100%;
+      height: 100%;
+    }
+
+    .content {
+      padding: 1rem;
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.25rem;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .title {
+        margin-bottom: 0.5rem;
+        font-size: var(--ft-17);
+        @include hoverText;
+      }
 
       .subtitle,
-      .language {
-        @include hoverText;
-        margin-bottom: 0.5rem;
-      }
-    }
-
-    .more {
-      top: auto;
-      display: flex;
-      justify-content: space-between;
-      gap: 0.5rem;
-
-      .write {
+      .languages {
+        //   height: 2rem;
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
         gap: 0.25rem;
 
-        .author {
-          font-weight: 500;
-        }
-        .date {
-          font-size: var(--ft-13);
+        .subtitle,
+        .language {
+          @include hoverText;
+          margin-bottom: 0.5rem;
         }
       }
 
-      .counts {
+      .more {
+        top: auto;
         display: flex;
-        align-items: flex-end;
+        justify-content: space-between;
         gap: 0.5rem;
+
+        .write {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+
+          .author {
+            font-weight: 500;
+          }
+          .date {
+            font-size: var(--ft-13);
+          }
+        }
+
+        .counts {
+          display: flex;
+          align-items: flex-end;
+          gap: 0.5rem;
+        }
       }
     }
   }

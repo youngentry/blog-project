@@ -1,8 +1,14 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { getPostCardsData } from '@/services/postsFetch';
 import { CardInterface } from '@/types/types';
 import useLoading from './useLoading';
+
+export interface UsePostCardsInterface {
+  postCards: CardInterface[];
+  setPostCards: Dispatch<SetStateAction<CardInterface[]>>;
+  loading: boolean;
+}
 
 const usePostCards = (subtitle: string) => {
   const [postCards, setPostCards] = useState<CardInterface[]>([]); // 게시물 카드
