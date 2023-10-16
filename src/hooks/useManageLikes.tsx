@@ -1,12 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
 import { getManageLikesApi } from '@/services/manageFetch';
 import useLoading from './useLoading';
 import { PostInterface } from '@/types/types';
 
-const useLikes = () => {
+export interface useManageLikesInterface {
+  likes: PostInterface[];
+  setLikes: Dispatch<SetStateAction<PostInterface[]>>;
+  loading?: boolean;
+}
+
+const useManageLikes = () => {
   const [likes, setLikes] = useState<PostInterface[]>([]); // 좋아요 한 게시물 리스트
   const { loading, setLoading } = useLoading();
 
@@ -28,4 +34,4 @@ const useLikes = () => {
   return { likes, setLikes, loading };
 };
 
-export default useLikes;
+export default useManageLikes;

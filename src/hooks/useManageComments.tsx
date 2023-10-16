@@ -8,7 +8,7 @@ import useLoading from './useLoading';
 
 export interface useManageCommentsInterface {
   comments: CommentInterface[];
-  setComments: Dispatch<SetStateAction<any>>;
+  setComments: Dispatch<SetStateAction<CommentInterface[]>>;
   loading?: boolean;
 }
 

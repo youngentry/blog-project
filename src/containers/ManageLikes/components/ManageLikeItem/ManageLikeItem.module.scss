@@ -1,57 +1,72 @@
-@import "@/styles/mixins/hover";
+@import '@/styles/mixins/hover';
 
-.container {
-  min-width: 40rem;
-  .itemHead {
-    margin-bottom: 1.5rem;
-    display: flex;
-    text-align: center;
-    justify-content: space-between;
+.days {
+  .ondDay {
+    .likedDate {
+      padding: 1rem;
+      width: 100%;
+      font-size: var(--ft-19);
+      background: #f8f9fa;
+      border-radius: 0.5rem;
+    }
+    .postList {
+      margin-bottom: 1rem;
+      padding: 1.5rem;
 
-    .head {
-      display: flex;
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      font-size: var(--ft-17);
+      .postItem {
+        .itemHead {
+          margin-bottom: 1.5rem;
+          display: flex;
+          text-align: center;
+          justify-content: space-between;
 
-      .postLink {
-        color: var(--color-blue-dark);
-        display: flex;
-        @include hoverText();
-        .title {
-          margin-right: 0.25rem;
+          .head {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            font-size: var(--ft-17);
+
+            .postLink {
+              color: var(--color-blue-dark);
+              display: flex;
+              @include hoverText();
+              .title {
+                margin-right: 0.25rem;
+              }
+            }
+
+            span {
+              margin-right: 0.25rem;
+              color: var(--color-0);
+              font-weight: 400;
+            }
+          }
+          .likeButton {
+          }
+        }
+        .itemBody {
+          .description {
+            display: flex;
+            justify-content: space-between;
+            .contents {
+              margin-bottom: 0.5rem;
+              font-size: var(--ft-19);
+            }
+
+            .image {
+              border-radius: 0.5rem;
+            }
+          }
+          .time {
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: var(--ft-15);
+            color: var(--color-text-week);
+            border-bottom: var(--1-solid);
+          }
         }
       }
-
-      span {
-        margin-right: 0.25rem;
-        color: var(--color-0);
-        font-weight: 400;
-      }
-    }
-    .likeButton {
-    }
-  }
-  .itemBody {
-    .description {
-      display: flex;
-      justify-content: space-between;
-      .contents {
-        margin-bottom: 0.5rem;
-        font-size: var(--ft-19);
-      }
-
-      .image {
-        border-radius: 0.5rem;
-      }
-    }
-    .time {
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      font-size: var(--ft-15);
-      color: var(--color-text-week);
-      border-bottom: var(--1-solid);
     }
   }
 }
