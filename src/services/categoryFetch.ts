@@ -28,7 +28,7 @@ export const addCategoryApi = async (body: CommonCategoryInterface) => {
 
   // 요청 결과 반환
   const res = await fetch(url, options);
-  return !!res.ok;
+  return res.ok;
 };
 
 /**

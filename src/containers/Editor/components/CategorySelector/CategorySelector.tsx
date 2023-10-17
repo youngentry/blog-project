@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 import { CommonCategoryInterface, SubCategoryInterface } from '@/types/types';
 
@@ -23,32 +23,6 @@ const CategorySelector = ({
   isSelectCategoryVisible,
   setIsSelectCategoryVisible,
 }: CategorySelectorPropsInterface) => {
-  const [file, setFile] = useState<any>();
-
-  const onFileUpload = async () => {
-    /* FormData 선언 */
-    const formData = new FormData();
-    formData.append('file', file);
-
-    const res = await fetch('https://api.imgur.com/3/image', {
-      method: 'POST',
-      headers: {
-        Authorization: `Client-ID ${process.env.NEXT_PUBLIC_IMGUR_CLIENT_ID}`,
-        Accept: 'application/json',
-      },
-      body: formData,
-    });
-
-    const data = await res.json(); // imgur 업로드 결과 데이터
-    const { link } = data; // 이미지 링크
-
-    return link;
-  };
-
-  const onFileChange = (e: any) => {
-    setFile({ file: e.target.files[0] });
-  };
-
   const handleSelectSubtitle = (subTitle: string, mainCategoryId: string) => {
     setMainCategoryId(mainCategoryId);
     setSelectedSubtitle(subTitle);
@@ -63,11 +37,6 @@ const CategorySelector = ({
         type='button'
       >
         {selectedSubtitle}
-      </button>
-
-      <input type='file' onChange={onFileChange} />
-      <button onClick={onFileUpload} type='button'>
-        upload
       </button>
       <div className={`${styles.categoryList} ${!isSelectCategoryVisible && 'hide'}`}>
         {categoryList.map((mainCategory: CommonCategoryInterface) => {
