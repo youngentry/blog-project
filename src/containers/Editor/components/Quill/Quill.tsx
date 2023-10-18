@@ -37,7 +37,7 @@ const ReactQuill = dynamic(
 const Quill = (props: quillProps) => {
   const quillRef = useRef();
 
-  const { contents, setContents } = props;
+  const { contents, setContents } = props; // quill input
 
   // 이미지를 본문의 커서 위치에 <img src="이미지주소"/> 형태로 삽입합니다.
   const onFileUpload = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -60,8 +60,6 @@ const Quill = (props: quillProps) => {
     const { link } = result.data; // 이미지 링크
 
     insertImage(link); // 커서 위치에 이미지 태그 삽입
-
-    console.log(contents);
   };
 
   // 현재 커서 위치에 이미지 태그를 삽입합니다.
@@ -69,19 +67,12 @@ const Quill = (props: quillProps) => {
     // @ts-ignore
     const editor = quillRef.current?.getEditor();
     const range = editor?.getSelection();
-    editor.insertEmbed(range.index, 'image', link);
+    editor.insertEmbed(range?.index || Infinity, 'image', link); // cursor가 존재하지 않을 경우에는 본문 마지막에 이미지 추가
   };
 
   // imgur customized toolbar
   const modules = {
     toolbar: '#toolbar',
-    // toolbar: {
-    //   container: [
-    //     ['underline', 'strike', 'blockquote'], // 글자 효과
-    //     [{ size: ['small', false, 'large', 'huge'] }], // 글자 크기
-    //     [{ color: [] }, { background: [] }], // 글자 색상, 글자 배경
-    //   ],
-    // },
   };
 
   return (
