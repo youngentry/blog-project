@@ -1,8 +1,45 @@
-@import "@/styles/mixins/flex.scss";
+@import '@/styles/mixins/flex.scss';
+@import '@/styles/mixins/hover.scss';
 
 .container {
-  height: var(--h-footer);
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: calc(100% - var(--w-nav-side));
-  background: #f00;
-  @include flex(row, center, center, center);
+  background: var(--color-e);
+  h3 {
+    display: flex;
+    gap: 0.25rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: var(--ft-19);
+    font-weight: 500;
+
+    i {
+      font-size: var(--ft-17);
+    }
+  }
+
+  .links {
+    padding-bottom: 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .madeBy {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: var(--color-text-week);
+
+    span {
+      margin-right: 0.5rem;
+    }
+
+    a {
+      @include hoverText();
+    }
+  }
 }

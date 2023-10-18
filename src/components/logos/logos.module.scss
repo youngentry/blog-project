@@ -1,4 +1,4 @@
-@import "@/styles/mixins/hover.scss";
+@import '@/styles/mixins/hover.scss';
 
 .logo {
   display: flex;
@@ -12,12 +12,15 @@
 
   @include hoverBg();
   p {
+    align-items: center;
+
     display: flex;
     margin-left: 0.35rem;
     span {
       margin-right: 0.35rem;
     }
     i {
+      display: flex;
       color: var(--color-3);
     }
   }
