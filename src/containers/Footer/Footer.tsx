@@ -2,7 +2,6 @@ import React from 'react';
 
 import styles from './Footer.module.scss';
 import { Logo } from '@/components/logos/logos';
-import { BsArrowDown } from 'react-icons/bs';
 
 // footer 레이아웃 컴포넌트입니다.
 const Footer = () => {

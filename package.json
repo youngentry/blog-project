@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --cache .",
-    "lint:fix": "next lint --cache --fix"
+    "lint:fix": "next lint --cache --fix",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@next-auth/mongodb-adapter": "^1.1.3",
@@ -45,9 +46,8 @@
     "typescript": "5.2.2"
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
+    "*.tsx": [
+      "npm run lint:fix"
     ]
   },
   "husky": {
