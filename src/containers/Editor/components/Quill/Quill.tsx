@@ -76,7 +76,6 @@ const Quill = (props: quillProps) => {
         ['underline', 'strike', 'blockquote'], // 글자 효과
         [{ size: ['small', false, 'large', 'huge'] }], // 글자 크기
         [{ color: [] }, { background: [] }], // 글자 색상, 글자 배경
-        ['image', 'video'],
       ],
     },
   };

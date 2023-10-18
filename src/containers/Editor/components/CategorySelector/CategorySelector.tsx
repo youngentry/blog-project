@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
+import { BsChevronDown } from 'react-icons/bs';
 
 import { CommonCategoryInterface, SubCategoryInterface } from '@/types/types';
 
@@ -32,11 +33,12 @@ const CategorySelector = ({
   return (
     <div className={styles.categoryBox}>
       <button
-        className={styles.selectedSubtitle}
+        className={styles.selectedSubtitleBox}
         onClick={() => setIsSelectCategoryVisible(!isSelectCategoryVisible)}
         type='button'
       >
-        {selectedSubtitle}
+        <p className={styles.selectedSubtitle}>{selectedSubtitle}</p>
+        <BsChevronDown />
       </button>
       <div className={`${styles.categoryList} ${!isSelectCategoryVisible && 'hide'}`}>
         {categoryList.map((mainCategory: CommonCategoryInterface) => {

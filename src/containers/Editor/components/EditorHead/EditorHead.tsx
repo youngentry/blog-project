@@ -29,6 +29,7 @@ const EditorHead = (props: EditorHeadPropsInterface) => {
 
   return (
     <div className={styles.head}>
+      <CategorySelector {...categorySelectorProps} />
       <input
         className={styles.title}
         type='text'
@@ -36,7 +37,6 @@ const EditorHead = (props: EditorHeadPropsInterface) => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <CategorySelector {...categorySelectorProps} />
     </div>
   );
 };
