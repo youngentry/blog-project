@@ -1,0 +1,9 @@
+@import '@/styles/mixins/hover.scss';
+
+.button {
+  padding: 0.5rem 1rem;
+  background: var(--color-blue);
+  color: var(--color-f);
+  border-radius: 1rem;
+  @include hoverBg(var(--color-blue-dark));
+}

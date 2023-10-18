@@ -1,8 +1,25 @@
-$toolbar-height: 40px;
+@import '@/styles/zIndex.scss';
+
+$toolbar-height: 135px;
 
 .quillContainer {
-  height: calc(100vh - var(--h-nav-head) - var(--h-footer));
+  padding: 0.5rem 0;
+  min-height: calc(100vh - var(--h-nav-head) - var(--h-footer) - $toolbar-height);
+  // toolbar
+  > :first-child {
+    position: sticky;
+    margin-bottom: 0.5rem;
+    top: var(--h-nav-head);
+    background: var(--color-f);
+    z-index: $zindex-dropdown;
+  }
+
   .quill {
-    height: calc(100% - $toolbar-height);
+    > :first-child {
+      > :first-child {
+        // input의 너비를 조절합니다.
+        min-height: calc(100vh - var(--h-nav-head) - var(--h-footer) - $toolbar-height);
+      }
+    }
   }
 }

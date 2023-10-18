@@ -2,8 +2,8 @@ import { Dispatch, SetStateAction, useState } from 'react';
 
 import { CommonCategoryInterface } from '@/types/types';
 
-import CategorySelector from '../CategorySelector/CategorySelector';
 import styles from './EditorHead.module.scss';
+import CategorySelector from '../CategorySelector/CategorySelector';
 
 interface EditorHeadPropsInterface {
   setMainCategoryId: Dispatch<SetStateAction<string>>;
@@ -33,7 +33,7 @@ const EditorHead = (props: EditorHeadPropsInterface) => {
       <input
         className={styles.title}
         type='text'
-        placeholder='제목'
+        placeholder='제목을 입력하세요'
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />

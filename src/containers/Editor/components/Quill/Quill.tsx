@@ -5,6 +5,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
 import { postImgur } from '@/services/imgurFetch';
 
 import styles from './Quill.module.scss';
+import QuillToolbar from '../QuillToolbar/QuillToolbar';
 
 const ERROR = {
   EVENT_KR: '이미지 업로드 작업에 문제가 발생하였습니다.',
@@ -59,6 +60,8 @@ const Quill = (props: quillProps) => {
     const { link } = result.data; // 이미지 링크
 
     insertImage(link); // 커서 위치에 이미지 태그 삽입
+
+    console.log(contents);
   };
 
   // 현재 커서 위치에 이미지 태그를 삽입합니다.
@@ -71,18 +74,20 @@ const Quill = (props: quillProps) => {
 
   // imgur customized toolbar
   const modules = {
-    toolbar: {
-      container: [
-        ['underline', 'strike', 'blockquote'], // 글자 효과
-        [{ size: ['small', false, 'large', 'huge'] }], // 글자 크기
-        [{ color: [] }, { background: [] }], // 글자 색상, 글자 배경
-      ],
-    },
+    toolbar: '#toolbar',
+    // toolbar: {
+    //   container: [
+    //     ['underline', 'strike', 'blockquote'], // 글자 효과
+    //     [{ size: ['small', false, 'large', 'huge'] }], // 글자 크기
+    //     [{ color: [] }, { background: [] }], // 글자 색상, 글자 배경
+    //   ],
+    // },
   };
 
   return (
     <div className={styles.quillContainer}>
-      <input type='file' onChange={onFileUpload} />
+      <QuillToolbar onFileUpload={onFileUpload} />
+      {/* <input type='file' onChange={onFileUpload} /> */}
       <ReactQuill
         forwardedRef={quillRef}
         className={styles.quill}

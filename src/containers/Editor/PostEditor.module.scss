@@ -1,8 +1,13 @@
 @import '@/styles/mixins/hover.scss';
 
 .spinContainer {
-  padding: 8rem 0;
+  padding: 8rem 0rem;
 }
 
 .container {
+  margin: 0 auto;
+  padding: 2rem 2rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+  width: var(--w-post);
 }

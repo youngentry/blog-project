@@ -1,26 +1,50 @@
-@import "@/styles/mixins/hover.scss";
+@import '@/styles/mixins/hover.scss';
+@import '@/styles/zIndex.scss';
 
 .categoryBox {
   position: relative;
-  .selectedSubtitle {
+  display: flex;
+  .selectedSubtitleBox {
+    padding: 0.25rem 0.5rem;
+    display: flex;
+    width: 300px;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--ft-15);
+    color: var(--color-text-week);
+    border: 1px solid var(--color-c);
     @include hoverBg();
-    font-size: 1rem;
+
+    .selectedSubtitle {
+      margin-right: 1rem;
+    }
   }
 
   .categoryList {
     position: absolute;
-    width: 100%;
+    bottom: 0;
+    transform: translateY(100%);
+    width: 300px;
     background: var(--color-f);
-    z-index: 9999;
+    border: 1px solid var(--color-c);
+    z-index: $zindex-dropdown + 1;
 
     .mainCategory {
-      font-size: 1.25rem;
-      color: #f00;
+      padding: 0.5rem;
+      font-size: var(--ft-13);
+      color: var(--color-text-week);
+
+      i {
+        margin-right: 0.5rem;
+      }
     }
+
     .subCategory {
+      padding: 0.15rem 0.3rem 0.15rem 1rem;
+      display: flex;
+      width: 100%;
+      font-size: var(--ft-15);
       @include hoverBg();
-      font-size: 1rem;
-      margin-left: 0.5rem;
     }
   }
 }
