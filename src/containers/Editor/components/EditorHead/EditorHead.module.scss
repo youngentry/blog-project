@@ -4,7 +4,10 @@
 
   .title {
     padding: 1rem 0;
-    border: none;
+    input {
+      border: none;
+      width: 100%;
+    }
     font-size: var(--ft-30);
   }
 }

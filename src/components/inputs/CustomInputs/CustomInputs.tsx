@@ -1,21 +1,12 @@
 import React, { Dispatch, SetStateAction } from 'react';
 
 import styles from './CustomInputs.module.scss';
+import { BsXLg } from 'react-icons/bs';
 
 interface ReadOnlyInputPropsInterface {
   className?: string;
   placeholder: string;
   value?: string;
-}
-
-interface CustomInputPropsInterface {
-  className?: string;
-  placeholder: string;
-  value: string;
-  maxLength?: number;
-  dispatch: Dispatch<SetStateAction<string>>;
-  // eslint-disable-next-line
-  inputType?: string;
 }
 
 /**
@@ -27,6 +18,16 @@ interface CustomInputPropsInterface {
 export const ReadOnlyInput = ({ className, placeholder, value }: ReadOnlyInputPropsInterface) => {
   return <input className={`${className}`} type='text' placeholder={placeholder} value={value} readOnly />;
 };
+
+interface CustomInputPropsInterface {
+  className?: string;
+  placeholder: string;
+  value: string;
+  maxLength?: number;
+  dispatch: Dispatch<SetStateAction<string>>;
+  // eslint-disable-next-line
+  inputType?: string;
+}
 
 /**
  * onChange에 setState를 전달하여야 합니다.
@@ -44,7 +45,7 @@ export const CustomInput = (props: CustomInputPropsInterface) => {
   return (
     <div className={`${styles.inputBox} ${className}`}>
       <button className={`${styles.reset} ${value.length && styles.visible}`} onClick={clickInitialize} type='button'>
-        ❌
+        <BsXLg />
       </button>
       <input
         type={`${inputType || 'text'}`}

@@ -9,6 +9,7 @@
     right: 0.25rem;
     transform: translateY(-50%);
     display: none;
+    color: var(--color-text-week);
     cursor: pointer;
 
     &.visible {

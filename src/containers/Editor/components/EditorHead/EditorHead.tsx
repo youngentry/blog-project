@@ -4,6 +4,7 @@ import { CommonCategoryInterface } from '@/types/types';
 
 import styles from './EditorHead.module.scss';
 import CategorySelector from '../CategorySelector/CategorySelector';
+import { CustomInput } from '@/components/inputs/CustomInputs/CustomInputs';
 
 interface EditorHeadPropsInterface {
   setMainCategoryId: Dispatch<SetStateAction<string>>;
@@ -30,13 +31,7 @@ const EditorHead = (props: EditorHeadPropsInterface) => {
   return (
     <div className={styles.head}>
       <CategorySelector {...categorySelectorProps} />
-      <input
-        className={styles.title}
-        type='text'
-        placeholder='제목을 입력하세요'
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+      <CustomInput className={styles.title} placeholder='제목을 입력하세요' value={title} dispatch={setTitle} />
     </div>
   );
 };
