@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import styles from './ConfirmEditPost.module.scss';
 import ConfirmEditPostButton, {
   ConfirmEditPostButtonPropsInterface,
@@ -24,4 +26,4 @@ const ConfirmEditPost = (props: ConfirmEditPostButtonPropsInterface) => {
   );
 };
 
-export default ConfirmEditPost;
+export default memo(ConfirmEditPost);

@@ -19,6 +19,7 @@ export interface CardInterface {
 export interface PostInterface extends CardInterface {
   _id?: string;
   contents: string;
+  categoryId: string;
 }
 
 // write, edit post form
