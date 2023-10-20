@@ -1,10 +1,10 @@
-import { BsChatLeftText, BsFileText } from 'react-icons/bs';
+import { BsBorderAll, BsChatLeftText } from 'react-icons/bs';
 import Link from 'next/link';
 
 import styles from './ManagementMenus.module.scss';
 
 const managements = [
-  { id: 1, activity: '블로그', icon: <BsFileText />, menus: [{ href: '/manage/category', title: '카테고리 관리' }] },
+  { id: 1, activity: '블로그', icon: <BsBorderAll />, menus: [{ href: '/manage/category', title: '카테고리 관리' }] },
   {
     id: 2,
     activity: '내 활동',

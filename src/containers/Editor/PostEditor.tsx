@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import { useParams } from 'next/navigation';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
 import usePostItem, { UsePostItemInterface } from '@/hooks/usePostItem';
@@ -17,8 +17,6 @@ import EditorHead from './components/EditorHead/EditorHead';
 
 // react-quill에 게시물 데이터를 불러오거나, 새롭게 작성하거나 수정한 게시물을 DB에 업데이트합니다.
 const PostEditor = ({ canEdit }: { canEdit?: boolean }) => {
-  const router = useRouter(); // 작성 완료되면 게시물로 redirect 합니다.
-
   const { postId }: Params = useParams();
 
   const { postData, loading }: UsePostItemInterface = usePostItem(postId || ''); // 수정하기 에디터에 불러올 게시물 내용

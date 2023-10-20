@@ -1,4 +1,4 @@
-@import "@/styles/mixins/hover.scss";
+@import '@/styles/mixins/hover.scss';
 
 .container {
   position: relative;
@@ -6,6 +6,13 @@
   height: 100%;
   border-radius: 1.5rem;
   overflow: hidden;
+
+  .imageBox {
+    .image {
+      width: auto;
+      height: auto;
+    }
+  }
 
   .contentsBox {
     position: absolute;

@@ -12,7 +12,7 @@ import NewPostButton from '@/components/buttons/NewPostButton/NewPostButton';
 const BlogProfile = ({ session }: { session: any }) => {
   return (
     <div className={styles.container}>
-      <Image src='/profile.jpg' alt='blog profile' width={240} height={200} />
+      <Image className={styles.blogThumbnail} src='/profile.jpg' alt='blog profile' width={240} height={240} />
       <h2 className={styles.blogName}>Youngentry</h2>
       <div className={styles.buttons}>
         <SearchPostButton boxPosition='left' />

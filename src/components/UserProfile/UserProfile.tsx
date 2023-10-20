@@ -16,7 +16,8 @@ const UserProfile = ({ session, isLoggedIn }: { session?: UserSessionData | null
       className={styles.profile}
       alt='user thumbnail'
       src={`/images/thumbnail/${session || isLoggedIn ? 'fox.jpg' : 'guest.jpg'}`}
-      fill
+      width={40}
+      height={40}
     />
   );
 };

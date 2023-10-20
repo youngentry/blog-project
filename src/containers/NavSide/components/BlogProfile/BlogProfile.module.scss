@@ -7,6 +7,11 @@
   font-size: var(--ft-17);
   border-bottom: 1px solid var(--color-d);
 
+  .blogThumbnail {
+    width: auto;
+    height: auto;
+  }
+
   .blogName {
     padding: 1rem 0;
     font-weight: 700;

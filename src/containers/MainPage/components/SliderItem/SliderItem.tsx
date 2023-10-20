@@ -13,7 +13,7 @@ const SliderItem = ({ slideItemProps }: { slideItemProps: SlideItemPropsInterfac
     <Link href={link} target='_blank' rel='noopener noreferrer'>
       <div className={styles.container}>
         <div className={styles.imageBox}>
-          <Image className={styles.image} src={src} alt='post image' fill />
+          <Image className={styles.image} src={src} alt='post image' width={1000} height={1000} />
         </div>
         <div className={styles.contentsBox}>
           <div className={styles.contents}>

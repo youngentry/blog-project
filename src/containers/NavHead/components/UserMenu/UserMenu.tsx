@@ -7,8 +7,8 @@ import Link from 'next/link';
 import useClickOutside from '@/hooks/useClickOutside';
 import { UserSessionData } from '@/types/session';
 
-import UserProfile from '@/components/UserProfile/UserProfile';
 import styles from './UserMenu.module.scss';
+import UserProfile from '@/components/UserProfile/UserProfile';
 import LogOutButton from '@/components/buttons/LogOutButton/LogOutButton';
 import LogInButton from '@/components/buttons/LogInButton/LogInButton';
 import Notice from '@/components/notices/Notice';
