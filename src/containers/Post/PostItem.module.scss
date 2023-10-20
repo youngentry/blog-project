@@ -8,5 +8,14 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+
+    pre {
+      padding: 0.5rem 1rem;
+      background: #161b22;
+      color: #ddd;
+      border-radius: 0.5rem;
+      width: var(--w-post);
+      overflow-x: auto;
+    }
   }
 }

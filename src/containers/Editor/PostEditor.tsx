@@ -6,6 +6,8 @@ import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
 import usePostItem, { UsePostItemInterface } from '@/hooks/usePostItem';
 import useCategoryList, { UseCategoryInterface } from '@/hooks/useCategoryList';
+import useAlertAndRedirect from '@/hooks/useAlertAndRedirect';
+import { ALERT_MESSAGE } from '@/constants/DESCRIPTION';
 
 import styles from './PostEditor.module.scss';
 import Quill from './components/Quill/Quill';
@@ -27,30 +29,13 @@ const PostEditor = ({ canEdit }: { canEdit?: boolean }) => {
   const [contents, setContents] = useState(''); // 게시글 내용
   const [selectedSubtitle, setSelectedSubtitle] = useState<string>('부제목 없음'); // 선택된 카테고리
 
-  // 수정 권한이 없는 경우엔 수정을 시도하려던 게시글로 이동합니다.
-  useEffect(() => {
-    if (postId && !canEdit) {
-      window.alert('수정 권한 없음');
-      router.push(`/posts/${postId}`);
-    }
-  }, [postId, canEdit, router]);
-
-  // 수정할 게시물이 존재하지 않을 경우 category로 redirect 합니다.
-  useEffect(() => {
-    if (postId && !loading && !postData) {
-      window.alert('수정할 게시물이 존재하지 않습니다.');
-      router.push(`/category`);
-    }
-  }, [router, postId, loading, postData]);
-
-  // editor에 수정할 게시물 정보 저장합니다.
-  useEffect(() => {
-    if (postData) {
-      setTitle(postData.title);
-      setSelectedSubtitle(postData.subtitle);
-      setContents(postData.contents);
-    }
-  }, [loading, postData]);
+  // 유효한 접근이 아닌 경우 redirect 합니다.
+  const isEditableUser = postId && !canEdit; // 수정 가능 여부 검사
+  const isExistPost = postId && !loading && !postData; // 게시물 데이터 검사
+  const redirectToPostLink = `/posts/${postId}`;
+  const redirectToCategoryLink = `/category`;
+  useAlertAndRedirect(isEditableUser, ALERT_MESSAGE.NOT_EDITABLE, redirectToPostLink);
+  useAlertAndRedirect(isExistPost, ALERT_MESSAGE.NO_POST, redirectToCategoryLink);
 
   if (postId && loading) {
     return (

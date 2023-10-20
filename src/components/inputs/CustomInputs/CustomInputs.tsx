@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react';
+import { BsXLg } from 'react-icons/bs';
 
 import styles from './CustomInputs.module.scss';
-import { BsXLg } from 'react-icons/bs';
 
 interface ReadOnlyInputPropsInterface {
   className?: string;

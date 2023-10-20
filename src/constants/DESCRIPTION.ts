@@ -4,3 +4,8 @@ export const DESCRIPTION = {
   MANAGE_LIKES:
     '이 페이지에서는 어느 게시물에 좋아요를 하였는지 확인하고 취소하는 작업을 수행할 수 있습니다. 언제든지 다시 좋아요 작업을 수행할 수 있지만, 좋아요를 취소하고 새로고침을 하면 해당 게시물은 이 페이지에서 제외됩니다.',
 };
+
+export const ALERT_MESSAGE = {
+  NOT_EDITABLE: '수정 권한이 없습니다.',
+  NO_POST: '수정할 게시물이 존재하지 않습니다.',
+};

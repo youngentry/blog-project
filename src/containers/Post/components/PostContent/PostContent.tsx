@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 
 import styles from './PostContent.module.scss';
 
@@ -10,15 +10,15 @@ interface PostContentInterface {
   src: string;
 }
 
-const PostContent = ({ contents, src }: PostContentInterface) => {
+const PostContent = ({ contents }: PostContentInterface) => {
   // 게시물 본문
   const innerHTML = { dangerouslySetInnerHTML: { __html: sanitize(contents) } };
 
   return (
     <div className={styles.content}>
-      <div className={styles.thumbnail}>
+      {/* <div className={styles.thumbnail}>
         <Image src={src} alt='post content image' fill />
-      </div>
+      </div> */}
       <div {...innerHTML} />
     </div>
   );
