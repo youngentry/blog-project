@@ -14,10 +14,11 @@ interface ManageCommentItemPropsInterface {
   comments: CommentInterface[];
   setComments: Dispatch<SetStateAction<CommentInterface[]>>;
   day: string;
+  commentsByOneDay: CommentInterface[];
 }
 
 const ManageCommentItem = (props: ManageCommentItemPropsInterface) => {
-  const { comments, setComments, day } = props;
+  const { comments, setComments, day, commentsByOneDay } = props;
 
   // 삭제 버튼 클릭 이벤트
   const handleClickDeleteButton = async (postId: string, _id: string) => {
@@ -51,7 +52,7 @@ const ManageCommentItem = (props: ManageCommentItemPropsInterface) => {
       <li className={styles.oneDay}>
         <div className={styles.likedDate}>{day}</div>
         <ul className={styles.postList}>
-          {comments.map((commentData: CommentInterface) => {
+          {commentsByOneDay.map((commentData: CommentInterface) => {
             const { comment, parentId, title, date, _id } = commentData;
             return (
               <li key={String(_id)} className={styles.postItem}>
