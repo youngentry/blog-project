@@ -35,6 +35,7 @@ const PostEditor = ({ canEdit }: { canEdit?: boolean }) => {
   useAlertAndRedirect(isEditableUser, ALERT_MESSAGE.NOT_EDITABLE, redirectToPostLink);
   useAlertAndRedirect(isExistPost, ALERT_MESSAGE.NO_POST, redirectToCategoryLink);
 
+  // 로딩 컴포넌트
   if (postId && loading) {
     return (
       <div className={styles.spinContainer}>

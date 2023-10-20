@@ -17,11 +17,11 @@ const AddMainCategoryForm = () => {
     setAddMainCategoryInput('');
   };
 
+  // 메인 카테고리 추가 POST 요청을 보냅니다.
   const addMainCategory = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      // POST 요청을 보냅니다.
       const body: CommonCategoryInterface = {
         role: 'main',
         title: addMainCategoryInput,

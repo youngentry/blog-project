@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { BsArrowUpRightSquare } from 'react-icons/bs';
 // eslint-disable-next-line
@@ -33,6 +33,7 @@ const SanitizedInnerHTML = ({ contents }: { contents: string }) => {
 
 const ManageLikeItem = (props: ManageLikeItemPropsInterface) => {
   const { likedPosts, email, day } = props;
+
   return (
     <ul key={day} className={styles.days}>
       <li className={styles.ondDay}>

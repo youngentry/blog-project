@@ -7,7 +7,7 @@ import { postLikeCountData } from '@/services/postsFetch';
 
 import styles from './LikePostButton.module.scss';
 
-// 게시물 좋아요 버튼을 클릭 요청.
+// 게시물 좋아요 요청 버튼
 const LikePostButton = ({
   className,
   likes,

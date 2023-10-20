@@ -12,6 +12,7 @@ import SubCategoryList from '../SubCategoryList/SubCategoryList';
 const CategoryList = () => {
   const [mainCategories, setMainCategories] = useState<any[]>([]);
 
+  // 카테고리 데이터를 요청합니다.
   useEffect(() => {
     const getMainCategories = async () => {
       const res = await getCategoriesApi('main');

@@ -39,8 +39,7 @@ const ManageComments = () => {
 
   const manageCommentData: ManageCommentsInterface = getManageCommentData(comments);
   const days: string[] = Object.keys(manageCommentData); // 날짜 배열
-  // 날짜 인덱스별로 좋아요한 댓글이 담긴 배열 [[]]
-  // n은 날짜 배열 index일 때. n=0 일 경우 [[comment1, comment2],[comment3, comment4]][0]과 같은 형태로 컴포넌트에 댓글 배열이 전달됩니다.
+  // [[comment1, comment2],[comment3, comment4]][0]과 같은 형태로 컴포넌트에 댓글 배열이 전달됩니다.
   const eachDayComments: CommentInterface[][] = Object.values(manageCommentData);
 
   // 로딩 중에 출력할 컴포넌트

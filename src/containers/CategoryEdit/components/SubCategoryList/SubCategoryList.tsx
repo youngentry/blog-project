@@ -5,12 +5,13 @@ import Link from 'next/link';
 import { BsCircleFill } from 'react-icons/bs';
 
 import { getCategoriesApi } from '@/services/categoryFetch';
+import { SubCategoryInterface } from '@/types/types';
 
 import styles from './SubCategoryList.module.scss';
 
 // 서브 카테고리 리스트
 const SubCategoryList = ({ mainCategoryId, subtitles }: { mainCategoryId: string; subtitles?: string[] }) => {
-  const [subCategories, setSubCategories] = useState<any[]>([]);
+  const [subCategories, setSubCategories] = useState<SubCategoryInterface[]>([]);
 
   useEffect(() => {
     const getSubCategories = async (parentId: string) => {

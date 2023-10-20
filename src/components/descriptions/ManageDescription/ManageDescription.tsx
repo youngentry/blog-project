@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import styles from './ManageDescription.module.scss';
 
@@ -11,4 +11,4 @@ const ManageDescription = ({ title, description }: { title: string; description:
   );
 };
 
-export default ManageDescription;
+export default memo(ManageDescription);

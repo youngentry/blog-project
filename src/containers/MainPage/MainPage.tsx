@@ -6,7 +6,7 @@ const MainPage = () => {
   return (
     <div className={styles.container}>
       <Slogan />
-      <Slider />
+      {/* <Slider /> */}
     </div>
   );
 };
