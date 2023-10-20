@@ -16,14 +16,17 @@ interface CategorySelectorPropsInterface {
 }
 
 // 게시물 작성 시 카테고리 선택 드롭메뉴
-const CategorySelector = ({
-  categoryList,
-  setMainCategoryId,
-  selectedSubtitle,
-  setSelectedSubtitle,
-  isSelectCategoryVisible,
-  setIsSelectCategoryVisible,
-}: CategorySelectorPropsInterface) => {
+const CategorySelector = (props: CategorySelectorPropsInterface) => {
+  const {
+    categoryList,
+    setMainCategoryId,
+    selectedSubtitle,
+    setSelectedSubtitle,
+    isSelectCategoryVisible,
+    setIsSelectCategoryVisible,
+  } = props;
+
+  // 카테고리 선택 시 이벤트
   const handleSelectSubtitle = (subTitle: string, mainCategoryId: string) => {
     setMainCategoryId(mainCategoryId);
     setSelectedSubtitle(subTitle);

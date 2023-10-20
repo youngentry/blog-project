@@ -12,11 +12,6 @@ const AddSubCategoryForm = ({ mainCategoryId }: { mainCategoryId: string }) => {
   const addSubCategory = async (e: React.FormEvent, parentId: string) => {
     e.preventDefault();
 
-    // submit 성공 시 input 초기화
-    const resetInput = () => {
-      setAddSubCategoryInput('');
-    };
-
     try {
       // POST 요청을 보냅니다.
       const body: CommonCategoryInterface = {
@@ -30,7 +25,7 @@ const AddSubCategoryForm = ({ mainCategoryId }: { mainCategoryId: string }) => {
       // 서브 카테고리 추가요청 성공 시 실행할 함수
       if (res) {
         window.alert('서브 카테고리 추가 성공.');
-        resetInput();
+        setAddSubCategoryInput(''); // submit 성공 시 input 초기화
       }
     } catch (err) {
       console.error(err);

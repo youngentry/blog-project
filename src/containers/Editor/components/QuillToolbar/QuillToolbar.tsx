@@ -11,6 +11,7 @@ const ERROR = {
   UPLOAD_EN: 'imgur image upload error',
 };
 
+// 게시글 에디터 툴바
 const QuillToolbar = ({ quillRef }: { quillRef: RefObject<any> }) => {
   // 이미지를 본문의 커서 위치에 <img src="이미지주소"/> 형태로 삽입합니다.
   const onFileUpload = async (e: ChangeEvent<HTMLInputElement>) => {

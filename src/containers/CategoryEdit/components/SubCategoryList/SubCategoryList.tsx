@@ -13,14 +13,13 @@ import styles from './SubCategoryList.module.scss';
 const SubCategoryList = ({ mainCategoryId, subtitles }: { mainCategoryId: string; subtitles?: string[] }) => {
   const [subCategories, setSubCategories] = useState<SubCategoryInterface[]>([]);
 
+  // 메인 카테고리 조회 성공 시 메인 카테고리 목록 반환
   useEffect(() => {
     const getSubCategories = async (parentId: string) => {
       const res = await getCategoriesApi('sub', parentId);
-      // 메인 카테고리 조회 성공 시 메인 카테고리 목록 반환
       if (res) {
         return res.children;
       }
-
       return [];
     };
 

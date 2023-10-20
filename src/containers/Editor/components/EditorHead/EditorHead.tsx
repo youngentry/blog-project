@@ -15,6 +15,7 @@ interface EditorHeadPropsInterface {
   setSelectedSubtitle: Dispatch<SetStateAction<string>>;
 }
 
+// 게시글 작성 시 카테고리 선택창, 게시글 제목
 const EditorHead = (props: EditorHeadPropsInterface) => {
   const { title, setTitle, categoryList, setMainCategoryId, selectedSubtitle, setSelectedSubtitle } = props;
   const [isSelectCategoryVisible, setIsSelectCategoryVisible] = useState<boolean>(false); // 카테고리 드롭메뉴 visible 여부

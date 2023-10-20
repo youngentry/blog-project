@@ -12,11 +12,6 @@ import { CustomInput } from '@/components/inputs/CustomInputs/CustomInputs';
 const AddMainCategoryForm = () => {
   const [addMainCategoryInput, setAddMainCategoryInput] = useState<string>('');
 
-  // submit 성공 시 초기화
-  const successSubmit = () => {
-    setAddMainCategoryInput('');
-  };
-
   // 메인 카테고리 추가 POST 요청을 보냅니다.
   const addMainCategory = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +27,7 @@ const AddMainCategoryForm = () => {
       // 메인 카테고리 추가 작성요청 성공 시 실행
       if (res) {
         window.alert('메인 카테고리 추가 성공.');
-        successSubmit();
+        setAddMainCategoryInput(''); // submit 성공 시 초기화
       }
     } catch (err) {
       console.error(err);

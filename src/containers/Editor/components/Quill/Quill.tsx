@@ -10,6 +10,7 @@ interface quillProps {
   setContents: Dispatch<SetStateAction<string>>;
 }
 
+// 게시물 작성 본문
 const Quill = (props: quillProps) => {
   const quillRef = useRef();
 
