@@ -34,6 +34,7 @@ const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) 
 
   const { title, subtitle, contents, src, email, author, date, likes }: PostInterface = postData;
 
+  // 게시물 머리
   const PostHeadProps = {
     userEmail,
     email,
@@ -44,11 +45,13 @@ const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) 
     date,
   };
 
+  // 게시물 본문
   const PostContentProps = {
     contents,
     src,
   };
 
+  // 댓글 수, 좋아요 수
   const countsBoxProps = {
     userEmail,
     postId,
@@ -56,6 +59,7 @@ const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) 
     postCommentCount,
   };
 
+  // 댓글
   const commentProps = {
     userEmail,
     postId,

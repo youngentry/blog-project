@@ -1,0 +1,46 @@
+@import '@/styles/mixins/hover.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: start;
+
+  .activityBox {
+    .activityItem {
+      padding: 1rem;
+      border-bottom: var(--1-solid);
+
+      .activityName {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        font-size: var(--ft-17);
+        font-weight: 500;
+
+        .activityIcon {
+          margin-right: 0.25rem;
+          display: flex;
+          width: 1rem;
+          color: var(--color-text-week);
+        }
+      }
+
+      .menuItem {
+        margin-left: 1.25rem;
+        margin-bottom: 0.5rem;
+
+        // 메뉴 아이템 마지막 요소는 margin-bottom 제거
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .menuName {
+          font-size: var(--ft-14);
+          color: var(--color-text-week);
+          @include hoverText();
+        }
+      }
+    }
+  }
+}
