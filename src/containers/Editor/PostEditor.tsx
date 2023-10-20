@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
@@ -22,10 +22,19 @@ const PostEditor = ({ canEdit }: { canEdit?: boolean }) => {
   const { postData, loading }: UsePostItemInterface = usePostItem(postId || ''); // 수정하기 에디터에 불러올 게시물 내용
   const { categoryList }: UseCategoryInterface = useCategoryList(); // 카테고리 목록
 
-  const [title, setTitle] = useState(''); // 게시글 제목
-  const [mainCategoryId, setMainCategoryId] = useState<string>('6516f855d44958b59ed7b8d5'); // "카테고리 없음" 메인 카테고리의 디폴트 값입니다.
-  const [contents, setContents] = useState(''); // 게시글 내용
-  const [selectedSubtitle, setSelectedSubtitle] = useState<string>('부제목 없음'); // 선택된 카테고리
+  const [title, setTitle] = useState(postData?.title || ''); // 게시글 제목
+  const [mainCategoryId, setMainCategoryId] = useState<string>(postData?.categoryId || '6516f855d44958b59ed7b8d5'); // "카테고리 없음" 메인 카테고리의 디폴트 값입니다.
+  const [contents, setContents] = useState(postData?.contents || ''); // 게시글 내용
+  const [selectedSubtitle, setSelectedSubtitle] = useState<string>(postData?.subtitle || '부제목 없음'); // 선택된 카테고리
+
+  // editor에 수정할 게시물 정보를 불러옵니다.
+  useEffect(() => {
+    if (postData) {
+      setTitle(postData.title);
+      setSelectedSubtitle(postData.subtitle);
+      setContents(postData.contents);
+    }
+  }, [postData]);
 
   // 유효한 접근이 아닌 경우 redirect 합니다.
   const isEditableUser = postId && !canEdit; // 수정 가능 여부 검사
@@ -36,7 +45,7 @@ const PostEditor = ({ canEdit }: { canEdit?: boolean }) => {
   useAlertAndRedirect(isExistPost, ALERT_MESSAGE.NO_POST, redirectToCategoryLink);
 
   // 로딩 컴포넌트
-  if (postId && loading) {
+  if (loading) {
     return (
       <div className={styles.spinContainer}>
         <Spin size='m' message='에디터를 불러오는 중입니다.' />
