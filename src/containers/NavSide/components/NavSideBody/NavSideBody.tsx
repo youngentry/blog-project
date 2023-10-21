@@ -9,7 +9,7 @@ import ManageMenus from '../ManagementMenus/ManagementMenus';
 // 사이드 메뉴의 바디 컴포넌트입니다.
 const NavSideBody = () => {
   const pathname = usePathname();
-  const isManagePage = pathname.startsWith('/manage');
+  const isManagePage = pathname.startsWith('/manage') && !pathname.startsWith('/manage/newpost');
   return <div className={styles.container}>{isManagePage ? <ManageMenus /> : <SideCategories />}</div>;
 };
 

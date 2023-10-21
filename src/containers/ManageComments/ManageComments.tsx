@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import useManageComments, { useManageCommentsInterface } from '@/hooks/useManageComments';
 import { CommentInterface } from '@/types/types';
@@ -45,23 +45,23 @@ const ManageComments = () => {
   // 로딩 중에 출력할 컴포넌트
   if (loading) {
     return (
-      <div className={styles.container}>
-        <ManageDescription title='내가 작성한 댓글' description={DESCRIPTION.MANAGE_COMMENTS} />
+      <Layout>
         <Spin size='s' />
-      </div>
+      </Layout>
     );
   }
 
   // 작성한 댓글이 없을 경우 출력할 컴포넌트
   if (!comments.length) {
     return (
-      <NoItem h2='아직 댓글을 작성한 게시물이 없습니다.' src='/images/manageActivity/comment-activity-sample.png' />
+      <Layout>
+        <NoItem h2='아직 댓글을 작성한 게시물이 없습니다.' src='/images/manageActivity/comment-activity-sample.png' />
+      </Layout>
     );
   }
 
   return (
-    <div className={styles.container}>
-      <ManageDescription title='내가 작성한 댓글' description={DESCRIPTION.MANAGE_COMMENTS} />
+    <Layout>
       {days.map((day: string, index: number) => {
         const commentsByOneDay = commentsByDays[index];
         return (
@@ -74,6 +74,15 @@ const ManageComments = () => {
           />
         );
       })}
+    </Layout>
+  );
+};
+
+const Layout = ({ children }: { children: any }) => {
+  return (
+    <div className={styles.container}>
+      <ManageDescription title='내가 작성한 댓글' description={DESCRIPTION.MANAGE_COMMENTS} />
+      {children}
     </div>
   );
 };
