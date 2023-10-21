@@ -24,6 +24,7 @@ const usePostItem = (postId: string) => {
           throw Error;
         }
 
+        // 게시물 요청에 성공했다면 loading을 종료합니다.
         const res: PostInterface | undefined = await getPostItemData(postId);
         if (res) {
           setPostData(res); // 게시물 데이터 저장

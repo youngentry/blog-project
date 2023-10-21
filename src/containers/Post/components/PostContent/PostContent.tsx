@@ -1,5 +1,3 @@
-// import Image from 'next/image';
-
 import styles from './PostContent.module.scss';
 
 // eslint-disable-next-line
@@ -16,9 +14,6 @@ const PostContent = ({ contents }: PostContentInterface) => {
 
   return (
     <div className={styles.content}>
-      {/* <div className={styles.thumbnail}>
-        <Image src={src} alt='post content image' fill />
-      </div> */}
       <div {...innerHTML} />
     </div>
   );

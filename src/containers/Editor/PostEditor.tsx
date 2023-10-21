@@ -38,20 +38,11 @@ const PostEditor = ({ canEdit }: { canEdit?: boolean }) => {
 
   // 유효한 접근이 아닌 경우 redirect 합니다.
   const isEditableUser = postId && !canEdit; // 수정 가능 여부 검사
-  const isExistPost = postId && !loading && !postData; // 게시물 데이터 검사
+  const isExistPost = postId && !loading && !postData; // 수정할 게시물 데이터 검사
   const redirectToPostLink = `/posts/${postId}`;
   const redirectToCategoryLink = `/category`;
   useAlertAndRedirect(isEditableUser, ALERT_MESSAGE.NOT_EDITABLE, redirectToPostLink);
   useAlertAndRedirect(isExistPost, ALERT_MESSAGE.NO_POST, redirectToCategoryLink);
-
-  // 로딩 컴포넌트
-  if (loading) {
-    return (
-      <div className={styles.spinContainer}>
-        <Spin size='m' message='에디터를 불러오는 중입니다.' />
-      </div>
-    );
-  }
 
   // Editor Head props
   const editorHeadProps = {
@@ -77,6 +68,20 @@ const PostEditor = ({ canEdit }: { canEdit?: boolean }) => {
     mainCategoryId,
     postId,
   };
+
+  // 로딩 컴포넌트
+  // quill을 dynamic 옵션으로 로드하도록 하고 있기 때문에 css가 적용이 늦습니다.
+  // UX 개선을 위해 quill을 미리 로드하도록 하여 css가 적용된 모습을 바로 보여주도록 합니다.
+  if (loading) {
+    return (
+      <div className={styles.spinContainer}>
+        <Spin size='m' message='에디터를 불러오는 중입니다.' />
+        <div className={styles.quillBox}>
+          <Quill {...quillProps} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
