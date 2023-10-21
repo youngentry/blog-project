@@ -1,15 +1,6 @@
 :root {
   --color-bg: #f6f6f6;
   --color-red: #eb0d00; /* Minimum WCAG AA Pass */
-  --color-red-rgb: 235, 13, 0;
-  --color-orange: #ff9500;
-  --color-yellow: #ffcc00;
-  --color-green: #26873e; /* Minimum WCAG AA Pass */
-  --color-teal: #5ac8fa;
-  --color-indigo: #5856d6;
-  --color-purple: #af52de;
-  --color-pink: #ff2d55;
-  --color-em: #ff59e3;
 
   --color-text-week: #848484;
   --color-border: #dddddd;
@@ -28,6 +19,7 @@
   --color-c: #ddd;
   --color-d: #ddd;
   --color-e: #eee;
+  --color-f8: #f8f8f8;
   --color-f: #fff;
 
   --color-blue-hover: #dbe4ff;
@@ -43,7 +35,6 @@
 
   --h-footer: 10rem;
 
-  //post
   --w-post: 50rem;
   --m-post: 5rem auto;
 
@@ -61,22 +52,6 @@
   --ft-24: 1.2rem;
   --ft-30: 1.5rem;
   --ft-36: 1.8rem;
-
-  // border-radius
-  --br-5: 5px;
-  --br-10: 0.5rem;
-  --br-15: 0.75rem;
-  --br-20: 1rem;
-  --br-25: 1.25rem;
-  --br-30: 1.5rem;
-
-  // items gap
-  --gap-5: 5px;
-  --gap-10: 0.5rem;
-  --gap-15: 0.75rem;
-  --gap-20: 1rem;
-  --gap-25: 1.25rem;
-  --gap-30: 1.5rem;
 
   // border
   --1-solid: 1px solid var(--color-border);

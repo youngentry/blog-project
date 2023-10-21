@@ -1,10 +1,9 @@
-@import '@/styles/mixins/flex.scss';
 @import '@/styles/mixins/hover.scss';
 
 .cardContainer {
   margin-bottom: 4rem;
   display: inline-block;
-  gap: var(--gap-20);
+  gap: 1rem;
   width: 100%;
 
   // 컬럼 카운트
@@ -16,7 +15,7 @@
     font-size: 0.75rem;
     width: 100%;
     background: var(--color-f);
-    border-radius: var(--br-20);
+    border-radius: 1rem;
     overflow: hidden;
     margin-bottom: 1rem;
     box-shadow: 0 0 4px var(--color-c);
@@ -46,12 +45,11 @@
       }
 
       .subtitle {
-        //   height: 2rem;
+        margin-bottom: 0.5rem;
         display: flex;
         flex-wrap: wrap;
         gap: 0.25rem;
         @include hoverText;
-        margin-bottom: 0.5rem;
       }
 
       .more {

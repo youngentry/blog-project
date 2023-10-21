@@ -1,4 +1,3 @@
-@import '@/styles/mixins/flex.scss';
 @import '@/styles/mixins/hover.scss';
 
 .container {
@@ -8,6 +7,7 @@
   align-items: center;
   width: calc(100% - var(--w-nav-side));
   background: var(--color-e);
+
   h3 {
     display: flex;
     gap: 0.25rem;

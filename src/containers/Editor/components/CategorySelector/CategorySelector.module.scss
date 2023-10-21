@@ -7,12 +7,12 @@
   .selectedSubtitleBox {
     padding: 0.25rem 0.5rem;
     display: flex;
-    width: 300px;
+    width: 15rem;
     align-items: center;
     justify-content: space-between;
     font-size: var(--ft-15);
     color: var(--color-text-week);
-    border: 1px solid var(--color-c);
+    border: var(--1-solid);
     @include hoverBg();
 
     .selectedSubtitle {
@@ -24,9 +24,9 @@
     position: absolute;
     bottom: 0;
     transform: translateY(100%);
-    width: 300px;
+    width: 15rem;
     background: var(--color-f);
-    border: 1px solid var(--color-c);
+    border: var(--1-solid);
     z-index: $zindex-dropdown + 1;
 
     .mainCategory {

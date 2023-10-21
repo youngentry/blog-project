@@ -25,6 +25,35 @@
 html {
   font-size: 20px;
   box-sizing: border-box;
+
+  // ~모바일
+  @media (max-width: 479px) {
+    font-size: 20px;
+  }
+  // 모바일~태블릿
+  @media (min-width: 480px) and (max-width: 767px) {
+    font-size: 10px;
+  }
+  // 태블릿
+  @media (min-width: 768px) and (max-width: 1023px) {
+    font-size: 14px;
+  }
+  // 태블릿~노트북
+  @media (min-width: 1024px) and (max-width: 1365px) {
+    font-size: 16px;
+  }
+  // 노트북~데스크톱
+  @media (min-width: 1366px) and (max-width: 1599px) {
+    font-size: 18px;
+  }
+  // 노트북~데스크톱
+  @media (min-width: 1600px) and (max-width: 1919px) {
+    font-size: 20px;
+  }
+  // 데스크톱~
+  @media (min-width: 1920px) {
+    font-size: 20px;
+  }
 }
 
 *,

@@ -1,9 +1,9 @@
-@import '@/styles/mixins/flex.scss';
-
 .category {
-  @include flex(column, center, center, start);
   margin: 0 auto;
-  padding: 7rem 0;
+  padding: 6rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: var(--w-post);
 
   h2 {

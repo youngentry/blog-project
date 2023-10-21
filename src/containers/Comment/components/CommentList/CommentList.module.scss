@@ -1,5 +1,4 @@
-@import "@/styles/mixins/flex.scss";
-@import "@/styles/mixins/hover.scss";
+@import '@/styles/mixins/hover.scss';
 
 .commentList {
   margin-bottom: 1rem;
@@ -23,7 +22,7 @@
     display: flex;
     border-bottom: var(--1-solid);
     &:hover {
-      background: #f8f8f8;
+      background: var(--color-f8);
     }
 
     .thumbnail {
@@ -83,7 +82,7 @@
             .deleteConfirmButton {
               margin-right: 0.25rem;
               padding-right: 0.25rem;
-              color: #fff;
+              color: var(--color-f);
               white-space: nowrap;
               border-right: 1px solid var(--color-f);
               cursor: pointer;
@@ -91,7 +90,7 @@
             .deleteCancelButton {
               margin-right: 0.25rem;
               white-space: nowrap;
-              color: #fff;
+              color: var(--color-f);
               cursor: pointer;
             }
           }

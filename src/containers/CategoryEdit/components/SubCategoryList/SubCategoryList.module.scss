@@ -1,10 +1,12 @@
-@import "@/styles/mixins/hover.scss";
+@import '@/styles/mixins/hover.scss';
+
 .subTitleBox {
   margin-left: 0.35rem;
   margin-bottom: 0.5rem;
   display: flex;
   flex-direction: column;
-  border-left: 1px solid #eee;
+  border-left: var(--1-solid);
+
   h5 {
     margin-left: 0.55rem;
     padding: 0.45rem;
@@ -12,16 +14,17 @@
     justify-content: space-between;
     text-align: center;
     font-size: var(--ft-15);
-    border-radius: 10px;
+    border-radius: 0.5rem;
     @include hoverBg();
+
     .subtitle {
       display: flex;
       align-items: center;
-      margin-right: var(--gap-5);
+      margin-right: 0.25rem;
       .subtitleLeftDot {
         margin-right: 0.55rem;
-        transform: translateY(-2px);
-        font-size: 4px;
+        transform: translateY(-0.05rem);
+        font-size: 0.2rem;
       }
     }
 
@@ -33,7 +36,7 @@
       line-height: 1.5;
       color: var(--color-blue-dark);
       border: 1px solid var(--color-blue-dark);
-      border-radius: 9px;
+      border-radius: 0.45rem;
     }
   }
 }

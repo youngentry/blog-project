@@ -4,8 +4,9 @@
   .oneDay {
     .likedDate {
       padding: 1rem;
+      width: 100%;
       font-size: var(--ft-19);
-      background: #f8f9fa;
+      background: var(--color-f8);
       border-radius: 0.5rem;
     }
     .postList {

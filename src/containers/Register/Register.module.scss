@@ -1,8 +1,11 @@
-@import "@/styles/mixins/flex.scss";
-@import "@/styles/mixins/hover.scss";
+@import '@/styles/mixins/hover.scss';
 
 .container {
-  @include flex(column, center, center, flex-start);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: start;
   height: calc(100vh - var(--h-footer) - var(--h-nav-head));
 
   h2 {
@@ -11,18 +14,26 @@
   }
 
   form {
-    border: var(--1-solid);
     padding: 2.5rem;
-    @include flex(column, center, flex-start, flex-start);
-    gap: var(--gap-20);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: start;
+    gap: 1rem;
     width: 25rem;
+    border: var(--1-solid);
 
     .email {
       // display: none;
     }
 
     label {
-      @include flex(row, space-between, flex-start, flex-start);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      text-align: start;
       width: 100%;
       font-size: var(--ft-19);
       input {
@@ -37,7 +48,7 @@
       height: 2rem;
       border: none;
       background: var(--color-gray-e);
-      border-radius: var(--br-5);
+      border-radius: 0.25rem;
       width: 100%;
       @include hoverBg(var(--color-d));
     }
