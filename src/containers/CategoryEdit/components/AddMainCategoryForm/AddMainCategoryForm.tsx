@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { addCategoryApi } from '@/services/categoryFetch';
 import { CommonCategoryInterface } from '@/types/types';
 
-import { CustomInput } from '@/components/inputs/CustomInputs/CustomInputs';
+import CustomInput from '@/components/inputs/CustomInput/CustomInput';
 // import styles from './AddMainCategoryForm.module.scss';
 
 // 메인 카테고리 추가 폼

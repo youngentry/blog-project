@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { addCategoryApi } from '@/services/categoryFetch';
 import { CommonCategoryInterface } from '@/types/types';
 
-import { CustomInput } from '@/components/inputs/CustomInputs/CustomInputs';
+import CustomInput from '@/components/inputs/CustomInput/CustomInput';
 
 // 서브 카테고리 추가 폼
 const AddSubCategoryForm = ({ mainCategoryId }: { mainCategoryId: string }) => {

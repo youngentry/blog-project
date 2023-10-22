@@ -4,7 +4,7 @@ import { CommonCategoryInterface } from '@/types/types';
 
 import styles from './EditorHead.module.scss';
 import CategorySelector from '../CategorySelector/CategorySelector';
-import { CustomInput } from '@/components/inputs/CustomInputs/CustomInputs';
+import CustomInput from '@/components/inputs/CustomInput/CustomInput';
 
 interface EditorHeadPropsInterface {
   setMainCategoryId: Dispatch<SetStateAction<string>>;

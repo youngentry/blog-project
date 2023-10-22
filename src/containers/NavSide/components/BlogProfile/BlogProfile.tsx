@@ -10,6 +10,7 @@ import GoHomeButton from '@/components/buttons/GoHomeButton/GoHomeButton';
 import NewPostButton from '@/components/buttons/NewPostButton/NewPostButton';
 
 const BlogProfile = ({ session }: { session: any }) => {
+  const isBlogManager = session && checkBlogManager(session.user.email);
   return (
     <div className={styles.container}>
       <Image className={styles.blogThumbnail} src='/profile.jpg' alt='blog profile' width={240} height={240} />
@@ -17,7 +18,7 @@ const BlogProfile = ({ session }: { session: any }) => {
       <div className={styles.buttons}>
         <SearchPostButton boxPosition='left' />
         <GoHomeButton />
-        {session && checkBlogManager(session.user.email) && <NewPostButton />}
+        {isBlogManager && <NewPostButton />}
       </div>
     </div>
   );
