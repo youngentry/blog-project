@@ -28,17 +28,17 @@
     .thumbnail {
       width: 3rem;
       height: 3rem;
-      margin-right: 0.5rem;
+      margin-right: 1rem;
       font-size: 1.5rem;
     }
 
     .content {
       width: 100%;
       .header {
+        margin-bottom: 0.5rem;
         display: flex;
         align-items: flex-end;
         gap: 0.5rem;
-        margin-bottom: 0.5rem;
 
         .user {
           display: flex;
@@ -47,6 +47,12 @@
             margin-right: 0.5rem;
           }
           .date {
+            margin-right: 0.5rem;
+            font-size: var(--ft-14);
+            color: var(--color-text-week);
+          }
+          .postAuthor {
+            display: none;
             font-size: var(--ft-14);
             color: var(--color-text-week);
           }

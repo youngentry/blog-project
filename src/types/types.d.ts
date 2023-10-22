@@ -52,6 +52,7 @@ export interface CommentListPropsInterface {
   postId: string;
   newUpdate: boolean;
   userEmail: string;
+  postEmail?: string;
   postCommentCount: number;
   setPostCommentCount: Dispatch<SetStateAction<number>>;
 }
