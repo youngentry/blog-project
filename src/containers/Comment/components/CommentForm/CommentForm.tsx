@@ -1,13 +1,15 @@
 'use client';
 
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, memo } from 'react';
 
 import { CommentFormPropsInterface, CommentFormInterface } from '@/types/types';
 import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
 import { postCommentApi } from '@/services/commentsFetch';
 
-import { CustomInput, CustomTextarea, ReadOnlyInput } from '@/components/inputs/CustomInputs/CustomInputs';
 import styles from './CommentForm.module.scss';
+import CustomInput from '@/components/inputs/CustomInput/CustomInput';
+import ReadOnlyInput from '@/components/inputs/ReadOnlyInput/ReadOnlyInput';
+import CustomTextarea from '@/components/inputs/CustomTextarea/CustomTextarea';
 
 // 댓글 입력 폼입니다.
 // 비로그인 상태에서는 nickname, password input이 나타납니다.
@@ -107,7 +109,7 @@ const CommentForm = (props: CommentFormPropsInterface) => {
         ) : (
           <div className={styles.account}>
             <CustomInput placeholder='닉네임' {...nicknameInputProps} />
-            <CustomInput placeholder='비밀번호' {...passwordInputProps} />
+            <CustomInput placeholder='비밀번호' inputType='password' {...passwordInputProps} />
           </div>
         )}
         <CustomTextarea className={styles.textarea} placeholder='댓글을 입력하세요' {...commentInputProps} />
@@ -119,4 +121,4 @@ const CommentForm = (props: CommentFormPropsInterface) => {
   );
 };
 
-export default CommentForm;
+export default memo(CommentForm);

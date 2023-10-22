@@ -13,11 +13,7 @@
     cursor: pointer;
 
     &.visible {
-      display: block;
+      display: flex;
     }
   }
-}
-
-.textarea {
-  resize: none;
 }

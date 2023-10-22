@@ -78,5 +78,5 @@ export const postGuestCommentDeletionApi = async (postId: string, _id: string, p
 
   // 요청 결과 반환
   const res = await fetch(url, options);
-  return !!res.ok;
+  return res.ok;
 };

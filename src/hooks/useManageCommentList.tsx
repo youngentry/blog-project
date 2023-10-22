@@ -7,13 +7,13 @@ import { CommentInterface } from '@/types/types';
 import useLoading from './useLoading';
 
 export interface useManageCommentsInterface {
-  comments: CommentInterface[];
-  setComments: Dispatch<SetStateAction<CommentInterface[]>>;
+  commentList: CommentInterface[];
+  setCommentList: Dispatch<SetStateAction<CommentInterface[]>>;
   loading?: boolean;
 }
 
 const useManageComments = () => {
-  const [comments, setComments] = useState<CommentInterface[]>([]); // 댓글 리스트
+  const [commentList, setCommentList] = useState<CommentInterface[]>([]); // 댓글 리스트
   const { loading, setLoading } = useLoading();
 
   // 작성한 댓글 리스트를 조회하여 state에 저장합니다.
@@ -23,7 +23,7 @@ const useManageComments = () => {
         // GET 요청을 보냅니다.
         const commentsResponse = await getManageCommentsApi();
         // 불러온 댓글 리스트를 state에 저장합니다.
-        setComments(commentsResponse);
+        setCommentList(commentsResponse);
         setLoading(false);
       } catch (err) {
         console.error(err);
@@ -31,7 +31,7 @@ const useManageComments = () => {
     })();
   }, [setLoading]);
 
-  return { comments, setComments, loading, setLoading };
+  return { commentList, setCommentList, loading, setLoading };
 };
 
 export default useManageComments;
