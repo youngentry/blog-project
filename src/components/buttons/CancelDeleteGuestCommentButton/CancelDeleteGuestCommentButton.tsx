@@ -1,3 +1,5 @@
+import React, { memo } from 'react';
+
 import styles from './CancelDeleteGuestCommentButton.module.scss';
 
 export interface CancelDeleteGuestCommentButtonPropsInterface {
@@ -13,4 +15,4 @@ const CancelDeleteGuestCommentButton = (props: CancelDeleteGuestCommentButtonPro
   );
 };
 
-export default CancelDeleteGuestCommentButton;
+export default memo(CancelDeleteGuestCommentButton);
