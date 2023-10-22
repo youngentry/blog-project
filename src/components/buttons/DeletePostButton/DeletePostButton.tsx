@@ -11,7 +11,7 @@ import styles from './DeletePostButton.module.scss';
 const DeletePostButton = ({ postId }: { postId: string }) => {
   const router = useRouter();
 
-  const handleClickDeleteButton = async () => {
+  const handleClickDeletePostButton = async () => {
     // 삭제 확인. "취소" 선택 시 함수 종료
     const confirm = window.confirm('정말로 삭제하시겠습니까?');
     if (!confirm) {
@@ -35,7 +35,7 @@ const DeletePostButton = ({ postId }: { postId: string }) => {
   };
 
   return (
-    <button className={styles.deletePostButton} onClick={() => handleClickDeleteButton()} type='button'>
+    <button className={styles.deletePostButton} onClick={() => handleClickDeletePostButton()} type='button'>
       삭제
     </button>
   );

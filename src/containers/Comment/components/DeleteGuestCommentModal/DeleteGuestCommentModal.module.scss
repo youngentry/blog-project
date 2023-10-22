@@ -1,0 +1,17 @@
+.deleteConfirmModal {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  padding: 0.1rem;
+  transform: translate(calc(-100% - 5px), -50%);
+  display: none;
+  background: var(--color-blue);
+  border-radius: 0.25rem;
+  &.visible {
+    display: flex;
+  }
+
+  .deletePasswordInput {
+    margin-right: 0.25rem;
+  }
+}

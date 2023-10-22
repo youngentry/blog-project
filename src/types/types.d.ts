@@ -89,3 +89,14 @@ export interface SignUpFormInterface {
   email: string;
   password: string;
 }
+
+// custom input
+export interface CustomInputPropsInterface {
+  className?: string;
+  placeholder?: string;
+  value: string;
+  maxLength?: number;
+  dispatch: Dispatch<SetStateAction<string>>;
+  // eslint-disable-next-line
+  inputType?: string;
+}

@@ -1,0 +1,14 @@
+.editCancelButton {
+  margin-right: 0.25rem;
+  padding: 0.25rem 1rem;
+  white-space: nowrap;
+  background: var(--color-blue);
+  color: var(--color-f);
+  border-radius: 0.25rem;
+  transition: 0.3s;
+  cursor: pointer;
+  background: var(--color-9);
+  &:hover {
+    background: var(--color-6);
+  }
+}
