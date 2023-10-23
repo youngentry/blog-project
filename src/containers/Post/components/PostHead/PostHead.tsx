@@ -1,11 +1,12 @@
+
 import Link from 'next/link';
 
 import { checkSameAuthor } from '@/utils/sessionCheck/checkSameAuthor';
 import { getDateForm } from '@/utils/getDateForm';
+import EditPostButton from '@/containers/Post/components/EditPostButton/EditPostButton';
+import DeletePostButton from '@/containers/Post/components/DeletePostButton/DeletePostButton';
 
 import styles from './PostHead.module.scss';
-import EditPostButton from '@/components/buttons/EditPostButton/EditPostButton';
-import DeletePostButton from '@/components/buttons/DeletePostButton/DeletePostButton';
 
 interface PostHeadPropsInterface {
   userEmail: string;

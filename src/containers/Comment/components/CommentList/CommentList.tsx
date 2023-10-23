@@ -7,24 +7,24 @@ import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
 import useCommentList from '@/hooks/useCommentList';
 import { getRelativeTime } from '@/utils/getRelativeTime';
-
-import styles from './CommentList.module.scss';
-import UserProfile from '@/components/UserProfile/UserProfile';
 import ConfirmEditCommentButton, {
   ConfirmEditCommentButtonPropsInterface,
-} from '@/components/buttons/ConfirmEditCommentButton/ConfirmEditCommentButton';
+} from '@/containers/Comment/components/ConfirmEditCommentButton/ConfirmEditCommentButton';
 import CancelEditCommentButton, {
   CancelEditCommentButtonPropsInterface,
-} from '@/components/buttons/CancelEditCommentButton/CancelEditCommentButton';
+} from '@/containers/Comment/components/CancelEditCommentButton/CancelEditCommentButton';
 import DeleteCommentButton, {
   deleteCommentButtonPropsInterface,
-} from '@/components/buttons/DeleteCommentButton/DeleteCommentButton';
+} from '@/containers/Comment/components/DeleteCommentButton/DeleteCommentButton';
 import ToggleEditCommentButton, {
   ToggleEditCommentButtonPropsInterface,
-} from '@/components/buttons/ToggleEditCommentButton/ToggleEditCommentButton';
+} from '@/containers/Comment/components/ToggleEditCommentButton/ToggleEditCommentButton';
 import ToggleDeleteGuestCommentModalButton, {
   ToggleDeleteModalButtonPropsInterface,
-} from '@/components/buttons/ToggleDeleteGuestCommentModalButton/ToggleDeleteGuestCommentModalButton';
+} from '@/containers/Comment/components/ToggleDeleteGuestCommentModalButton/ToggleDeleteGuestCommentModalButton';
+
+import UserProfile from '@/components/UserProfile/UserProfile';
+import styles from './CommentList.module.scss';
 import DeleteGuestCommentModal from '../DeleteGuestCommentModal/DeleteGuestCommentModal';
 import CustomTextarea from '@/components/inputs/CustomTextarea/CustomTextarea';
 

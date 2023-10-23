@@ -6,9 +6,9 @@ import { BsArrowUpRightSquare } from 'react-icons/bs';
 
 import { CommentInterface } from '@/types/types';
 import { getDateForm } from '@/utils/getDateForm';
+import DeleteCommentButton from '@/containers/Comment/components/DeleteCommentButton/DeleteCommentButton';
 
 import styles from './ManageCommentItem.module.scss';
-import DeleteCommentButton from '@/components/buttons/DeleteCommentButton/DeleteCommentButton';
 
 interface ManageCommentItemPropsInterface {
   commentList: CommentInterface[];

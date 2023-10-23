@@ -1,9 +1,10 @@
 import { memo } from 'react';
 
-import styles from './ConfirmEditPost.module.scss';
 import ConfirmEditPostButton, {
   ConfirmEditPostButtonPropsInterface,
-} from '@/components/buttons/ConfirmEditPostButton/ConfirmEditPostButton';
+} from '@/containers/Editor/components/ConfirmEditPostButton/ConfirmEditPostButton';
+
+import styles from './ConfirmEditPost.module.scss';
 
 // 게시물 수정 확인 버튼입니다.
 const ConfirmEditPost = (props: ConfirmEditPostButtonPropsInterface) => {

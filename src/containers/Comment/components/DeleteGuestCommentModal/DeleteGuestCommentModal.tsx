@@ -2,14 +2,14 @@ import React, { useState, useCallback, memo } from 'react';
 
 import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
 import { CustomInputPropsInterface } from '@/types/types';
-
-import styles from './DeleteGuestCommentModal.module.scss';
-import ConfirmDeleteGuestCommentButton, {
-  ConfirmDelGuestCommentButtonPropsInterface,
-} from '@/components/buttons/ConfirmDeleteGuestCommentButton/ConfirmDeleteGuestCommentButton';
 import CancelDeleteGuestCommentButton, {
   CancelDeleteGuestCommentButtonPropsInterface,
-} from '@/components/buttons/CancelDeleteGuestCommentButton/CancelDeleteGuestCommentButton';
+} from '@/containers/Comment/components/CancelDeleteGuestCommentButton/CancelDeleteGuestCommentButton';
+import ConfirmDeleteGuestCommentButton, {
+  ConfirmDelGuestCommentButtonPropsInterface,
+} from '@/containers/Comment/components/ConfirmDeleteGuestCommentButton/ConfirmDeleteGuestCommentButton';
+
+import styles from './DeleteGuestCommentModal.module.scss';
 import CustomInput from '@/components/inputs/CustomInput/CustomInput';
 
 const DeleteGuestCommentModal = (props: any) => {
