@@ -19,14 +19,12 @@ const CardItem = ({ postCards }: { postCards: CardInterface[] }) => {
 
         return (
           <li key={id} className={styles.card}>
-            <Link prefetch={false} href={link}>
+            <Link href={link}>
               <Image className={styles.image} src={src} alt='post cover' width={300} height={300 * 0.75} />
             </Link>
             <div className={styles.content}>
               <h3 className={styles.title}>
-                <Link prefetch={false} href={link}>
-                  {title || '제목 없음'}
-                </Link>
+                <Link href={link}>{title || '제목 없음'}</Link>
               </h3>
               <div className={styles.subtitle}>
                 <Link href={{ pathname: '/category', query: { subtitle } }}>

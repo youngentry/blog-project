@@ -53,18 +53,8 @@ const UserMenu = ({ session }: { session: UserSessionData | null }) => {
             </li>
             <li className={`${styles.myList} `}>
               <ul className={`${styles.myListItemBox} ${styles.menuItem}`}>
-                <li className={styles.myListItem}>
-                  <Link href='/manage/likes'>좋아요 한 게시물</Link>
-                  <i>
-                    <BsChevronRight />
-                  </i>
-                </li>
-                <li className={styles.myListItem}>
-                  <Link href='/manage/comments'>작성한 댓글</Link>
-                  <i>
-                    <BsChevronRight />
-                  </i>
-                </li>
+                <GoToListButton linkTo='likes' description='좋아요 한 게시물' />
+                <GoToListButton linkTo='comments' description='작성한 댓글' />
               </ul>
             </li>
           </>
@@ -72,6 +62,17 @@ const UserMenu = ({ session }: { session: UserSessionData | null }) => {
         <li className={`${styles.logout} ${styles.menuItem}`}>{session ? <LogOutButton /> : <LogInButton />}</li>
       </ul>
     </div>
+  );
+};
+
+const GoToListButton = ({ linkTo, description }: { linkTo: string; description: string }) => {
+  return (
+    <li className={styles.myListItem}>
+      <Link href={`/manage/${linkTo}`}>{description}</Link>
+      <i>
+        <BsChevronRight />
+      </i>
+    </li>
   );
 };
 

@@ -10,7 +10,7 @@ import styles from './SliderItem.module.scss';
 const SliderItem = ({ slideItemProps }: { slideItemProps: SlideItemPropsInterface }) => {
   const { title, src, content, link } = slideItemProps;
   return (
-    <Link href={link} target='_blank' rel='noopener noreferrer'>
+    <Link href={link} target='_blank' rel='noopener noreferrer' prefetch={false}>
       <div className={styles.container}>
         <div className={styles.imageBox}>
           <Image className={styles.image} src={src} alt='post image' width={1000} height={1000} />

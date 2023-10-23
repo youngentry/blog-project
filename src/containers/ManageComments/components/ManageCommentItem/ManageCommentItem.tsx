@@ -42,6 +42,7 @@ const ManageCommentItem = (props: ManageCommentItemPropsInterface) => {
                       href={`/posts/${parentId}`}
                       target='_blank'
                       rel='noopener noreferrer'
+                      prefetch={false}
                     >
                       {title}
                       <BsArrowUpRightSquare />

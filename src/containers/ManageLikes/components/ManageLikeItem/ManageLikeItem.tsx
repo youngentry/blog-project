@@ -46,7 +46,13 @@ const ManageLikeItem = (props: ManageLikeItemPropsInterface) => {
                 <div className={styles.itemHead}>
                   <h3 className={styles.head}>
                     <span>게시물 제목:</span>
-                    <Link className={styles.postLink} href={`/posts/${id}`} target='_blank' rel='noopener noreferrer'>
+                    <Link
+                      className={styles.postLink}
+                      href={`/posts/${id}`}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      prefetch={false}
+                    >
                       <p className={styles.title}>{title}</p>
                       <BsArrowUpRightSquare />
                     </Link>
