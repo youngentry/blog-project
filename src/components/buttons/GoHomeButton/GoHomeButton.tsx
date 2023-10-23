@@ -5,11 +5,9 @@ import styles from './GoHomeButton.module.scss';
 
 const GoHomeButton = () => {
   return (
-    <button className={styles.homeButton} type='button'>
-      <Link href='/'>
-        <BsHouseDoor />
-      </Link>
-    </button>
+    <Link className={styles.homeButton} href='/'>
+      <BsHouseDoor />
+    </Link>
   );
 };
 

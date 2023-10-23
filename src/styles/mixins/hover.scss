@@ -18,7 +18,7 @@
 
 // pointer 효과와 hover 시 text underline 효과를 줍니다.
 @mixin hoverIcon() {
-  padding: 0.4rem 0.5rem;
+  padding: 0.4rem 0.4rem;
   border-radius: 50%;
   cursor: pointer;
 
