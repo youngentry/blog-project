@@ -1,5 +1,4 @@
 .container {
-  padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -15,6 +14,11 @@
   .blogName {
     padding: 1rem 0;
     font-weight: 700;
+  }
+
+  .profile {
+    padding-bottom: 1rem;
+    border-right: var(--1-solid);
   }
 
   .buttonBox {

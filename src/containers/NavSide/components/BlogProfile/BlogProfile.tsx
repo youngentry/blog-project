@@ -15,12 +15,14 @@ const BlogProfile = ({ session }: { session: any }) => {
   return (
     <div className={styles.container}>
       <Image className={styles.blogThumbnail} src='/profile.jpg' alt='blog profile' width={240} height={240} />
-      <h2 className={styles.blogName}>Youngentry</h2>
-      <div className={styles.buttonBox}>
-        <SearchPostButton boxPosition='left' />
-        <GoHomeButton />
-        {isBlogManager && <NewPostButton />}
-        {isBlogManager && <ManageBlogButton />}
+      <div className={styles.profile}>
+        <h2 className={styles.blogName}>Youngentry</h2>
+        <div className={styles.buttonBox}>
+          <SearchPostButton boxPosition='left' />
+          <GoHomeButton />
+          {isBlogManager && <NewPostButton />}
+          {isBlogManager && <ManageBlogButton />}
+        </div>
       </div>
     </div>
   );

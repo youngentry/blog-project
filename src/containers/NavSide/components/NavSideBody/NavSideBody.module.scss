@@ -1,4 +1,6 @@
 .container {
+  height: 100%;
+  border-right: var(--1-solid);
   .currentMenu {
     display: none;
   }
