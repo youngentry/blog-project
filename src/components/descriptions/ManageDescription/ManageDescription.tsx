@@ -1,5 +1,3 @@
-import React, { memo } from 'react';
-
 import styles from './ManageDescription.module.scss';
 
 const ManageDescription = ({ title, description }: { title: string; description: string }) => {
@@ -11,4 +9,4 @@ const ManageDescription = ({ title, description }: { title: string; description:
   );
 };
 
-export default memo(ManageDescription);
+export default ManageDescription;

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, FormEvent, memo } from 'react';
+import React, { useState, FormEvent } from 'react';
 
 import { CommentFormPropsInterface, CommentFormInterface } from '@/types/types';
 import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
@@ -121,4 +121,4 @@ const CommentForm = (props: CommentFormPropsInterface) => {
   );
 };
 
-export default memo(CommentForm);
+export default CommentForm;

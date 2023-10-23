@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
 import { CustomInputPropsInterface } from '@/types/types';
@@ -71,4 +71,4 @@ const DeleteGuestCommentModal = (props: any) => {
   );
 };
 
-export default memo(DeleteGuestCommentModal);
+export default DeleteGuestCommentModal;

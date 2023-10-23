@@ -1,5 +1,3 @@
-import React, { memo } from 'react';
-
 interface Props {
   className?: string;
   placeholder: string;
@@ -16,4 +14,4 @@ const ReadOnlyInput = ({ className, placeholder, value }: Props) => {
   return <input className={`${className}`} type='text' placeholder={placeholder} value={value} readOnly />;
 };
 
-export default memo(ReadOnlyInput);
+export default ReadOnlyInput;

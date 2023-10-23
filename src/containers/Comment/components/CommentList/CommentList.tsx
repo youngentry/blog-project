@@ -119,8 +119,6 @@ const CommentList = ({
           const canEdit: boolean = isSameCommenter || !isLoggedIn || isBlogAdmin; // 수정 권한 여부
           const isVisibleDeleteGuestCommentModal =
             deletingCommentId === commentId && checkingGuestPassword && !isLoggedIn; // 게스트 댓글 삭제버튼 visible 여부
-          console.log(postEmail, author);
-          console.log(postEmail === author);
           return (
             <li key={commentId} className={`${styles.commentItem}`}>
               <div className={styles.thumbnail}>

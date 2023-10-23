@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 import ConfirmEditPostButton, {
   ConfirmEditPostButtonPropsInterface,
 } from '@/containers/Editor/components/ConfirmEditPostButton/ConfirmEditPostButton';
@@ -27,4 +25,4 @@ const ConfirmEditPost = (props: ConfirmEditPostButtonPropsInterface) => {
   );
 };
 
-export default memo(ConfirmEditPost);
+export default ConfirmEditPost;

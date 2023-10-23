@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, memo, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { CommonCategoryInterface } from '@/types/types';
 
@@ -37,4 +37,4 @@ const EditorHead = (props: EditorHeadPropsInterface) => {
   );
 };
 
-export default memo(EditorHead);
+export default EditorHead;
