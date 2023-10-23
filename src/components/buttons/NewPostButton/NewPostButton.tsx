@@ -11,13 +11,14 @@ const NewPostButton = () => {
 
   return (
     <button
-      className={styles.newPostButton}
       onClick={() => {
         router.push('/manage/newpost');
       }}
       type='button'
     >
-      <BsPencil />
+      <i className={styles.newPostButton}>
+        <BsPencil />
+      </i>
     </button>
   );
 };

@@ -5,8 +5,10 @@ import styles from './ManageBlogButton.module.scss';
 
 const ManageBlogButton = () => {
   return (
-    <Link className={styles.manageBlogButton} href='/manage/category'>
-      <BsGear />
+    <Link href='/manage/category'>
+      <i className={styles.manageBlogButton}>
+        <BsGear />
+      </i>
     </Link>
   );
 };
