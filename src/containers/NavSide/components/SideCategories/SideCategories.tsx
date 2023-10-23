@@ -1,6 +1,6 @@
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { BsThreeDots } from 'react-icons/bs';
-import { useEffect, useState } from 'react';
 
 import { getCategoryPostCountApi } from '@/services/categoryFetch';
 import useCategories from '@/hooks/useMainCategories';
