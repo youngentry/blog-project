@@ -10,12 +10,12 @@ import { connectDB } from '@/utils/db/db';
 const githubSocial =
   process.env.NODE_ENV === 'development'
     ? {
-        clientId: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_ID as string,
-        clientSecret: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_SECRET as string,
+        clientId: process.env.GITHUB_SOCIAL_CLIENT_ID as string,
+        clientSecret: process.env.GITHUB_SOCIAL_CLIENT_SECRET as string,
       }
     : {
-        clientId: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_ID_DEPLOYMENT as string,
-        clientSecret: process.env.NEXT_PUBLIC_GITHUB_SOCIAL_CLIENT_SECRET_DEPLOYMENT as string,
+        clientId: process.env.GITHUB_SOCIAL_CLIENT_ID_DEPLOYMENT as string,
+        clientSecret: process.env.GITHUB_SOCIAL_CLIENT_SECRET_DEPLOYMENT as string,
       };
 
 // next-auth 로그인 설정입니다.

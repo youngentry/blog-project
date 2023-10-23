@@ -8,7 +8,7 @@ export const postImgur = async (formData: FormData) => {
   const options = {
     method: 'POST',
     headers: {
-      Authorization: `Client-ID ${process.env.NEXT_PUBLIC_IMGUR_CLIENT_ID}`,
+      Authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}`,
       Accept: 'application/json',
     },
     body: formData,
