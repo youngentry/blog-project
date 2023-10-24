@@ -1,0 +1,25 @@
+@import '@/styles/mixins/hover.scss';
+
+.searchCategoryBox {
+  margin-bottom: auto;
+  .categoryHead {
+    margin-bottom: 1.5rem;
+    font-size: var(--ft-21);
+    font-weight: 500;
+  }
+  .categoryList {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    .categoryItem {
+      .categoryLink {
+        padding: 0.7rem 1rem 0.6rem 1rem;
+        display: inline-block;
+        font-size: var(--ft-17);
+        border: var(--1-solid);
+        border-radius: 1.4rem;
+        @include hoverBg();
+      }
+    }
+  }
+}

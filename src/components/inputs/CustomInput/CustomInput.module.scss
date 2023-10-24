@@ -3,6 +3,11 @@
   display: flex;
   width: 100%;
 
+  input {
+    border: none;
+    width: 100%;
+  }
+
   .reset {
     position: absolute;
     top: 50%;

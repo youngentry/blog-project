@@ -1,7 +1,0 @@
-@import "@/styles/mixins/notice.scss";
-@import "@/styles/mixins/hover.scss";
-
-.searchPostButton {
-  @include hoverIcon();
-  @include noticeHover(); // hover 시 notice를 나타나게 합니다.
-}

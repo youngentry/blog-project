@@ -11,7 +11,7 @@ import styles from './CustomInput.module.scss';
  * @returns
  */
 const CustomInput = (props: CustomInputPropsInterface) => {
-  const { className, placeholder, value, maxLength, dispatch, inputType } = props;
+  const { className, placeholder, value, maxLength, dispatch, inputType, onKeyDown, inputRef } = props;
 
   // input 초기화 버튼
   const clickInit = () => dispatch('');
@@ -22,12 +22,14 @@ const CustomInput = (props: CustomInputPropsInterface) => {
         <BsXLg />
       </button>
       <input
+        ref={inputRef}
         type={`${inputType || 'text'}`}
         placeholder={placeholder}
         value={value}
         maxLength={maxLength}
         required
         onChange={(e) => dispatch(e.target.value)}
+        onKeyDown={onKeyDown}
       />
     </div>
   );

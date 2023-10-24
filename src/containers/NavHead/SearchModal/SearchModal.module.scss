@@ -1,29 +1,28 @@
 @import '@/styles/zIndex.scss';
-@import '@/styles/mixins/hover.scss';
 
 .container {
   position: fixed;
   top: 0;
   left: var(--w-nav-side);
   display: flex;
+  display: none;
   justify-content: center;
   width: calc(100% - var(--w-nav-side));
   height: 100%;
   background: var(--color-shadow-black);
-  $zindex-popover: 1060;
-  display: none;
+  z-index: $zindex-popover;
   &::after {
     background: var(--color-shadow-black);
   }
 
   .searchBox {
     position: relative;
-    margin: 5rem 1rem 0 1rem;
+    margin: 5rem auto 0 auto;
+    padding: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 3rem;
-    width: 50rem;
+    width: 65%;
     height: 30rem;
     border-radius: 0.5rem;
     background: var(--color-f);
@@ -57,28 +56,6 @@
         border: none;
         &::placeholder {
           color: var(--color-text-week);
-        }
-      }
-    }
-    .categoryBox {
-      margin-bottom: auto;
-      .categoryHead {
-        margin-bottom: 1.5rem;
-        font-size: var(--ft-21);
-        font-weight: 500;
-      }
-      .categoryList {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        .categoryItem {
-          .categoryLink {
-            padding: 0.7rem 1rem 0.6rem 1rem;
-            font-size: var(--ft-17);
-            border: var(--1-solid);
-            border-radius: 1.4rem;
-            @include hoverBg();
-          }
         }
       }
     }

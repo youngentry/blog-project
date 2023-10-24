@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, Ref, SetStateAction } from 'react';
 
 // postCard
 export interface CardInterface {
@@ -93,11 +93,13 @@ export interface SignUpFormInterface {
 
 // custom input
 export interface CustomInputPropsInterface {
+  inputRef?: Ref;
   className?: string;
   placeholder?: string;
-  value: string;
   maxLength?: number;
-  dispatch: Dispatch<SetStateAction<string>>;
   // eslint-disable-next-line
   inputType?: string;
+  value: string;
+  dispatch: Dispatch<SetStateAction<string>>;
+  onKeyDown: (KeyboardEvent) => void;
 }
