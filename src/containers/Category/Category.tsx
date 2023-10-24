@@ -6,8 +6,8 @@ import { useSearchParams } from 'next/navigation';
 import usePostCards, { UsePostCardsInterface } from '@/hooks/usePostCards';
 
 import styles from './Category.module.scss';
-import CardItem from './components/Card/CardItem';
 import Spin from '@/components/loadings/Spin/Spin';
+import CardItem from './components/Card/CardItem';
 
 // category (게시물 목록)페이지입니다.
 const Category = () => {
@@ -36,27 +36,11 @@ const Category = () => {
 };
 
 const Head = ({ title, subtitle, author }: { title: string; subtitle: string; author: string }) => {
-  // 전체 게시물
-  if (!title && !subtitle) {
-    return <h2>전체 게시물</h2>;
-  }
-
-  // 제목 + 카테고리
-  if (title && subtitle) {
-    return <h2>{`"${title}" + ${subtitle}`}</h2>;
-  }
-
-  // 제목
-  if (title) {
-    return <h2>{`"${title}"`} 검색 결과</h2>;
-  }
-
-  if (author) {
-    return <h2>{`"${author}"`}님의 게시물</h2>;
-  }
-
-  // 카테고리
-  return <h2>{`${subtitle}`}</h2>;
+  // debt: title+subtitle, title+author 기능 등 복합 검색도 가능하지만 렌더링 결과는 보류
+  if (title) return <h2>{`"${title}"`} 검색 결과</h2>; // 글 제목
+  if (subtitle) return <h2>{`${subtitle}`}</h2>; // 카테고리
+  if (author) return <h2>{`"${author}"`}님의 게시물</h2>; // 글 작성자
+  return <h2>전체 게시물</h2>;
 };
 
 export default Category;

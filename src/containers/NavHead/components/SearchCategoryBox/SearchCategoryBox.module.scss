@@ -3,13 +3,13 @@
 .searchCategoryBox {
   margin-bottom: auto;
   .categoryHead {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     font-size: var(--ft-21);
     font-weight: 500;
   }
   .categoryList {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
     flex-wrap: wrap;
     .categoryItem {
       .categoryLink {

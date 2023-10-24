@@ -14,7 +14,7 @@ const SearchCategoryBox = (props: PropsInterface) => {
   const { subTitleList, setIsVisibleModal } = props;
   return (
     <div className={styles.searchCategoryBox}>
-      <h3 className={styles.head}>게시물 카테고리</h3>
+      <h3 className={styles.categoryHead}>게시물 카테고리</h3>
       <ul className={styles.categoryList}>
         {subTitleList.map((subCategory: SubCategoryInterface) => {
           return (
