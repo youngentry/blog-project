@@ -14,17 +14,17 @@ const CardItem = ({ postCards }: { postCards: CardInterface[] }) => {
     <ul className={styles.cardContainer}>
       {postCards.map((card: CardInterface) => {
         const { id, src, title, subtitle, commentCount, likes, author, date, email } = card;
-        const formedDate = getDateForm(date);
-        const link = `/posts/${id}`;
+        const formedDate = getDateForm(date); // YYYY.MM.DD
+        const POST_LINK = `/posts/${id}`;
 
         return (
           <li key={id} className={styles.card}>
-            <Link href={link}>
+            <Link href={POST_LINK}>
               <Image className={styles.image} src={src} alt='post cover' width={300} height={300 * 0.75} />
             </Link>
             <div className={styles.content}>
               <h3 className={styles.title}>
-                <Link href={link}>{title || '제목 없음'}</Link>
+                <Link href={POST_LINK}>{title || '제목 없음'}</Link>
               </h3>
               <div className={styles.subtitle}>
                 <Link href={{ pathname: '/category', query: { subtitle } }}>
@@ -33,7 +33,9 @@ const CardItem = ({ postCards }: { postCards: CardInterface[] }) => {
               </div>
               <div className={styles.more}>
                 <div className={styles.write}>
-                  <strong className={styles.author}>{author}</strong>
+                  <Link href={{ pathname: '/category', query: { author } }}>
+                    <strong className={styles.author}>{author}</strong>
+                  </Link>
                   <span className={styles.date}>{formedDate}</span>
                 </div>
                 <div className={styles.counts}>

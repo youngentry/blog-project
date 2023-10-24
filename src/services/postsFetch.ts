@@ -7,8 +7,8 @@ import { setFetchOptions } from './fetchOptions';
  * 게시물 카드 리스트를 조회합니다.
  * @returns {CardInterface[]} commentsData or false
  */
-export const getPostCardsData = async (title: string, subtitle: string) => {
-  const url = `${BASE_URL}/category?title=${title}&subtitle=${subtitle}`;
+export const getPostCardsData = async (title: string, subtitle: string, author?: string) => {
+  const url = `${BASE_URL}/category?title=${title}&subtitle=${subtitle}&author=${author}`;
   const options = setFetchOptions('GET');
   // 요청 결과 반환
   const res = await fetch(url, options);
