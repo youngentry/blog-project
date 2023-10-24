@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 
-import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
+import { COMMENT_FORM_LENGTH } from '@/constants/LENGTH';
 import { CustomInputPropsInterface } from '@/types/types';
 import CancelDeleteGuestCommentButton, {
   CancelDeleteGuestCommentButtonPropsInterface,

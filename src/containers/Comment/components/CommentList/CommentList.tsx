@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 import { CommentInterface, CommentListPropsInterface, CustomInputPropsInterface } from '@/types/types';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
-import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
+import { COMMENT_FORM_LENGTH } from '@/constants/LENGTH';
 import useCommentList from '@/hooks/useCommentList';
 import { getRelativeTime } from '@/utils/getRelativeTime';
 import ConfirmEditCommentButton, {

@@ -17,3 +17,9 @@ export const SIGN_UP_FORM_LENGTH = {
   MIN_PASSWORD: 4,
   MAX_PASSWORD: 20,
 };
+
+// 게시글 제목 길이
+export const POST_LENGTH = {
+  MIN_TITLE: 1,
+  MAX_TITLE: 50,
+};

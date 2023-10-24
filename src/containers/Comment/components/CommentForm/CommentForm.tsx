@@ -3,7 +3,7 @@
 import React, { useState, FormEvent } from 'react';
 
 import { CommentFormPropsInterface, CommentFormInterface } from '@/types/types';
-import { COMMENT_FORM_LENGTH } from '@/constants/COMMENT_LENGTH';
+import { COMMENT_FORM_LENGTH } from '@/constants/LENGTH';
 import { postCommentApi } from '@/services/commentsFetch';
 
 import styles from './CommentForm.module.scss';
