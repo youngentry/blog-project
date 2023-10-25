@@ -101,5 +101,5 @@ export interface CustomInputPropsInterface {
   inputType?: string;
   value: string;
   dispatch: Dispatch<SetStateAction<string>>;
-  onKeyDown: (KeyboardEvent) => void;
+  onKeyDown?: (KeyboardEvent) => void;
 }

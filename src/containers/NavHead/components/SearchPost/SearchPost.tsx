@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import SearchModal from '@/containers/NavHead/SearchModal/SearchModal';
+import SearchModal from '@/containers/NavHead/components/SearchModal/SearchModal';
 
 import SearchPostButton from '../SearchPostButton/SearchPostButton';
 

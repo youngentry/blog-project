@@ -1,11 +1,10 @@
 .container {
   padding: 5rem;
   display: flex;
-  align-items: center;
   justify-content: center;
   text-align: center;
   gap: 2rem;
   height: calc(100vh - var(--h-nav-head));
   width: 100%;
-  background: url("/images/4eee8328m2008n22c3.png") repeat bottom center/contain;
+  background: url('/images/4eee8328m2008n22c3.png') repeat bottom center/contain;
 }

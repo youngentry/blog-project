@@ -10,8 +10,8 @@ import { CommonCategoryInterface } from '@/types/types';
 import { POST_LENGTH } from '@/constants/LENGTH';
 
 import styles from './SearchModal.module.scss';
-import CustomInput from '../../../components/inputs/CustomInput/CustomInput';
-import SearchCategoryBox from '../components/SearchCategoryBox/SearchCategoryBox';
+import CustomInput from '../../../../components/inputs/CustomInput/CustomInput';
+import SearchCategoryBox from '../SearchCategoryBox/SearchCategoryBox';
 
 interface PropsInterface {
   isVisibleModal: boolean;
