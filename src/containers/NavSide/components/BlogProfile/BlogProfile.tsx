@@ -11,7 +11,13 @@ const BlogProfile = ({ session }: { session: any }) => {
   const isBlogManager = session && checkBlogManager(session.user.email);
   return (
     <div className={styles.container}>
-      <Image className={styles.blogThumbnail} src='/profile.jpg' alt='blog profile' width={240} height={240} />
+      <Image
+        className={styles.blogThumbnail}
+        src='/images/blog-profile.jpg'
+        alt='blog profile'
+        width={240}
+        height={240}
+      />
       <div className={styles.profile}>
         <h2 className={styles.blogName}>
           Youngentry
