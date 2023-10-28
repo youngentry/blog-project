@@ -5,7 +5,7 @@ import { CommentInterface } from '@/types/types';
 
 import styles from './DeleteCommentButton.module.scss';
 
-export interface deleteCommentButtonPropsInterface {
+interface PropsInterface {
   postId: string;
   commentList: CommentInterface[];
   setCommentList: Dispatch<SetStateAction<CommentInterface[]>>;
@@ -14,7 +14,7 @@ export interface deleteCommentButtonPropsInterface {
   commentId?: string;
 }
 
-const DeleteCommentButton = (props: deleteCommentButtonPropsInterface) => {
+const DeleteCommentButton = (props: PropsInterface) => {
   const { postId, commentList, setCommentList, setPostCommentCount, postCommentCount, commentId } = props;
 
   // 삭제 버튼 클릭 이벤트

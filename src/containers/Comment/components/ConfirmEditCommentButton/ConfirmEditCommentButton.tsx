@@ -5,7 +5,7 @@ import { patchCommentApi } from '@/services/commentsFetch';
 
 import styles from './ConfirmEditCommentButton.module.scss';
 
-export interface ConfirmEditCommentButtonPropsInterface {
+interface PropsInterface {
   postId: string;
   editCommentInput: string;
   commentList: CommentInterface[];
@@ -14,7 +14,7 @@ export interface ConfirmEditCommentButtonPropsInterface {
   commentId?: string;
 }
 
-const ConfirmEditCommentButton = (props: ConfirmEditCommentButtonPropsInterface) => {
+const ConfirmEditCommentButton = (props: PropsInterface) => {
   const { postId, editCommentInput, commentList, setCommentList, initCommentEdit, commentId } = props;
 
   // 수정 확인 버튼 클릭 이벤트

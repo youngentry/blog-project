@@ -56,10 +56,7 @@ const CommentForm = (props: CommentFormPropsInterface) => {
     e.preventDefault();
 
     // input이 유효한지 검사합니다.
-    const isValidInput = checkValidInput();
-    if (!isValidInput) {
-      return;
-    }
+    if (!checkValidInput()) return;
 
     const commentForm: CommentFormInterface = { nickname, password, comment, title };
 

@@ -2,14 +2,14 @@ import React, { Dispatch, SetStateAction } from 'react';
 
 import styles from './ToggleDeleteGuestCommentModalButton.module.scss';
 
-export interface ToggleDeleteModalButtonPropsInterface {
+interface PropsInterface {
   setCheckingGuestPassword: Dispatch<SetStateAction<boolean>>;
   setDeletingCommentId: Dispatch<SetStateAction<string>>;
   setEditCommentInput: Dispatch<SetStateAction<string>>;
   commentId?: string;
 }
 
-const ToggleDeleteGuestCommentModalButton = (props: ToggleDeleteModalButtonPropsInterface) => {
+const ToggleDeleteGuestCommentModalButton = (props: PropsInterface) => {
   const { setDeletingCommentId, setCheckingGuestPassword, setEditCommentInput, commentId } = props;
 
   // "게스트 댓글 삭제 버튼 클릭" 이벤트

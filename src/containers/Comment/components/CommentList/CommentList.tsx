@@ -2,29 +2,19 @@
 
 import React, { useState } from 'react';
 
-import { CommentInterface, CommentListPropsInterface, CustomInputPropsInterface } from '@/types/types';
+import { CommentInterface, CommentListPropsInterface } from '@/types/types';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { COMMENT_FORM_LENGTH } from '@/constants/LENGTH';
 import useCommentList from '@/hooks/useCommentList';
-import { getRelativeTime } from '@/utils/getRelativeTime';
-import ConfirmEditCommentButton, {
-  ConfirmEditCommentButtonPropsInterface,
-} from '@/containers/Comment/components/ConfirmEditCommentButton/ConfirmEditCommentButton';
-import CancelEditCommentButton, {
-  CancelEditCommentButtonPropsInterface,
-} from '@/containers/Comment/components/CancelEditCommentButton/CancelEditCommentButton';
-import DeleteCommentButton, {
-  deleteCommentButtonPropsInterface,
-} from '@/containers/Comment/components/DeleteCommentButton/DeleteCommentButton';
-import ToggleEditCommentButton, {
-  ToggleEditCommentButtonPropsInterface,
-} from '@/containers/Comment/components/ToggleEditCommentButton/ToggleEditCommentButton';
-import ToggleDeleteGuestCommentModalButton, {
-  ToggleDeleteModalButtonPropsInterface,
-} from '@/containers/Comment/components/ToggleDeleteGuestCommentModalButton/ToggleDeleteGuestCommentModalButton';
+import ConfirmEditCommentButton from '@/containers/Comment/components/ConfirmEditCommentButton/ConfirmEditCommentButton';
+import CancelEditCommentButton from '@/containers/Comment/components/CancelEditCommentButton/CancelEditCommentButton';
+import DeleteCommentButton from '@/containers/Comment/components/DeleteCommentButton/DeleteCommentButton';
+import ToggleEditCommentButton from '@/containers/Comment/components/ToggleEditCommentButton/ToggleEditCommentButton';
+import ToggleDeleteGuestCommentModalButton from '@/containers/Comment/components/ToggleDeleteGuestCommentModalButton/ToggleDeleteGuestCommentModalButton';
+import { getKrTime } from '@/utils/getKrTime';
 
-import UserProfile from '@/components/UserProfile/UserProfile';
 import styles from './CommentList.module.scss';
+import UserProfile from '@/components/UserProfile/UserProfile';
 import DeleteGuestCommentModal from '../DeleteGuestCommentModal/DeleteGuestCommentModal';
 import CustomTextarea from '@/components/inputs/CustomTextarea/CustomTextarea';
 
@@ -54,14 +44,14 @@ const CommentList = ({
   };
 
   // 댓글 수정 input
-  const editCommentInputProps: CustomInputPropsInterface = {
+  const editCommentInputProps = {
     value: editCommentInput,
     maxLength: MAX_COMMENT,
     dispatch: setEditCommentInput,
   };
 
   // 댓글 수정 form이 나타나도록 하는 button
-  const startEditCommentButtonProps: ToggleEditCommentButtonPropsInterface = {
+  const startEditCommentButtonProps = {
     setEditingCommentId,
     setEditCommentInput,
   };
@@ -77,7 +67,7 @@ const CommentList = ({
   };
 
   // 권한 있는 댓글 삭제 button
-  const deleteCommentButtonProps: deleteCommentButtonPropsInterface = {
+  const deleteCommentButtonProps = {
     postId,
     commentList,
     setCommentList,
@@ -86,14 +76,14 @@ const CommentList = ({
   };
 
   // 게스트 댓글 삭제 form이 나타나도록 하는 button
-  const toggleDeleteModalButtonProps: ToggleDeleteModalButtonPropsInterface = {
+  const toggleDeleteModalButtonProps = {
     setCheckingGuestPassword,
     setDeletingCommentId,
     setEditCommentInput,
   };
 
   // 댓글 수정 확인 button
-  const confirmEditCommentButtonProps: ConfirmEditCommentButtonPropsInterface = {
+  const confirmEditCommentButtonProps = {
     postId,
     editCommentInput,
     commentList,
@@ -102,7 +92,7 @@ const CommentList = ({
   };
 
   // 댓글 수정 취소 button
-  const cancelEditCommentButtonProps: CancelEditCommentButtonPropsInterface = {
+  const cancelEditCommentButtonProps = {
     initCommentEdit,
   };
 
@@ -128,7 +118,7 @@ const CommentList = ({
                 <div className={styles.header}>
                   <div className={styles.user}>
                     <p className={styles.nickname}>{nickname}</p>
-                    <p className={styles.date}>{getRelativeTime(String(date))}</p>
+                    <p className={styles.date}>{getKrTime(date)}</p>
                     <p className={`${styles.postAuthor} ${postEmail === author && 'visible'}`}>작성자</p>
                   </div>
                   {canEdit && (
@@ -139,7 +129,6 @@ const CommentList = ({
                         commentId={commentId}
                         comment={comment}
                       />
-
                       {isSameCommenter || isBlogAdmin ? (
                         <DeleteCommentButton {...deleteCommentButtonProps} commentId={commentId} />
                       ) : (

@@ -1,10 +1,10 @@
 import styles from './CancelEditCommentButton.module.scss';
 
-export interface CancelEditCommentButtonPropsInterface {
+interface PropsInterface {
   initCommentEdit: () => void;
 }
 
-const CancelEditCommentButton = (props: CancelEditCommentButtonPropsInterface) => {
+const CancelEditCommentButton = (props: PropsInterface) => {
   const { initCommentEdit } = props;
   return (
     <button className={styles.editCancelButton} onClick={() => initCommentEdit()} type='button'>

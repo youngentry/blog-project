@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 
 import styles from './ToggleEditCommentButton.module.scss';
 
-export interface ToggleEditCommentButtonPropsInterface {
+interface PropsInterface {
   isLoggedIn?: boolean;
   commentId?: string;
   comment?: string;
@@ -10,7 +10,7 @@ export interface ToggleEditCommentButtonPropsInterface {
   setEditCommentInput: Dispatch<SetStateAction<string>>;
 }
 
-const ToggleEditCommentButton = (props: ToggleEditCommentButtonPropsInterface) => {
+const ToggleEditCommentButton = (props: PropsInterface) => {
   const { isLoggedIn, commentId, comment, setEditingCommentId, setEditCommentInput } = props;
 
   // "수정 버튼 클릭" 이벤트
