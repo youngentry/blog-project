@@ -3,20 +3,16 @@
 import React, { useState } from 'react';
 
 import { CommentInterface, CommentListPropsInterface } from '@/types/types';
-import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { COMMENT_FORM_LENGTH } from '@/constants/LENGTH';
 import useCommentList from '@/hooks/useCommentList';
 import ConfirmEditCommentButton from '@/containers/Comment/components/ConfirmEditCommentButton/ConfirmEditCommentButton';
 import CancelEditCommentButton from '@/containers/Comment/components/CancelEditCommentButton/CancelEditCommentButton';
-import DeleteCommentButton from '@/containers/Comment/components/DeleteCommentButton/DeleteCommentButton';
-import ToggleEditCommentButton from '@/containers/Comment/components/ToggleEditCommentButton/ToggleEditCommentButton';
-import ToggleDeleteGuestCommentModalButton from '@/containers/Comment/components/ToggleDeleteGuestCommentModalButton/ToggleDeleteGuestCommentModalButton';
 import { getKrTime } from '@/utils/getKrTime';
 
 import styles from './CommentList.module.scss';
 import UserProfile from '@/components/UserProfile/UserProfile';
-import DeleteGuestCommentModal from '../DeleteGuestCommentModal/DeleteGuestCommentModal';
 import CustomTextarea from '@/components/inputs/CustomTextarea/CustomTextarea';
+import CommentItemHead from '../CommentItemHead/CommentItemHead';
 
 // 댓글 목록입니다.
 const CommentList = ({
@@ -31,9 +27,6 @@ const CommentList = ({
 
   const [editCommentInput, setEditCommentInput] = useState<string>(''); // 수정 input
   const [editingCommentId, setEditingCommentId] = useState<string>(''); // 수정중인 댓글 ObjectId
-
-  const [checkingGuestPassword, setCheckingGuestPassword] = useState<boolean>(false); // 게스트 댓글 비밀번호 input이 나타날지 말지 여부
-  const [deletingCommentId, setDeletingCommentId] = useState<string>(''); // 수정중인 댓글 ObjectId
 
   const { commentList, setCommentList } = useCommentList(postId, newUpdate);
 
@@ -50,38 +43,6 @@ const CommentList = ({
     dispatch: setEditCommentInput,
   };
 
-  // 댓글 수정 form이 나타나도록 하는 button
-  const startEditCommentButtonProps = {
-    setEditingCommentId,
-    setEditCommentInput,
-  };
-
-  // 게스트 댓글 삭제 모달
-  const deleteGuestCommentModalProps = {
-    setCheckingGuestPassword,
-    postId,
-    commentList,
-    setCommentList,
-    setPostCommentCount,
-    postCommentCount,
-  };
-
-  // 권한 있는 댓글 삭제 button
-  const deleteCommentButtonProps = {
-    postId,
-    commentList,
-    setCommentList,
-    setPostCommentCount,
-    postCommentCount,
-  };
-
-  // 게스트 댓글 삭제 form이 나타나도록 하는 button
-  const toggleDeleteModalButtonProps = {
-    setCheckingGuestPassword,
-    setDeletingCommentId,
-    setEditCommentInput,
-  };
-
   // 댓글 수정 확인 button
   const confirmEditCommentButtonProps = {
     postId,
@@ -96,6 +57,18 @@ const CommentList = ({
     initCommentEdit,
   };
 
+  const commentItemHeadProps = {
+    userEmail,
+    postEmail,
+    postId,
+    postCommentCount,
+    setPostCommentCount,
+    setEditCommentInput,
+    setEditingCommentId,
+    commentList,
+    setCommentList,
+  };
+
   return (
     <ul className={styles.commentList}>
       {commentList &&
@@ -103,45 +76,20 @@ const CommentList = ({
           const { comment, date, isLoggedIn, nickname, author, _id } = commentItem;
           const commentId = String(_id); // key에 할당하기 위해 직렬화합니다.
 
-          // 댓글 수정 및 삭제 권한이 있는지 여부에 따라 삭제 버튼이 나타나도록 합니다.
-          const isSameCommenter: boolean = isLoggedIn && userEmail === author; // 동일한 댓글 작성자
-          const isBlogAdmin: boolean = checkBlogAdmin(userEmail); // 블로그 관리자
-          const canEdit: boolean = isSameCommenter || !isLoggedIn || isBlogAdmin; // 수정 권한 여부
-          const isVisibleDeleteGuestCommentModal =
-            deletingCommentId === commentId && checkingGuestPassword && !isLoggedIn; // 게스트 댓글 삭제버튼 visible 여부
           return (
             <li key={commentId} className={`${styles.commentItem}`}>
               <div className={styles.thumbnail}>
                 <UserProfile isLoggedIn={isLoggedIn} />
               </div>
               <div className={styles.content}>
-                <div className={styles.header}>
-                  <div className={styles.user}>
-                    <p className={styles.nickname}>{nickname}</p>
-                    <p className={styles.date}>{getKrTime(date)}</p>
-                    <p className={`${styles.postAuthor} ${postEmail === author && 'visible'}`}>작성자</p>
-                  </div>
-                  {canEdit && (
-                    <div className={styles.buttons}>
-                      <ToggleEditCommentButton
-                        {...startEditCommentButtonProps}
-                        isLoggedIn={isLoggedIn}
-                        commentId={commentId}
-                        comment={comment}
-                      />
-                      {isSameCommenter || isBlogAdmin ? (
-                        <DeleteCommentButton {...deleteCommentButtonProps} commentId={commentId} />
-                      ) : (
-                        <ToggleDeleteGuestCommentModalButton {...toggleDeleteModalButtonProps} commentId={commentId} />
-                      )}
-                      <DeleteGuestCommentModal
-                        {...deleteGuestCommentModalProps}
-                        isVisibleDeleteGuestCommentModal={isVisibleDeleteGuestCommentModal}
-                        commentId={commentId}
-                      />
-                    </div>
-                  )}
-                </div>
+                <CommentItemHead
+                  {...commentItemHeadProps}
+                  commentId={commentId}
+                  isLoggedIn={isLoggedIn}
+                  nickname={nickname}
+                  author={author}
+                  comment={comment}
+                />
                 <div className={`${styles.body} ${editingCommentId === commentId && 'hide'}`}>
                   <p className={`${styles.comment} `}>{comment}</p>
                 </div>
@@ -153,6 +101,11 @@ const CommentList = ({
                   />
                   <ConfirmEditCommentButton {...confirmEditCommentButtonProps} commentId={commentId} />
                   <CancelEditCommentButton {...cancelEditCommentButtonProps} />
+                </div>
+
+                <div className={`${styles.bottom}`}>
+                  <p className={styles.date}>{getKrTime(date)}</p>
+                  <div>답글 쓰기</div>
                 </div>
               </div>
             </li>

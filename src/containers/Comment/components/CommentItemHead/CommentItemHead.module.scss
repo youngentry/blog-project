@@ -1,0 +1,27 @@
+.head {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+
+  .user {
+    display: flex;
+    .nickname {
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+
+    .postAuthor {
+      display: none;
+      color: var(--color-text-week);
+      font-size: var(--ft-15);
+    }
+  }
+
+  .buttons {
+    position: relative;
+    margin-left: auto;
+    display: flex;
+    gap: 0.25rem;
+  }
+}
