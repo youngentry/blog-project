@@ -8,7 +8,11 @@ import { setFetchOptions } from './fetchOptions';
  * @returns {CardInterface[]} commentsData or false
  */
 export const getPostCardsData = async (title: string, subtitle: string, author?: string) => {
-  const url = `${BASE_URL}/category?title=${title}&subtitle=${subtitle}&author=${author}`;
+  const titleQuery = title && `&title=${title}`;
+  const subtitleQuery = subtitle && `&subtitle=${subtitle}`;
+  const authorQuery = author && `&author=${author}`;
+
+  const url = `${BASE_URL}/category?${titleQuery}${subtitleQuery}${authorQuery}`;
   const options = setFetchOptions('GET');
   // 요청 결과 반환
   const res = await fetch(url, options);

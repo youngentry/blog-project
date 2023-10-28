@@ -76,6 +76,7 @@ const SearchModal = (props: PropsInterface) => {
             placeholder='검색어를 입력해주세요.'
             maxLength={POST_LENGTH.MAX_TITLE}
             onKeyDown={handleOnKeyDown}
+            injectionProtected
           />
         </div>
         <SearchCategoryBox subTitleList={subTitleList} setIsVisibleModal={setIsVisibleModal} />

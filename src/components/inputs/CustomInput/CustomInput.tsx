@@ -1,7 +1,8 @@
-import React, { memo } from 'react';
+import React, { ChangeEvent, memo, useCallback } from 'react';
 import { BsXLg } from 'react-icons/bs';
 
 import { CustomInputPropsInterface } from '@/types/types';
+import { isDangerousLetter } from '@/utils/isDangerousLetter';
 
 import styles from './CustomInput.module.scss';
 
@@ -11,10 +12,28 @@ import styles from './CustomInput.module.scss';
  * @returns
  */
 const CustomInput = (props: CustomInputPropsInterface) => {
-  const { className, placeholder, value, maxLength, dispatch, inputType, onKeyDown, inputRef } = props;
+  const { className, placeholder, value, maxLength, dispatch, inputType, onKeyDown, inputRef, injectionProtected } =
+    props;
 
   // input 초기화 버튼
   const clickInit = () => dispatch('');
+
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    dispatch(inputValue);
+  };
+
+  // DB에 injection 공격이 예상될 경우에는 injectionProtected 핸들러를 실행합니다.
+  const handleProtectedOnchange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+
+    if (isDangerousLetter(inputValue)) {
+      alert('보안: 특수문자(${}[]().)는 입력 할수 없습니다.');
+      inputValue.replace(/[${}[\]().]/g, '');
+    } else {
+      dispatch(e.target.value);
+    }
+  }, []);
 
   return (
     <div className={`${styles.inputBox} ${className}`}>
@@ -28,7 +47,7 @@ const CustomInput = (props: CustomInputPropsInterface) => {
         value={value}
         maxLength={maxLength}
         required
-        onChange={(e) => dispatch(e.target.value)}
+        onChange={injectionProtected ? handleProtectedOnchange : handleOnChange}
         onKeyDown={onKeyDown}
       />
     </div>

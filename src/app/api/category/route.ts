@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { CardInterface, PostInterface } from '@/types/types';
 import { connectDB } from '@/utils/db/db';
+import { isDangerousLetter } from '@/utils/isDangerousLetter';
 
 // 게시물 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest) => {
@@ -9,6 +10,10 @@ export const GET = async (req: NextRequest) => {
   const title: string = searchParams.get('title') || ''; // 게시물 제목 검색어
   const subtitle: string = searchParams.get('subtitle') || ''; // 카테고리 부제목 이름
   const author: string = searchParams.get('author') || ''; // 게시물 작성자 이름
+
+  if (isDangerousLetter(title + subtitle + author)) {
+    return NextResponse.json({ message: 'letters warning' }, { status: 400 });
+  }
 
   const isQueryExist = title || subtitle || author; // query 존재 여부
 

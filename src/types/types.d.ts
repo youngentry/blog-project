@@ -99,6 +99,7 @@ export interface CustomInputPropsInterface {
   maxLength?: number;
   // eslint-disable-next-line
   inputType?: string;
+  injectionProtected?: boolean;
   value: string;
   dispatch: Dispatch<SetStateAction<string>>;
   onKeyDown?: (KeyboardEvent) => void;

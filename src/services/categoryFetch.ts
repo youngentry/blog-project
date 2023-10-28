@@ -7,8 +7,8 @@ import { setFetchOptions } from './fetchOptions';
  * @param {CommonCategoryInterface} body
  * @returns {boolean}
  */
-export const getCategoriesApi = async (query: string = '', parentId: string = '') => {
-  const url = `/api/manage/category?role=${query}&parentId=${parentId}`;
+export const getCategoriesApi = async (role: string = '', parentId: string = '') => {
+  const url = `/api/manage/category?role=${role}&parentId=${parentId}`;
   const options = setFetchOptions('GET');
 
   // 요청 결과 반환
