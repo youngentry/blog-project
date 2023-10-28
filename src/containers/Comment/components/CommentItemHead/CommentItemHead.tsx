@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
+import { CommentInterface } from '@/types/types';
 
 import styles from './CommentItemHead.module.scss';
 import ToggleEditCommentButton from '../buttons/ToggleEditCommentButton/ToggleEditCommentButton';
@@ -8,22 +9,39 @@ import DeleteCommentButton from '../buttons/DeleteCommentButton/DeleteCommentBut
 import ToggleDeleteGuestCommentModalButton from '../buttons/ToggleDeleteGuestCommentModalButton/ToggleDeleteGuestCommentModalButton';
 import DeleteGuestCommentModal from '../DeleteGuestCommentModal/DeleteGuestCommentModal';
 
-const CommentItemHead = (props: any) => {
+interface PropsInterface {
+  commentList: CommentInterface[];
+  setCommentList: Dispatch<SetStateAction<CommentInterface[]>>;
+  userEmail: string;
+  postEmail?: string;
+  postId: string;
+  commentId: string;
+  nickname: string;
+  isLoggedIn: boolean;
+  author: string;
+  comment: string;
+  postCommentCount: number;
+  setPostCommentCount: Dispatch<SetStateAction<number>>;
+  setEditCommentInput: Dispatch<SetStateAction<string>>;
+  setEditingCommentId: Dispatch<SetStateAction<string>>;
+}
+
+const CommentItemHead = (props: PropsInterface) => {
   const {
-    userEmail,
-    postEmail,
-    commentId,
+    commentList,
+    setCommentList,
+    userEmail, // 로그인 유저
+    postEmail, // 게시물 작성자
     postId,
+    commentId,
     nickname,
-    isLoggedIn,
+    isLoggedIn, // 유저/게스트 댓글 구분하는 속성
     author,
+    comment,
     postCommentCount,
     setPostCommentCount,
     setEditCommentInput,
     setEditingCommentId,
-    commentList,
-    setCommentList,
-    comment,
   } = props;
 
   const [checkingGuestPassword, setCheckingGuestPassword] = useState<boolean>(false); // 게스트 댓글 비밀번호 input이 나타날지 말지 여부

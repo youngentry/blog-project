@@ -25,6 +25,7 @@ const CommentList = ({
 
   const { commentList, setCommentList } = useCommentList(postId, newUpdate);
 
+  // 댓글 머리 (닉네임, 수정, 삭제 버튼 등)
   const commentItemHeadProps = {
     userEmail,
     postEmail,
@@ -36,6 +37,8 @@ const CommentList = ({
     commentList,
     setCommentList,
   };
+
+  // 댓글 본문
   const commentItemBodyProps = {
     postId,
     commentList,
@@ -52,7 +55,6 @@ const CommentList = ({
         commentList.map((commentItem: CommentInterface) => {
           const { comment, date, isLoggedIn, nickname, author, _id } = commentItem;
           const commentId = String(_id); // key에 할당하기 위해 직렬화합니다.
-
           return (
             <li key={commentId} className={`${styles.commentItem}`}>
               <div className={styles.thumbnail}>
