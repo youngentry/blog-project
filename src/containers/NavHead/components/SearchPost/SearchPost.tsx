@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import SearchModal from '@/containers/NavHead/components/SearchModal/SearchModal';
 
-import SearchPostButton from '../SearchPostButton/SearchPostButton';
+import OpenSearchModalButton from '../OpenSearchModalButton/OpenSearchModalButton';
 
 const SearchPost = () => {
   const [isVisibleModal, setIsVisibleModal] = useState<boolean>(false);
@@ -17,7 +17,7 @@ const SearchPost = () => {
   return (
     <>
       <SearchModal {...modalProps} />
-      <SearchPostButton {...modalProps} />
+      <OpenSearchModalButton {...modalProps} />
     </>
   );
 };

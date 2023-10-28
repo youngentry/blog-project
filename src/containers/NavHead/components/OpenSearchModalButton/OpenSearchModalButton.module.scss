@@ -1,6 +1,6 @@
 @import '@/styles/mixins/notice.scss';
 @import '@/styles/mixins/hover.scss';
 
-.searchPostButton {
+.openSearchModalButton {
   @include hoverIcon();
 }

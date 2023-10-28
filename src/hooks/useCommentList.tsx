@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { getCommentsDataApi } from '@/services/commentsFetch';
 import { CommentInterface } from '@/types/types';
 
-const useCommentList = (postId: string, newUpdate: any = null) => {
+const useCommentList = (postId: string, newUpdate: boolean = false) => {
   const [commentList, setCommentList] = useState<CommentInterface[]>([]); // API 요청하여 조회할 댓글 목록
 
   // 게시물의 댓글을 조회하여 state에 저장합니다.
