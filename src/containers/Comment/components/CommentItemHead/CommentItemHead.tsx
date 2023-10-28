@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 
 import styles from './CommentItemHead.module.scss';
-import ToggleEditCommentButton from '../ToggleEditCommentButton/ToggleEditCommentButton';
-import DeleteCommentButton from '../DeleteCommentButton/DeleteCommentButton';
-import ToggleDeleteGuestCommentModalButton from '../ToggleDeleteGuestCommentModalButton/ToggleDeleteGuestCommentModalButton';
+import ToggleEditCommentButton from '../buttons/ToggleEditCommentButton/ToggleEditCommentButton';
+import DeleteCommentButton from '../buttons/DeleteCommentButton/DeleteCommentButton';
+import ToggleDeleteGuestCommentModalButton from '../buttons/ToggleDeleteGuestCommentModalButton/ToggleDeleteGuestCommentModalButton';
 import DeleteGuestCommentModal from '../DeleteGuestCommentModal/DeleteGuestCommentModal';
 
 const CommentItemHead = (props: any) => {

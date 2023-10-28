@@ -5,19 +5,6 @@
   display: flex;
   flex-direction: column;
 
-  .editForm {
-    margin-bottom: 0.5rem;
-    display: none;
-
-    .textarea {
-      width: 100%;
-    }
-  }
-
-  .guestConfirm {
-    display: none;
-  }
-
   .commentItem {
     padding: 1rem 0.5rem;
     display: flex;
@@ -33,33 +20,8 @@
       font-size: 1.5rem;
     }
 
-    .content {
+    .contentBox {
       width: 100%;
-
-      .comment {
-        margin-bottom: 0.5rem;
-        font-size: var(--ft-17);
-        line-height: 1.5;
-      }
-
-      .editForm {
-        .textarea {
-          margin-bottom: 0.15rem;
-          width: 100%;
-          height: 4rem;
-          line-height: 1.5;
-        }
-      }
-
-      .bottom {
-        display: flex;
-        font-size: var(--ft-15);
-        color: var(--color-text-week);
-
-        .date {
-          margin-right: 0.5rem;
-        }
-      }
     }
   }
 }

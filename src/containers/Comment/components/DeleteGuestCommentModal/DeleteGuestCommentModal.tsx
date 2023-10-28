@@ -4,10 +4,10 @@ import { COMMENT_FORM_LENGTH } from '@/constants/LENGTH';
 import { CustomInputPropsInterface } from '@/types/types';
 import CancelDeleteGuestCommentButton, {
   CancelDeleteGuestCommentButtonPropsInterface,
-} from '@/containers/Comment/components/CancelDeleteGuestCommentButton/CancelDeleteGuestCommentButton';
+} from '@/containers/Comment/components/buttons/CancelDeleteGuestCommentButton/CancelDeleteGuestCommentButton';
 import ConfirmDeleteGuestCommentButton, {
   ConfirmDelGuestCommentButtonPropsInterface,
-} from '@/containers/Comment/components/ConfirmDeleteGuestCommentButton/ConfirmDeleteGuestCommentButton';
+} from '@/containers/Comment/components/buttons/ConfirmDeleteGuestCommentButton/ConfirmDeleteGuestCommentButton';
 
 import styles from './DeleteGuestCommentModal.module.scss';
 import CustomInput from '@/components/inputs/CustomInput/CustomInput';
