@@ -27,25 +27,25 @@ const CommentList = ({
 
   // 댓글 머리 (닉네임, 수정, 삭제 버튼 등)
   const commentItemHeadProps = {
+    commentList,
+    setCommentList,
     userEmail,
     postEmail,
     postId,
     postCommentCount,
     setPostCommentCount,
-    setEditCommentInput,
     setEditingCommentId,
-    commentList,
-    setCommentList,
+    setEditCommentInput,
   };
 
   // 댓글 본문
   const commentItemBodyProps = {
-    postId,
     commentList,
-    editCommentInput,
-    editingCommentId,
     setCommentList,
+    postId,
+    editingCommentId,
     setEditingCommentId,
+    editCommentInput,
     setEditCommentInput,
   };
 

@@ -1,20 +1,35 @@
+import { Dispatch, SetStateAction } from 'react';
+
 import { COMMENT_FORM_LENGTH } from '@/constants/LENGTH';
+import { CommentInterface } from '@/types/types';
 
 import styles from './CommentItemBody.module.scss';
 import CustomTextarea from '@/components/inputs/CustomTextarea/CustomTextarea';
 import ConfirmEditCommentButton from '../buttons/ConfirmEditCommentButton/ConfirmEditCommentButton';
 import CancelEditCommentButton from '../buttons/CancelEditCommentButton/CancelEditCommentButton';
 
-const CommentItemBody = (props: any) => {
+interface PropsInterface {
+  commentList: CommentInterface[];
+  setCommentList: Dispatch<SetStateAction<CommentInterface[]>>;
+  postId: string;
+  commentId: string;
+  comment: string;
+  editingCommentId: string;
+  editCommentInput: string;
+  setEditingCommentId: Dispatch<SetStateAction<string>>;
+  setEditCommentInput: Dispatch<SetStateAction<string>>;
+}
+
+const CommentItemBody = (props: PropsInterface) => {
   const {
-    comment,
-    commentId,
-    postId,
-    editCommentInput,
-    editingCommentId,
     commentList,
     setCommentList,
+    postId,
+    commentId,
+    comment, // 댓글 본문
+    editingCommentId,
     setEditingCommentId,
+    editCommentInput,
     setEditCommentInput,
   } = props;
 

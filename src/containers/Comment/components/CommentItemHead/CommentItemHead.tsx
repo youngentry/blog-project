@@ -22,8 +22,8 @@ interface PropsInterface {
   comment: string;
   postCommentCount: number;
   setPostCommentCount: Dispatch<SetStateAction<number>>;
-  setEditCommentInput: Dispatch<SetStateAction<string>>;
   setEditingCommentId: Dispatch<SetStateAction<string>>;
+  setEditCommentInput: Dispatch<SetStateAction<string>>;
 }
 
 const CommentItemHead = (props: PropsInterface) => {
@@ -40,8 +40,8 @@ const CommentItemHead = (props: PropsInterface) => {
     comment,
     postCommentCount,
     setPostCommentCount,
-    setEditCommentInput,
     setEditingCommentId,
+    setEditCommentInput,
   } = props;
 
   const [checkingGuestPassword, setCheckingGuestPassword] = useState<boolean>(false); // 게스트 댓글 비밀번호 input이 나타날지 말지 여부

@@ -29,10 +29,10 @@ const DeleteGuestCommentModal = (props: any) => {
   const [deleteCommentPasswordInput, setDeleteCommentPasswordInput] = useState<string>(''); // 게스트 댓글 비밀번호 input
 
   // 게스트 댓글 삭제 비밀번호 초기화
-  const initCheckingDeleteGuestComment = useCallback(() => {
+  const initCheckingDeleteGuestComment = () => {
     setCheckingGuestPassword(false); // 삭제 확인 모달 invisible
     setDeleteCommentPasswordInput(''); // 삭제확인 비밀번호 초기화
-  }, [setCheckingGuestPassword]);
+  };
 
   // 게스트 댓글 삭제 비밀번호 input
   const deletePasswordInputInputProps: CustomInputPropsInterface = {
