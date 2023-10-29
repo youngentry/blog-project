@@ -13,6 +13,7 @@
 
       input {
         width: 100%;
+        border: var(--1-solid);
       }
 
       &.sameAuthor {
@@ -21,9 +22,10 @@
     }
 
     .textarea {
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.1rem;
       width: 100%;
-      height: 4rem;
+      height: 5rem;
+      border: var(--1-solid);
     }
 
     .writeCommentButton {

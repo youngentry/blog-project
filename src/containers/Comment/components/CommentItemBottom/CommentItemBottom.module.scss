@@ -1,9 +1,14 @@
 .bottom {
   display: flex;
+  flex-direction: column;
   font-size: var(--ft-15);
   color: var(--color-text-week);
 
-  .date {
-    margin-right: 0.5rem;
+  .dateAndReplyBox {
+    display: flex;
+    margin-bottom: 0.5rem;
+    .date {
+      margin-right: 0.5rem;
+    }
   }
 }

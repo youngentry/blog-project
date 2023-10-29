@@ -14,7 +14,8 @@ import CustomTextarea from '@/components/inputs/CustomTextarea/CustomTextarea';
 // 댓글 입력 폼입니다.
 // 비로그인 상태에서는 nickname, password input이 나타납니다.
 const CommentForm = (props: CommentFormPropsInterface) => {
-  const { title, postId, userEmail, newUpdate, setNewUpdate, postCommentCount, setPostCommentCount } = props;
+  const { postId, userEmail, newUpdate, setNewUpdate, postCommentCount, setPostCommentCount, replyingCommentId } =
+    props;
 
   const [nickname, setNickname] = useState<string>(userEmail || '');
   const [password, setPassword] = useState<string>('');
@@ -58,10 +59,9 @@ const CommentForm = (props: CommentFormPropsInterface) => {
     // input이 유효한지 검사합니다.
     if (!checkValidInput()) return;
 
-    const commentForm: CommentFormInterface = { nickname, password, comment, title };
-
     try {
       // POST 요청을 보냅니다.
+      const commentForm: CommentFormInterface = { nickname, password, comment, replyingCommentId };
       const res = await postCommentApi(postId, commentForm);
 
       // 댓글 작성요청 성공 시 실행할 함수
@@ -109,10 +109,12 @@ const CommentForm = (props: CommentFormPropsInterface) => {
             <CustomInput placeholder='비밀번호' inputType='password' {...passwordInputProps} />
           </div>
         )}
-        <CustomTextarea className={styles.textarea} placeholder='댓글을 입력하세요' {...commentInputProps} />
-        <button className={styles.writeCommentButton} type='submit'>
-          댓글 작성
-        </button>
+        <div className={styles.commentBox}>
+          <CustomTextarea className={styles.textarea} placeholder='댓글을 입력하세요' {...commentInputProps} />
+          <button className={styles.writeCommentButton} type='submit'>
+            댓글 작성
+          </button>
+        </div>
       </form>
     </div>
   );

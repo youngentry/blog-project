@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { CommentInterface, CommentListPropsInterface } from '@/types/types';
+import { CommentInterface, CommentFormPropsInterface } from '@/types/types';
 import useCommentList from '@/hooks/useCommentList';
 
 import styles from './CommentList.module.scss';
@@ -15,11 +15,12 @@ import CommentItemBottom from '../CommentItemBottom/CommentItemBottom';
 const CommentList = ({
   postId,
   newUpdate,
+  setNewUpdate,
   userEmail,
   postEmail,
   postCommentCount,
   setPostCommentCount,
-}: CommentListPropsInterface) => {
+}: CommentFormPropsInterface) => {
   const [editCommentInput, setEditCommentInput] = useState<string>(''); // 수정 input
   const [editingCommentId, setEditingCommentId] = useState<string>(''); // 수정중인 댓글 ObjectId
 
@@ -49,6 +50,17 @@ const CommentList = ({
     setEditCommentInput,
   };
 
+  // 댓글의 답글용 form props
+  const commentFormProps = {
+    postId,
+    userEmail,
+    postEmail,
+    postCommentCount,
+    setPostCommentCount,
+    newUpdate,
+    setNewUpdate,
+  };
+
   return (
     <ul className={styles.commentList}>
       {commentList &&
@@ -70,7 +82,7 @@ const CommentList = ({
                   comment={comment}
                 />
                 <CommentItemBody {...commentItemBodyProps} commentId={commentId} comment={comment} />
-                <CommentItemBottom date={date} />
+                <CommentItemBottom {...commentFormProps} date={date} commentId={commentId} />
               </div>
             </li>
           );
