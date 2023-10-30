@@ -43,6 +43,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
     password,
     comment,
     parentCommentId,
+    depth,
     replyToNickname,
     replyToEmail,
   }: CommentFormInterface = data;
@@ -81,7 +82,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
     date: new Date(), // 작성 시간
     isLoggedIn: !!token, // 게스트 댓글 or 유저 댓글 여부
     parentCommentId: parentCommentId || null, // 어느 댓글 id에 답글을 달지
-    depth: (parentCommentId && 1) || 0,
+    depth: parentCommentId ? (depth || 0) + 1 : 0,
     replyToNickname, // 답글 작성자 닉네임
     replyToEmail, // 답글 작성자 이메일
   };

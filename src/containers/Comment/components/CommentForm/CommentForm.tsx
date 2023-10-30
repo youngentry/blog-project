@@ -23,6 +23,7 @@ const CommentForm = (props: CommentFormPropsInterface) => {
     postCommentCount,
     setPostCommentCount,
     parentCommentId,
+    depth,
     replyToNickname,
     replyToEmail,
     setReplyingCommentId,
@@ -79,6 +80,7 @@ const CommentForm = (props: CommentFormPropsInterface) => {
         password,
         comment,
         parentCommentId,
+        depth,
         replyToNickname,
         replyToEmail,
       };
