@@ -54,7 +54,7 @@ export interface CommentInterface extends CommentFormInterface {
 // 댓글 CommentFormProps 컴포넌트 props
 export interface CommentFormPropsInterface {
   postId: string;
-  postTitle: string;
+  postTitle?: string;
   newUpdate: boolean;
   userEmail: string;
   postEmail?: string;

@@ -69,7 +69,11 @@ const CommentList = ({
             commentItem;
           const commentId = String(_id); // key에 할당하기 위해 직렬화합니다.
           return (
-            <li key={commentId} className={`${styles.commentItem}`} style={{ paddingLeft: `${0.5 + depth * 4}rem` }}>
+            <li
+              key={commentId}
+              className={`${styles.commentItem}`}
+              style={{ paddingLeft: `${0.5 + (depth || 0) * 4}rem` }}
+            >
               <div className={styles.thumbnail}>
                 <UserProfile isLoggedIn={isLoggedIn} />
               </div>

@@ -23,7 +23,6 @@ const CommentForm = (props: CommentFormPropsInterface) => {
     postCommentCount,
     setPostCommentCount,
     parentCommentId,
-    depth,
     replyToNickname,
     replyToEmail,
     setReplyingCommentId,
@@ -75,7 +74,7 @@ const CommentForm = (props: CommentFormPropsInterface) => {
     try {
       // POST 요청을 보냅니다.
       const commentForm: CommentFormInterface = {
-        postTitle,
+        postTitle: postTitle || '',
         nickname,
         password,
         comment,
