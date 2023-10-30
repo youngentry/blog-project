@@ -16,8 +16,9 @@ import CustomTextarea from '@/components/inputs/CustomTextarea/CustomTextarea';
 const CommentForm = (props: CommentFormPropsInterface) => {
   const {
     postId,
-    userEmail,
+    postTitle,
     newUpdate,
+    userEmail,
     setNewUpdate,
     postCommentCount,
     setPostCommentCount,
@@ -74,13 +75,13 @@ const CommentForm = (props: CommentFormPropsInterface) => {
     try {
       // POST 요청을 보냅니다.
       const commentForm: CommentFormInterface = {
+        postTitle,
         nickname,
         password,
         comment,
         parentCommentId,
         replyToNickname,
         replyToEmail,
-        depth: depth || 0,
       };
       const res = await postCommentApi(postId, commentForm);
 

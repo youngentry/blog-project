@@ -31,11 +31,12 @@ export interface PostContentsInterface {
 
 // comment form
 export interface CommentFormInterface {
+  postTitle: string;
   nickname: string;
   password: string;
   comment: string;
   parentCommentId?: string | null;
-  depth: number;
+  depth?: number;
   replyToNickname?: string;
   replyToEmail?: string;
 }
@@ -44,6 +45,7 @@ export interface CommentFormInterface {
 export interface CommentInterface extends CommentFormInterface {
   _id?: ObjectId;
   parentId: number;
+  postTitle: string;
   author: string;
   date: Date;
   isLoggedIn: boolean;
@@ -52,6 +54,7 @@ export interface CommentInterface extends CommentFormInterface {
 // 댓글 CommentFormProps 컴포넌트 props
 export interface CommentFormPropsInterface {
   postId: string;
+  postTitle: string;
   newUpdate: boolean;
   userEmail: string;
   postEmail?: string;
