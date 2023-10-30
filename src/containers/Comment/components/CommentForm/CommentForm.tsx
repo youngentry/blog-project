@@ -14,8 +14,19 @@ import CustomTextarea from '@/components/inputs/CustomTextarea/CustomTextarea';
 // 댓글 입력 폼입니다.
 // 비로그인 상태에서는 nickname, password input이 나타납니다.
 const CommentForm = (props: CommentFormPropsInterface) => {
-  const { postId, userEmail, newUpdate, setNewUpdate, postCommentCount, setPostCommentCount, replyingCommentId } =
-    props;
+  const {
+    postId,
+    userEmail,
+    newUpdate,
+    setNewUpdate,
+    postCommentCount,
+    setPostCommentCount,
+    parentCommentId,
+    depth,
+    replyToNickname,
+    replyToEmail,
+    setReplyingCommentId,
+  } = props;
 
   const [nickname, setNickname] = useState<string>(userEmail || '');
   const [password, setPassword] = useState<string>('');
@@ -46,6 +57,7 @@ const CommentForm = (props: CommentFormPropsInterface) => {
     setComment('');
     setNickname('');
     setPassword('');
+    if (setReplyingCommentId) setReplyingCommentId(null);
 
     // client component 업데이트
     setNewUpdate(!newUpdate);
@@ -61,7 +73,15 @@ const CommentForm = (props: CommentFormPropsInterface) => {
 
     try {
       // POST 요청을 보냅니다.
-      const commentForm: CommentFormInterface = { nickname, password, comment, replyingCommentId };
+      const commentForm: CommentFormInterface = {
+        nickname,
+        password,
+        comment,
+        parentCommentId,
+        replyToNickname,
+        replyToEmail,
+        depth: depth || 0,
+      };
       const res = await postCommentApi(postId, commentForm);
 
       // 댓글 작성요청 성공 시 실행할 함수

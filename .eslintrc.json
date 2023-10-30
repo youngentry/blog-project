@@ -130,6 +130,7 @@
     "no-console": "off",
     "no-alert": "off",
     "no-nested-ternary": "off",
+    "no-restricted-syntax": "off",
     "camelcase": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-shadow": ["error"],

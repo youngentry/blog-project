@@ -37,7 +37,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
 
   const { MIN_NICKNAME, MIN_PASSWORD, MIN_COMMENT, MAX_NICKNAME, MAX_PASSWORD, MAX_COMMENT } = COMMENT_FORM_LENGTH;
 
-  const { nickname, password, comment, replyingCommentId }: CommentFormInterface = data;
+  const { nickname, password, comment, parentCommentId, replyToNickname, replyToEmail }: CommentFormInterface = data;
 
   // nickname또는 password를 입력했는지 검사합니다.
   if (!token && (nickname.length < MIN_NICKNAME || password.length < MIN_PASSWORD)) {
@@ -71,23 +71,17 @@ export const POST = async (req: NextRequest, { params }: Params) => {
     comment, // 댓글 내용
     date: new Date(), // 작성 시간
     isLoggedIn: !!token, // 게스트 댓글 or 유저 댓글 여부
-    replies: [],
+    parentCommentId: parentCommentId || null, // 어느 댓글 id에 답글을 달지
+    depth: (parentCommentId && 1) || 0,
+    replyToNickname, // 답글 작성자 닉네임
+    replyToEmail, // 답글 작성자 이메일
   };
 
   // 댓글 작성 결과
   const db = (await connectDB).db('blog');
   const commentsCollection = db.collection<CommentInterface>('comments');
 
-  let updateResult: any | null = null;
-  // 댓글의 "답글" 작성 로직
-  if (replyingCommentId) {
-    const filter = { _id: new ObjectId(replyingCommentId) };
-    const update = { $push: { replies: saveData } };
-    updateResult = await commentsCollection.updateOne(filter, update);
-    // "일반 댓글" 작성 로직
-  } else {
-    updateResult = await commentsCollection.insertOne({ ...saveData });
-  }
+  const updateResult = await commentsCollection.insertOne({ ...saveData });
 
   // 게시물의 댓글 갯수를 +1 업데이트 합니다.
   const postsCollection = db.collection<PostInterface>('posts');

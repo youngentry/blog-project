@@ -65,10 +65,11 @@ const CommentList = ({
     <ul className={styles.commentList}>
       {commentList &&
         commentList.map((commentItem: CommentInterface) => {
-          const { comment, date, isLoggedIn, nickname, author, _id } = commentItem;
+          const { comment, date, isLoggedIn, nickname, author, _id, depth, replyToNickname, parentCommentId } =
+            commentItem;
           const commentId = String(_id); // key에 할당하기 위해 직렬화합니다.
           return (
-            <li key={commentId} className={`${styles.commentItem}`}>
+            <li key={commentId} className={`${styles.commentItem}`} style={{ paddingLeft: `${0.5 + depth * 4}rem` }}>
               <div className={styles.thumbnail}>
                 <UserProfile isLoggedIn={isLoggedIn} />
               </div>
@@ -81,8 +82,21 @@ const CommentList = ({
                   author={author}
                   comment={comment}
                 />
-                <CommentItemBody {...commentItemBodyProps} commentId={commentId} comment={comment} />
-                <CommentItemBottom {...commentFormProps} date={date} commentId={commentId} />
+                <CommentItemBody
+                  {...commentItemBodyProps}
+                  commentId={commentId}
+                  comment={comment}
+                  replyToNickname={replyToNickname}
+                />
+                <CommentItemBottom
+                  {...commentFormProps}
+                  date={date}
+                  commentId={commentId}
+                  depth={depth}
+                  replyToNickname={nickname}
+                  replyToEmail={author}
+                  parentCommentId={parentCommentId || String(_id)}
+                />
               </div>
             </li>
           );

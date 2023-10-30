@@ -24,6 +24,10 @@ const CommentItemBottom = (props: PropsInterface) => {
     setNewUpdate,
     date,
     commentId,
+    depth,
+    replyToNickname,
+    replyToEmail,
+    parentCommentId,
   } = props;
 
   const [replyingCommentId, setReplyingCommentId] = useState<string | null>(null);
@@ -38,6 +42,11 @@ const CommentItemBottom = (props: PropsInterface) => {
     newUpdate,
     setNewUpdate,
     replyingCommentId,
+    depth,
+    replyToNickname,
+    replyToEmail,
+    parentCommentId,
+    setReplyingCommentId,
   };
 
   const toggleReplyCommentButtonProps = {

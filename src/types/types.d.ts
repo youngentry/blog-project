@@ -34,7 +34,10 @@ export interface CommentFormInterface {
   nickname: string;
   password: string;
   comment: string;
-  replyingCommentId?: string | null;
+  parentCommentId?: string | null;
+  depth: number;
+  replyToNickname?: string;
+  replyToEmail?: string;
 }
 
 // comment
@@ -44,7 +47,6 @@ export interface CommentInterface extends CommentFormInterface {
   author: string;
   date: Date;
   isLoggedIn: boolean;
-  replies: CommentFormInterface[];
 }
 
 // 댓글 CommentFormProps 컴포넌트 props
@@ -56,7 +58,11 @@ export interface CommentFormPropsInterface {
   postCommentCount: number;
   setPostCommentCount: Dispatch<SetStateAction<number>>;
   setNewUpdate: Dispatch<SetStateAction<boolean>>;
-  replyingCommentId?: string | null;
+  parentCommentId?: string | null;
+  depth?: number;
+  replyToNickname?: string;
+  replyToEmail?: string;
+  setReplyingCommentId?: Dispatch<SetStateAction<string | null>>;
 }
 
 // subCategory

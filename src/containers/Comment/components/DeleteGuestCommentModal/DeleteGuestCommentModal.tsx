@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 
 import { COMMENT_FORM_LENGTH } from '@/constants/LENGTH';
 import { CustomInputPropsInterface } from '@/types/types';

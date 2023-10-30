@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 import { getCommentsDataApi } from '@/services/commentsFetch';
 import { CommentInterface } from '@/types/types';
+import { sortCommentList } from '@/utils/sortCommentList';
 
 const useCommentList = (postId: string, newUpdate: boolean = false) => {
   const [commentList, setCommentList] = useState<CommentInterface[]>([]); // API 요청하여 조회할 댓글 목록
@@ -13,10 +14,11 @@ const useCommentList = (postId: string, newUpdate: boolean = false) => {
     (async () => {
       try {
         // GET 요청을 보냅니다.
-        const res: CommentInterface[] | false = await getCommentsDataApi(postId);
+        const comments: CommentInterface[] | false = await getCommentsDataApi(postId);
         // 작성 요청 성공 시 불러온 댓글을 state에 저장합니다.
-        if (res) {
-          setCommentList(res);
+        if (comments) {
+          const sortedCommentList = sortCommentList(comments);
+          setCommentList(sortedCommentList);
         }
       } catch (err) {
         console.error(err);
