@@ -24,17 +24,20 @@ const CustomTextarea = ({
     dispatch(inputValue);
   };
 
-  // DB에 injection 공격이 예상될 경우에는 injectionProtected 핸들러를 실행합니다.
-  const handleProtectedOnchange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
-    const inputValue = e.target.value;
+  // injectionProtected 속성이 true일 때 검사합니다.
+  const handleProtectedOnchange = useCallback(
+    (e: ChangeEvent<HTMLTextAreaElement>) => {
+      const inputValue = e.target.value;
 
-    if (isDangerousLetter(inputValue)) {
-      alert('보안: 특수문자(${}[]().)는 입력 할수 없습니다.');
-      inputValue.replace(/[${}[\]().]/g, '');
-    } else {
-      dispatch(e.target.value);
-    }
-  }, []);
+      if (isDangerousLetter(inputValue)) {
+        alert('보안: 특수문자(${}[]().)는 입력 할수 없습니다.');
+        inputValue.replace(/[${}[\]().]/g, '');
+      } else {
+        dispatch(e.target.value);
+      }
+    },
+    [dispatch],
+  );
 
   return (
     <textarea

@@ -14,6 +14,7 @@ interface PropsInterface {
   postId: string;
   commentId: string;
   comment: string;
+  replyToNickname?: string;
   editingCommentId: string;
   editCommentInput: string;
   setEditingCommentId: Dispatch<SetStateAction<string>>;
@@ -27,6 +28,7 @@ const CommentItemBody = (props: PropsInterface) => {
     postId,
     commentId,
     comment, // 댓글 본문
+    replyToNickname,
     editingCommentId,
     setEditingCommentId,
     editCommentInput,
@@ -64,7 +66,10 @@ const CommentItemBody = (props: PropsInterface) => {
   return (
     <div className={`${styles.body}`}>
       <div className={`${styles.content} ${editingCommentId === commentId && 'hide'}`}>
-        <p className={`${styles.text} `}>{comment}</p>
+        <p className={`${styles.text} `}>
+          {replyToNickname && <span className={`${styles.replyToNickname}`}>@{replyToNickname}</span>}
+          {comment}
+        </p>
       </div>
       <div className={`${styles.editForm} ${editingCommentId === commentId && 'visible'}`}>
         <CustomTextarea className={`${styles.textarea}`} placeholder='댓글을 입력하세요.' {...editCommentInputProps} />

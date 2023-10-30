@@ -31,7 +31,7 @@ const ManageCommentItem = (props: ManageCommentItemPropsInterface) => {
         <div className={styles.likedDate}>{day}</div>
         <ul className={styles.postList}>
           {commentsByOneDay.map((commentData: CommentInterface) => {
-            const { comment, parentId, title, date, _id } = commentData;
+            const { comment, parentId, postTitle, date, _id } = commentData;
             return (
               <li key={String(_id)} className={styles.postItem}>
                 <div className={styles.itemHead}>
@@ -44,7 +44,7 @@ const ManageCommentItem = (props: ManageCommentItemPropsInterface) => {
                       rel='noopener noreferrer'
                       prefetch={false}
                     >
-                      {title}
+                      {postTitle}
                       <BsArrowUpRightSquare />
                     </Link>
                     <span>에 남긴 댓글</span>

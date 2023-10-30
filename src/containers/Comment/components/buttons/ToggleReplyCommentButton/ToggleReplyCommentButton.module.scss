@@ -1,0 +1,7 @@
+@import '@/styles/mixins/hover.scss';
+
+.toggleReplyCommentButton {
+  @include hoverText();
+  font-size: var(--ft-14);
+  color: var(--color-text-week);
+}

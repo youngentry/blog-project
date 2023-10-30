@@ -31,36 +31,41 @@ export interface PostContentsInterface {
 
 // comment form
 export interface CommentFormInterface {
-  title: string;
+  postTitle: string;
   nickname: string;
   password: string;
   comment: string;
+  parentCommentId?: string | null;
+  depth?: number;
+  replyToNickname?: string;
+  replyToEmail?: string;
 }
 
 // comment
 export interface CommentInterface extends CommentFormInterface {
   _id?: ObjectId;
   parentId: number;
+  postTitle: string;
   author: string;
   date: Date;
-  thumbnail: string;
   isLoggedIn: boolean;
 }
 
-// 댓글 CommentListProps 컴포넌트 props
-export interface CommentListPropsInterface {
+// 댓글 CommentFormProps 컴포넌트 props
+export interface CommentFormPropsInterface {
   postId: string;
+  postTitle?: string;
   newUpdate: boolean;
   userEmail: string;
   postEmail?: string;
   postCommentCount: number;
   setPostCommentCount: Dispatch<SetStateAction<number>>;
-}
-
-// 댓글 CommentFormProps 컴포넌트 props
-export interface CommentFormPropsInterface extends CommentListPropsInterface {
-  title: string;
   setNewUpdate: Dispatch<SetStateAction<boolean>>;
+  parentCommentId?: string | null;
+  depth?: number;
+  replyToNickname?: string;
+  replyToEmail?: string;
+  setReplyingCommentId?: Dispatch<SetStateAction<string | null>>;
 }
 
 // subCategory

@@ -11,17 +11,16 @@
     }
     .postList {
       margin-bottom: 1rem;
-      padding: 1.5rem;
-      border-bottom: var(--1-solid);
-
-      &:last-child {
-        border-bottom: none;
-      }
 
       .postItem {
+        padding: 1rem;
         min-width: 40rem;
+        border-bottom: var(--1-solid);
+        &:last-child {
+          border-bottom: none;
+        }
         .itemHead {
-          margin-bottom: 1.5rem;
+          margin-bottom: 1rem;
           display: flex;
           text-align: center;
           justify-content: space-between;
@@ -33,6 +32,7 @@
             font-size: var(--ft-17);
 
             .postLink {
+              display: flex;
               margin-right: 0.25rem;
               @include hoverText();
             }

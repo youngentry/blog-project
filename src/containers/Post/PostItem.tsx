@@ -61,10 +61,10 @@ const PostItem = ({ postId, userEmail }: { postId: string; userEmail: string }) 
 
   // 댓글
   const commentProps = {
+    postId,
     userEmail,
     postEmail: email,
-    postId,
-    title,
+    postTitle: title,
     author,
     postCommentCount,
     setPostCommentCount,

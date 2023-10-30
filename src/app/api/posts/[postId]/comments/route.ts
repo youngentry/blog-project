@@ -37,7 +37,15 @@ export const POST = async (req: NextRequest, { params }: Params) => {
 
   const { MIN_NICKNAME, MIN_PASSWORD, MIN_COMMENT, MAX_NICKNAME, MAX_PASSWORD, MAX_COMMENT } = COMMENT_FORM_LENGTH;
 
-  const { nickname, password, comment, title }: CommentFormInterface = data;
+  const {
+    postTitle,
+    nickname,
+    password,
+    comment,
+    parentCommentId,
+    replyToNickname,
+    replyToEmail,
+  }: CommentFormInterface = data;
 
   // nickname또는 password를 입력했는지 검사합니다.
   if (!token && (nickname.length < MIN_NICKNAME || password.length < MIN_PASSWORD)) {
@@ -63,21 +71,26 @@ export const POST = async (req: NextRequest, { params }: Params) => {
 
   // DB에 저장할 데이터
   const saveData: CommentInterface = {
-    title,
+    _id: new ObjectId(),
     parentId: Number(postId), // 게시물 번호
+    postTitle, // 게시물 제목
     nickname: token ? (token.name as string) : nickname, // 작성자 닉네임
     author: token ? (token.email as string) : '', // 로그인 유저인 경우에는 유저 email을 저장
     password: token ? '' : hashedPassword, // 게스트 댓글의 경우에는 댓글 비밀번호를 저장
     comment, // 댓글 내용
     date: new Date(), // 작성 시간
-    thumbnail: '', // 댓글 옆에 표시되는 이미지 주소
     isLoggedIn: !!token, // 게스트 댓글 or 유저 댓글 여부
+    parentCommentId: parentCommentId || null, // 어느 댓글 id에 답글을 달지
+    depth: (parentCommentId && 1) || 0,
+    replyToNickname, // 답글 작성자 닉네임
+    replyToEmail, // 답글 작성자 이메일
   };
 
   // 댓글 작성 결과
   const db = (await connectDB).db('blog');
   const commentsCollection = db.collection<CommentInterface>('comments');
-  const insertResult = await commentsCollection.insertOne({ ...saveData });
+
+  const updateResult = await commentsCollection.insertOne({ ...saveData });
 
   // 게시물의 댓글 갯수를 +1 업데이트 합니다.
   const postsCollection = db.collection<PostInterface>('posts');
@@ -87,7 +100,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
   );
 
   // 업데이트 결과 응답
-  if (insertResult && commentCountUpdateResult) {
+  if (updateResult && commentCountUpdateResult) {
     return NextResponse.json({ id: postId }, { status: 200 }); // 응답에 게시물 id를 포함하여 redirect할 수 있도록 합니다.
   }
   return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });

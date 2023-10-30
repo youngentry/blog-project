@@ -11,14 +11,14 @@
     }
     .postList {
       margin-bottom: 1rem;
-      padding: 1.5rem;
-      border-bottom: var(--1-solid);
-
-      &:last-child {
-        border-bottom: none;
-      }
 
       .postItem {
+        padding: 1rem;
+        min-width: 40rem;
+        border-bottom: var(--1-solid);
+        &:last-child {
+          border-bottom: none;
+        }
         .itemHead {
           margin-bottom: 1.5rem;
           display: flex;
