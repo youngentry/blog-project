@@ -18,7 +18,7 @@ export const GET = async (req: NextRequest, { params }: Params) => {
 
   // 댓글 조회 결과
   const foundResult: CommentInterface[] = await commentsCollection
-    .find({ parentId: Number(postId) }, { projection: { password: 0, parentId: 0 } })
+    .find({ parentId: Number(postId) }, { projection: { password: 0 } })
     .toArray();
 
   // 댓글과 정보와 status를 응답합니다.
