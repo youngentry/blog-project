@@ -47,10 +47,11 @@
     button {
       height: 2rem;
       border: none;
-      background: var(--color-gray-e);
+      color: var(--color-f);
+      background: var(--color-blue);
       border-radius: 0.25rem;
       width: 100%;
-      @include hoverBg(var(--color-d));
+      @include hoverBg(var(--color-blue-dark));
     }
   }
 }

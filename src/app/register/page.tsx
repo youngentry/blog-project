@@ -1,10 +1,15 @@
+import { getServerSession } from 'next-auth';
+
 import Register from '@/containers/Register/Register';
 
 // 가입하기 페이지로 라우트합니다.
-const RegisterRouter = () => {
+const RegisterRouter = async () => {
+  const session = await getServerSession();
+  const isLoggedIn = !!session;
+  console.log(session);
   return (
     <div>
-      <Register />
+      <Register isLoggedIn={isLoggedIn} />
     </div>
   );
 };

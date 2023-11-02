@@ -53,25 +53,36 @@ const UserMenu = ({ session }: { session: UserSessionData | null }) => {
             </li>
             <li className={`${styles.myList} `}>
               <ul className={`${styles.myListItemBox} ${styles.menuItem}`}>
-                <GoToListButton linkTo='likes' description='좋아요 한 게시물' />
-                <GoToListButton linkTo='comments' description='작성한 댓글' />
+                <LinkButton linkTo='/manage/likes' description='좋아요 한 게시물' chevron />
+                <LinkButton linkTo='/manage/comments' description='작성한 댓글' chevron />
               </ul>
             </li>
           </>
         )}
-        <li className={`${styles.logout} ${styles.menuItem}`}>{session ? <LogOutButton /> : <LogInButton />}</li>
+        <div className={`${styles.logout} ${styles.menuItem}`}>
+          {session ? (
+            <LogOutButton />
+          ) : (
+            <>
+              <LogInButton />
+              <LinkButton linkTo='/register' description='회원가입' />
+            </>
+          )}
+        </div>
       </ul>
     </div>
   );
 };
 
-const GoToListButton = ({ linkTo, description }: { linkTo: string; description: string }) => {
+const LinkButton = ({ linkTo, description, chevron }: { linkTo: string; description: string; chevron?: boolean }) => {
   return (
     <li className={styles.myListItem}>
-      <Link href={`/manage/${linkTo}`}>{description}</Link>
-      <i>
-        <BsChevronRight />
-      </i>
+      <Link href={`${linkTo}`}>{description}</Link>
+      {chevron && (
+        <i>
+          <BsChevronRight />
+        </i>
+      )}
     </li>
   );
 };

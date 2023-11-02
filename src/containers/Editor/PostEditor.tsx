@@ -41,8 +41,8 @@ const PostEditor = ({ canEdit }: { canEdit?: boolean }) => {
   const isExistPost = postId && !loading && !postData; // 수정할 게시물 데이터 검사
   const redirectToPostLink = `/posts/${postId}`;
   const redirectToCategoryLink = `/category`;
-  useAlertAndRedirect(isEditableUser, ALERT_MESSAGE.NOT_EDITABLE, redirectToPostLink);
-  useAlertAndRedirect(isExistPost, ALERT_MESSAGE.NO_POST, redirectToCategoryLink);
+  useAlertAndRedirect(isEditableUser, redirectToPostLink, ALERT_MESSAGE.NOT_EDITABLE);
+  useAlertAndRedirect(isExistPost, redirectToCategoryLink, ALERT_MESSAGE.NO_POST);
 
   // Editor Head props
   const editorHeadProps = {
