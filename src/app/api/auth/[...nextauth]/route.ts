@@ -1,11 +1,12 @@
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
-import NextAuth, { NextAuthOptions, Session } from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 import { JWT } from 'next-auth/jwt';
 
 import { connectDB } from '@/utils/db/db';
+import { CustomJWT, CustomSession, CustomUser } from '@/types/session';
 
 const githubSocial =
   process.env.NODE_ENV === 'development'
@@ -24,7 +25,10 @@ export const authOptions: NextAuthOptions = {
     GithubProvider({
       clientId: githubSocial.clientId,
       clientSecret: githubSocial.clientSecret,
-      // profile(profile: any) { }, // 프로필 설정 기능 검색
+      profile(profile) {
+        const { id, name, email, image } = profile;
+        return { id, name, email, image, role: 'tester' };
+      },
     }),
 
     CredentialsProvider({
@@ -71,11 +75,16 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     // 4. jwt 생성 시 실행되는 코드
-    jwt: async ({ token }: { token: JWT }) => {
+    jwt: ({ token, user }: { token: JWT; user: CustomUser }) => {
+      if (user) token.role = user.role;
       return token;
     },
     // 5. 유저 세션이 조회될 때 session에 user 정보를 저장하여 이용할 수 있도록 함
-    session: async ({ session }: { session: Session }) => {
+    session: ({ session, token }: { session: CustomSession; token: CustomJWT }) => {
+      if (session?.user) {
+        session.user.role = token.role;
+        return session;
+      }
       return session;
     },
   },

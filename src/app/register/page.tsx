@@ -6,7 +6,6 @@ import Register from '@/containers/Register/Register';
 const RegisterRouter = async () => {
   const session = await getServerSession();
   const isLoggedIn = !!session;
-  console.log(session);
   return (
     <div>
       <Register isLoggedIn={isLoggedIn} />

@@ -5,7 +5,7 @@ import { BsChevronRight } from 'react-icons/bs';
 import Link from 'next/link';
 
 import useClickOutside from '@/hooks/useClickOutside';
-import { UserSessionData } from '@/types/session';
+import { CustomSession } from '@/types/session';
 
 import styles from './UserMenu.module.scss';
 import UserProfile from '@/components/UserProfile/UserProfile';
@@ -15,10 +15,10 @@ import Notice from '@/components/notices/Notice';
 
 /**
  * 블로그 유저 메뉴 컴포넌트입니다.
- * @param {UserSessionData} session
+ * @param {CustomSession} session
  * @returns
  */
-const UserMenu = ({ session }: { session: UserSessionData | null }) => {
+const UserMenu = ({ session }: { session: CustomSession | null }) => {
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false); // 메뉴 visible 여부
