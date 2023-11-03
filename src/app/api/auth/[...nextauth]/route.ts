@@ -20,10 +20,6 @@ const githubSocial =
 
 // next-auth 로그인 설정입니다.
 export const authOptions: NextAuthOptions = {
-  pages: {
-    newUser: '/auth/new-user',
-  },
-
   providers: [
     GithubProvider({
       clientId: githubSocial.clientId,
