@@ -16,4 +16,7 @@ export interface CustomUser extends DefaultUser {
 
 export interface CustomJWT extends DefaultJWT {
   role?: string | null;
+  iat?: number;
+  exp?: number;
+  jti?: string;
 }

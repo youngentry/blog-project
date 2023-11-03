@@ -8,6 +8,7 @@ import { CommentInterface, CommentFormInterface, PostInterface } from '@/types/t
 import { connectDB } from '@/utils/db/db';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { COMMENT_FORM_LENGTH } from '@/constants/LENGTH';
+import { CustomJWT } from '@/types/session';
 
 // 댓글 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest, { params }: Params) => {
@@ -109,7 +110,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
 
 // 댓글 수정 API 입니다.
 export const PATCH = async (req: NextRequest, { params }: Params) => {
-  const token: JWT | null = await getToken({ req }); // 유저 정보
+  const token: CustomJWT | null = await getToken({ req }); // 유저 정보
   const { postId } = params; // 게시물 번호
 
   const data = await req.json();
@@ -135,7 +136,7 @@ export const PATCH = async (req: NextRequest, { params }: Params) => {
 
   // 로그인 유저일 경우 블로그 관리자가 아니거나, 동일한 작성자가 아닐 경우 400 응답
   if (token) {
-    const isBlogAdmin = checkBlogAdmin(token.email as string);
+    const isBlogAdmin = checkBlogAdmin(token.role);
     const isSameAuthor = token.email === foundResult.author;
     if (!isBlogAdmin && !isSameAuthor) {
       return NextResponse.json({ message: '댓글 수정: 수정 권한이 없습니다.' }, { status: 400 });
@@ -174,7 +175,7 @@ export const DELETE = async (req: NextRequest, { params }: Params) => {
 
   // 로그인 유저일 경우 블로그 관리자가 아니거나, 동일한 작성자가 아닐 경우 400 응답
   if (token) {
-    const isBlogAdmin = checkBlogAdmin(token.email as string);
+    const isBlogAdmin = checkBlogAdmin(token.role as string);
     const isSameAuthor = token.email === foundResult.author;
     if (!isBlogAdmin && !isSameAuthor) {
       return NextResponse.json({ message: '댓글 삭제: 수정 권한이 없습니다.' }, { status: 400 });

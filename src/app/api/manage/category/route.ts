@@ -3,8 +3,9 @@ import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 
 import { connectDB } from '@/utils/db/db';
-import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { CommonCategoryInterface } from '@/types/types';
+import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
+import { CustomJWT } from '@/types/session';
 
 // 카테고리 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest) => {
@@ -50,15 +51,16 @@ export const POST = async (req: NextRequest) => {
   const db = (await connectDB).db('blog');
   const categoryCollection = db.collection('categories');
 
-  const token = await getToken({ req }); // 로그인 유저 정보
+  const token: CustomJWT | null = await getToken({ req }); // 로그인 유저 정보
+
   // 로그인 되지 않은 사용자 경고
   if (!token) {
     return NextResponse.json({ message: '카테고리 편집: 유효하지 않은 접근입니다.' }, { status: 400 });
   }
 
   // admin이 아닌 사용자 경고
-  const { email } = token;
-  if (!checkBlogAdmin(email as string)) {
+  const isBlogAdmin = checkBlogAdmin(token.role);
+  if (!isBlogAdmin) {
     return NextResponse.json({ message: '카테고리 편집: 유효하지 않은 접근입니다.' }, { status: 400 });
   }
 

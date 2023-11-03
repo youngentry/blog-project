@@ -16,6 +16,7 @@ const CommentList = ({
   postId,
   newUpdate,
   setNewUpdate,
+  userRole,
   userEmail,
   postEmail,
   postCommentCount,
@@ -30,6 +31,7 @@ const CommentList = ({
   const commentItemHeadProps = {
     commentList,
     setCommentList,
+    userRole,
     userEmail,
     postEmail,
     postId,
@@ -53,6 +55,7 @@ const CommentList = ({
   // 댓글의 답글용 form props
   const commentFormProps = {
     postId,
+    userRole,
     userEmail,
     postEmail,
     postCommentCount,

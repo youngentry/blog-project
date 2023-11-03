@@ -56,6 +56,7 @@ export interface CommentFormPropsInterface {
   postId: string;
   postTitle?: string;
   newUpdate: boolean;
+  userRole: string | null | undefined;
   userEmail: string;
   postEmail?: string;
   postCommentCount: number;

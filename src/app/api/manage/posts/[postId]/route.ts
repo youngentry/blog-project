@@ -1,10 +1,11 @@
-import { JWT, getToken } from 'next-auth/jwt';
+import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
 import { PostInterface } from '@/types/types';
 import { connectDB } from '@/utils/db/db';
 import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
+import { CustomJWT } from '@/types/session';
 
 // 게시물 삭제 API 입니다.
 export const DELETE = async (req: NextRequest, { params }: Params) => {
@@ -12,7 +13,7 @@ export const DELETE = async (req: NextRequest, { params }: Params) => {
   const { postId } = params;
 
   // 로그인 유저정보 확인
-  const token: JWT | null = await getToken({ req });
+  const token: CustomJWT | null = await getToken({ req });
   if (!token) {
     return NextResponse.json({ message: '게시물 삭제: 로그인 되지 않은 유저입니다.' }, { status: 400 });
   }
@@ -24,7 +25,7 @@ export const DELETE = async (req: NextRequest, { params }: Params) => {
 
   const foundPost: PostInterface | null = await postCollection.findOne({ id: Number(postId) }); // 조회한 게시물
   const postAuthorEmail = foundPost?.email; // 게시물 작성자 email
-  const isBlogAdmin: boolean = checkBlogAdmin(userEmail); // 관리자 여부 확인
+  const isBlogAdmin: boolean = checkBlogAdmin(token.role); // 관리자 여부 확인
 
   // 로그인 유저와 게시글 작성자가 다른지 확인 && 블로그 관리자가 아닌지 확인
   if (userEmail !== postAuthorEmail && !isBlogAdmin) {
