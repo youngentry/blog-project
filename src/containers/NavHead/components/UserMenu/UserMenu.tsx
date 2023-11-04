@@ -53,8 +53,8 @@ const UserMenu = ({ session }: { session: CustomSession | null }) => {
             </li>
             <li className={`${styles.myList} `}>
               <ul className={`${styles.myListItemBox} ${styles.menuItem}`}>
-                <LinkButton linkTo='/manage/likes' description='좋아요 한 게시물' chevron />
                 <LinkButton linkTo='/manage/comments' description='작성한 댓글' chevron />
+                <LinkButton linkTo='/manage/likes' description='좋아요 한 게시물' chevron />
               </ul>
             </li>
           </>

@@ -5,7 +5,7 @@ import styles from './ManageBlogButton.module.scss';
 
 const ManageBlogButton = () => {
   return (
-    <Link href='/manage/category'>
+    <Link href='/manage/comments'>
       <i className={styles.manageBlogButton}>
         <BsGear />
       </i>
