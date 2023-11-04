@@ -7,8 +7,6 @@ import { CommentInterface } from '@/types/types';
  */
 export const sortCommentList = (comments: CommentInterface[]) => {
   const commentOrderMap = new Map();
-  // 부모가 없는 자식 댓글은 바로 앞페이지에 부모 댓글이 존재하므로
-  // 정렬을 끝낸 뒤에 concat으로 [...remains, ...sortedComments] 형태로 합쳐줍니다.
 
   // Map: {A부모id: [A부모, A자식], B부모id: [B부모, B자식]} 과 같이 정렬
   for (const comment of comments) {

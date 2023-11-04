@@ -71,8 +71,8 @@ export const POST = async (req: NextRequest, { params }: Params) => {
 
   const hashedPassword: string = await hash(password, 10); // 해시화한 비밀번호
 
-  // DB에 저장할 데이터
-  const saveData: CommentInterface = {
+  // DB에 저장할 댓글 데이터
+  const saveCommentData: CommentInterface = {
     _id: new ObjectId(),
     parentId: Number(postId), // 게시물 번호
     postTitle, // 게시물 제목
@@ -92,7 +92,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
   const db = (await connectDB).db('blog');
   const commentsCollection = db.collection<CommentInterface>('comments');
 
-  const updateResult = await commentsCollection.insertOne({ ...saveData });
+  const updateResult = await commentsCollection.insertOne({ ...saveCommentData });
 
   // 게시물의 댓글 갯수를 +1 업데이트 합니다.
   const postsCollection = db.collection<PostInterface>('posts');

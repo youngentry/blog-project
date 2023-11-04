@@ -1,4 +1,4 @@
-# 메신저 대화 분석 시각화 웹사이트
+# 블로그 프로젝트
 
 Next.js 13의 기능 학습과 서버사이드 렌더링 흐름의 이해를 강화하기 위한 블로그 프로젝트.  
 유튜브, 네이버, 티스토리 등의 서비스를 관찰, 분석하여 API를 설계한 뒤 기능을 구현했습니다.
@@ -81,7 +81,7 @@ Next.js 13의 기능 학습과 서버사이드 렌더링 흐름의 이해를 강
 - 회원기능
 
   - next-auth (소셜 로그인 방식, Session 로그인 방식)
-  - next-auth/mongodb-adapter
+  - next-auth/mongodb-adapter (next-auth와 DB연동)
 
 - 웹 에디터
   - react-quill
@@ -113,7 +113,6 @@ form으로 **ID/Password 입력을 받아 회원가입**을 할 수 있도록 �
 🔗 [ID/Password JWT 가입 및 로그인 구현 방법 CredentialsProvider() 알고 보기](https://sakuraop.tistory.com/596)
 
 - 관리자, 테스터, 방문유저, 비로그인 : `권한 분기`
-
 
 회원별로 권한에 따라 **접근 가능한 경로 분기**, 권한에 따라 렌더링되는 컴포넌트를 다르게 하여 **클라이언트가 수행할 수 있는 작업을 분리**하였습니다.
 
@@ -263,7 +262,60 @@ export default LikePostButton;
 
 - 대댓글
 
+답글 기능을 구현하기 위해서 댓글을 작성할 때 `parentCommentId`의 여부에 따라서 **답글인지 아닌지를 구분**할 수 있도록 했습니다. 여기에 `depth`를 추가하여 해당 댓글이 **몇 번째 깊이의 댓글에 대한 답글이 될지에 대한 정보**와, 누구에게 답글을 하는 것인지 시각적인 정보를 더하기 위해서 `replyToNickname`로 **답글 대상 유저의 닉네임이 태그**되도록 했습니다.
+
+```
+  // DB에 저장할 댓글
+  const saveCommentData: CommentInterface = {
+    // ...
+    parentCommentId: parentCommentId || null, // 어느 댓글 id에 답글을 달지
+    depth: parentCommentId ? (depth || 0) + 1 : 0,
+    replyToNickname, // 답글 작성자 닉네임
+  };
+```
+
+하지만 이대로는 depth를 나타내기만 할 뿐, 댓글 작성 순서대로 나열이 되고 있었기 때문에 **부모 댓글과 자식 댓글끼리 묶어줄 필요**가 있었습니다.
+
+훅을 이용하여 댓글 목록을 불러오기 전에 부모-자식 댓글끼리 묶어주는 작업을 위해 `sortCommentList` 함수를 만들었습니다.
+
+```
+export const sortCommentList = (comments: CommentInterface[]) => {
+  const commentOrderMap = new Map();
+
+  // Map: {A부모id: [A부모, A자식], B부모id: [B부모, B자식]} 과 같이 정렬
+  for (const comment of comments) {
+    if (comment.depth === 0) {
+      commentOrderMap.set(comment._id, [comment]); // Map: {A부모id: [A부모]} 추가
+    } else {
+      const parentArray = commentOrderMap.get(comment.parentCommentId);
+      parentArray.push(comment); // 부모 댓글 배열에 [A부모, A자식]과 같이 추가
+    }
+  }
+
+  const sortedComments = Array.from(commentOrderMap.values()).flat(); // 배열 평탄화
+  return sortedComments;
+};
+```
+
+1. 자식 댓글은 부모 댓글이 작성된 뒤에 존재할 수 있다.
+2. 자식 댓글을 자식 댓글끼리 작성된 순서를 반드시 유지하기 때문에, 자식 댓글에 대한 별도의 정렬 작업을 할 필요는 없다.
+3. 부모-자식 묶음끼리의 순서만 유지하면 된다고 판단한다.
+
+이러한 조건에 따라, 작성 순서를 유지하기 위해서 `Map 객체`를 생성한 뒤, 조회한 댓글 데이터를 for문으로 순회하여 `{ {부모A: [부모A,자식1,자식2]}, {부모B: [부모B,자식1,자식2]} }`형태를 만들었습니다.
+
+그리고 이를 배열로 변경한 뒤 평탄화 작업을 통해서 목표 형태를 구현했습니다.
+
 - 계층형 댓글
+
+이렇게 부모-자식꼴로 정렬된 데이터를 `depth`의 깊이에 따라서 댓글 li에 paddingLeft를 주어 몇 번째 depth의 답글인지 렌더링하도록 했습니다.
+
+```
+            <li
+              key={commentId}
+              className={`${styles.commentItem}`}
+              style={{ paddingLeft: `${0.5 + (depth || 0) * 4}rem` }}
+            >
+```
 
 ---
 
