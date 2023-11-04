@@ -225,6 +225,8 @@ const CustomReactQuill = dynamic(
 
 - 게시물 좋아요 : `단일 컴포넌트 단일 기능 원칙에 대한 노력`
 
+게시물의 구성은 티스토리를 참고했습니다.
+
 게시물 좋아요를 별도로 기술한 이유는 **단일 컴포넌트 단일 기능 원칙**에 대해 노력하고 있다는 점을 보여드릴 수 있는 간단한 예시라 생각했기 때문입니다. 프로젝트 전반에 클라이언트와 **인터렉션을 수행하는 기능 컴포넌트는 아래와 같이 개별 컴포넌트로** 나누었습니다.
 
 ```
@@ -249,6 +251,8 @@ export default LikePostButton;
 ![reply-s](https://github.com/youngentry/blog-project/assets/90388461/516dd68b-cf4e-4d0d-8f06-83a55f61db4b)
 
 - 댓글 CRUD : `Atomic Design Pattern 적용 경험을 바탕으로 작업 난이도 낮추기`
+
+댓글 기능은 네이버 댓글을 참고하여 구현했습니다.
 
 댓글 컴포넌트는 관리자, 댓글 작성자, 게스트 등 권한 분기에 따라 포함되는 정보가 많았습니다. 이 때문에 한 파일에 코드가 많아지자 작업이 쉽지 않았습니다. 따라서 이전에 진행한 프로젝트에서 **`Atomic Design Pattern`을 적용해본 경험**을 살려 댓글의 머리, 본문, 꼬리 세 영역을 molecule로 바라보고 리팩토링하는 과정을 통해 **댓글 기능 작업 난이도를 낮출 수 있었습니다.**
 
@@ -308,7 +312,7 @@ export const sortCommentList = (comments: CommentInterface[]) => {
 
 - 계층형 댓글
 
-이렇게 부모-자식꼴로 정렬된 데이터를 `depth`의 깊이에 따라서 댓글 li에 paddingLeft를 주어 몇 번째 depth의 답글인지 렌더링하도록 했습니다.
+이렇게 부모-자식꼴로 정렬된 데이터를 `depth`의 깊이에 따라서 댓글 li에 paddingLeft를 주어 몇 번째 depth에 대한 답글인지 렌더링하도록 했습니다.
 
 ```
 const CommentList = ({
@@ -332,9 +336,9 @@ const CommentList = ({
 
 - 계층형 카테고리
 
-MainCategory의 하위에 SubCategory가 저장되고, 게시물이 SubCategory 정보를 지니도록 했습니다.
+`MainCategory`의 하위에 `SubCategory`가 저장되고, 게시물이 `SubCategory` 정보를 지니도록 했습니다.
 
-MainCategory를 추가하면 하위에 SubCategory를 추가하는 form과 SubCategory 리스트가 나타납니다.
+`MainCategory`를 추가하면 하위에 `SubCategory`를 추가하는 form과 `SubCategory` 리스트가 나타납니다.
 
 ```
     <div className={styles.container}>
@@ -344,14 +348,79 @@ MainCategory를 추가하면 하위에 SubCategory를 추가하는 form과 SubCa
     </div>
 ```
 
-게시물이 작성될 때에는 SubCategory를 반드시 포함하도록 하여, SubCategory별로 몇 개의 게시물을 포함하고 있는지 정보를 알 수 있도록 했습니다.
+게시물이 작성될 때에는 `SubCategory`를 반드시 포함하도록 하여, `SubCategory`별로 몇 개의 게시물을 포함하고 있는지 정보를 알 수 있도록 했습니다.
 
 ---
 
 ### 게시물 검색
 
 - 게시물, 카테고리 단일 검색
-- 게시물 + 카테고리 복합 조건 검색
+
+게시물 검색 버튼과 검색 모달을 한데 묶은 모듈로 만들어, 이 컴포넌트를 어디든 삽입하면 곧바로 게시물 검색 기능을 이용할 수 있도록 만들었습니다.
+
+```
+    <>
+      <SearchModal {...modalProps} />
+      <OpenSearchModalButton {...modalProps} />
+    </>
+```
+
+`ref`로 컴포넌트 바깥을 클릭하면 창이 닫히도록 하는 `hook`을 만들어 검색 모달에 적용시켰습니다.
+
+```
+  useClickOutside(modalRef, false, setIsVisibleModal);
+```
+
+input에 검색어를 입력하고 submit하게 되면 DB에서 해당 검색어를 제목에 포함하는 게시물을 찾거나, 카테고리를 클릭하여 해당 카테고리에 속한 게시물을 검색할 수 있도록 query를 구성했습니다.
+
+```
+   // input에 입력한 값을 title search query로 검색하는 페이지로 이동
+  const GoToSearchResult = () => {
+    if (!searchInput) {
+      window.alert('검색어를 입력해주세요.');
+      return;
+    }
+
+    router.push(`/category?title=${searchInput}`);
+    setIsVisibleModal(false);
+  };
+
+  // 카테고리를 클릭하면 해당 카테고리를 search query로 검색하는 페이지로 이동
+  <Link className={styles.categoryLink} href={`/category?subtitle=${subCategory.title}`}>
+    {subCategory.title}
+  </Link>
+```
+
+- 게시물 + 카테고리 + 작성자 복합 조건 검색
+
+title, SubCategory, author 속성을 복합적으로 검색하는 기능은 url에 직접 입력해 검색이 가능하도록 서버에서 구현해 두었습니다. 꼭 필요한 기능이라 생각되지 않아 컴포넌트로 프론트에 직접 구현은 하지 않았습니다.
+
+```
+    <div className={styles.category}>
+      <Head title={title} subtitle={subtitle} author={author} />
+      {postCards.length ? <CardItem postCards={postCards} /> : <div>게시물이 존재하지 않습니다.</div>}
+    </div>
+```
+
+```
+/**
+ * 게시물 리스트를 조회합니다.
+ */
+export const getPostCardsData = async (title: string, subtitle: string, author?: string) => {
+  // 검색 query를 props로 전달받아
+  const titleQuery = title && `&title=${title}`;
+  const subtitleQuery = subtitle && `&subtitle=${subtitle}`;
+  const authorQuery = author && `&author=${author}`;
+
+ // 게시물 검색 API 요청을 보냅니다.
+  const url = `${BASE_URL}/category?${titleQuery}${subtitleQuery}${authorQuery}`;
+  const options = setFetchOptions('GET');
+  const res = await fetch(url, options);
+  const data: CardInterface[] = await res.json(); // 댓글 리스트
+
+  return res.ok ? data : [];
+};
+```
 
 ---
 
@@ -362,10 +431,10 @@ MainCategory를 추가하면 하위에 SubCategory를 추가하는 form과 SubCa
 
 # 💡 새로운 시도
 
-- sendbird 코드 스타일을 참고하여 **직관적인 폴더와 컴포넌트 구조**를 만들기 위해 노력
-- 그때그때 필요한 작업을 생각하는 대신, 체계적인 **설계 후 기능 구현** 노력 (UI>인터렉션>server>DB 각 과정에 필요한 작업을 글로 정리한 뒤에 코딩하는 습관 들이기)
-- 전역상태관리의 사용을 최소한으로 하고 **서버 컴포넌트와 클라이언트 컴포넌트의 경계를 구분**하여 컴포넌트 간의 결합도 최대한 낮추기
+- **직관적인 폴더와 컴포넌트 구조**를 만들기 위해 노력 (sendbird 코드 스타일을 수시로 참고)
+- **설계 후 기능 구현** 노력 (필요한 작업을 대략적으로 생각하는 것이 아닌, UI>인터렉션>server>DB 각 과정에 필요한 작업을 글로 정리한 뒤에 코딩하는 습관)
+- **서버 컴포넌트와 클라이언트 컴포넌트의 경계를 구분**하여 컴포넌트 간의 결합도 최대한 낮추기 (전역상태관리의 사용을 최소한으로)
 - 하나의 함수는 하나의 기능, 하나의 기능 컴포넌트는 하나의 기능만 수행
-- Github issue 주도 커밋으로 구현할 기능, 발생한 문제 관리
+- Github issue를 중심으로 커밋. 구현 기능, 발생 문제 관리
 - 시범적으로 도입해볼 라이브러리나, 테스트 기능은 branch로 작업한 뒤에 merge 또는 폐기
 - 웹보안 XSS, query injection attack 방어에 신경쓰기
