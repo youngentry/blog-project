@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 
 import { checkSameAuthor } from '@/utils/sessionCheck/checkSameAuthor';
@@ -10,6 +9,7 @@ import styles from './PostHead.module.scss';
 
 interface PostHeadPropsInterface {
   userEmail: string;
+  userRole: string | null | undefined;
   email: string;
   subtitle: string;
   title: string;
@@ -18,9 +18,9 @@ interface PostHeadPropsInterface {
   postId: string;
 }
 
-const PostHead = ({ userEmail, email, subtitle, title, author, date, postId }: PostHeadPropsInterface) => {
+const PostHead = ({ userEmail, userRole, email, subtitle, title, author, date, postId }: PostHeadPropsInterface) => {
   // 같은 작성자인 경우에는 '수정', '삭제' 버튼이 나타나도록 합니다.
-  const isSameAuthor: boolean = checkSameAuthor(userEmail, email); // 로그인 유저와 게시물 작성자 비교
+  const isSameAuthor: boolean = checkSameAuthor(userRole, userEmail, email); // 로그인 유저와 게시물 작성자 비교
 
   return (
     <div className={styles.head}>

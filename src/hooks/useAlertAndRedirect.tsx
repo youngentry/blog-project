@@ -1,19 +1,26 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-const useAlertAndRedirect = (condition: boolean, redirectTo: string, alertMessage?: string) => {
+/**
+ *
+ * @param {boolean} isAllowed 권한 여부를 인자로 전달합니다
+ * @param {string} redirectTo 이동할 경로
+ * @param {string?} alertMessage alert에 출력할 메시지
+ * @returns
+ */
+const useAlertAndRedirect = (isAllowed: boolean, redirectTo: string, alertMessage?: string) => {
   const router = useRouter(); // 작성 완료되면 게시물로 redirect 합니다.
 
   useEffect(() => {
-    if (condition) {
-      if (alertMessage) {
-        window.alert(alertMessage);
-      }
-      router.push(redirectTo);
+    if (isAllowed) {
+      return;
     }
-  }, [condition, alertMessage, redirectTo, router]);
 
-  return null;
+    if (alertMessage) {
+      window.alert(alertMessage);
+    }
+    router.push(redirectTo);
+  }, [isAllowed, alertMessage, redirectTo, router]);
 };
 
 export default useAlertAndRedirect;

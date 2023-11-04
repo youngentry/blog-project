@@ -1,7 +1,8 @@
 import { getToken } from 'next-auth/jwt';
 import { NextResponse, NextRequest } from 'next/server';
 
-import { checkBlogManager } from './utils/sessionCheck/checkBlogManager';
+import { CustomJWT } from './types/session';
+import { checkIsBlogManager } from './utils/sessionCheck/checkUserRole';
 
 export { withAuth } from 'next-auth/middleware';
 
@@ -11,10 +12,12 @@ export const middleware = async (req: NextRequest) => {
   // 1. '/manage'로 시작하는 경로에 접근 시
   if (req.nextUrl.pathname.startsWith('/manage')) {
     // 2. 토큰 정보 가져오기
-    const token = await getToken({ req });
+    const token: CustomJWT | null = await getToken({ req });
+    const userRole = token?.role;
+    const isUser = checkIsBlogManager(userRole);
 
     // 3. token을 검사하여 접근해도 되는지 확인
-    if (token === null || !checkBlogManager(token.email as string)) {
+    if (token === null || !isUser) {
       // 4. 접근 불가하면 '/'로 redirect
       return NextResponse.redirect(new URL('/', req.url));
     }

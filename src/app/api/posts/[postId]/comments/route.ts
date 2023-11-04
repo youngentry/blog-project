@@ -6,8 +6,9 @@ import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
 import { CommentInterface, CommentFormInterface, PostInterface } from '@/types/types';
 import { connectDB } from '@/utils/db/db';
-import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { COMMENT_FORM_LENGTH } from '@/constants/LENGTH';
+import { CustomJWT } from '@/types/session';
+import { checkIsBlogAdmin } from '@/utils/sessionCheck/checkUserRole';
 
 // 댓글 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest, { params }: Params) => {
@@ -33,7 +34,7 @@ export const GET = async (req: NextRequest, { params }: Params) => {
 export const POST = async (req: NextRequest, { params }: Params) => {
   const token: JWT | null = await getToken({ req }); // 유저 정보
   const { postId } = params; // 게시물 번호
-  const data: CommentFormInterface = await req.json(); // 요청 받은 댓글 작성 form
+  const requestedData: CommentFormInterface = await req.json(); // 요청 받은 댓글 작성 form
 
   const { MIN_NICKNAME, MIN_PASSWORD, MIN_COMMENT, MAX_NICKNAME, MAX_PASSWORD, MAX_COMMENT } = COMMENT_FORM_LENGTH;
 
@@ -46,7 +47,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
     depth,
     replyToNickname,
     replyToEmail,
-  }: CommentFormInterface = data;
+  }: CommentFormInterface = requestedData;
 
   // nickname또는 password를 입력했는지 검사합니다.
   if (!token && (nickname.length < MIN_NICKNAME || password.length < MIN_PASSWORD)) {
@@ -70,12 +71,14 @@ export const POST = async (req: NextRequest, { params }: Params) => {
 
   const hashedPassword: string = await hash(password, 10); // 해시화한 비밀번호
 
+  console.log(token);
+
   // DB에 저장할 데이터
   const saveData: CommentInterface = {
     _id: new ObjectId(),
     parentId: Number(postId), // 게시물 번호
     postTitle, // 게시물 제목
-    nickname: token ? (token.name as string) : nickname, // 작성자 닉네임
+    nickname: token ? token.name || (token.login as string) : nickname, // 작성자 닉네임
     author: token ? (token.email as string) : '', // 로그인 유저인 경우에는 유저 email을 저장
     password: token ? '' : hashedPassword, // 게스트 댓글의 경우에는 댓글 비밀번호를 저장
     comment, // 댓글 내용
@@ -109,7 +112,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
 
 // 댓글 수정 API 입니다.
 export const PATCH = async (req: NextRequest, { params }: Params) => {
-  const token: JWT | null = await getToken({ req }); // 유저 정보
+  const token: CustomJWT | null = await getToken({ req }); // 유저 정보
   const { postId } = params; // 게시물 번호
 
   const data = await req.json();
@@ -135,7 +138,7 @@ export const PATCH = async (req: NextRequest, { params }: Params) => {
 
   // 로그인 유저일 경우 블로그 관리자가 아니거나, 동일한 작성자가 아닐 경우 400 응답
   if (token) {
-    const isBlogAdmin = checkBlogAdmin(token.email as string);
+    const isBlogAdmin = checkIsBlogAdmin(token.role);
     const isSameAuthor = token.email === foundResult.author;
     if (!isBlogAdmin && !isSameAuthor) {
       return NextResponse.json({ message: '댓글 수정: 수정 권한이 없습니다.' }, { status: 400 });
@@ -174,7 +177,7 @@ export const DELETE = async (req: NextRequest, { params }: Params) => {
 
   // 로그인 유저일 경우 블로그 관리자가 아니거나, 동일한 작성자가 아닐 경우 400 응답
   if (token) {
-    const isBlogAdmin = checkBlogAdmin(token.email as string);
+    const isBlogAdmin = checkIsBlogAdmin(token.role as string);
     const isSameAuthor = token.email === foundResult.author;
     if (!isBlogAdmin && !isSameAuthor) {
       return NextResponse.json({ message: '댓글 삭제: 수정 권한이 없습니다.' }, { status: 400 });

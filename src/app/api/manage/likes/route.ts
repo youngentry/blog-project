@@ -9,7 +9,6 @@ export const GET = async (req: NextRequest) => {
   const postsCollection = db.collection('posts');
 
   const token = await getToken({ req });
-
   // 인증되지 않은 유저의 접근
   if (!token) {
     return NextResponse.json({ message: '좋아요 한 포스트: 인증되지 않은 유저입니다.' }, { status: 400 });

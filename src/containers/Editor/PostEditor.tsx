@@ -37,12 +37,10 @@ const PostEditor = ({ canEdit }: { canEdit?: boolean }) => {
   }, [postData]);
 
   // 유효한 접근이 아닌 경우 redirect 합니다.
-  const isEditableUser = postId && !canEdit; // 수정 가능 여부 검사
-  const isExistPost = postId && !loading && !postData; // 수정할 게시물 데이터 검사
+  const isEditableUser = !postId || (postId && canEdit); // 수정 가능 여부 검사
+  const isExistPost = !postId || (postId && !loading && postData); // 수정할 게시물 데이터 검사
   const redirectToPostLink = `/posts/${postId}`;
-  const redirectToCategoryLink = `/category`;
-  useAlertAndRedirect(isEditableUser, redirectToPostLink, ALERT_MESSAGE.NOT_EDITABLE);
-  useAlertAndRedirect(isExistPost, redirectToCategoryLink, ALERT_MESSAGE.NO_POST);
+  useAlertAndRedirect(isExistPost || isEditableUser, redirectToPostLink, ALERT_MESSAGE.NOT_EDITABLE);
 
   // Editor Head props
   const editorHeadProps = {
