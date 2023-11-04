@@ -310,11 +310,17 @@ export const sortCommentList = (comments: CommentInterface[]) => {
 이렇게 부모-자식꼴로 정렬된 데이터를 `depth`의 깊이에 따라서 댓글 li에 paddingLeft를 주어 몇 번째 depth의 답글인지 렌더링하도록 했습니다.
 
 ```
-            <li
-              key={commentId}
-              className={`${styles.commentItem}`}
-              style={{ paddingLeft: `${0.5 + (depth || 0) * 4}rem` }}
-            >
+const CommentList = ({
+  const { commentList, setCommentList } = useCommentList(postId, newUpdate); // 정렬된 댓글 목록
+  return (
+        //...
+          <li
+            key={commentId}
+            className={`${styles.commentItem}`}
+            style={{ paddingLeft: `${0.5 + (depth || 0) * 4}rem` }}
+          >
+  );
+})
 ```
 
 ---
