@@ -7,8 +7,7 @@ import GoHomeButton from '@/components/buttons/GoHomeButton/GoHomeButton';
 import NewPostButton from '@/components/buttons/NewPostButton/NewPostButton';
 import ManageBlogButton from '@/components/buttons/ManageBlogButton/ManageBlogButton';
 
-const BlogProfile = ({ session }: { session: any }) => {
-  const isBlogManager = session && checkIsBlogManager(session.user.email);
+const BlogProfile = ({ isBlogManager }: { isBlogManager: boolean }) => {
   return (
     <div className={styles.container}>
       <Image

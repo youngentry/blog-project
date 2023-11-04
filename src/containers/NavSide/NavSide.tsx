@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth';
 
 import { CustomSession } from '@/types/session';
-import { checkIsBlogAdmin } from '@/utils/sessionCheck/checkUserRole';
+import { checkIsBlogAdmin, checkIsBlogManager } from '@/utils/sessionCheck/checkUserRole';
 
 import styles from './NavSide.module.scss';
 import BlogProfile from './components/BlogProfile/BlogProfile';
@@ -12,10 +12,10 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 const NavSide = async () => {
   const session: CustomSession | null = await getServerSession(authOptions);
   const isBlogAdmin = checkIsBlogAdmin(session?.user?.role);
-
+  const isBlogManager = checkIsBlogManager(session?.user?.role);
   return (
     <nav className={styles.sideNav}>
-      <BlogProfile session={session} />
+      <BlogProfile isBlogManager={isBlogManager} />
       <NavSideBody isBlogAdmin={isBlogAdmin} />
     </nav>
   );
