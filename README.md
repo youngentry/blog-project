@@ -52,7 +52,6 @@ Next.js 13의 기능 학습과 서버사이드 렌더링 흐름의 이해를 강
 
 - [카테고리](###-카테고리)
 
-  - 카테고리 추가
   - 계층형 카테고리
 
 - [게시물 검색](###-게시물-검색)
@@ -154,7 +153,9 @@ checkIsEditableAuthor() // 게시물 수정 권한
 
 - 웹에디터 ReactQuill 커스텀 : `binary 타입으로 DB에 저장되는 이미지 용량 문제 해결`
 
-내장된 이미지 삽입 버튼의 경우에는 **binary 타입으로 이미지 파일을 저장**합니다. DB에 저장될 수 있는 **Document의 용량 제한을 초과하는 문제를 해결**하기 위해서 내장 버튼이 아닌** 커스텀한 버튼을 삽일할 필요**가 있었습니다. ReactQuill의 Toolbar를 커스텀하여 직접 생성한 버튼을 추가할 수 있도록 Toolbar 컴포넌트를 나누었습니다.
+웹에디터 기능은 티스토리를 참고하여 구현했습니다.
+
+ReactQuill에 내장된 이미지 삽입 버튼의 경우에는 **binary 타입으로 이미지 파일을 저장**합니다. DB에 저장될 수 있는 **Document의 용량 제한을 초과하는 문제를 해결**하기 위해서 내장 버튼이 아닌** 커스텀한 버튼을 삽일할 필요**가 있었습니다. ReactQuill의 Toolbar를 커스텀하여 직접 생성한 버튼을 추가할 수 있도록 Toolbar 컴포넌트를 나누었습니다.
 
 ```
     <div id='toolbar'>
@@ -327,8 +328,23 @@ const CommentList = ({
 
 ### 카테고리
 
-- 카테고리 추가
+(@need:카테고리이미지추가)
+
 - 계층형 카테고리
+
+MainCategory의 하위에 SubCategory가 저장되고, 게시물이 SubCategory 정보를 지니도록 했습니다.
+
+MainCategory를 추가하면 하위에 SubCategory를 추가하는 form과 SubCategory 리스트가 나타납니다.
+
+```
+    <div className={styles.container}>
+      <h2>카테고리 에딧 페이지 제목</h2>
+      <AddMainCategoryForm />
+      <CategoryList />
+    </div>
+```
+
+게시물이 작성될 때에는 SubCategory를 반드시 포함하도록 하여, SubCategory별로 몇 개의 게시물을 포함하고 있는지 정보를 알 수 있도록 했습니다.
 
 ---
 
