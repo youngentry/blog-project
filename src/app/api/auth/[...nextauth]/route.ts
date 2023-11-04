@@ -26,8 +26,9 @@ export const authOptions: NextAuthOptions = {
       clientId: githubSocial.clientId,
       clientSecret: githubSocial.clientSecret,
       profile(profile) {
-        const { id, name, email, image, login } = profile;
-        return { id, name, email, image, github: login, role: 'tester', created_at: new Date() };
+        console.log(profile);
+        const { id, name, email, avatar_url, login } = profile;
+        return { id, name, email, avatar_url, login, role: 'tester', created_at: new Date() };
       },
     }),
 
@@ -78,7 +79,7 @@ export const authOptions: NextAuthOptions = {
     jwt: ({ token, user }: { token: JWT; user: CustomUser }) => {
       if (user) {
         token.role = user.role;
-        token.github = user.login;
+        token.login = user.login;
       }
       return token;
     },
@@ -87,7 +88,7 @@ export const authOptions: NextAuthOptions = {
       if (session?.user) {
         // session에 정보 추가
         session.user.role = token.role;
-        session.user.name = session.user.name || token.github;
+        session.user.name = session.user.name || token.login;
 
         return session;
       }

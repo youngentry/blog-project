@@ -17,7 +17,7 @@ export interface CustomUser extends DefaultUser {
 
 export interface CustomJWT extends DefaultJWT {
   role?: string | null;
-  github?: string;
+  login?: string;
   iat?: number;
   exp?: number;
   jti?: string;

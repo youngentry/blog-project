@@ -71,12 +71,14 @@ export const POST = async (req: NextRequest, { params }: Params) => {
 
   const hashedPassword: string = await hash(password, 10); // 해시화한 비밀번호
 
+  console.log(token);
+
   // DB에 저장할 데이터
   const saveData: CommentInterface = {
     _id: new ObjectId(),
     parentId: Number(postId), // 게시물 번호
     postTitle, // 게시물 제목
-    nickname: token ? (token.github as string) : nickname, // 작성자 닉네임
+    nickname: token ? token.name || (token.login as string) : nickname, // 작성자 닉네임
     author: token ? (token.email as string) : '', // 로그인 유저인 경우에는 유저 email을 저장
     password: token ? '' : hashedPassword, // 게스트 댓글의 경우에는 댓글 비밀번호를 저장
     comment, // 댓글 내용
