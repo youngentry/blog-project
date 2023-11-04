@@ -26,8 +26,8 @@ export const authOptions: NextAuthOptions = {
       clientId: githubSocial.clientId,
       clientSecret: githubSocial.clientSecret,
       profile(profile) {
-        const { id, name, email, image } = profile;
-        return { id, name, email, image, role: 'tester' };
+        const { id, name, email, image, login } = profile;
+        return { id, name, email, image, github: login, role: 'tester', created_at: new Date() };
       },
     }),
 
@@ -76,13 +76,19 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     // 4. jwt 생성 시 실행되는 코드
     jwt: ({ token, user }: { token: JWT; user: CustomUser }) => {
-      if (user) token.role = user.role;
+      if (user) {
+        token.role = user.role;
+        token.github = user.login;
+      }
       return token;
     },
     // 5. 유저 세션이 조회될 때 session에 user 정보를 저장하여 이용할 수 있도록 함
     session: ({ session, token }: { session: CustomSession; token: CustomJWT }) => {
       if (session?.user) {
+        // session에 정보 추가
         session.user.role = token.role;
+        session.user.name = session.user.name || token.github;
+
         return session;
       }
       return session;

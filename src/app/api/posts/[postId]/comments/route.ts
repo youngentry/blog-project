@@ -34,7 +34,7 @@ export const GET = async (req: NextRequest, { params }: Params) => {
 export const POST = async (req: NextRequest, { params }: Params) => {
   const token: JWT | null = await getToken({ req }); // 유저 정보
   const { postId } = params; // 게시물 번호
-  const data: CommentFormInterface = await req.json(); // 요청 받은 댓글 작성 form
+  const requestedData: CommentFormInterface = await req.json(); // 요청 받은 댓글 작성 form
 
   const { MIN_NICKNAME, MIN_PASSWORD, MIN_COMMENT, MAX_NICKNAME, MAX_PASSWORD, MAX_COMMENT } = COMMENT_FORM_LENGTH;
 
@@ -47,7 +47,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
     depth,
     replyToNickname,
     replyToEmail,
-  }: CommentFormInterface = data;
+  }: CommentFormInterface = requestedData;
 
   // nickname또는 password를 입력했는지 검사합니다.
   if (!token && (nickname.length < MIN_NICKNAME || password.length < MIN_PASSWORD)) {
@@ -76,7 +76,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
     _id: new ObjectId(),
     parentId: Number(postId), // 게시물 번호
     postTitle, // 게시물 제목
-    nickname: token ? (token.name as string) : nickname, // 작성자 닉네임
+    nickname: token ? (token.github as string) : nickname, // 작성자 닉네임
     author: token ? (token.email as string) : '', // 로그인 유저인 경우에는 유저 email을 저장
     password: token ? '' : hashedPassword, // 게스트 댓글의 경우에는 댓글 비밀번호를 저장
     comment, // 댓글 내용

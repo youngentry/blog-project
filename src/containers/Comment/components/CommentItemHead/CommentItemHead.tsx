@@ -13,6 +13,7 @@ interface PropsInterface {
   commentList: CommentInterface[];
   setCommentList: Dispatch<SetStateAction<CommentInterface[]>>;
   userRole: string | null | undefined;
+  userEmail: string;
   postEmail?: string;
   postId: string;
   commentId: string;
@@ -30,7 +31,8 @@ const CommentItemHead = (props: PropsInterface) => {
   const {
     commentList,
     setCommentList,
-    userRole, // 로그인 유저
+    userRole, // 로그인 유저 권한
+    userEmail,
     postEmail, // 게시물 작성자
     postId,
     commentId,
@@ -48,7 +50,7 @@ const CommentItemHead = (props: PropsInterface) => {
   const [deletingCommentId, setDeletingCommentId] = useState<string>(''); // 수정중인 댓글 ObjectId
 
   // 댓글 수정 및 삭제 권한이 있는지 여부에 따라 삭제 버튼이 나타나도록 합니다.
-  const isSameCommenter: boolean = isLoggedIn && userRole === author; // 동일한 댓글 작성자
+  const isSameCommenter: boolean = isLoggedIn && userEmail === author; // 동일한 댓글 작성자
   const isBlogAdmin: boolean = checkIsBlogAdmin(userRole); // 블로그 관리자
 
   const canEdit: boolean = isSameCommenter || !isLoggedIn || isBlogAdmin; // 수정 권한 여부

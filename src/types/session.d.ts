@@ -12,10 +12,12 @@ export interface CustomSession extends DefaultSession {
 
 export interface CustomUser extends DefaultUser {
   role?: string | null;
+  login?: string;
 }
 
 export interface CustomJWT extends DefaultJWT {
   role?: string | null;
+  github?: string;
   iat?: number;
   exp?: number;
   jti?: string;
