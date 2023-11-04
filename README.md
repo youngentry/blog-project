@@ -17,9 +17,9 @@ Next.js 13의 기능 학습과 서버사이드 렌더링 흐름의 이해를 강
 
 # 목차
 
-### [주요 기술 스택](#-🧱-주요-기술-스택)
+### [주요 기술 스택](#-주요-기술-스택)
 
-### [주요 라이브러리](#-🛠️-주요-라이브러리)
+### [주요 라이브러리](#-주요-라이브러리)
 
 ### [프로젝트 목적]()
 
@@ -67,7 +67,7 @@ Next.js 13의 기능 학습과 서버사이드 렌더링 흐름의 이해를 강
 
   ### [새로운 시도]()
 
-# 🧱 주요 기술 스택
+# 주요 기술 스택
 
 | Subject | Stack |
 | :-- | :-- |
@@ -76,7 +76,7 @@ Next.js 13의 기능 학습과 서버사이드 렌더링 흐름의 이해를 강
 | Database | <img src="https://img.shields.io/badge/mongodb-282C34?style=for-the-badge&logo=mongodb&logoColor=#61DAFB"> |
 | Code Quality | <img src="https://img.shields.io/badge/prettier-2C414F?style=for-the-badge&logo=prettier&logoColor=white"> <img src="https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white"> |
 
-# 🛠️ 주요 라이브러리
+# 주요 라이브러리
 
 - 회원기능
 
@@ -113,11 +113,13 @@ form으로 **ID/Password 입력을 받아 회원가입**을 할 수 있도록 �
 회원별로 권한에 따라 **접근 가능한 경로 분기**, 권한에 따라 렌더링되는 컴포넌트를 다르게 하여 **클라이언트가 수행할 수 있는 작업을 분리**하였습니다.
 
 ```
-  {isSameCommenter || isBlogAdmin ? (
-    <DeleteCommentButton />
-  ) : (
-    <ToggleDeleteGuestCommentModalButton />
-  )}
+// 상황별로 권한을 확인하는 함수를 모아서 관리합니다.
+
+checkIsBlogAdmin() // 관리자
+checkIsBlogManager() // tester
+checkIsUser() // 일반 유저
+checkIsSameAuthor() // 동일한 작성자
+checkIsEditableAuthor() // 게시물 수정 권한
 ```
 
 - 관리자
@@ -212,7 +214,7 @@ const CustomReactQuill = dynamic(
 
 - 게시물 좋아요 : `단일 컴포넌트 단일 기능 원칙에 대한 노력`
 
-게시물 좋아요를 별도로 기술한 이유는 **단일 컴포넌트 단일 기능 원칙**에 대해 노력하고 있다는 점을 보이기 위한 가장 간단하고도 좋은 예시라 생각했기 때문입니다. 프로젝트 전반에 클라이언트와 **인터렉션을 수행하는 기능 컴포넌트는 아래와 같이 개별 컴포넌트로** 나누었습니다.
+게시물 좋아요를 별도로 기술한 이유는 **단일 컴포넌트 단일 기능 원칙**에 대해 노력하고 있다는 점을 보여드릴 수 있는 간단한 예시라 생각했기 때문입니다. 프로젝트 전반에 클라이언트와 **인터렉션을 수행하는 기능 컴포넌트는 아래와 같이 개별 컴포넌트로** 나누었습니다.
 
 ```
 const LikePostButton = (props) => {
@@ -235,7 +237,7 @@ export default LikePostButton;
 
 - 댓글 CRUD : `Atomic Design Pattern 적용 경험을 바탕으로 작업 난이도 낮추기`
 
-댓글 컴포넌트는 관리자, 댓글 작성자, 게스트 등 권한 분기에 따라 포함되는 정보가 많았습니다. 이 때문에 한 파일에 코드가 많아지자 작업이 쉽지 않았습니다. 따라서 이전에 진행한 프로젝트에서 **`Atomic Design Pattern`을 적용해본 경험**을 살려 댓글의 머리, 본문, 꼬리 세 영역을 molecule로 바라보고 리팩토링하는 과정을 통해 **댓글 기능 작업 난이도를 크게 낮출 수 있었습니다.**
+댓글 컴포넌트는 관리자, 댓글 작성자, 게스트 등 권한 분기에 따라 포함되는 정보가 많았습니다. 이 때문에 한 파일에 코드가 많아지자 작업이 쉽지 않았습니다. 따라서 이전에 진행한 프로젝트에서 **`Atomic Design Pattern`을 적용해본 경험**을 살려 댓글의 머리, 본문, 꼬리 세 영역을 molecule로 바라보고 리팩토링하는 과정을 통해 **댓글 기능 작업 난이도를 낮출 수 있었습니다.**
 
 ```
   <div className={styles.contentBox}>

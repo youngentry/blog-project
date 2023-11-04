@@ -26,7 +26,6 @@ export const authOptions: NextAuthOptions = {
       clientId: githubSocial.clientId,
       clientSecret: githubSocial.clientSecret,
       profile(profile) {
-        console.log(profile);
         const { id, name, email, avatar_url, login } = profile;
         return { id, name, email, avatar_url, login, role: 'tester', created_at: new Date() };
       },

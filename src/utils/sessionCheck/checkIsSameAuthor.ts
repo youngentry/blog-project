@@ -1,6 +1,6 @@
 import { checkIsBlogAdmin } from './checkUserRole';
 
-interface CheckSameAuthor {
+interface CheckIsSameAuthor {
   (userRole: string | null | undefined, userEmail: string, postAuthor: string): boolean;
 }
 
@@ -9,7 +9,7 @@ interface CheckSameAuthor {
  * @param email
  * @returns boolean
  */
-export const checkSameAuthor: CheckSameAuthor = (userRole, userEmail, postAuthor) => {
+export const checkIsSameAuthor: CheckIsSameAuthor = (userRole, userEmail, postAuthor) => {
   // 로그인 상태 확인
   if (!userEmail) {
     return false;
