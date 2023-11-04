@@ -40,9 +40,9 @@ const UserMenu = ({ session }: { session: CustomSession | null }) => {
         {session && (
           <>
             <li className={`${styles.accountSetting} ${styles.menuItem}`}>
-              <strong>{session.user.name}</strong>
+              <strong>{session?.user?.name}</strong>
               <p className={styles.userId}>
-                <span>{session.user.email}</span>
+                <span>{session?.user?.email}</span>
                 <button className={styles.manageAccountButton} type='button'>
                   계정 관리
                   <div className={styles.notice}>
