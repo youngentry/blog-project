@@ -83,8 +83,6 @@ Next.js 13의 기능 학습과 서버사이드 렌더링 흐름의 이해를 강
   - next-auth (소셜 로그인 방식, Session 로그인 방식)
   - next-auth/mongodb-adapter
 
-[next-auth로 깃허브 소셜 로그인 + MongoDB 회원 정보 저장](https://sakuraop.tistory.com/594)
-
 - 웹 에디터
   - react-quill
   - highlight.js
@@ -98,17 +96,24 @@ Next.js 13의 기능 학습과 서버사이드 렌더링 흐름의 이해를 강
 
 ### 회원 기능
 
+![sign-s](https://github.com/youngentry/blog-project/assets/90388461/dfc5eb96-1e9d-4c14-90dc-abce430dee46)
+
 - next-auth GIthub 소셜 로그인 기능
 
 회원 기능 구현을 위해 **next-auth** 라이브러리를 사용하였습니다.
 
 next-auth의 providers 메서드에 **Github OAuth** 속성을 추가하여 **소셜 로그인을 구현**하였으며, **MongoDBAdapter**를 이용하여 로그인한 클라이언트의 **회원 데이터를 DB에 저장**합니다.
 
+🔗 [next-auth로 깃허브 소셜 로그인 + MongoDB 회원 정보 저장](https://sakuraop.tistory.com/594)
+
 - next-auth ID/Password를 이용한 JWT 회원가입 : `bcrypt 비밀번호 보안`
 
 form으로 **ID/Password 입력을 받아 회원가입**을 할 수 있도록 했습니다. 비밀번호를 곧바로 DB에 저장하면 개인정보 유출의 위험이 있기 때문에 bcrypt 라이브러리를 이용하여 비밀번호를 해쉬화하여 저장했습니다. **로그인 시**에는 next-auth의 authorize 메서드를 활용, 입력한 정보와 DB의 회원데이터를 비교하여 **유효한 경우 next-auth session에 로그인 정보를 저장**합니다.
 
+🔗 [ID/Password JWT 가입 및 로그인 구현 방법 CredentialsProvider() 알고 보기](https://sakuraop.tistory.com/596)
+
 - 관리자, 테스터, 방문유저, 비로그인 : `권한 분기`
+
 
 회원별로 권한에 따라 **접근 가능한 경로 분기**, 권한에 따라 렌더링되는 컴포넌트를 다르게 하여 **클라이언트가 수행할 수 있는 작업을 분리**하였습니다.
 
@@ -121,6 +126,8 @@ checkIsUser() // 일반 유저
 checkIsSameAuthor() // 동일한 작성자
 checkIsEditableAuthor() // 게시물 수정 권한
 ```
+
+![roles](https://github.com/youngentry/blog-project/assets/90388461/b205eae9-bdf7-4a2e-9aa1-52393114c42d)
 
 - 관리자
 
@@ -138,9 +145,13 @@ checkIsEditableAuthor() // 게시물 수정 권한
 
 댓글 작성, 게스트 댓글 삭제
 
+🔗 [next-auth로 Role-based access control 구현: 회원별 권한 분기 개선](https://sakuraop.tistory.com/617)
+
 ---
 
 ### 게시물
+
+![edit-s](https://github.com/youngentry/blog-project/assets/90388461/54b3ec7d-6c40-46d8-be61-7775e4700ed6)
 
 - 웹에디터 ReactQuill 커스텀 : `binary 타입으로 DB에 저장되는 이미지 용량 문제 해결`
 
@@ -234,6 +245,8 @@ export default LikePostButton;
 ---
 
 ### 댓글
+
+![reply-s](https://github.com/youngentry/blog-project/assets/90388461/516dd68b-cf4e-4d0d-8f06-83a55f61db4b)
 
 - 댓글 CRUD : `Atomic Design Pattern 적용 경험을 바탕으로 작업 난이도 낮추기`
 
