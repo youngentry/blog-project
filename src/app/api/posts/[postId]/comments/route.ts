@@ -71,8 +71,6 @@ export const POST = async (req: NextRequest, { params }: Params) => {
 
   const hashedPassword: string = await hash(password, 10); // 해시화한 비밀번호
 
-  console.log(token);
-
   // DB에 저장할 데이터
   const saveData: CommentInterface = {
     _id: new ObjectId(),
