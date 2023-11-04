@@ -8,7 +8,7 @@ import NewPostButton from '@/components/buttons/NewPostButton/NewPostButton';
 import ManageBlogButton from '@/components/buttons/ManageBlogButton/ManageBlogButton';
 
 const BlogProfile = ({ session }: { session: any }) => {
-  const isBlogManager = session && checkIsBlogManager(session.user.email);
+  const isBlogManager = session && checkIsBlogManager(session.user.role);
   return (
     <div className={styles.container}>
       <Image
