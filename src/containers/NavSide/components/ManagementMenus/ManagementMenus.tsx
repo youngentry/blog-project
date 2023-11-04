@@ -16,11 +16,14 @@ const managements = [
   },
 ];
 
-const ManagementMenus = () => {
+const ManagementMenus = ({ isBlogAdmin }: { isBlogAdmin: boolean }) => {
+  const adminSettingList = [...managements]; // 관리자용
+  const userSettingList = [...managements].slice(1); // 일반 유저용
+
   return (
     <div className={styles.container}>
       <ul className={styles.activityBox}>
-        {managements.map((management) => {
+        {(isBlogAdmin ? adminSettingList : userSettingList).map((management) => {
           return (
             <li key={management.id} className={styles.activityItem}>
               <h3 key={management.id} className={styles.activityName}>

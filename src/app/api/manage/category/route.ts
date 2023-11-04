@@ -4,8 +4,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { connectDB } from '@/utils/db/db';
 import { CommonCategoryInterface } from '@/types/types';
-import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { CustomJWT } from '@/types/session';
+import { checkIsBlogAdmin } from '@/utils/sessionCheck/checkUserRole';
 
 // 카테고리 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest) => {
@@ -59,7 +59,7 @@ export const POST = async (req: NextRequest) => {
   }
 
   // admin이 아닌 사용자 경고
-  const isBlogAdmin = checkBlogAdmin(token.role);
+  const isBlogAdmin = checkIsBlogAdmin(token.role);
   if (!isBlogAdmin) {
     return NextResponse.json({ message: '카테고리 편집: 유효하지 않은 접근입니다.' }, { status: 400 });
   }

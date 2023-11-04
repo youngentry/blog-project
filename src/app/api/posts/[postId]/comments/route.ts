@@ -6,9 +6,9 @@ import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
 import { CommentInterface, CommentFormInterface, PostInterface } from '@/types/types';
 import { connectDB } from '@/utils/db/db';
-import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { COMMENT_FORM_LENGTH } from '@/constants/LENGTH';
 import { CustomJWT } from '@/types/session';
+import { checkIsBlogAdmin } from '@/utils/sessionCheck/checkUserRole';
 
 // 댓글 정보를 불러오는 API입니다.
 export const GET = async (req: NextRequest, { params }: Params) => {
@@ -136,7 +136,7 @@ export const PATCH = async (req: NextRequest, { params }: Params) => {
 
   // 로그인 유저일 경우 블로그 관리자가 아니거나, 동일한 작성자가 아닐 경우 400 응답
   if (token) {
-    const isBlogAdmin = checkBlogAdmin(token.role);
+    const isBlogAdmin = checkIsBlogAdmin(token.role);
     const isSameAuthor = token.email === foundResult.author;
     if (!isBlogAdmin && !isSameAuthor) {
       return NextResponse.json({ message: '댓글 수정: 수정 권한이 없습니다.' }, { status: 400 });
@@ -175,7 +175,7 @@ export const DELETE = async (req: NextRequest, { params }: Params) => {
 
   // 로그인 유저일 경우 블로그 관리자가 아니거나, 동일한 작성자가 아닐 경우 400 응답
   if (token) {
-    const isBlogAdmin = checkBlogAdmin(token.role as string);
+    const isBlogAdmin = checkIsBlogAdmin(token.role as string);
     const isSameAuthor = token.email === foundResult.author;
     if (!isBlogAdmin && !isSameAuthor) {
       return NextResponse.json({ message: '댓글 삭제: 수정 권한이 없습니다.' }, { status: 400 });

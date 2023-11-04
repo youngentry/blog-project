@@ -4,8 +4,8 @@ import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
 import { PostInterface } from '@/types/types';
 import { connectDB } from '@/utils/db/db';
-import { checkBlogAdmin } from '@/utils/sessionCheck/checkBlogAdmin';
 import { CustomJWT } from '@/types/session';
+import { checkIsBlogAdmin } from '@/utils/sessionCheck/checkUserRole';
 
 // 게시물 삭제 API 입니다.
 export const DELETE = async (req: NextRequest, { params }: Params) => {
@@ -25,7 +25,7 @@ export const DELETE = async (req: NextRequest, { params }: Params) => {
 
   const foundPost: PostInterface | null = await postCollection.findOne({ id: Number(postId) }); // 조회한 게시물
   const postAuthorEmail = foundPost?.email; // 게시물 작성자 email
-  const isBlogAdmin: boolean = checkBlogAdmin(token.role); // 관리자 여부 확인
+  const isBlogAdmin: boolean = checkIsBlogAdmin(token.role); // 관리자 여부 확인
 
   // 로그인 유저와 게시글 작성자가 다른지 확인 && 블로그 관리자가 아닌지 확인
   if (userEmail !== postAuthorEmail && !isBlogAdmin) {

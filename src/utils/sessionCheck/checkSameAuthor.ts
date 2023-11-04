@@ -1,4 +1,4 @@
-import { checkBlogAdmin } from './checkBlogAdmin';
+import { checkIsBlogAdmin } from './checkUserRole';
 
 interface CheckSameAuthor {
   (userRole: string | null | undefined, userEmail: string, postAuthor: string): boolean;
@@ -17,7 +17,7 @@ export const checkSameAuthor: CheckSameAuthor = (userRole, userEmail, postAuthor
 
   // 로그인된 유저의 email과 게시물의 email이 동일한 경우 또는 admin일 경우 true를 반환합니다.
   if (userEmail) {
-    const isBlogAdmin: boolean = checkBlogAdmin(userRole);
+    const isBlogAdmin: boolean = checkIsBlogAdmin(userRole);
     if (userEmail === postAuthor || isBlogAdmin) {
       return true;
     }

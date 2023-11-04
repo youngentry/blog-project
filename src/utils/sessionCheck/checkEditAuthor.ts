@@ -3,8 +3,8 @@ import { getServerSession } from 'next-auth';
 import BASE_URL from '@/constants/BASE_URL';
 import { CustomSession } from '@/types/session';
 
-import { checkBlogAdmin } from './checkBlogAdmin';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { checkIsBlogAdmin } from './checkUserRole';
 
 // 게시글 수정 권한이 있는지 확인합니다.
 export const checkEditAuthor = async (postId: string) => {
@@ -26,7 +26,7 @@ export const checkEditAuthor = async (postId: string) => {
   const isSameAuthor = postEmail === userEmail;
 
   // 접속 권한을 확인합니다.
-  const isBlogAdmin = checkBlogAdmin(userRole);
+  const isBlogAdmin = checkIsBlogAdmin(userRole);
   const canEdit: boolean = isSameAuthor || isBlogAdmin;
 
   return canEdit;
