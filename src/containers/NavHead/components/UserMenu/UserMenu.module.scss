@@ -95,7 +95,8 @@
     .logout {
       display: flex;
       gap: 0.5rem;
-      width: 5rem;
+      min-width: 5rem;
+      width: 100%;
       & > :last-child {
         color: var(--color-text-week);
         @include hoverText();
