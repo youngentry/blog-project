@@ -341,7 +341,7 @@ const CommentList = ({
 
 ## 카테고리
 
-(@need:카테고리이미지추가)
+![image](https://github.com/youngentry/blog-project/assets/90388461/e11bfabb-9740-4e21-8113-4aaa6119016c)
 
 - ### 계층형 카테고리 구현
 
@@ -360,6 +360,8 @@ const CommentList = ({
 게시물이 작성될 때에는 `SubCategory`에서 포함한 게시물의 데이터를 업데이트하여, `SubCategory`별로 몇 개의 게시물을 포함하고 있는지 정보를 알 수 있도록 했습니다.
 
 ## 게시물 검색
+
+![search](https://github.com/youngentry/blog-project/assets/90388461/f346d4a4-b508-4510-870b-35cb23eb239a)
 
 - ### 게시물 및 카테고리 단일 검색
 
@@ -430,6 +432,10 @@ export const getPostCardsData = async (title: string, subtitle: string, author?:
 ```
 
 ## 회원 활동 관리
+
+![image](https://github.com/youngentry/blog-project/assets/90388461/b73a154d-951e-4e6e-92a6-5a213b615896)
+
+![image](https://github.com/youngentry/blog-project/assets/90388461/27ff0579-0b0b-4c02-9366-e201d7c40725)
 
 - 좋아요한 게시물 조회
 - 작성한 댓글 관리
