@@ -11,15 +11,6 @@ import ManageDescription from '@/components/descriptions/ManageDescription/Manag
 import NoItem from './components/NoItem/NoItem';
 import Spin from '@/components/loadings/Spin/Spin';
 
-const Layout = ({ children }: { children: any }) => {
-  return (
-    <div className={styles.container}>
-      <ManageDescription title='좋아요 한 게시물' description={DESCRIPTION.MANAGE_LIKES} />
-      {children}
-    </div>
-  );
-};
-
 export interface ManageLikesInterface {
   [key: string]: PostInterface[];
 }
@@ -75,6 +66,15 @@ const ManageLikes = ({ email }: { email: string }) => {
         return <ManageLikeItem key={day} day={day} likedPosts={likedPosts} email={email} />;
       })}
     </Layout>
+  );
+};
+
+const Layout = ({ children }: { children: any }) => {
+  return (
+    <div className={styles.container}>
+      <ManageDescription title='좋아요 한 게시물' description={DESCRIPTION.MANAGE_LIKES} />
+      {children}
+    </div>
   );
 };
 

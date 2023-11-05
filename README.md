@@ -115,23 +115,17 @@ Next.js 13의 최신 기능 학습 및 서버사이드 렌더링(SSR) 흐름의 
 
 next-auth의 providers 메서드에 **Github OAuth** 속성을 추가하여 **소셜 로그인을 구현**하였으며, **MongoDBAdapter**를 이용하여 로그인한 클라이언트의 **회원 데이터를 DB에 저장**합니다.
 
-🔗 [next-auth로 깃허브 소셜 로그인 + MongoDB 회원 정보 저장](https://sakuraop.tistory.com/594)
-
 - ### `next-auth` ID/Password를 이용한 JWT 회원가입 : `bcrypt 비밀번호 보안`
 
 form으로 **ID/Password 입력을 받아 회원가입**을 할 수 있도록 했습니다.
 
 bcrypt 라이브러리를 이용하여 비밀번호를 해쉬화하여 저장하도록 했으며, **로그인 시**에는 next-auth의 authorize 메서드를 활용, 입력받은 정보와 DB의 회원데이터를 비교하여 **유효한 경우 session을 클라이언트의 cookie에 저장**합니다.
 
-🔗 [ID/Password JWT 가입 및 로그인 구현 방법 CredentialsProvider() 알고 보기](https://sakuraop.tistory.com/596)
-
 - ### 회원 권한 분기: 관리자, 테스터, 방문 유저, 비로그인 사용자
 
 회원별로 권한에 따라 **접근 가능한 경로**에 제한을 두었습니다.
 
 `middleware` 라우터를 만들어 비로그인 유저는 /manage를 포함한 경로에 접근할 수 없도록 하였으며, 유저의 권한에 따라 렌더링되는 컴포넌트를 다르게 해 수행할 수 있는 작업을 분리하였습니다.
-
-🔗 [Middleware로 권한이 없는 유저 "/"로 redirect 시키기](https://sakuraop.tistory.com/595)
 
 ```
 // 권한을 확인하는 함수를 모아서 관리합니다.
@@ -152,6 +146,9 @@ checkIsEditableAuthor() // 게시물 수정 권한
 
 게스트(비로그인 유저) : 댓글 작성, 게스트 댓글 삭제
 
+🔗 [Next.js 13 소셜 로그인](https://sakuraop.tistory.com/594)  
+🔗 [ID/Password JWT 가입 및 로그인](https://sakuraop.tistory.com/596)  
+🔗 [Middleware로 권한이 없는 유저 redirect](https://sakuraop.tistory.com/595)  
 🔗 [next-auth로 Role-based access control 구현: 회원별 권한 분기 개선](https://sakuraop.tistory.com/617)
 
 ## 게시물
@@ -265,7 +262,8 @@ export default LikePostButton;
 
 댓글 컴포넌트는 관리자, 댓글 작성자, 게스트 등 권한 분기에 따라 포함되는 정보가 많았습니다. 이 때문에 한 파일에 코드가 많아지자 작업이 쉽지 않았습니다. 따라서 이전에 진행한 프로젝트에서 **`Atomic Design Pattern`을 적용해본 경험**을 살려 댓글의 머리, 본문, 꼬리 세 영역을 molecule로 바라보고 리팩토링하는 과정을 통해 **댓글 기능 작업 난이도를 낮출 수 있었습니다.**
 
-🔗 [댓글 기능구현(1): 댓글 작성, 수정, 삭제, 리스트 조회](https://sakuraop.tistory.com/601) 🔗 [댓글 기능구현(2): 수정, 삭제 권한 분기(유저/게스트/관리자)](https://sakuraop.tistory.com/602)
+🔗 [댓글 기능구현(1): 댓글 작성, 수정, 삭제, 리스트 조회](https://sakuraop.tistory.com/601)  
+🔗 [댓글 기능구현(2): 수정, 삭제 권한 분기(유저/게스트/관리자)](https://sakuraop.tistory.com/602)
 
 ```
   <div className={styles.contentBox}>
