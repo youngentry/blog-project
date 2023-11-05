@@ -3,12 +3,13 @@
  * @param {FormData} formData
  * @returns
  */
-export const postImgur = async (formData: FormData) => {
+export const postImgur = async (formData: FormData, IMGUR_CLIENT_ID: string) => {
   const url = `https://api.imgur.com/3/image`;
   const options = {
     method: 'POST',
     headers: {
-      Authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}`,
+      Authorization: `Client-ID ${IMGUR_CLIENT_ID}`,
+      Accept: 'application/json',
     },
     body: formData,
   };

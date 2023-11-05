@@ -12,7 +12,7 @@ const ERROR = {
 };
 
 // 게시글 에디터 툴바
-const QuillToolbar = ({ quillRef }: { quillRef: RefObject<any> }) => {
+const QuillToolbar = ({ quillRef, IMGUR_CLIENT_ID }: { quillRef: RefObject<any>; IMGUR_CLIENT_ID: string }) => {
   // 이미지를 본문의 커서 위치에 <img src="이미지주소"/> 형태로 삽입합니다.
   const onFileUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     // 업로드 이벤트 에러
@@ -26,7 +26,7 @@ const QuillToolbar = ({ quillRef }: { quillRef: RefObject<any> }) => {
     formData.append('image', e.target.files[0]);
 
     // imgur 업로드 결과
-    const result = await postImgur(formData);
+    const result = await postImgur(formData, IMGUR_CLIENT_ID);
     if (!result) {
       window.alert(ERROR.UPLOAD_KR);
       throw Error(ERROR.UPLOAD_EN);
