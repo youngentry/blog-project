@@ -8,7 +8,7 @@ Next.js 13의 기능 및 서버사이드 렌더링 흐름에 대한 이해를 �
 
 ## 사이트 URL
 
-- ### [https://blog-project-rose.vercel.app/](https://blog-project-rose.vercel.app/)
+- ### [https://blog-project-rose.vercel.app/](https://blog-project-rose.vercel.app/category)
 
 ## 프로젝트 화면
 
