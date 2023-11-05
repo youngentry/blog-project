@@ -1,7 +1,5 @@
 import Image from 'next/image';
 
-import { checkIsBlogManager } from '@/utils/sessionCheck/checkUserRole';
-
 import styles from './BlogProfile.module.scss';
 import GoHomeButton from '@/components/buttons/GoHomeButton/GoHomeButton';
 import NewPostButton from '@/components/buttons/NewPostButton/NewPostButton';
