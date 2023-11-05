@@ -6,6 +6,7 @@ import QuillToolbar from '../QuillToolbar/QuillToolbar';
 import CustomReactQuill from '../CustomReactQuill/CustomReactQuill';
 
 interface quillProps {
+  IMGUR_CLIENT_ID: string;
   contents: string;
   setContents: Dispatch<SetStateAction<string>>;
 }
@@ -14,11 +15,11 @@ interface quillProps {
 const Quill = (props: quillProps) => {
   const quillRef = useRef();
 
-  const { contents, setContents } = props; // quill input
+  const { IMGUR_CLIENT_ID, contents, setContents } = props; // quill input
 
   return (
     <div className={styles.quillContainer}>
-      <QuillToolbar quillRef={quillRef} />
+      <QuillToolbar quillRef={quillRef} IMGUR_CLIENT_ID={IMGUR_CLIENT_ID} />
       <CustomReactQuill
         forwardedRef={quillRef}
         className={styles.quill}
