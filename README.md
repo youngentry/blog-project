@@ -109,13 +109,13 @@ Next.js 13의 최신 기능 학습 및 서버사이드 렌더링(SSR) 흐름의 
 
 ![sign-s](https://github.com/youngentry/blog-project/assets/90388461/dfc5eb96-1e9d-4c14-90dc-abce430dee46)
 
-- ### `next-auth` GIthub 소셜 로그인 기능
+- ### next-auth GIthub 소셜 로그인 기능
 
 회원 기능 구현을 위해 **next-auth** 라이브러리를 사용하였습니다.
 
 next-auth의 providers 메서드에 **Github OAuth** 속성을 추가하여 **소셜 로그인을 구현**하였으며, **MongoDBAdapter**를 이용하여 로그인한 클라이언트의 **회원 데이터를 DB에 저장**합니다.
 
-- ### `next-auth` ID/Password를 이용한 JWT 회원가입 : `bcrypt 비밀번호 보안`
+- ### next-auth ID/Password를 이용한 JWT 회원가입 : bcrypt 비밀번호 보안
 
 form으로 **ID/Password 입력을 받아 회원가입**을 할 수 있도록 했습니다.
 
@@ -155,7 +155,7 @@ checkIsEditableAuthor() // 게시물 수정 권한
 
 ![edit-s](https://github.com/youngentry/blog-project/assets/90388461/54b3ec7d-6c40-46d8-be61-7775e4700ed6)
 
-- ### 웹에디터 `ReactQuill` 커스터마이징 : `DB에 이진(binary) 데이터로 저장되는 이미지 용량 문제 해결`
+- ### 웹에디터 ReactQuill 커스터마이징 : DB에 이진(binary) 데이터로 저장되는 이미지 용량 문제 해결
 
 ReactQuill에 내장된 이미지 삽입 버튼의 경우에는 **binary 타입으로 이미지 파일을 저장**합니다. DB에 저장될 수 있는 **Document의 용량 제한을 초과하는 문제를 해결**하기 위해서 내장 버튼이 아닌** 커스텀한 버튼을 삽일할 필요**가 있었습니다. ReactQuill의 Toolbar를 커스텀하여 직접 생성한 버튼을 추가할 수 있도록 Toolbar 컴포넌트를 나누었습니다.
 
@@ -175,7 +175,7 @@ ReactQuill에 내장된 이미지 삽입 버튼의 경우에는 **binary 타입�
 
 이미지 파일 첨부 시 binary 타입으로 저장하는 대신, **Imgur 무료 이미지 호스팅 사이트에 이미지를 업로드**한 뒤, 업로드 된 이미지의 URL을 `<Image/>`의 속성으로 추가하여 **DB에 binary 타입으로 저장하는 문제를 해결**하였습니다.
 
-- ### 커서가 위치한 곳에 이미지 첨부 : `forwardedRef를 통해 ref 속성 주입`
+- ### 커서가 위치한 곳에 이미지 첨부 : forwardedRef를 통해 ref 속성 주입
 
 에디터의 커서위치에 이미지를 첨부하기 위해서는 `ref` 속성이 필요했습니다. 하지만, ReactQuill 모듈에는 ref 속성이 존재하지 않습니다. 이 문제를 해결하기 위해 dynamic import로 모듈을 로드하기 전에 `forwardedRef` 속성을 이용하여 **ref 속성을 주입**하였습니다.
 
@@ -197,13 +197,13 @@ const CustomReactQuill = dynamic(
 );
 ```
 
-- ### XSS 공격 방어를 위한 `dompurify` 라이브러리 적용
+- ### XSS 공격 방어를 위한 dompurify 라이브러리 적용
 
 게시물 내에 스크립트를 삽입하여 정보를 탈취하지 못하도록 dompurify 라이브러리를 적용했습니다.
 
 🔗 [XSS 방어 DOMpurify - 스크립트 실행 막기](https://sakuraop.tistory.com/600)
 
-- ### 웹에디터 css 로딩 지연 현상 개선 : `UX 개선`
+- ### 웹에디터 css 로딩 지연 현상 개선 : UX 개선
 
 웹에디터는 서버컴포넌트 내에서 dynamic import로 컴포넌트를 로드해야 했기 때문에 script가 style을 적용하기 전에 짧은 시간 동안 **클라이언트에게 날것의 tags가 보여지는 문제**가 있었습니다.
 
@@ -231,7 +231,7 @@ const CustomReactQuill = dynamic(
 
 ## 게시물 좋아요
 
-- ### 게시물 좋아요 : `단일 컴포넌트 단일 기능 원칙에 따른 구현`
+- ### 게시물 좋아요 : 단일 컴포넌트 단일 기능 원칙에 따른 구현
 
 게시물 좋아요를 별도로 기술한 이유는 **단일 컴포넌트 단일 기능 원칙**에 대해 노력하고 있다는 점을 보여드릴 수 있는 간단한 예시라 생각했기 때문입니다.
 
@@ -258,7 +258,7 @@ export default LikePostButton;
 
 ![reply-s](https://github.com/youngentry/blog-project/assets/90388461/516dd68b-cf4e-4d0d-8f06-83a55f61db4b)
 
-- ### 댓글 CRUD : `Atomic Design Pattern 적용 경험을 바탕으로 작업 난이도 감소`
+- ### 댓글 CRUD : Atomic Design Pattern 적용 경험을 바탕으로 작업 난이도 감소
 
 댓글 컴포넌트는 관리자, 댓글 작성자, 게스트 등 권한 분기에 따라 포함되는 정보가 많았습니다. 이 때문에 한 파일에 코드가 많아지자 작업이 쉽지 않았습니다. 따라서 이전에 진행한 프로젝트에서 **`Atomic Design Pattern`을 적용해본 경험**을 살려 댓글의 머리, 본문, 꼬리 세 영역을 molecule로 바라보고 리팩토링하는 과정을 통해 **댓글 기능 작업 난이도를 낮출 수 있었습니다.**
 
