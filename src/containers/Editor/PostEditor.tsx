@@ -16,8 +16,8 @@ import ConfirmEditPost from './components/ConfirmEditPost/ConfirmEditPost';
 import EditorHead from './components/EditorHead/EditorHead';
 
 // react-quill에 게시물 데이터를 불러오거나, 새롭게 작성하거나 수정한 게시물을 DB에 업데이트합니다.
-const PostEditor = ({ canEdit }: { canEdit?: boolean }) => {
-  const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID || '';
+const PostEditor = ({ canEdit, IMGUR_CLIENT_ID }: { canEdit?: boolean; IMGUR_CLIENT_ID: string }) => {
+  console.log(process.env.IMGUR_CLIENT_ID);
 
   const { postId }: Params = useParams();
 

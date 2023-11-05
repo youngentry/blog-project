@@ -27,6 +27,7 @@ const QuillToolbar = ({ quillRef, IMGUR_CLIENT_ID }: { quillRef: RefObject<any>;
 
     // imgur 업로드 결과
     const result = await postImgur(formData, IMGUR_CLIENT_ID);
+    console.log(IMGUR_CLIENT_ID);
     if (!result) {
       window.alert(ERROR.UPLOAD_KR);
       throw Error(ERROR.UPLOAD_EN);
