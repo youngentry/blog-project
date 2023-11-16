@@ -20,7 +20,7 @@ const CardItem = ({ postCards }: { postCards: CardInterface[] }) => {
         return (
           <li key={id} className={styles.card}>
             <Link href={POST_LINK}>
-              <Image className={styles.image} src={src} alt='post cover' width={300} height={300 * 0.75} />
+              <Image className={styles.image} src={src} alt='post card cover image' width={300} height={300 * 0.75} />
             </Link>
             <div className={styles.content}>
               <h3 className={styles.title}>
