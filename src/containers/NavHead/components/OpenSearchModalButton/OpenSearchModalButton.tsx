@@ -1,18 +1,18 @@
-import { Dispatch, SetStateAction } from 'react';
 import { BsSearch } from 'react-icons/bs';
+import { useSetAtom } from 'jotai';
 
 import styles from './OpenSearchModalButton.module.scss';
+import { isModalVisibleAtom } from '../../atoms';
 
-interface PropsInterface {
-  isVisibleModal: boolean;
-  setIsVisibleModal: Dispatch<SetStateAction<boolean>>;
-}
+type ModalVisibleControlType = () => void;
 
-const OpenSearchModalButton = (props: PropsInterface) => {
-  const { isVisibleModal, setIsVisibleModal } = props;
+const OpenSearchModalButton = () => {
+  const setIsModalVisible = useSetAtom(isModalVisibleAtom);
+
+  const openSearchModal: ModalVisibleControlType = () => setIsModalVisible(true);
 
   return (
-    <button className={styles.openSearchModalButton} onClick={() => setIsVisibleModal(!isVisibleModal)} type='button'>
+    <button className={styles.openSearchModalButton} onClick={openSearchModal} type='button'>
       <BsSearch />
     </button>
   );

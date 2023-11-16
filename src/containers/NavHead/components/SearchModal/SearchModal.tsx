@@ -1,8 +1,9 @@
 'use client';
 
 import { BsSearch, BsX } from 'react-icons/bs';
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAtom } from 'jotai';
 
 import useClickOutside from '@/hooks/useClickOutside';
 import useCategoryList, { UseCategoryInterface } from '@/hooks/useCategoryList';
@@ -12,56 +13,59 @@ import { POST_LENGTH } from '@/constants/LENGTH';
 import styles from './SearchModal.module.scss';
 import CustomInput from '../../../../components/inputs/CustomInput/CustomInput';
 import SearchCategoryBox from '../SearchCategoryBox/SearchCategoryBox';
+import { isModalVisibleAtom } from '../../atoms';
 
-interface PropsInterface {
-  isVisibleModal: boolean;
-  setIsVisibleModal: Dispatch<SetStateAction<boolean>>;
-}
+type ModalVisibleControlType = () => void;
 
-const SearchModal = (props: PropsInterface) => {
-  const { isVisibleModal, setIsVisibleModal } = props;
+const SearchModal = () => {
+  const REQUEST_SEARCH_INPUT = '검색어를 입력해주세요.';
+  const CATEGORY_TITLE_QUERY_URL = '/category?title=';
+
+  const router = useRouter();
 
   const modalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
 
   const { categoryList }: UseCategoryInterface = useCategoryList();
+
+  const [isModalVisible, setIsModalVisible] = useAtom(isModalVisibleAtom);
+  const closeSearchModal: ModalVisibleControlType = () => setIsModalVisible(false);
 
   const [searchInput, setSearchInput] = useState<string>('');
 
   // 모달 창 visible 이벤트
   useEffect(() => {
-    setSearchInput(''); // input 초기화
-    inputRef?.current?.focus(); // input에 focus
-  }, [isVisibleModal]);
+    setSearchInput('');
+    inputRef?.current?.focus();
+  }, [isModalVisible]);
 
   // 모달 바깥 클릭 시 모달 창 닫기
-  useClickOutside(modalRef, false, setIsVisibleModal);
+  useClickOutside(modalRef, closeSearchModal);
 
   // 검색 결과 페이지로 이동
-  const GoToSearchResult = () => {
+  const navigateToSearchResults = () => {
     if (!searchInput) {
-      window.alert('검색어를 입력해주세요.');
+      window.alert(REQUEST_SEARCH_INPUT);
       return;
     }
 
-    router.push(`/category?title=${searchInput}`);
-    setIsVisibleModal(false);
+    router.push(`${CATEGORY_TITLE_QUERY_URL}${searchInput}`);
+    closeSearchModal();
   };
 
   // 엔터 누르면 실행되는 이벤트
   const handleOnKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
-      GoToSearchResult();
+      navigateToSearchResults();
     }
   };
 
   const subTitleList: CommonCategoryInterface[] = categoryList.map((category) => category.children || []).flat();
 
   return (
-    <div className={`${styles.container} ${isVisibleModal && 'visible'}`}>
+    <div className={`${styles.container} ${isModalVisible && 'visible'}`}>
       <div className={styles.searchBox} ref={modalRef}>
-        <button className={styles.closeModalButton} type='button' onClick={() => setIsVisibleModal(false)}>
+        <button className={styles.closeModalButton} type='button' onClick={closeSearchModal}>
           <BsX />
         </button>
         <div className={styles.searchBar}>
@@ -73,13 +77,13 @@ const SearchModal = (props: PropsInterface) => {
             className={styles.searchInput}
             value={searchInput}
             dispatch={setSearchInput}
-            placeholder='검색어를 입력해주세요.'
+            placeholder={REQUEST_SEARCH_INPUT}
             maxLength={POST_LENGTH.MAX_TITLE}
             onKeyDown={handleOnKeyDown}
             injectionProtected
           />
         </div>
-        <SearchCategoryBox subTitleList={subTitleList} setIsVisibleModal={setIsVisibleModal} />
+        <SearchCategoryBox subTitleList={subTitleList} closeSearchModal={closeSearchModal} />
       </div>
     </div>
   );

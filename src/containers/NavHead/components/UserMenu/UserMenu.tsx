@@ -29,7 +29,7 @@ const UserMenu = ({ session }: { session: CustomSession | null }) => {
   };
 
   // 메뉴 모달의 바깥쪽을 눌렀을 때 창 닫기
-  useClickOutside(userMenuRef, false, setIsMenuVisible);
+  useClickOutside(userMenuRef, setIsMenuVisible);
 
   return (
     <div className={styles.userMenus} ref={userMenuRef}>
