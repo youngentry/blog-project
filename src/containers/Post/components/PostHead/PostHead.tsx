@@ -10,17 +10,28 @@ import styles from './PostHead.module.scss';
 interface PostHeadPropsInterface {
   userEmail: string;
   userRole: string | null | undefined;
-  email: string;
+  postEmail: string;
   subtitle: string;
-  title: string;
+  postTitle: string;
   author: string;
   date: string | Date;
   postId: string;
 }
 
-const PostHead = ({ userEmail, userRole, email, subtitle, title, author, date, postId }: PostHeadPropsInterface) => {
+const PostHead = ({
+  userEmail,
+  userRole,
+  postEmail,
+  subtitle,
+  postTitle,
+  author,
+  date,
+  postId,
+}: PostHeadPropsInterface) => {
+  const NON_POST_TITLE = '제목없음';
+
   // 같은 작성자인 경우에는 '수정', '삭제' 버튼이 나타나도록 합니다.
-  const isSameAuthor: boolean = checkIsSameAuthor(userRole, userEmail, email); // 로그인 유저와 게시물 작성자 비교
+  const isSameAuthor: boolean = checkIsSameAuthor(userRole, userEmail, postEmail); // 로그인 유저와 게시물 작성자 비교
 
   return (
     <div className={styles.head}>
@@ -29,7 +40,7 @@ const PostHead = ({ userEmail, userRole, email, subtitle, title, author, date, p
           <span>#{subtitle}</span>
         </Link>
       </div>
-      <h2>{title || '제목없음'}</h2>
+      <h2>{postTitle || NON_POST_TITLE}</h2>
       <div className={styles.info}>
         <span className={styles.author}>{author}</span>
         <span className={styles.date}>{getDateForm(String(date), true)}</span>

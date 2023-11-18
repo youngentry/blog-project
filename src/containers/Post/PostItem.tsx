@@ -44,9 +44,9 @@ const PostItem = ({ postId, userRole, userEmail }: PropsInterface) => {
   const PostHeadProps = {
     userEmail,
     userRole,
-    email,
+    postEmail: email,
     postId,
-    title,
+    postTitle: title,
     subtitle,
     author,
     date,
