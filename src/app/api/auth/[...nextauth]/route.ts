@@ -86,10 +86,9 @@ export const authOptions: NextAuthOptions = {
     session: ({ session, token }: { session: CustomSession; token: CustomJWT }) => {
       if (session?.user) {
         // session에 정보 추가
-        session.user.role = token.role;
+        session.user.role = token.role || '';
         session.user.name = session.user.name || token.login;
-
-        return session;
+        session.user.image = session.user.image || '';
       }
       return session;
     },
