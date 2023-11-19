@@ -20,10 +20,10 @@ const CommentList = ({
   postCommentCount,
   setPostCommentCount,
 }: CommentFormPropsInterface) => {
+  const { commentList, setCommentList } = useCommentList(postId, newUpdate);
+
   const [editCommentInput, setEditCommentInput] = useState<string>(''); // 수정 input
   const [editingCommentId, setEditingCommentId] = useState<string>(''); // 수정중인 댓글 ObjectId
-
-  const { commentList, setCommentList } = useCommentList(postId, newUpdate);
 
   // 댓글 머리 (닉네임, 수정, 삭제 버튼 등)
   const commentItemHeadProps = {
@@ -72,7 +72,7 @@ const CommentList = ({
               style={{ paddingLeft: `${0.5 + (depth || 0) * 4}rem` }}
             >
               <div className={styles.thumbnail}>
-                <UserProfile />
+                <UserProfile isLoggedIn={isLoggedIn} />
               </div>
               <div className={styles.contentBox}>
                 <CommentItemHead

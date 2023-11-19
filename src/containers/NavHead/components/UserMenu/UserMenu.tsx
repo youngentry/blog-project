@@ -36,7 +36,6 @@ const UserMenu = ({ session }: { session: CustomSession | null }) => {
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   const { userSession, setUserSession } = useUserSessionAtom();
-  const isLoggedIn = useIsUserLoggedIn();
 
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false); // 메뉴 visible 여부
 
@@ -55,7 +54,7 @@ const UserMenu = ({ session }: { session: CustomSession | null }) => {
   return (
     <div className={styles.userMenus} ref={userMenuRef}>
       <button className={styles.thumbnail} onClick={toggleUserMenuVisible} type='button'>
-        <UserProfile />
+        <UserProfile isLoggedIn={!!session} />
       </button>
       <ul className={`${styles.menuList} ${isMenuVisible && 'visible'}`}>
         {userSession && (
