@@ -1,3 +1,5 @@
+import { useUserSessionValue } from '@/jotai/userAtom';
+
 import GoPostCommentButton from '@/components/buttons/GoPostCommentButton/GoPostCommentButton';
 import styles from './CountsBox.module.scss';
 import LikePostButton from '@/components/buttons/LikePostButton/LikePostButton';
@@ -6,10 +8,12 @@ interface CountsBoxPropsInterface {
   postCommentCount: number;
   likes: string[];
   postId: string;
-  userEmail: string;
 }
 
-const CountsBox = ({ postCommentCount, likes, postId, userEmail }: CountsBoxPropsInterface) => {
+const CountsBox = ({ postCommentCount, likes, postId }: CountsBoxPropsInterface) => {
+  const userSession = useUserSessionValue();
+  const userEmail = userSession?.email || '';
+
   return (
     <div className={styles.countsBox}>
       <GoPostCommentButton>{postCommentCount}</GoPostCommentButton>

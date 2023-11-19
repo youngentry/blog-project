@@ -15,11 +15,10 @@ import PostContent from './components/PostContent/PostContent';
 interface PropsInterface {
   postId: string;
   userRole: string | null | undefined;
-  userEmail: string;
 }
 
 // 게시물 하나의 컴포넌트입니다.
-const PostItem = ({ postId, userRole, userEmail }: PropsInterface) => {
+const PostItem = ({ postId, userRole }: PropsInterface) => {
   const { postData, loading }: UsePostItemInterface = usePostItem(postId); // 게시물 데이터
   const [postCommentCount, setPostCommentCount] = useState<number>(0); // 게시물 댓글 갯수
 
@@ -42,7 +41,6 @@ const PostItem = ({ postId, userRole, userEmail }: PropsInterface) => {
 
   // 게시물 머리
   const PostHeadProps = {
-    userEmail,
     userRole,
     postEmail: email,
     postId,
@@ -60,7 +58,6 @@ const PostItem = ({ postId, userRole, userEmail }: PropsInterface) => {
 
   // 댓글 수, 좋아요 수
   const countsBoxProps = {
-    userEmail,
     postId,
     likes,
     postCommentCount,
@@ -70,7 +67,6 @@ const PostItem = ({ postId, userRole, userEmail }: PropsInterface) => {
   const commentProps = {
     postId,
     userRole,
-    userEmail,
     postEmail: email,
     postTitle: title,
     author,

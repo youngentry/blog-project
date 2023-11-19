@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { BsFillHeartFill, BsHeart } from 'react-icons/bs';
 
 import { postLikeCountData } from '@/services/postsFetch';
+import { useIsUserLoggedIn } from '@/jotai/userAtom';
 
 import styles from './LikePostButton.module.scss';
 
@@ -19,13 +20,18 @@ const LikePostButton = ({
   postId: string;
   userEmail?: string;
 }) => {
+  const isLoggedIn = useIsUserLoggedIn();
+
   const [likeCount, setPostLike] = useState<number>(likes.length); // 좋아요를 누른 유저 배열의 길이
   const [isLiked, setIsLiked] = useState<boolean>(userEmail ? likes.includes(userEmail) : false); // 로그인 여부에 따라 heart 모양 변경
 
   // 좋아요 요청 성공 시 이벤트
   const handleSuccess = (count: number) => {
-    setPostLike(count); // like 숫자 변경
-    setIsLiked(!isLiked);
+    if (isLoggedIn) {
+      setIsLiked(!isLiked);
+    }
+
+    setPostLike(count);
   };
 
   const handleClickLikePostButton = async () => {

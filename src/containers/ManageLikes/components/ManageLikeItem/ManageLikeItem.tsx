@@ -9,13 +9,13 @@ import Image from 'next/image';
 
 import { getDateForm } from '@/utils/getDateForm';
 import { PostInterface } from '@/types/types';
+import { useUserSessionValue } from '@/jotai/userAtom';
 
 import styles from './ManageLikeItem.module.scss';
 import LikePostButton from '@/components/buttons/LikePostButton/LikePostButton';
 
 interface ManageLikeItemPropsInterface {
   likedPosts: PostInterface[];
-  email: string;
   day: string;
 }
 
@@ -32,7 +32,10 @@ const SanitizedInnerHTML = ({ contents }: { contents: string }) => {
 };
 
 const ManageLikeItem = (props: ManageLikeItemPropsInterface) => {
-  const { likedPosts, email, day } = props;
+  const { likedPosts, day } = props;
+
+  const userSession = useUserSessionValue();
+  const userEmail = userSession?.email || '';
 
   return (
     <ul key={day} className={styles.days}>
@@ -57,7 +60,12 @@ const ManageLikeItem = (props: ManageLikeItemPropsInterface) => {
                       <BsArrowUpRightSquare />
                     </Link>
                   </h3>
-                  <LikePostButton className={styles.likeButton} likes={likes} postId={String(id)} userEmail={email} />
+                  <LikePostButton
+                    className={styles.likeButton}
+                    likes={likes}
+                    postId={String(id)}
+                    userEmail={userEmail}
+                  />
                 </div>
                 <div className={styles.itemBody}>
                   <div className={styles.description}>

@@ -57,7 +57,6 @@ export interface CommentFormPropsInterface {
   postTitle?: string;
   newUpdate: boolean;
   userRole: string | null | undefined;
-  userEmail: string;
   postEmail?: string;
   postCommentCount: number;
   setPostCommentCount: Dispatch<SetStateAction<number>>;

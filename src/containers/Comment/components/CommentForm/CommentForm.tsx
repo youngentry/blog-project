@@ -5,6 +5,7 @@ import React, { useState, FormEvent } from 'react';
 import { CommentFormPropsInterface, CommentFormInterface } from '@/types/types';
 import { COMMENT_FORM_LENGTH } from '@/constants/LENGTH';
 import { postCommentApi } from '@/services/commentsFetch';
+import { useUserSessionValue } from '@/jotai/userAtom';
 
 import styles from './CommentForm.module.scss';
 import CustomInput from '@/components/inputs/CustomInput/CustomInput';
@@ -18,7 +19,6 @@ const CommentForm = (props: CommentFormPropsInterface) => {
     postId,
     postTitle,
     newUpdate,
-    userEmail,
     setNewUpdate,
     postCommentCount,
     setPostCommentCount,
@@ -28,6 +28,8 @@ const CommentForm = (props: CommentFormPropsInterface) => {
     replyToEmail,
     setReplyingCommentId,
   } = props;
+  const userSession = useUserSessionValue();
+  const userEmail = userSession?.email || '';
 
   const [nickname, setNickname] = useState<string>(userEmail || '');
   const [password, setPassword] = useState<string>('');

@@ -15,7 +15,7 @@ export interface ManageLikesInterface {
   [key: string]: PostInterface[];
 }
 
-const ManageLikes = ({ email }: { email: string }) => {
+const ManageLikes = () => {
   // 좋아요 한 게시물 목록
   const { likes, loading }: useManageLikesInterface = useManageLikes();
 
@@ -63,7 +63,7 @@ const ManageLikes = ({ email }: { email: string }) => {
     <Layout>
       {days.map((day: string, index: number) => {
         const likedPosts = likedPostsByDay[index];
-        return <ManageLikeItem key={day} day={day} likedPosts={likedPosts} email={email} />;
+        return <ManageLikeItem key={day} day={day} likedPosts={likedPosts} />;
       })}
     </Layout>
   );

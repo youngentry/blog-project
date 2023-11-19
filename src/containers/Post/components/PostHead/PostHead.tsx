@@ -4,11 +4,11 @@ import { getDateForm } from '@/utils/getDateForm';
 import EditPostButton from '@/containers/Post/components/EditPostButton/EditPostButton';
 import DeletePostButton from '@/containers/Post/components/DeletePostButton/DeletePostButton';
 import { checkIsSameAuthor } from '@/utils/sessionCheck/checkIsSameAuthor';
+import { useUserSessionValue } from '@/jotai/userAtom';
 
 import styles from './PostHead.module.scss';
 
 interface PostHeadPropsInterface {
-  userEmail: string;
   userRole: string | null | undefined;
   postEmail: string;
   subtitle: string;
@@ -18,17 +18,11 @@ interface PostHeadPropsInterface {
   postId: string;
 }
 
-const PostHead = ({
-  userEmail,
-  userRole,
-  postEmail,
-  subtitle,
-  postTitle,
-  author,
-  date,
-  postId,
-}: PostHeadPropsInterface) => {
+const PostHead = ({ userRole, postEmail, subtitle, postTitle, author, date, postId }: PostHeadPropsInterface) => {
   const NON_POST_TITLE = '제목없음';
+
+  const userSession = useUserSessionValue();
+  const userEmail = userSession?.email || '';
 
   // 같은 작성자인 경우에는 '수정', '삭제' 버튼이 나타나도록 합니다.
   const isSameAuthor: boolean = checkIsSameAuthor(userRole, userEmail, postEmail); // 로그인 유저와 게시물 작성자 비교

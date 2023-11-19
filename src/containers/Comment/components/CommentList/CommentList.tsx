@@ -17,7 +17,6 @@ const CommentList = ({
   newUpdate,
   setNewUpdate,
   userRole,
-  userEmail,
   postEmail,
   postCommentCount,
   setPostCommentCount,
@@ -32,7 +31,6 @@ const CommentList = ({
     commentList,
     setCommentList,
     userRole,
-    userEmail,
     postEmail,
     postId,
     postCommentCount,
@@ -56,7 +54,6 @@ const CommentList = ({
   const commentFormProps = {
     postId,
     userRole,
-    userEmail,
     postEmail,
     postCommentCount,
     setPostCommentCount,

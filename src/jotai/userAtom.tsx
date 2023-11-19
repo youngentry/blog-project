@@ -1,4 +1,4 @@
-import { atom, createStore, useAtom } from 'jotai';
+import { atom, createStore, useAtom, useAtomValue } from 'jotai';
 
 export interface userSessionInterface {
   name?: string | null;
@@ -11,8 +11,20 @@ const store = createStore();
 
 export const userSessionAtom = atom<userSessionInterface | null>({ name: '', email: '', image: '', role: '' });
 
-export function useUserSessionAtom() {
+export const useUserSessionAtom = () => {
   const [userSession, setUserSession] = useAtom(userSessionAtom, { store });
-
   return { userSession, setUserSession };
-}
+};
+
+export const useUserSessionValue = () => {
+  return useAtomValue(userSessionAtom);
+};
+
+export const useIsUserLoggedIn = () => {
+  const [userSession] = useAtom(userSessionAtom, { store });
+
+  if (userSession?.name) {
+    return true;
+  }
+  return false;
+};
