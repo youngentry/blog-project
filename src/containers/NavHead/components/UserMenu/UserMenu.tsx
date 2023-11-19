@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BsChevronRight } from 'react-icons/bs';
 import Link from 'next/link';
+import { useAtom } from 'jotai';
 
 import useClickOutside from '@/hooks/useClickOutside';
 import { CustomSession } from '@/types/session';
+import { useUserSessionAtom, userSessionAtom } from '@/jotai/userAtom';
 
 import styles from './UserMenu.module.scss';
 import UserProfile from '@/components/UserProfile/UserProfile';
@@ -34,7 +36,14 @@ const LinkButton = ({ linkTo, description, chevron }: { linkTo: string; descript
 const UserMenu = ({ session }: { session: CustomSession | null }) => {
   const userMenuRef = useRef<HTMLDivElement>(null);
 
+  const { userSession, setUserSession } = useUserSessionAtom();
+
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false); // 메뉴 visible 여부
+  const [isLoggedIn] = useState<boolean>(!!session);
+
+  useEffect(() => {
+    setUserSession(session?.user || null);
+  }, [session, setUserSession]);
 
   // 유저 프로필 클릭 시 menu visible 상태를 토글합니다.
   const toggleUserMenuVisible = () => {
@@ -47,15 +56,15 @@ const UserMenu = ({ session }: { session: CustomSession | null }) => {
   return (
     <div className={styles.userMenus} ref={userMenuRef}>
       <button className={styles.thumbnail} onClick={toggleUserMenuVisible} type='button'>
-        <UserProfile session={session} />
+        <UserProfile isLoggedIn={isLoggedIn} />
       </button>
       <ul className={`${styles.menuList} ${isMenuVisible && 'visible'}`}>
-        {session && (
+        {userSession && (
           <>
             <li className={`${styles.accountSetting} ${styles.menuItem}`}>
-              <strong>{session?.user?.name}</strong>
+              <strong>{userSession.name}</strong>
               <p className={styles.userId}>
-                <span>{session?.user?.email}</span>
+                <span>{userSession.email}</span>
                 <button className={styles.manageAccountButton} type='button'>
                   계정 관리
                   <div className={styles.notice}>
@@ -73,7 +82,7 @@ const UserMenu = ({ session }: { session: CustomSession | null }) => {
           </>
         )}
         <div className={`${styles.logout} ${styles.menuItem}`}>
-          {session ? (
+          {isLoggedIn ? (
             <LogOutButton />
           ) : (
             <>
