@@ -1,17 +1,16 @@
 'use client';
 
-import { Provider } from 'jotai';
-
 import SearchModal from '@/containers/NavHead/components/SearchModal/SearchModal';
 
 import OpenSearchModalButton from '../OpenSearchModalButton/OpenSearchModalButton';
+import { SearchPostProvider } from '../../store';
 
 const SearchPost = () => {
   return (
-    <Provider>
+    <SearchPostProvider>
       <SearchModal />
       <OpenSearchModalButton />
-    </Provider>
+    </SearchPostProvider>
   );
 };
 

@@ -3,7 +3,6 @@
 import { BsSearch, BsX } from 'react-icons/bs';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAtom } from 'jotai';
 
 import useClickOutside from '@/hooks/useClickOutside';
 import useCategoryList, { UseCategoryInterface } from '@/hooks/useCategoryList';
@@ -13,7 +12,7 @@ import { POST_LENGTH } from '@/constants/LENGTH';
 import styles from './SearchModal.module.scss';
 import CustomInput from '../../../../components/inputs/CustomInput/CustomInput';
 import SearchCategoryBox from '../SearchCategoryBox/SearchCategoryBox';
-import { isModalVisibleAtom } from '../../atoms';
+import { useIsModalVisibleAtom } from '../../store';
 
 type ModalVisibleControlType = () => void;
 
@@ -28,7 +27,8 @@ const SearchModal = () => {
 
   const { categoryList }: UseCategoryInterface = useCategoryList();
 
-  const [isModalVisible, setIsModalVisible] = useAtom(isModalVisibleAtom);
+  const [isModalVisible, setIsModalVisible] = useIsModalVisibleAtom();
+
   const closeSearchModal: ModalVisibleControlType = () => setIsModalVisible(false);
 
   const [searchInput, setSearchInput] = useState<string>('');

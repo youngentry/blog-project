@@ -1,13 +1,12 @@
 import { BsSearch } from 'react-icons/bs';
-import { useSetAtom } from 'jotai';
 
 import styles from './OpenSearchModalButton.module.scss';
-import { isModalVisibleAtom } from '../../atoms';
+import { useIsModalVisibleAtom } from '../../store';
 
 type ModalVisibleControlType = () => void;
 
 const OpenSearchModalButton = () => {
-  const setIsModalVisible = useSetAtom(isModalVisibleAtom);
+  const [, setIsModalVisible] = useIsModalVisibleAtom();
 
   const openSearchModal: ModalVisibleControlType = () => setIsModalVisible(true);
 
