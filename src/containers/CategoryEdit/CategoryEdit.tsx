@@ -2,13 +2,19 @@
 
 import useAlertAndRedirect from '@/hooks/useAlertAndRedirect';
 import { ALERT_MESSAGE } from '@/constants/DESCRIPTION';
+import { useUserSessionValue } from '@/jotai/userAtom';
+import { checkIsBlogAdmin } from '@/utils/sessionCheck/checkUserRole';
 
 import styles from './CategoryEdit.module.scss';
 import AddMainCategoryForm from './components/AddMainCategoryForm/AddMainCategoryForm';
 import CategoryList from './components/CategoryList/CategoryList';
 
 // 카테고리 에디터
-const CategoryEdit = ({ isBlogAdmin }: { isBlogAdmin: boolean }) => {
+const CategoryEdit = () => {
+  const userSession = useUserSessionValue();
+  const userRole = userSession?.role || '';
+  const isBlogAdmin = checkIsBlogAdmin(userRole);
+
   // 수정 권한이 없는 경우 '/'로 redirect 합니다.
   useAlertAndRedirect(isBlogAdmin, '/', ALERT_MESSAGE.NOT_EDITABLE);
   if (!isBlogAdmin) {

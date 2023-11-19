@@ -13,7 +13,6 @@ import DeleteGuestCommentModal from '../DeleteGuestCommentModal/DeleteGuestComme
 interface PropsInterface {
   commentList: CommentInterface[];
   setCommentList: Dispatch<SetStateAction<CommentInterface[]>>;
-  userRole: string | null | undefined;
   postEmail?: string;
   postId: string;
   commentId: string;
@@ -31,7 +30,6 @@ const CommentItemHead = (props: PropsInterface) => {
   const {
     commentList,
     setCommentList,
-    userRole, // 로그인 유저 권한
     postEmail, // 게시물 작성자
     postId,
     commentId,
@@ -46,6 +44,7 @@ const CommentItemHead = (props: PropsInterface) => {
   } = props;
   const userSession = useUserSessionValue();
   const userEmail = userSession?.email || '';
+  const userRole = userSession?.role || '';
 
   const [checkingGuestPassword, setCheckingGuestPassword] = useState<boolean>(false); // 게스트 댓글 비밀번호 input이 나타날지 말지 여부
   const [deletingCommentId, setDeletingCommentId] = useState<string>(''); // 수정중인 댓글 ObjectId

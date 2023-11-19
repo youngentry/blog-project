@@ -9,7 +9,6 @@ import { useUserSessionValue } from '@/jotai/userAtom';
 import styles from './PostHead.module.scss';
 
 interface PostHeadPropsInterface {
-  userRole: string | null | undefined;
   postEmail: string;
   subtitle: string;
   postTitle: string;
@@ -18,13 +17,12 @@ interface PostHeadPropsInterface {
   postId: string;
 }
 
-const PostHead = ({ userRole, postEmail, subtitle, postTitle, author, date, postId }: PostHeadPropsInterface) => {
+const PostHead = ({ postEmail, subtitle, postTitle, author, date, postId }: PostHeadPropsInterface) => {
   const NON_POST_TITLE = '제목없음';
 
   const userSession = useUserSessionValue();
   const userEmail = userSession?.email || '';
-
-  // 같은 작성자인 경우에는 '수정', '삭제' 버튼이 나타나도록 합니다.
+  const userRole = userSession?.role || '';
   const isSameAuthor: boolean = checkIsSameAuthor(userRole, userEmail, postEmail); // 로그인 유저와 게시물 작성자 비교
 
   return (

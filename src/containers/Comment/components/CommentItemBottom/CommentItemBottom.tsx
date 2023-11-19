@@ -16,8 +16,6 @@ interface PropsInterface extends CommentFormPropsInterface {
 const CommentItemBottom = (props: PropsInterface) => {
   const {
     postId,
-    userRole,
-    userEmail,
     postEmail,
     postCommentCount,
     setPostCommentCount,
@@ -36,8 +34,6 @@ const CommentItemBottom = (props: PropsInterface) => {
   // 댓글의 답글용 form props
   const commentFormProps = {
     postId,
-    userRole,
-    userEmail,
     postEmail,
     postCommentCount,
     setPostCommentCount,
