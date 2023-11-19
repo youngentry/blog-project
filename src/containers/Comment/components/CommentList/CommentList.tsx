@@ -72,13 +72,13 @@ const CommentList = ({
               style={{ paddingLeft: `${0.5 + (depth || 0) * 4}rem` }}
             >
               <div className={styles.thumbnail}>
-                <UserProfile isLoggedIn={isLoggedIn} />
+                <UserProfile />
               </div>
               <div className={styles.contentBox}>
                 <CommentItemHead
                   {...commentItemHeadProps}
                   commentId={commentId}
-                  isLoggedIn={isLoggedIn}
+                  isLoginComment={isLoggedIn}
                   nickname={nickname}
                   author={author}
                   comment={comment}

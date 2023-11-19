@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import styles from './ToggleEditCommentButton.module.scss';
 
 interface PropsInterface {
-  isLoggedIn?: boolean;
+  isLoginComment?: boolean;
   commentId?: string;
   comment?: string;
   setEditingCommentId: Dispatch<SetStateAction<string>>;
@@ -11,7 +11,7 @@ interface PropsInterface {
 }
 
 const ToggleEditCommentButton = (props: PropsInterface) => {
-  const { isLoggedIn, commentId, comment, setEditingCommentId, setEditCommentInput } = props;
+  const { isLoginComment, commentId, comment, setEditingCommentId, setEditCommentInput } = props;
 
   // "수정 버튼 클릭" 이벤트
   const handleClickToggleEditButton = async (_id: string, originComment: string) => {
@@ -21,7 +21,7 @@ const ToggleEditCommentButton = (props: PropsInterface) => {
 
   return (
     <button
-      className={`${styles.editButton} ${!isLoggedIn && 'hide'}`}
+      className={`${styles.editButton} ${!isLoginComment && 'hide'}`}
       onClick={() => handleClickToggleEditButton(commentId as string, comment as string)}
       type='button'
     >

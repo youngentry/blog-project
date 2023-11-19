@@ -3,11 +3,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BsChevronRight } from 'react-icons/bs';
 import Link from 'next/link';
-import { useAtom } from 'jotai';
 
 import useClickOutside from '@/hooks/useClickOutside';
 import { CustomSession } from '@/types/session';
-import { useUserSessionAtom, userSessionAtom } from '@/jotai/userAtom';
+import { useIsUserLoggedIn, useUserSessionAtom } from '@/jotai/userAtom';
 
 import styles from './UserMenu.module.scss';
 import UserProfile from '@/components/UserProfile/UserProfile';
@@ -37,9 +36,9 @@ const UserMenu = ({ session }: { session: CustomSession | null }) => {
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   const { userSession, setUserSession } = useUserSessionAtom();
+  const isLoggedIn = useIsUserLoggedIn();
 
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false); // 메뉴 visible 여부
-  const [isLoggedIn] = useState<boolean>(!!session);
 
   useEffect(() => {
     setUserSession(session?.user || null);
@@ -56,7 +55,7 @@ const UserMenu = ({ session }: { session: CustomSession | null }) => {
   return (
     <div className={styles.userMenus} ref={userMenuRef}>
       <button className={styles.thumbnail} onClick={toggleUserMenuVisible} type='button'>
-        <UserProfile isLoggedIn={isLoggedIn} />
+        <UserProfile />
       </button>
       <ul className={`${styles.menuList} ${isMenuVisible && 'visible'}`}>
         {userSession && (
@@ -82,7 +81,7 @@ const UserMenu = ({ session }: { session: CustomSession | null }) => {
           </>
         )}
         <div className={`${styles.logout} ${styles.menuItem}`}>
-          {isLoggedIn ? (
+          {session ? (
             <LogOutButton />
           ) : (
             <>

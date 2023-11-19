@@ -1,14 +1,16 @@
 import React from 'react';
 import Image from 'next/image';
 
+import { useIsUserLoggedIn } from '@/jotai/userAtom';
+
 import styles from './UserProfile.module.scss';
 
 /**
  * 유저 프로필 이미지 컴포넌트입니다.
- * @param {userSessionInterface} session
- * @returns
  */
-const UserProfile = ({ isLoggedIn }: { isLoggedIn?: boolean }) => {
+const UserProfile = () => {
+  const isLoggedIn = useIsUserLoggedIn();
+
   return (
     <Image
       className={styles.profile}

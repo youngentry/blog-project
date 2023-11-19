@@ -17,7 +17,7 @@ export const useUserSessionAtom = () => {
 };
 
 export const useUserSessionValue = () => {
-  return useAtomValue(userSessionAtom);
+  return useAtomValue(userSessionAtom, { store });
 };
 
 export const useIsUserLoggedIn = () => {

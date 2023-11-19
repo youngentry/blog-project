@@ -17,7 +17,7 @@ interface PropsInterface {
   postId: string;
   commentId: string;
   nickname: string;
-  isLoggedIn: boolean;
+  isLoginComment: boolean;
   author: string;
   comment: string;
   postCommentCount: number;
@@ -34,7 +34,7 @@ const CommentItemHead = (props: PropsInterface) => {
     postId,
     commentId,
     nickname,
-    isLoggedIn, // 유저/게스트 댓글 구분하는 속성
+    isLoginComment, // 유저/게스트 댓글 구분하는 속성
     author,
     comment,
     postCommentCount,
@@ -50,11 +50,11 @@ const CommentItemHead = (props: PropsInterface) => {
   const [deletingCommentId, setDeletingCommentId] = useState<string>(''); // 수정중인 댓글 ObjectId
 
   // 댓글 수정 및 삭제 권한이 있는지 여부에 따라 삭제 버튼이 나타나도록 합니다.
-  const isSameCommenter: boolean = isLoggedIn && userEmail === author; // 동일한 댓글 작성자
+  const isSameCommenter: boolean = isLoginComment && userEmail === author; // 동일한 댓글 작성자
   const isBlogAdmin: boolean = checkIsBlogAdmin(userRole); // 블로그 관리자
 
-  const canEdit: boolean = isSameCommenter || !isLoggedIn || isBlogAdmin; // 수정 권한 여부
-  const isVisibleDeleteGuestCommentModal = deletingCommentId === commentId && checkingGuestPassword && !isLoggedIn; // 게스트 댓글 삭제버튼 visible 여부
+  const canEdit: boolean = isSameCommenter || !isLoginComment || isBlogAdmin; // 수정 권한 여부
+  const isVisibleDeleteGuestCommentModal = deletingCommentId === commentId && checkingGuestPassword && !isLoginComment; // 게스트 댓글 삭제버튼 visible 여부
 
   // 댓글 수정 form이 나타나도록 하는 button
   const startEditCommentButtonProps = {
@@ -99,7 +99,7 @@ const CommentItemHead = (props: PropsInterface) => {
           <>
             <ToggleEditCommentButton
               {...startEditCommentButtonProps}
-              isLoggedIn={isLoggedIn}
+              isLoginComment={isLoginComment}
               commentId={commentId}
               comment={comment}
             />
