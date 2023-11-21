@@ -19,7 +19,7 @@ const useClickOutside = (ref: RefObject<HTMLElement>, setState: Dispatch<SetStat
     return () => {
       document.removeEventListener('mousedown', clickOutside);
     };
-  }, [ref, setState, false]);
+  }, [ref, setState]);
 };
 
 export default useClickOutside;

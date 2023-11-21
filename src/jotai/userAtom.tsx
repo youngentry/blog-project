@@ -21,7 +21,7 @@ export const useUserSessionValue = () => {
 };
 
 export const useIsUserLoggedIn = () => {
-  const [userSession] = useAtom(userSessionAtom, { store });
+  const userSession = useAtomValue(userSessionAtom, { store });
 
   if (userSession?.name) {
     return true;

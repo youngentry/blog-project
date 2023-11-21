@@ -1,6 +1,7 @@
 'use client';
 
 import { signOut } from 'next-auth/react';
+import { memo } from 'react';
 
 import styles from './LogOutButton.module.scss';
 
@@ -13,4 +14,4 @@ const LogOutButton = () => {
   );
 };
 
-export default LogOutButton;
+export default memo(LogOutButton);

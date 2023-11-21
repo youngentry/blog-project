@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import { BsChevronRight } from 'react-icons/bs';
 import Link from 'next/link';
 
 import useClickOutside from '@/hooks/useClickOutside';
 import { CustomSession } from '@/types/session';
-import { useIsUserLoggedIn, useUserSessionAtom } from '@/jotai/userAtom';
+import { useUserSessionAtom } from '@/jotai/userAtom';
 
 import styles from './UserMenu.module.scss';
 import UserProfile from '@/components/UserProfile/UserProfile';
@@ -14,18 +14,20 @@ import LogOutButton from '@/components/buttons/LogOutButton/LogOutButton';
 import LogInButton from '@/components/buttons/LogInButton/LogInButton';
 import Notice from '@/components/notices/Notice';
 
-const LinkButton = ({ linkTo, description, chevron }: { linkTo: string; description: string; chevron?: boolean }) => {
-  return (
-    <li className={styles.myListItem}>
-      <Link href={`${linkTo}`}>{description}</Link>
-      {chevron && (
-        <i>
-          <BsChevronRight />
-        </i>
-      )}
-    </li>
-  );
-};
+const LinkList = memo(
+  ({ linkTo, description, chevron }: { linkTo: string; description: string; chevron?: boolean }) => {
+    return (
+      <li className={styles.myListItem}>
+        <Link href={`${linkTo}`}>{description}</Link>
+        {chevron && (
+          <i>
+            <BsChevronRight />
+          </i>
+        )}
+      </li>
+    );
+  },
+);
 
 /**
  * 블로그 유저 메뉴 컴포넌트입니다.
@@ -73,8 +75,8 @@ const UserMenu = ({ session }: { session: CustomSession | null }) => {
             </li>
             <li className={`${styles.myList} `}>
               <ul className={`${styles.myListItemBox} ${styles.menuItem}`}>
-                <LinkButton linkTo='/manage/comments' description='작성한 댓글' chevron />
-                <LinkButton linkTo='/manage/likes' description='좋아요 한 게시물' chevron />
+                <LinkList linkTo='/manage/comments' description='작성한 댓글' chevron />
+                <LinkList linkTo='/manage/likes' description='좋아요 한 게시물' chevron />
               </ul>
             </li>
           </>
@@ -85,7 +87,7 @@ const UserMenu = ({ session }: { session: CustomSession | null }) => {
           ) : (
             <>
               <LogInButton />
-              <LinkButton linkTo='/register' description='회원가입' />
+              <LinkList linkTo='/register' description='회원가입' />
             </>
           )}
         </div>

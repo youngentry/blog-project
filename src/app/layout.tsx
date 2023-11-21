@@ -1,6 +1,5 @@
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
-import Head from 'next/head';
 
 import NavHead from '@/containers/NavHead/NavHead';
 import NavSide from '@/containers/NavSide/NavSide';
